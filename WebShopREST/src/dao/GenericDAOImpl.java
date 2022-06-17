@@ -10,7 +10,8 @@ public class GenericDAOImpl<TEntity> implements GenericDAO {
 	@Override
 	public ArrayList<Entity> getAll() {
 		// TODO Auto-generated method stub
-		return WebContext.getInstance().get(this);
+		//return WebContext.getInstance().get(this);
+		return null;
 	}
 
 	@Override

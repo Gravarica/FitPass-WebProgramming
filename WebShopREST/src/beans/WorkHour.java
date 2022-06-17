@@ -38,6 +38,4 @@ public class WorkHour {
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
-	
-	
 }
