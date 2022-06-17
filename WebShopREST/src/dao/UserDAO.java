@@ -3,12 +3,20 @@ package dao;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import beans.Artikal;
 import beans.User;
+import dto.LoginDTO;
+import dto.RegistrationDTO;
 
 /***
  * <p>Klasa namenjena da uèita korisnike iz fajla i pruža operacije nad njima (poput pretrage).
@@ -20,7 +28,8 @@ import beans.User;
  */
 public class UserDAO {
 	private Map<String, User> users = new HashMap<>();
-	
+	private File file;
+	private User loggedUser;
 	
 	public UserDAO() {
 		
@@ -30,6 +39,7 @@ public class UserDAO {
 	 * @param contextPath Putanja do aplikacije u Tomcatu. Može se pristupiti samo iz servleta.
 	 */
 	public UserDAO(String contextPath) {
+		file = new File(contextPath + "/users.json");
 		loadUsers(contextPath);
 	}
 	
@@ -50,7 +60,7 @@ public class UserDAO {
 		return user;
 	}
 	
-	public Collection<User> findAll() {
+	public Collection<User> getAll() {
 		return users.values();
 	}
 	
@@ -60,36 +70,69 @@ public class UserDAO {
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
 	private void loadUsers(String contextPath) {
-		BufferedReader in = null;
+		
+		ObjectMapper mapper = new ObjectMapper();
+	
 		try {
-			File file = new File(contextPath + "/users.txt");
-			in = new BufferedReader(new FileReader(file));
-			String line;
-			StringTokenizer st;
-			while ((line = in.readLine()) != null) {
-				line = line.trim();
-				if (line.equals("") || line.indexOf('#') == 0)
-					continue;
-				st = new StringTokenizer(line, ";");
-				while (st.hasMoreTokens()) {
-					String firstName = st.nextToken().trim();
-					String lastName = st.nextToken().trim();
-					String email = st.nextToken().trim();
-					String username = st.nextToken().trim();
-					String password = st.nextToken().trim();
-				}
-				
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			if (in != null) {
-				try {
-					in.close();
-				}
-				catch (Exception e) { }
+			List<User> userList = Arrays.asList(mapper.readValue(file, User[].class));
+			convertListToMap(userList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public User register(RegistrationDTO dto) {
+		
+		User saveUser = new User(dto);
+		saveUser.setId(getMaxId());
+		users.put(saveUser.getUsername(), saveUser);
+		saveUsers();
+		
+		return saveUser;
+	}
+	
+	private void saveUsers() {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try {
+			ArrayList<User> userList = new ArrayList<User>(users.values());
+			System.out.println("USAO SAM OVDE");
+			mapper.writeValue(file, userList.toArray());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private int getMaxId() {
+		Integer maxId = -1;
+		for (User user : users.values()) {
+			if (user.getId() > maxId) {
+				maxId = user.getId();
 			}
 		}
+		
+		return ++maxId;
+	}
+	
+	private void convertListToMap(List<User> userList) {
+		for(User u : userList) {
+			users.put(u.getUsername(), u);
+			System.out.println(u.getId());
+		}
+	}
+	
+	public User login(LoginDTO dto) {
+		User user = users.get(dto.getUsername());
+		if (user == null || !user.passwordMatches(dto)) return null;
+		
+		return loggedUser = user;
+	}
+	
+	public User getLoggedUser() {
+		return loggedUser;
 	}
 	
 }

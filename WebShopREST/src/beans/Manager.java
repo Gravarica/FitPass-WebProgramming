@@ -14,9 +14,9 @@ public class Manager extends User {
 		super();
 	}
 
-	public Manager(String username, String password, String name, String surname, Gender gender, 
-			Date birthday, Role role,UserType type,SportObject object) {
-		super(username, password, name, surname, gender, role, birthday, type);
+	public Manager(int id, String username, String password, String name, String surname, Gender gender, 
+			Date birthday, Role role,CustomerType type,SportObject object) {
+		super(id, username, password, name, surname, gender, role, birthday, type);
 		this.object = object;
 	}
 
