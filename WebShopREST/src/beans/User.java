@@ -1,9 +1,11 @@
 package beans;
 
+import java.util.Date;
+
 import enums.Gender;
 import enums.Role;
 
-public class User {
+public class User extends Entity {
 
 	protected String username;
 	protected String password;
@@ -11,10 +13,15 @@ public class User {
 	protected String lastName;
 	protected Gender gender;
 	protected Role role;
-	protected int points;
+	protected Date dateOfBirth;
 	protected UserType userType;
 	
-	public User(String username, String password, String firstName, String lastName, Gender gender, Role role, int points, UserType userType) {
+	public User() {
+		super();
+	}
+	
+	public User(String username, String password, String firstName, String lastName, 
+			Gender gender, Role role, Date dateOfBirth, UserType userType) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -22,14 +29,10 @@ public class User {
 		this.lastName = lastName;
 		this.gender = gender;
 		this.role = role;
-		this.points = points;
+		this.dateOfBirth = dateOfBirth;
 		this.userType = userType;
 	}
-
-	public User() {
-		super();
-	}
-
+	
 	public String getUsername() {
 		return username;
 	}
@@ -78,13 +81,6 @@ public class User {
 		this.role = role;
 	}
 
-	public int getPoints() {
-		return points;
-	}
-
-	public void setPoints(int points) {
-		this.points = points;
-	}
 
 	public UserType getUserType() {
 		return userType;
@@ -93,7 +89,13 @@ public class User {
 	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
-	
-	
-	
+
+	public Date getBirthday() {
+		return dateOfBirth;
+	}
+
+	public void setBirthday(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+		
 }

@@ -1,12 +1,14 @@
 package beans;
 
+import enums.UserTypeName;
+
 public class UserType {
 
-	private String name;
+	private UserTypeName name;
 	private double discount;
 	private int pointsRequired;
 	
-	public UserType(String name, double discount, int pointsRequired) {
+	public UserType(UserTypeName name, double discount, int pointsRequired) {
 		super();
 		this.name = name;
 		this.discount = discount;
@@ -15,11 +17,11 @@ public class UserType {
 	
 	public UserType() {}
 
-	public String getName() {
+	public UserTypeName getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(UserTypeName name) {
 		this.name = name;
 	}
 
@@ -38,8 +40,5 @@ public class UserType {
 	public void setPointsRequired(int pointsRequired) {
 		this.pointsRequired = pointsRequired;
 	}
-	
-	
-	
-	
+		
 }
