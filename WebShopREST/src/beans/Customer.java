@@ -19,9 +19,9 @@ public class Customer extends User{
 		this.objectsVisited = new ArrayList<SportObject>();
 	}
 
-	public Customer(String username, String password, String firstName, String lastName, Gender gender,
-			Role role, Date birthday, UserType userType,Subscription membershipFee, ArrayList<SportObject> objectsVisited,int totalPoints) {
-		super(username, password, firstName, lastName, gender, role, birthday, userType);
+	public Customer(int id,String username, String password, String firstName, String lastName, Gender gender,
+			Role role, Date birthday, CustomerType userType,Subscription membershipFee, ArrayList<SportObject> objectsVisited,int totalPoints) {
+		super(id, username, password, firstName, lastName, gender, role, birthday, userType);
 		this.membershipFee = membershipFee;
 		this.objectsVisited = objectsVisited;
 		this.totalPoints = totalPoints;

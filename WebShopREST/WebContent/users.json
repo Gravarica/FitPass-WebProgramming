@@ -1,0 +1,38 @@
+[
+	{
+		"id" : 1,
+		"username" : "gravarica",
+		"password" : "kobaja123",
+		"firstName" : "Milos",
+		"lastName" : "Gravara",
+		"gender" : "MALE",
+		"role" : "ADMIN",
+		"dateOfBirth" : "2000-01-20",
+		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"object" : null
+	},
+	{
+		"id" : 2,
+		"username" : "cica",
+		"password" : "kobaja123",
+		"firstName" : "Andrija",
+		"lastName" : "Stanisic",
+		"gender" : "FEMALE",
+		"role" : "TRAINER",
+		"dateOfBirth" : "2000-07-25",
+		"customerType" : null,
+		"object" : null
+	},
+	{
+		"id" : 3,
+		"username" : "Singleton420",
+		"password" : "kobaja123",
+		"firstName" : "Ilija",
+		"lastName" : "Galin",
+		"gender" : "MALE",
+		"role" : "CUSTOMER",
+		"dateOfBirth" : "2000-01-01",
+		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"object" : null
+	}
+]
