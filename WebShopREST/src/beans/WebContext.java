@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import dao.GenericDAOImpl;
 import dao.ProductDAO;
 import dao.UserDAO;
@@ -50,6 +48,8 @@ public class WebContext {
 	}
 	*/
 	
+	
+	/*
 	public ArrayList<Entity> get(GenericDAOImpl dao) 
 	{
 		
@@ -91,9 +91,9 @@ public class WebContext {
 		
 		if(cls == TrainingHistory.class) {
 			return trainingHistories;
-		}*/
+		}
 		
 		return null;
 	}
-	
+	*/
 }
