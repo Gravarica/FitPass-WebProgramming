@@ -1,7 +1,7 @@
 package beans;
 
 import enums.Gender;
-import enums.UserType;
+import enums.Role;
 
 public class Customer extends User{
 
@@ -14,8 +14,8 @@ public class Customer extends User{
 	}
 
 	public Customer(String username, String password, String firstName, String lastName, Gender gender,
-			UserType userType) {
-		super(username, password, firstName, lastName, gender, userType);
+			Role role, int points, UserType userType) {
+		super(username, password, firstName, lastName, gender, role, points, userType);
 		// TODO Auto-generated constructor stub
 	}
 

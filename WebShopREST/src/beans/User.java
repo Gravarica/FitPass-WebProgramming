@@ -1,24 +1,28 @@
 package beans;
 
 import enums.Gender;
-import enums.UserType;
+import enums.Role;
 
 public class User {
 
-	private String username;
-	private String password;
-	private String firstName;
-	private String lastName;
-	private Gender gender;
-	private UserType userType;
+	protected String username;
+	protected String password;
+	protected String firstName;
+	protected String lastName;
+	protected Gender gender;
+	protected Role role;
+	protected int points;
+	protected UserType userType;
 	
-	public User(String username, String password, String firstName, String lastName, Gender gender, UserType userType) {
+	public User(String username, String password, String firstName, String lastName, Gender gender, Role role, int points, UserType userType) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
+		this.role = role;
+		this.points = points;
 		this.userType = userType;
 	}
 
@@ -64,6 +68,22 @@ public class User {
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
 	}
 
 	public UserType getUserType() {

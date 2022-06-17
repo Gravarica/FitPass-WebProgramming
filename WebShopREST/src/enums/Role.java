@@ -1,5 +1,5 @@
 package enums;
 
-public enum UserType {
+public enum Role {
 	ADMIN, MANAGER, TRAINER, CUSTOMER
 }
