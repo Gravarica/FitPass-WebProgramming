@@ -13,8 +13,8 @@ public class WorkHour {
 		super();
 	}
 	
-	public WorkHour(int id, DayOfWeek dayOfWeek, Date startTime, Date endTime) {
-		super(id);
+	public WorkHour(DayOfWeek dayOfWeek, Date startTime, Date endTime) {
+		super();
 		this.dayOfWeek = dayOfWeek;
 		this.startTime = startTime;
 		this.endTime = endTime;
