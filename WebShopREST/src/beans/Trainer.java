@@ -15,9 +15,9 @@ public class Trainer extends User {
 		this.trainingHistory = new ArrayList<TrainingHistory>();
 	}
 
-	public Trainer(String username, String password, String firstName, String lastName, Gender gender, Role role,
-			Date birthday, UserType userType, ArrayList<TrainingHistory> trainingHistory) {
-		super(username, password, firstName, lastName, gender, role, birthday, userType);
+	public Trainer(int id, String username, String password, String firstName, String lastName, Gender gender, Role role,
+			Date birthday, CustomerType userType, ArrayList<TrainingHistory> trainingHistory) {
+		super(id, username, password, firstName, lastName, gender, role, birthday, userType);
 		this.trainingHistory = trainingHistory;
 	}
 
