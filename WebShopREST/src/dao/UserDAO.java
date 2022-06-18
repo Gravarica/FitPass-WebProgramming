@@ -11,12 +11,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.org.apache.bcel.internal.classfile.Utility;
 
 import beans.Artikal;
 import beans.User;
 import dto.LoginDTO;
 import dto.RegistrationDTO;
+import src.util.BusinessUtil;
 
 /***
  * <p>Klasa namenjena da uèita korisnike iz fajla i pruža operacije nad njima (poput pretrage).
@@ -39,7 +42,7 @@ public class UserDAO {
 	 * @param contextPath Putanja do aplikacije u Tomcatu. Može se pristupiti samo iz servleta.
 	 */
 	public UserDAO(String contextPath) {
-		file = new File(contextPath + "/users.json");
+		file = new File(contextPath + "/Resources/Data/users.json");
 		loadUsers(contextPath);
 	}
 	
@@ -74,7 +77,7 @@ public class UserDAO {
 		ObjectMapper mapper = new ObjectMapper();
 	
 		try {
-			List<User> userList = Arrays.asList(mapper.readValue(file, User[].class));
+			List<User> userList = mapper.readValue(file, new TypeReference<List<User>>() {});
 			convertListToMap(userList);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,7 +87,11 @@ public class UserDAO {
 	
 	public User register(RegistrationDTO dto) {
 		
+		if (users.containsKey(dto.getUsername())) {
+			return null;
+		}
 		User saveUser = new User(dto);
+		saveUser.setPassword(BusinessUtil.hashPassword(saveUser.getPassword()));
 		saveUser.setId(getMaxId());
 		users.put(saveUser.getUsername(), saveUser);
 		saveUsers();
@@ -99,7 +106,7 @@ public class UserDAO {
 		try {
 			ArrayList<User> userList = new ArrayList<User>(users.values());
 			System.out.println("USAO SAM OVDE");
-			mapper.writeValue(file, userList.toArray());
+			mapper.writeValue(file, userList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

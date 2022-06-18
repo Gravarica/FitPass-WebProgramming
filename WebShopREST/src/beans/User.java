@@ -8,6 +8,7 @@ import dto.RegistrationDTO;
 import enums.CustomerTypeName;
 import enums.Gender;
 import enums.Role;
+import src.util.BusinessUtil;
 
 public class User extends Entity {
 
@@ -192,7 +193,7 @@ public class User extends Entity {
 	}
 	
 	public boolean passwordMatches(LoginDTO dto) {
-		return password.equals(dto.getPassword());
+		return password.equals(BusinessUtil.hashPassword(dto.getPassword()));
 	}
 		
 }
