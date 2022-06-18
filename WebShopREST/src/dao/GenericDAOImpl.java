@@ -12,6 +12,7 @@ public class GenericDAOImpl implements GenericDAO {
 	protected HashMap<Integer, Entity> entities;
 	
 	public GenericDAOImpl() {
+		entities = new HashMap<>();
 	}
 	
 	@Override

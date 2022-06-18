@@ -48,4 +48,8 @@ public class Address extends Entity {
 	public void setPostalNumber(String postalNumber) {
 		this.postalNumber = postalNumber;
 	}
+	
+	public boolean cityMatches(String cityParameter) {
+		return city.equals(cityParameter);
+	}
 }
