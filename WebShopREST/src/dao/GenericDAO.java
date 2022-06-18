@@ -1,12 +1,13 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import beans.Entity;
 
-public interface GenericDAO<TEntity> {
+public interface GenericDAO {
 
-	public ArrayList<Entity> getAll();
+	public Collection<Entity> getAll();
 	
 	public Entity getById(int id);
 	

@@ -1,10 +1,50 @@
 [
 	{
 		"id" : "1",
-		"name" : "Aaa"
+		"name" : "Ozzy Gym Telep",
+		"averageGrade" : 7.64,
+		"sportObjectType" : "GYM",
+		"location" : {
+			"address" : {
+				"street" : "Jovana Ducica",
+				"number" : "12a",
+				"city" : "Novi Sad",
+				"postalNumber" : "21000"
+			},
+			"longitude" : 24.42,
+			"latitude" : 12.23
+		}
 	},
 	{
 		"id" : "2",
-		"name" : "bbb"
+		"name" : "Addiction Fitness Center",
+		"averageGrade" : 10.00,
+		"sportObjectType" : "GYM",
+		"location" : {
+			"address" : {
+				"street" : "Bulevar Patrijarha Pavla",
+				"number" : "35",
+				"city" : "Novi Sad",
+				"postalNumber" : "21000"
+			},
+			"longitude" : 24.42,
+			"latitude" : 12.23
+		}
+	},
+		{
+		"id" : "3",
+		"name" : "Flex Fitness",
+		"averageGrade" : 8.64,
+		"sportObjectType" : "POOL",
+		"location" : {
+			"address" : {
+				"street" : "Bulevar Zorana Djindjica",
+				"number" : "22",
+				"city" : "Beograd",
+				"postalNumber" : "11000"
+			},
+			"longitude" : 24.42,
+			"latitude" : 12.23
+		}
 	}
 ]
