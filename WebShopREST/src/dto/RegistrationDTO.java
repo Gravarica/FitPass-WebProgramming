@@ -7,13 +7,13 @@ import enums.Role;
 
 public class RegistrationDTO {
 
-	private String username;
-	private String password;
-	private String firstName;
-	private String lastName;
-	private Gender gender;
-	private Role role;
-	private Date dateOfBirth;
+	protected String username;
+	protected String password;
+	protected String firstName;
+	protected String lastName;
+	protected Gender gender;
+	protected Role role;
+	protected Date dateOfBirth;
 	
 	public RegistrationDTO(String username, String password, String firstName, String lastName, Gender gender,
 			Role role, Date dateOfBirth) {

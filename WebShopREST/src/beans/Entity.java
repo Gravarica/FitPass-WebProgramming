@@ -3,6 +3,7 @@ package beans;
 public class Entity {
 
 	protected int id;
+	protected boolean deleted = false;
 
 	public Entity() {}
 	

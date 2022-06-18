@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 import enums.SportObjectType;
+import src.util.BusinessUtil;
 import enums.SportObjectContent;
 
 
@@ -100,7 +101,15 @@ public class SportObject extends Entity {
 		this.image = image;
 	}
 	
+	public boolean containsParameter(String parameter) {
+		return BusinessUtil.stringContains(name, parameter);
+	}
 	
+	public boolean typeMatches(SportObjectType type) {
+		return this.sportObjectType == type;
+	}
 	
-	
+	public boolean gradeApplies(double grade) {
+		return this.averageGrade >= grade;
+	}
 }
