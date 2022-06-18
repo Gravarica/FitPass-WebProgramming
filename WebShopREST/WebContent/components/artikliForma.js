@@ -8,7 +8,7 @@ Vue.Component("unos-artikla", {
     },
     template:
     `
-    <div>
+    <div class = "container mt-10">
     <form>
     <table>
         <tr>

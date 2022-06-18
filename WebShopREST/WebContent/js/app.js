@@ -10,14 +10,14 @@ const SearchProduct = {template: '<search></search>' }
 const router = new VueRouter({
 	mode: 'hash',
 	  routes: [
-		{ path: '/', name: 'home', component: Product},
-	    { path: '/products', component: Products}
+		{ path: '/', name: 'home', component: Products},
+	    { path: '/product', component: Product}
 	  ]
 });
 
 var app = new Vue({
 	router,
-	el: '#artikli',
+	el: '#main',
 	data: {
 	}
 });

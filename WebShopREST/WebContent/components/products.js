@@ -1,51 +1,40 @@
 Vue.component("products", { 
 	data : function(){
         return {
-            artikli : null,
+            objects : null,
             ukupnaCena: 0
         }
     },
     template: 
     `
     <div>
-    <h3>Prikaz artikala</h3>
-    <table border = "1">
-        <tr bgcolor = "lightgrey">
-            <th>Sifra</th>
-            <th>Naziv</th>
-            <th>Tip</th>
-            <th>Cena po komadu</th>
-            <th>Kolicina</th>
-            <th>Ukupna cena</th>
-            <th>Obrisi</th>
+    <h3>Sportski objekti</h3>
+    <table class="table">
+  		<thead class="thead-dark">
+    		<tr>
+		      <th scope="col">Naziv</th>
+		      <th scope="col">Tip</th>
+		      <th scope="col">Status</th>
+		      <th scope="col">Adresa</th>
+		      <th scope="col">Ocena</th>
+		    </tr>
+ 		</thead>
+		<tbody>
+        <tr v-for="o in objects">
+            <td>{{o.name}}</td>
+            <td>{{convertType(o)}}</td>
+            <td>{{convertStatus(o)}}</td>
+            <td>{{o.location.address.street}}</td>
+            <td>{{o.averageGrade}}</td>
         </tr>
-
-        <tr v-for="(a, index) in artikli"
-            v-bind:class="{ zeleno : a.available == true }">
-            <td>{{a.id}}</td>
-            <td>{{a.name}}</td>
-            <td>{{a.type}}</td>
-            <td>{{a.price}}</td>
-            <td>{{a.quantity}}</td>
-            <td>{{getTotalPriceForProduct(a)}}</td>
-            <td>
-                <button v-on:click="deleteArtikal(a.id, index)">Brisanje</button>
-            </td>
-            <tr>
-                <td colspan = "5" align="right">Ukupna cena:</td>
-                <td>{{ukupnaCena}}</td>
-            </tr>
-        </tr>
+        </tbody>
     </table>
     </div>
     `,
     mounted(){
         axios
-            .get('rest/artikli')
-            .then((response) => (this.artikli = response.data))
-        axios
-            .get('rest/artikli/total')
-            .then((response) => (this.ukupnaCena = response.data))
+            .get('rest/sport_objects/get')
+            .then((response) => (this.objects = response.data))
     },
     methods: {
         deleteArtikal: function(id, index){
@@ -60,6 +49,24 @@ Vue.component("products", {
         },
         getTotalPriceForProduct : function(artikal){
             return artikal.price * artikal.quantity
+        },
+        convertStatus : function (objekat) {
+        	if (objekat.status == true){
+        		return "Otvoren"
+        	} 
+        	return "Zatvoren"
+        },
+        convertType : function (objekat) {
+        	if (objekat.sportObjectType == "GYM"){
+        		return "Teretana"
+        	} else if (objekat.sportObjectType == "POOL"){
+        		return "Bazen"
+        	} else {
+        		return "Sportski centar"
+        	}
+        },
+        getAddress : function(objekat) {
+        	return objekat.location.address.street + objekat.loaction.address.number
         }
     }
 });
