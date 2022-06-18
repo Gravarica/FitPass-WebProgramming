@@ -1,35 +1,37 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 import beans.Entity;
 import beans.WebContext;
 
-public class GenericDAOImpl<TEntity> implements GenericDAO {
+public class GenericDAOImpl implements GenericDAO {
 
+	protected HashMap<Integer, Entity> entities;
+	
+	public GenericDAOImpl() {
+	}
+	
 	@Override
-	public ArrayList<Entity> getAll() {
-		// TODO Auto-generated method stub
-		//return WebContext.getInstance().get(this);
-		return null;
+	public Collection<Entity> getAll() {
+		return entities.values();
 	}
 
 	@Override
 	public Entity getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return entities.get(id);
 	}
 
 	@Override
 	public Entity create(Entity entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return entities.put(entity.getId(), entity);
 	}
 
 	@Override
 	public Entity delete(Entity entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return entities.remove(entity.getId());
 	}
 
 	@Override

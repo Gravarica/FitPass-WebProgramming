@@ -19,6 +19,8 @@ import beans.Artikal;
 import beans.User;
 import dto.LoginDTO;
 import dto.RegistrationDTO;
+import enums.CustomerTypeName;
+import enums.Role;
 import src.util.BusinessUtil;
 
 /***
@@ -141,5 +143,27 @@ public class UserDAO {
 	public User getLoggedUser() {
 		return loggedUser;
 	}
+	
+	public ArrayList<User> search(String parameter){
+		ArrayList<User> returnList = new ArrayList<>();
+		for(User searchUser : users.values()) {
+			if(searchUser.containsParameter(parameter)) {
+				returnList.add(searchUser);
+			}
+		}
+		return returnList;
+	}
+	
+	public ArrayList<User> getUsersByRole(Role role){
+		ArrayList<User> returnList = new ArrayList<>();
+		for(User searchUser : users.values()) {
+			if(searchUser.roleMatches(role)) {
+				returnList.add(searchUser);
+			}
+		}
+		return returnList;
+	}
+	
+
 	
 }

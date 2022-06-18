@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import dto.LoginDTO;
+import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
 import enums.CustomerTypeName;
 import enums.Gender;
@@ -49,8 +50,9 @@ public class User extends Entity {
 	}
 	
 	// Konstruktor za registraciju menadzera
-	public User(String username, String password, String firstName, String lastName, Gender gender, Date dateOfBirth, SportObject sportObject) {
-		
+	public User(ManagerRegistrationDTO dto) {
+		instantiateData(dto);
+		this.object = dto.getSportObject();
 	}
 	
 	private void instantiateData(RegistrationDTO dto) {
@@ -61,10 +63,12 @@ public class User extends Entity {
 		this.gender = dto.getGender();
 		this.role = dto.getRole();
 		this.dateOfBirth = dto.getDateOfBirth();
+		
 		instantiateEmptyFields();
+		
 		if (role == Role.CUSTOMER) {
 			instantiateCustomerFields();
-		} else {
+		} else if (role == Role.TRAINER){
 			instantiateTrainerFields();
 		}
 	}
@@ -195,5 +199,15 @@ public class User extends Entity {
 	public boolean passwordMatches(LoginDTO dto) {
 		return password.equals(BusinessUtil.hashPassword(dto.getPassword()));
 	}
+	
+	public boolean containsParameter(String parameter) {
+		return BusinessUtil.stringContains(firstName, parameter) || 
+			   BusinessUtil.stringContains(lastName, parameter)  ||
+			   BusinessUtil.stringContains(username, parameter);
+	}
 		
+	public boolean roleMatches(Role role) {
+		return this.role == role;
+	}
+	
 }
