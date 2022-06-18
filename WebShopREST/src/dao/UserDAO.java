@@ -46,6 +46,7 @@ public class UserDAO {
 	public UserDAO(String contextPath) {
 		file = new File(contextPath + "/Resources/Data/users.json");
 		loadUsers(contextPath);
+		//System.out.println(contextPath);
 	}
 	
 	/**
