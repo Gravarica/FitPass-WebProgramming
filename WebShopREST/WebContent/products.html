@@ -65,7 +65,7 @@
             </li>
           </ul>
         </div>
-        <form class="d-flex" class="bg-dark">
+        <form class="d-flex" class="bg-dark" v-bind:hidden="userStatus == 'ULOGOVAN'">
           <div>
             <button type="button" class="btn btn-outline-light  d-table mx-auto" data-bs-toggle="modal" data-bs-target="#loginPage">Login</button>
           </div>
