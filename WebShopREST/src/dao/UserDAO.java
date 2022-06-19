@@ -68,7 +68,14 @@ public class UserDAO {
 	}
 	
 	public Collection<User> getAll() {
+		printDateForEachUser();
 		return users.values();
+	}
+	
+	private void printDateForEachUser() {
+		for (User u : users.values()) {
+			System.out.println(u.getDateOfBirth().toString());
+		}
 	}
 	
 	/**

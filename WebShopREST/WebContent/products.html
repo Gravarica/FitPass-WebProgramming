@@ -135,17 +135,17 @@
                   
                   <div class="mb-3">
                       <label for="Firstname">First Name<span class="text-danger">*</span></label>
-                      <input type="text" name="firstName" v-model="registerData.firstName" class="form-control" id="FirstName" placeholder="First Name" pattern="[A-Za-z]">
+                      <input type="text" name="firstName" v-model="registerData.firstName" class="form-control" id="FirstName" placeholder="First Name" pattern="[A-Za-z]+">
                   </div>
 
                   <div class="mb-3">
                     <label for="Lastname">Last Name<span class="text-danger">*</span></label>
-                    <input type="text" name="lastName" v-model="registerData.lastName" class="form-control" id="LastName" placeholder="Last Name" pattern="[A-Za-z]">
+                    <input type="text" name="lastName" v-model="registerData.lastName" class="form-control" id="LastName" placeholder="Last Name" pattern="[A-Za-z]+">
                   </div>
 
                   <div class="mb-3">
                     <label for="DateOfBirth">Date of Birth<span class="text-danger">*</span></label>
-                    <input type="date" name="dateOfBirth" class="form-control" id="DateOfBirth" placeholder="Date of Birth">
+                    <input type="date" v-model = "registerData.dateOfBirth" name="dateOfBirth" class="form-control" id="DateOfBirth" placeholder="Date of Birth" required pattern="\d{4}-\d{2}-\d{2}">
                   </div>
 
                   <div class="col-md-6 mb-4">
@@ -167,17 +167,17 @@
 
 
                   <div class="mb-3">
-                    <label for="Username">Username<span class="text-danger">*</span></label>
-                    <input type="text" v-model="registerData.username" name="username" class="form-control" id="Username" placeholder="Username">
+                    <label for="UsernameReg">Username<span class="text-danger">*</span></label>
+                    <input type="text" v-model="registerData.username" name="username" class="form-control" id="UsernameReg" placeholder="Username">
                 </div>
 
                 <div class="mb-3">
-                  <label for="Password">Password<span class="text-danger">*</span></label>
-                  <input type="password" v-model="registerData.password" name="password" class="form-control" id="Password" placeholder="Password">
+                  <label for="PasswordReg">Password<span class="text-danger">*</span></label>
+                  <input type="password" v-model="registerData.password" name="password" class="form-control" id="PasswordReg" placeholder="Password" >
                  </div>
 
                 <div class="modal-footer pt-4">                  
-                  <input type="button" class="btn btn-success mx-auto w-100" v-on:click="register">Register</button>
+                  <input type="button" class="btn btn-success mx-auto w-100" v-on:click="register" value = "Register"/>
                 </div>
                 </div>
             </form>

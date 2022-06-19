@@ -49,6 +49,7 @@ public class UserService {
 	@Path("/registration")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User register(RegistrationDTO dto) {
+		System.out.println(dto.getDateOfBirth().toString());
 		return getUserDAO().register(dto);
 	}
 	

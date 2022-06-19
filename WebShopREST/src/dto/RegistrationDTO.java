@@ -2,6 +2,8 @@ package dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import enums.Gender;
 import enums.Role;
 
@@ -13,6 +15,7 @@ public class RegistrationDTO {
 	protected String lastName;
 	protected Gender gender;
 	protected Role role;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	protected Date dateOfBirth;
 	
 	public RegistrationDTO(String username, String password, String firstName, String lastName, Gender gender,

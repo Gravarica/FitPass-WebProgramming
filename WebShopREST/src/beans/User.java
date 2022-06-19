@@ -3,6 +3,8 @@ package beans;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import dto.LoginDTO;
 import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
@@ -19,6 +21,7 @@ public class User extends Entity {
 	protected String lastName;
 	protected Gender gender;
 	protected Role role;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	protected Date dateOfBirth;
 	protected CustomerType customerType;
 	private SportObject object;
