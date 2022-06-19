@@ -2,8 +2,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Products</title>
+	<title>Fit Pass</title>
 	<script src="js/jquery.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/6e1181ee60.js" crossorigin="anonymous"></script>
 	<script src="js/toast.js"></script>
 	<style>
 		.zeleno {
@@ -11,9 +13,183 @@
 		}
 	</style>
 </head>
-<body>
-<div id="artikli">
+<body class = "bg-light">
+<div id="main">
+<div class="component bg-light" style="background-color: rgba(0,0,255,.1); height:50px">
+<nav class = "navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+      <div class="container">
+      <a class = "navbar-brand mb-0 h1" href="#" >
+          <i class="fa-solid fa-dumbbell"></i>   !FatPass</a>
+    
+        <button 
+        type="button"
+        data-bs-toggle = "collapse"
+        data-bs-target = "#navbarNav"
+        class = "navbar-toggler"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        
+        <span class = "navbar-toggler-icon"></span>
+
+        </button>
+
+        <div
+          class  = "collapse navbar-collapse"
+          id = "navbarNav">
+        
+          <ul class = "navbar-nav">
+            <li class = "nav-item active">
+              <a href="#" class="nav-link active">Home</a>
+            </li>
+            <li class = "nav-item active">
+              <a href="#" class = "nav-link active">Objects</a>
+            </li>
+            <li class = "nav-item dropdown">
+              <a href="#" class = "nav-link dropdown-toggle"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expended="false">Dropdown test</a>
+              <ul class="class dropdown-menu"
+              aria-labelledby="navbarDropdown">
+                <li>
+                  <a href="#" class="dropdown-item">Ne znam 1</a>
+                </li>
+                <li>
+                  <a href="#" class="dropdown-item">Ne znam 2</a>
+                </li>
+                <li>
+                  <a href="#" class="dropdown-item">Ne znam 3</a>
+                </li>
+            </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+        <div id = "form" v-bind:hidden="userStatus == 'ULOGOVAN'">
+        <form class="d-flex" class="bg-dark" >
+          <div>
+            <button type="button" class="btn btn-outline-light  d-table mx-auto" data-bs-toggle="modal" data-bs-target="#loginPage">Login</button>
+          </div>
+          <div style="margin-left:20px;">
+            <button type="button" class="btn btn-success  d-table  mx-auto" data-bs-toggle="modal" data-bs-target="#registerPage">Register</button>
+          </div>
+        </form>
+        </div>
+        <div id = "loggedForm" v-bind:hidden="userStatus == 'NEREGISTROVAN'" overflow:hidden>
+        	<div overflow:hidden>
+        		<p class = "mb-0">{{loggedUser.role}}</p>
+        	</div>
+        	<div>
+        		<button type="button" class="btn btn-light d-table  mx-auto" v-on:click="logout">Logout</button>
+        	</div>
+        </div>
+        </div>
+      </div>
+</nav>
+</div>
+
+<div class="modal fade" id="loginPage" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <form>
+              <div class="modal-header">
+                <h5 class="modal-title">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                    <label for="Username">Username<span class="text-danger">*</span></label>
+                    <input type="text" name="username" class="form-control" id="Username" placeholder="Enter Username" v-model="loginData.username" pattern="[A-Za-z]">
+                </div>
+    
+                <div class="mb-3">
+                    <label for="Password">Password<span class="text-danger">*</span></label>
+                    <input type="password" name="password" class="form-control" id="Password" placeholder="Enter Password" v-model="loginData.password">
+                </div>
+                <div class="mb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="remember" required>
+                    <label class="form-check-label" for="remember">Remember Me</label>
+                    <a href="#" class="float-end">Forgot Password</a>
+                </div>
+              </div>
+              <div class="modal-footer pt-4">                  
+                <input type="button" class="btn btn-success mx-auto w-100" value = "login" v-on:click="login">
+              </div>
+              <p class="text-center">Don't have an account? <a href="#">Signup</a></p> 
+          </form>
+          </div>
+        </div>
+      </div>
+      
+<div class="modal fade" id="registerPage" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <form action="">
+                <div class="modal-header">
+                  <h5 class="modal-title">Register</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  
+                  <div class="mb-3">
+                      <label for="Firstname">First Name<span class="text-danger">*</span></label>
+                      <input type="text" name="firstName" v-model="registerData.firstName" class="form-control" id="FirstName" placeholder="First Name" pattern="[A-Za-z]">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="Lastname">Last Name<span class="text-danger">*</span></label>
+                    <input type="text" name="lastName" v-model="registerData.lastName" class="form-control" id="LastName" placeholder="Last Name" pattern="[A-Za-z]">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="DateOfBirth">Date of Birth<span class="text-danger">*</span></label>
+                    <input type="date" name="dateOfBirth" class="form-control" id="DateOfBirth" placeholder="Date of Birth">
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+
+                    <h6 class="mb-2 pb-1">Gender: </h6>
+  
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" v-model="registerData.gender" v-bind:value="'FEMALE'" type="radio" name="inlineRadioOptions" id="femaleGender"
+                        value="option1" checked />
+                      <label class="form-check-label" for="femaleGender">Female</label>
+                    </div>
+  
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" v-model="registerData.gender" v-bind:value="'MALE'" type="radio" name="inlineRadioOptions" id="maleGender"
+                        value="option2" />
+                      <label class="form-check-label" for="maleGender">Male</label>
+                    </div>
+                  </div>
+
+
+                  <div class="mb-3">
+                    <label for="Username">Username<span class="text-danger">*</span></label>
+                    <input type="text" v-model="registerData.username" name="username" class="form-control" id="Username" placeholder="Username">
+                </div>
+
+                <div class="mb-3">
+                  <label for="Password">Password<span class="text-danger">*</span></label>
+                  <input type="password" v-model="registerData.password" name="password" class="form-control" id="Password" placeholder="Password">
+                 </div>
+
+                <div class="modal-footer pt-4">                  
+                  <input type="button" class="btn btn-success mx-auto w-100" v-on:click="register">Register</button>
+                </div>
+                </div>
+            </form>
+        </div>
+       </div>
+      </div>  
+
+<div class = "container bg-light" style = "margin-top:40px">
+	<div>
 		<router-view></router-view>	
+	</div>
+</div>
 </div>
 
 	<script src="js/vue.js"></script>
@@ -23,6 +199,7 @@
 	<script src="components/prikazArtikala.js"></script>
 	<script src="components/product.js"></script>
 	<script src="components/products.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 	<script src="components/searchProduct.js"></script>
 	<script src="js/app.js"></script>
 

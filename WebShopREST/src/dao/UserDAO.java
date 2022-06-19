@@ -18,6 +18,7 @@ import com.sun.org.apache.bcel.internal.classfile.Utility;
 import beans.Artikal;
 import beans.User;
 import dto.LoginDTO;
+import dto.LoginReturnDTO;
 import dto.RegistrationDTO;
 import enums.CustomerTypeName;
 import enums.Role;
@@ -134,11 +135,12 @@ public class UserDAO {
 		}
 	}
 	
-	public User login(LoginDTO dto) {
+	public LoginReturnDTO login(LoginDTO dto) {
 		User user = users.get(dto.getUsername());
-		if (user == null || !user.passwordMatches(dto)) return null;
-		
-		return loggedUser = user;
+		if (user == null || !user.passwordMatches(dto)) return new LoginReturnDTO(null, null, false);
+		System.out.println("USPEO SAM DA SE ULOGUJEM");
+		loggedUser = user;
+		return new LoginReturnDTO(user.getUsername(), user.getRole(), true);
 	}
 	
 	public User getLoggedUser() {
@@ -165,6 +167,11 @@ public class UserDAO {
 		return returnList;
 	}
 	
-
+	public User logout() {
+		User returnUser = getLoggedUser();
+		this.loggedUser = null;
+		return returnUser;
+	}
+	
 	
 }
