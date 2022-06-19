@@ -33,7 +33,7 @@ Vue.component("products", {
     `,
     mounted(){
         axios
-            .get('rest/sport_objects/get')
+            .get('/WebShopREST/rest/sport_objects/get')
             .then((response) => (this.objects = response.data))
     },
     methods: {

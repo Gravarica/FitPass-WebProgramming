@@ -15,6 +15,7 @@ import beans.User;
 import dao.ArtikalDAO;
 import dao.UserDAO;
 import dto.LoginDTO;
+import dto.LoginReturnDTO;
 import dto.RegistrationDTO;
 
 @Path("/users")
@@ -54,7 +55,16 @@ public class UserService {
 	@POST
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
-	public User login(LoginDTO dto) {
+	public LoginReturnDTO login(LoginDTO dto) {
+		System.out.println("STIGAO JE ZAHTEV: " + dto.getUsername() + " " + dto.getPassword());
 		return getUserDAO().login(dto);
+	}
+	
+	@POST
+	@Path("/logout")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User logout() {
+		System.out.println("LOGOUT");
+		return getUserDAO().logout();
 	}
 }
