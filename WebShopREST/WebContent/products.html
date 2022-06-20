@@ -77,11 +77,11 @@
           </div>
         </form>
         </div>
-        <div id = "loggedForm" v-bind:hidden="userStatus == 'NEREGISTROVAN'" overflow:hidden>
-        	<div overflow:hidden>
-        		<p class = "mb-0">{{loggedUser.role}}</p>
+        <div id = "loggedForm" v-bind:hidden="userStatus == 'NEREGISTROVAN'" overflow:hidden class = "row">
+        	<div align = "center" class="col text-center">
+        			<p style = "color : white; font-family : verdana; " >{{loggedUser.username}}</p>
         	</div>
-        	<div>
+        	<div class = "col" align="center">
         		<button type="button" class="btn btn-light d-table  mx-auto" v-on:click="logout">Logout</button>
         	</div>
         </div>
