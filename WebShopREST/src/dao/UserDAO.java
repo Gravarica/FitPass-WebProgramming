@@ -68,7 +68,14 @@ public class UserDAO {
 	}
 	
 	public Collection<User> getAll() {
+		printDateForEachUser();
 		return users.values();
+	}
+	
+	private void printDateForEachUser() {
+		for (User u : users.values()) {
+			System.out.println(u.getDateOfBirth().toString());
+		}
 	}
 	
 	/**
@@ -138,7 +145,6 @@ public class UserDAO {
 	public LoginReturnDTO login(LoginDTO dto) {
 		User user = users.get(dto.getUsername());
 		if (user == null || !user.passwordMatches(dto)) return new LoginReturnDTO(null, null, false);
-		System.out.println("USPEO SAM DA SE ULOGUJEM");
 		loggedUser = user;
 		return new LoginReturnDTO(user.getUsername(), user.getRole(), true);
 	}
