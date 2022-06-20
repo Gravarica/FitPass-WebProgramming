@@ -145,7 +145,6 @@ public class UserDAO {
 	public LoginReturnDTO login(LoginDTO dto) {
 		User user = users.get(dto.getUsername());
 		if (user == null || !user.passwordMatches(dto)) return new LoginReturnDTO(null, null, false);
-		System.out.println("USPEO SAM DA SE ULOGUJEM");
 		loggedUser = user;
 		return new LoginReturnDTO(user.getUsername(), user.getRole(), true);
 	}

@@ -42,8 +42,8 @@ var app = new Vue({
 			document.getElementById('Password').style.border = this.border
 			axios
 				.post('/WebShopREST/rest/users/login', this.loginData)
-				.then(response => {loggedUser = response.data; 
-								   if (loggedUser.success == true){
+				.then(response => {this.loggedUser = response.data; 
+								   if (this.loggedUser.success == true){
 								   	this.userStatus = 'ULOGOVAN'; 
 								   	alert(this.userStatus)
 								   } else {
@@ -72,5 +72,13 @@ var app = new Vue({
 				.post('/WebShopREST/rest/users/logout')
 				.then(response => {this.userStatus = 'NEREGISTROVAN'})
 		}
+	},
+	mounted() {
+		axios
+			.get('/WebShopREST/rest/users/currentUser')
+			.then(response => { this.loggedUser = response.data;
+								if (this.loggedUser.success == true){
+									this.userStatus = 'ULOGOVAN'
+								}})
 	}
 });

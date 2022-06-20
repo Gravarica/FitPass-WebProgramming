@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -56,16 +58,32 @@ public class UserService {
 	@POST
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
-	public LoginReturnDTO login(LoginDTO dto) {
-		System.out.println("STIGAO JE ZAHTEV: " + dto.getUsername() + " " + dto.getPassword());
-		return getUserDAO().login(dto);
+	public LoginReturnDTO login(LoginDTO dto, @Context HttpServletRequest request) {
+		LoginReturnDTO lrd = getUserDAO().login(dto);
+		if (lrd.isSuccess()) {
+			request.getSession().setAttribute("user", lrd);
+		}
+		
+		return lrd;
 	}
 	
 	@POST
 	@Path("/logout")
 	@Produces(MediaType.APPLICATION_JSON)
-	public User logout() {
-		System.out.println("LOGOUT");
+	public User logout(@Context HttpServletRequest request) {
+		request.getSession().invalidate();
 		return getUserDAO().logout();
+	}
+	
+	@GET
+	@Path("/currentUser")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public LoginReturnDTO login(@Context HttpServletRequest request) {
+		LoginReturnDTO lrd = (LoginReturnDTO) request.getSession().getAttribute("user");
+		if (lrd == null) {
+			return new LoginReturnDTO(null,null,false);
+		}
+		return lrd;
 	}
 }
