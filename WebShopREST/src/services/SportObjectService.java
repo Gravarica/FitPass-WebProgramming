@@ -61,6 +61,7 @@ public class SportObjectService {
 	@Path("/search/city/{city}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<SportObject> searchByCity(@PathParam("city") String parameter){
+		if(parameter.equals("none")) {return getSportObjectDAO().getAll();}
 		return getSportObjectDAO().searchByCity(parameter);
 	}
 	

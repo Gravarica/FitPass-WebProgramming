@@ -50,6 +50,6 @@ public class Address extends Entity {
 	}
 	
 	public boolean cityMatches(String cityParameter) {
-		return city.equals(cityParameter);
+		return city.toLowerCase().contains(cityParameter.toLowerCase());
 	}
 }
