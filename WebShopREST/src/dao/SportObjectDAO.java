@@ -60,7 +60,7 @@ public class SportObjectDAO {
 	}
 	
 	public ArrayList<SportObject> searchByCity(String city){
-		ArrayList<SportObject> returnList = new ArrayList<>();
+		ArrayList<SportObject> returnList = new ArrayList<>();		
 		for(SportObject searchObj : objects) {
 			if(searchObj.getLocation().getAddress().cityMatches(city)) {
 				returnList.add(searchObj);
