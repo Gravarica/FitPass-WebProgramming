@@ -1,17 +1,37 @@
 <template>
   <div class="app">
-    <Navigation/>
+    <Navigation @show-login="showLogin"/>
      <router-view/>
+  </div>
+  <div>
+    <LoginPopup v-if="login">
+      <h2>MOJ POPUP</h2>
+    </LoginPopup> 
   </div>
 </template>
 
 <script>
 import Navigation from "./components/Navigation"
+import LoginPopup from "./components/LoginPopup.vue"
 
 export default{
     name : "App",
+    data(){
+      return{
+        login : false,
+        register : false
+      }
+    },
+    
     components:{
       Navigation,
+      LoginPopup,
+    },
+    
+    methods:{
+      showLogin(){
+        this.login = true
+      }
     }
 }
 </script>
