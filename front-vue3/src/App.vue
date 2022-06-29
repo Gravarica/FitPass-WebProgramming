@@ -3,7 +3,26 @@
     <Navigation/>
      <router-view/>
   </div>
+  <Popup :open="isOpen" @close = "isOpen = !isOpen">
+    
+  </Popup>
+  <router-view/>
 </template>
+<script>
+
+import Popup from "./components/Popup.vue";
+import { ref } from "vue";
+
+export default { 
+    components: { Popup },
+    setup(){
+      const isOpen = ref(false)
+
+      return {isOpen}
+    }
+  }
+</script>
+
 
 <script>
 import Navigation from "./components/Navigation"
@@ -35,4 +54,5 @@ export default{
   max-width: 1140px;
   margin: 0 auto;
 }
+
 </style>
