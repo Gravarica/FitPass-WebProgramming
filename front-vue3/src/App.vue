@@ -2,9 +2,28 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
+    <button @click = "isOpen = true">Show Popup</button>
   </nav>
+  <Popup :open="isOpen" @close = "isOpen = !isOpen">
+    
+  </Popup>
   <router-view/>
 </template>
+<script>
+
+import Popup from "./components/Popup.vue";
+import { ref } from "vue";
+
+export default { 
+    components: { Popup },
+    setup(){
+      const isOpen = ref(false)
+
+      return {isOpen}
+    }
+  }
+</script>
+
 
 <style>
 #app {
@@ -27,4 +46,5 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
 </style>
