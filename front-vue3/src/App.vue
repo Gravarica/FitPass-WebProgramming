@@ -3,6 +3,7 @@
     <Navigation @show-login="showLogin"/>
      <router-view/>
   </div>
+
   <div>
     <LoginPopup v-if="login">
       <h2>MOJ POPUP</h2>
@@ -55,4 +56,5 @@ export default{
   max-width: 1140px;
   margin: 0 auto;
 }
+
 </style>
