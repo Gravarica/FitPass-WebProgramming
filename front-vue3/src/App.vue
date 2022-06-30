@@ -5,9 +5,7 @@
   </div>
 
   <div>
-    <LoginPopup v-if="login">
-      <h2>MOJ POPUP</h2>
-    </LoginPopup> 
+    <LoginPopup v-if="login" @close-login="closeLogin"/> 
   </div>
 </template>
 
@@ -32,6 +30,9 @@ export default{
     methods:{
       showLogin(){
         this.login = true
+      },
+      closeLogin(){
+        this.login = false
       }
     }
 }
