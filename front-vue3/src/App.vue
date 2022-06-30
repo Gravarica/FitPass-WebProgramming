@@ -1,17 +1,21 @@
 <template>
   <div class="app">
-    <Navigation @show-login="showLogin"/>
+    <Navigation @show-login="showLogin" @show-reg="showRegister"/>
      <router-view/>
   </div>
 
   <div>
     <LoginPopup v-if="login" @close-login="closeLogin"/> 
   </div>
+  <div>
+    <RegistrationPopup v-if="register" @close-reg="closeRegister"/> 
+  </div>
 </template>
 
 <script>
 import Navigation from "./components/Navigation"
 import LoginPopup from "./components/LoginPopup.vue"
+import RegistrationPopup from "./components/RegistrationPopup.vue"
 
 export default{
     name : "App",
@@ -23,16 +27,23 @@ export default{
     },
     
     components:{
-      Navigation,
-      LoginPopup,
-    },
+    Navigation,
+    LoginPopup,
+    RegistrationPopup
+},
     
     methods:{
       showLogin(){
         this.login = true
       },
+      showRegister(){
+        this.register = true;
+      },
       closeLogin(){
         this.login = false
+      },
+      closeRegister(){
+        this.register = false
       }
     }
 }

@@ -6,12 +6,41 @@
                 <form>
                     <div class="user-box">
                     <input type="text" name="" required="">
+                    <label>First Name</label>
+                    </div>
+                    
+                    <div class="user-box">
+                    <input type="text" name="" required="">
+                    <label>Last Name</label>
+                    </div>
+                    
+                    <div class="user-box">
+                    <input type="text" name="" required="">
+                    <label>Date of Birth</label>
+                    </div>
+                    
+                    <div class="user-box">
+                    <input type="text" name="" required="">
+                    <label>Gender</label>
+                    </div>
+                    
+                    <div class="user-box">
+                    <input type="text" name="" required="">
                     <label>Username</label>
                     </div>
+
                     <div class="user-box">
-                    <input type="password" name="" required="">
+                        <input v-if="!showPassword" type="password" name="password" id="id_password" required="">
+                        <input v-else type="text" name="" id="" required="">
+                        <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
                     <label>Password</label>
                     </div>
+
+                    <div class="user-box">
+                    <input type="password" name="" required="">
+                    <label>Repeat Password</label>
+                    </div>
+
                     <div class="flex-container">
                     <div class="flex-child">
                     <a href="#">
@@ -23,7 +52,7 @@
     </a>
     </div>
     <div class="flex-child">
-     <a href="#" v-on:click="closeLogin()">
+     <a href="#" v-on:click="closeRegister()">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -36,28 +65,25 @@
 </div>
         </div>
     </div>
-
 </template>
 
+
 <script>
-    export default{
-        name : "loginPopup",
-        data(){
-            return{
-
-            };
-        },
-
+    export default {
+        name : "registrationPopup",
+        showPassword : true,
         methods:{
-            closeLogin(){
-                this.$emit('close-login')
+            closeRegister(){
+                this.$emit("close-reg")
             }
-        }
+        },
     }
 </script>
 
+
 <style lang="scss" scoped>
-    .popup{
+
+.popup{
         position: fixed;
         top: 0;
         left: 0;
@@ -74,6 +100,7 @@
         //     background-color: white;
         //     padding: 32px;
         // }
+
     }
 
 .flex-container {
@@ -256,5 +283,7 @@ body {
     bottom: 100%;
   }
 }
+
+
 
 </style>
