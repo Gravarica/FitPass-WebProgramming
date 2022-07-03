@@ -11,6 +11,7 @@
             <li><router-link class="link" :to="{name : ''}">About</router-link></li>
             <li><router-link class="link" :to="{name : ''}">Contact</router-link></li>
             <not-logged-buttons @show-login="showLogin" @show-reg="showRegister" :class="nav" v-if="!success"/>
+            <logged-buttons @logout="logout" @myprofile="myprofile" :username="username" :role="role" v-if="success" :class="nav"/>
         </ul>
 
         <transition name="mobile-nav">
@@ -31,6 +32,7 @@
 <script>
 import { booleanLiteral } from '@babel/types';
 import NotLoggedButtons from './NotLoggedButtons.vue';
+import LoggedButtons from './LoggedButtons.vue';
 export default {
     name: "navigation",
     props: {
@@ -79,9 +81,12 @@ export default {
         },
         showRegister() {
             this.$emit("show-reg");
+        },
+        logout(){
+            this.$emit('logout')
         }
     },
-    components: { NotLoggedButtons }
+    components: { NotLoggedButtons, LoggedButtons }
 };
 </script>
 
