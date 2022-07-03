@@ -97,8 +97,9 @@ public class UserDAO {
 	}
 	
 	public User register(RegistrationDTO dto) {
-		
+		System.out.println("OVO JE PROSLEDJENI USERNAME" + dto.getUsername());
 		if (users.containsKey(dto.getUsername())) {
+			System.out.println("VRATIO SAM NULL");
 			return null;
 		}
 		User saveUser = new User(dto);

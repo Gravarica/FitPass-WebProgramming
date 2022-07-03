@@ -8,10 +8,14 @@
                     <input type="text" name="" required="" v-model="loginDTO.username">
                     <label>Username</label>
                     </div>
+                    
                     <div class="user-box">
                     <input type="password" name="" required="" v-model="loginDTO.password">
                     <label>Password</label>
                     </div>
+                    
+                    <div id="err" class="err"></div>
+
                     <div class="flex-container">
                     <div class="flex-child">
                     <a href="#" @click="login">
@@ -60,7 +64,15 @@ import axios from 'axios';
                 .post('http://localhost:8081/WebShopREST/rest/users/login', this.loginDTO)
                 .then((response) => {
                   this.loggedUser = response.data
-                  this.$emit('logged-in', this.loggedUser)
+                  if(this.loggedUser.success){
+                    this.$emit('logged-in', this.loggedUser)
+                    this.closeLogin()
+                    alert("You have succesfully logged in")
+                  }else{
+                    let notify = document.getElementById("err");
+                    notify.innerHTML = "Invalid username or password, try again.";
+                    notify.style.direction="block";
+                  }
                 })
                 .catch(err => (console.log(err)))
             }
@@ -267,6 +279,12 @@ body {
   50%,100% {
     bottom: 100%;
   }
+}
+
+.err {
+   color: white; 
+   font-weight: bold;
+   background-color: #c12020;
 }
 
 </style>

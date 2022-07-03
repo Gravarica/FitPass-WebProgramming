@@ -5,78 +5,112 @@
                 <h2>Login</h2>
                 <form>
                     <div class="user-box">
-                    <input type="text" name="" required="">
+                    <input type="text" name="" required v-model="registrationDTO.firstName">
                     <label>First Name</label>
                     </div>
                     
                     <div class="user-box">
-                    <input type="text" name="" required="">
-                    <label>Last Name</label>
+                      <input type="text" name="" required v-model="registrationDTO.lastName">
+                      <label>Last Name</label>
                     </div>
                     
                     <div class="user-box">
-                    <input type="text" name="" required="">
-                    <label>Date of Birth</label>
+                    <input type="date" name="" required="" v-model="registrationDTO.dateOfBirth">
+                    <!-- <label>Date of Birth</label> -->
                     </div>
-                    
-                    <div class="user-box">
-                    <input type="text" name="" required="">
-                    <label>Gender</label>
+
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" v-model="registrationDTO.gender" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE">
+                      <label class="form-check-label" for="inlineRadio1">Male</label>
                     </div>
-                    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" v-model="registrationDTO.gender" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE">
+                      <label class="form-check-label"  for="inlineRadio2">Female</label>
+                    </div>
+                   
                     <div class="user-box">
-                    <input type="text" name="" required="">
+                    <input type="text" name="" required="" v-model="registrationDTO.username">
                     <label>Username</label>
                     </div>
 
                     <div class="user-box">
-                        <input v-if="!showPassword" type="password" name="password" id="id_password" required="">
-                        <input v-else type="text" name="" id="" required="">
-                        <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+                        <input v-if="!showPassword" type="password" name="password" id="id_password" required="" v-model="registrationDTO.password">
+                        <!-- <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i> -->
                     <label>Password</label>
                     </div>
 
                     <div class="user-box">
-                    <input type="password" name="" required="">
+                    <input type="password" name="" required="" v-model="repeatPassword">
                     <label>Repeat Password</label>
                     </div>
 
-                    <div class="flex-container">
-                    <div class="flex-child">
-                    <a href="#">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Submit
-    </a>
-    </div>
-    <div class="flex-child">
-     <a href="#" v-on:click="closeRegister()">
+                    <div id="err" class="err"></div>
+
+            <div class="flex-container">
+              <div class="flex-child">
+                <a href="#" @click="register">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  Submit
+                </a>
+              </div>
+              <div class="flex-child">
+                <a href="#" @click="closeRegister()">
                     <span></span>
                     <span></span>
                     <span></span>
                     <span></span>
                     Cancel
-    </a>
-    </div>
-    </div>
-  </form>
-</div>
+                </a>
+              </div>
+            </div>
+          </form>
         </div>
-    </div>
+      </div>
+  </div>
 </template>
 
 
 <script>
+import axios from 'axios'
+
     export default {
         name : "registrationPopup",
         showPassword : true,
+        repeatPassword : '',
+        data(){
+            return{
+                registrationDTO : {username:'', password: '', firstName: '', lastName: '', gender: '', role: 'CUSTOMER', dateOfBirth: ''},
+                registeredUser : null,
+            };
+        },
+        
         methods:{
             closeRegister(){
                 this.$emit("close-reg")
+            },
+          register(){
+              axios
+                .post('http://localhost:8081/WebShopREST/rest/users/registration',this.registrationDTO)
+                .then((response) => {
+                  this.registeredUser = response.data
+                })
+              // if(this.registeredUser == null){
+              //   let notify = document.getElementById("err");
+              //   notify.innerHTML = "Username allready exists, please try again.";
+              //   notify.style.direction="block";
+              // }
+              // if(!this.registrationDTO.password == this.repeatPassword){
+              //   console.log("USAO") 
+              //   console.log(this.repeatPassword)
+              //   let notify = document.getElementById("err");
+              //   notify.innerHTML = "PASSWORD INCORECT";
+              //   notify.style.direction="block";
+              // }
             }
-        },
+        }
     }
 </script>
 
@@ -90,7 +124,7 @@
         right: 0;
         bottom: 0;
         z-index: 99;
-        background-color: rgba(0,0,0,0.2);
+        background-color: rgba(0,0,0,0.3);
 
         display: flex;
         align-items: center;
@@ -114,7 +148,6 @@
 .flex-child:first-child {
     margin-right: 60px;
 } 
-
 
 html {
   height: 100%;
@@ -284,6 +317,9 @@ body {
   }
 }
 
-
+.err {
+  color: white;
+  background-color: red;
+}
 
 </style>

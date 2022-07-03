@@ -7,8 +7,8 @@
                 </transition> -->
             </router-link>
         </li>
-        <li><router-link  :to="{name : ''}">
-            <button @click="showRegister()" class="reg">Register</button>
+        <li><router-link  :to="{name : 'RegistrationForm'}">
+            <button class="reg">Register</button>
         </router-link></li>
     </form>
 </template>

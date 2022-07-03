@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import RegistrationForm from '../components/RegistrationForm'
 
 const routes = [
   {
@@ -11,6 +12,11 @@ const routes = [
     path: '/',
     name: 'Objects',
     component: HomeView
+  },
+  {
+    path: '/register',
+    name: 'RegistrationForm',
+    component: RegistrationForm
   }
 ]
 
