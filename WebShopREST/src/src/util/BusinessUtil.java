@@ -1,5 +1,8 @@
 package src.util;
 
+import java.util.Collection;
+import java.util.List;
+
 import beans.Entity;
 
 public class BusinessUtil {
@@ -12,7 +15,7 @@ public class BusinessUtil {
 		return property.toLowerCase().contains(parameter.toLowerCase());
 	}
 	
-	public static void filterUndeleted(Collection<Entity> entities) {
+	public static void filterUndeleted(List<Entity> entities) {
 		for (Entity entity : entities) {
 			if(entity.isDeleted()) {
 				entities.remove(entity);

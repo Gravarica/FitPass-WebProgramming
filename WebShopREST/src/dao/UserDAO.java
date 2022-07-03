@@ -16,9 +16,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.org.apache.bcel.internal.classfile.Utility;
 
 import beans.Artikal;
+import beans.Entity;
+import beans.SportObject;
 import beans.User;
 import dto.LoginDTO;
 import dto.LoginReturnDTO;
+import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
 import enums.CustomerTypeName;
 import enums.Role;
@@ -89,11 +92,22 @@ public class UserDAO {
 	
 		try {
 			List<User> userList = mapper.readValue(file, new TypeReference<List<User>>() {});
+			userList = filterUndeleted(userList);
 			convertListToMap(userList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private ArrayList<User> filterUndeleted(List<User> userList) {
+		ArrayList<User> usersNew = new ArrayList<User>();
+		for(User u : userList) {
+			if(!u.isDeleted()) {
+				usersNew.add(u);
+			}
+		}
+		return usersNew;
 	}
 	
 	public User register(RegistrationDTO dto) {
@@ -182,8 +196,31 @@ public class UserDAO {
 	public User delete(String username) {
 		User returnUser = users.get(username);
 		returnUser.setDeleted(true);
+		users.remove(username);
 		return returnUser;
 	}
 	
+	public User registerManager(ManagerRegistrationDTO dto, SportObject object) {
+		if (users.containsKey(dto.getUsername())) {
+			return null;
+		}
+		User manager = new User(dto, object);
+		manager.setPassword(BusinessUtil.hashPassword(manager.getPassword()));
+		manager.setId(getMaxId());
+		users.put(manager.getUsername(), manager);
+		saveUsers();
+		
+		return manager;
+	}
+	
+	public User setSportObject(SportObject object, String username) {
+		User manager = users.get(username);
+		if(manager.roleMatches(Role.MANAGER) || manager.getObject() != null) {
+			return null;
+		}
+		
+		manager.setObject(object);
+		return manager;
+	}
 	
 }

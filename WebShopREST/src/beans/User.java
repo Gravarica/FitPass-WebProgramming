@@ -53,9 +53,9 @@ public class User extends Entity {
 	}
 	
 	// Konstruktor za registraciju menadzera
-	public User(ManagerRegistrationDTO dto) {
+	public User(ManagerRegistrationDTO dto, SportObject object) {
 		instantiateData(dto);
-		this.object = dto.getSportObject();
+		this.object = object;
 	}
 	
 	private void instantiateData(RegistrationDTO dto) {

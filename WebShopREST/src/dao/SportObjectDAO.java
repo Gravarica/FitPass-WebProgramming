@@ -29,19 +29,21 @@ public class SportObjectDAO {
 		
 		try {
 			List<SportObject> list = Arrays.asList(mapper.readValue(new File(contextPath + "/sport_objects.json"),SportObject[].class));
-			objects = new ArrayList<SportObject>(list);
-			filterUndeleted();
+			objects = filterUndeleted(new ArrayList<SportObject>(list));		
 		}catch(Exception e) {
 			e.printStackTrace();
 		}	
 	}
 	
-	public void filterUndeleted() {
+	public ArrayList<SportObject> filterUndeleted(ArrayList<SportObject> objects) {
+		ArrayList<SportObject> objectsNew = new ArrayList<SportObject>();
 		for(SportObject object: objects) {
-			if(object.isDeleted()) {
-				objects.remove(object);
+			if(!object.isDeleted()) {
+				objectsNew.add(object);
 			}
 		}
+		
+		return objectsNew;
 	}
 
 	public ArrayList<SportObject> getAll(){
@@ -108,6 +110,7 @@ public class SportObjectDAO {
 	public SportObject delete(int id) {
 		SportObject returnObject = getById(id);
 		returnObject.setDeleted(true);
+		objects.remove(returnObject);
 		return returnObject;
 	}
 }
