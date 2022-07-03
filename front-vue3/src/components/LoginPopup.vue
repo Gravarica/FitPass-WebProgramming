@@ -46,7 +46,8 @@ import axios from 'axios';
         name : "loginPopup",
         data(){
             return{
-                loginDTO: {username: '', password: ''}
+                loginDTO: {username: '', password: ''},
+                loggedUser: {username: '', role: '', success: false}
             };
         },
 
@@ -58,7 +59,8 @@ import axios from 'axios';
               axios
                 .post('http://localhost:8081/WebShopREST/rest/users/login', this.loginDTO)
                 .then((response) => {
-                  console.log(response.data)
+                  this.loggedUser = response.data
+                  this.$emit('logged-in', this.loggedUser)
                 })
                 .catch(err => (console.log(err)))
             }

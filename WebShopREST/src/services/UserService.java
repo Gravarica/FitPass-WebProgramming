@@ -59,11 +59,13 @@ public class UserService {
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
 	public LoginReturnDTO login(LoginDTO dto, @Context HttpServletRequest request) {
+		System.out.println("POGODIO SAM LOGIN");
 		LoginReturnDTO lrd = getUserDAO().login(dto);
 		if (lrd.isSuccess()) {
 			request.getSession().setAttribute("user", lrd);
 		}
 		
+		System.out.println("VRACAM OVO: " + lrd.getUsername() + " " + lrd.getRole() + " " + lrd.isSuccess());
 		return lrd;
 	}
 	

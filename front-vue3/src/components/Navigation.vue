@@ -10,18 +10,7 @@
             <li><router-link class="link" :to="{name : ''}">Objects</router-link></li>
             <li><router-link class="link" :to="{name : ''}">About</router-link></li>
             <li><router-link class="link" :to="{name : ''}">Contact</router-link></li>
-            <form form class="d-flex ms-auto order-5">
-                 <li><router-link :to="{name : ''}">
-                        <button @click="showLogin()" class="log">Login</button>
-                        <!-- <transition name="fade" appear>
-                            <div class="modal-overlay" @click="showModal = false" v-if="showModal"></div>
-                        </transition> -->
-                    </router-link>
-                </li>
-                <li><router-link  :to="{name : ''}">
-                    <button @click="showRegister()" class="reg">Register</button>
-                </router-link></li>
-            </form>
+            <not-logged-buttons @show-login="showLogin" @show-reg="showRegister" :class="nav" v-if="!success"/>
         </ul>
 
         <transition name="mobile-nav">
@@ -40,59 +29,59 @@
 </template>
 
 <script>
+import { booleanLiteral } from '@babel/types';
+import NotLoggedButtons from './NotLoggedButtons.vue';
 export default {
     name: "navigation",
-    data(){
-        return{
-            scrolledNav : null,
-            mobile : null,
-            mobileNav : null,
-            windowWidth : null,
-            showModal : null
+    props: {
+        success: Boolean,
+        username: String,
+        role: String,
+    },
+    data() {
+        return {
+            scrolledNav: null,
+            mobile: null,
+            mobileNav: null,
+            windowWidth: null,
+            showModal: null
         };
     },
-
-    created(){
-        window.addEventListener("resize",this.checkScreen);
+    created() {
+        window.addEventListener("resize", this.checkScreen);
         this.checkScreen();
     },
-
-    mounted(){
+    mounted() {
         window.addEventListener("scroll", this.updateScroll);
     },
-
     methods: {
-        toggleMobileNav(){
-            this.mobileNav = !this.mobileNav
+        toggleMobileNav() {
+            this.mobileNav = !this.mobileNav;
         },
-
-        checkScreen(){
+        checkScreen() {
             this.windowWidth = window.innerWidth;
-            if(this.windowWidth <= 750){
+            if (this.windowWidth <= 750) {
                 this.mobile = true;
                 return;
             }
-        
             this.mobile = false;
             this.mobileNav = false;
         },
-
-        updateScroll(){
+        updateScroll() {
             const scrollPosition = window.scrollY;
-            if(scrollPosition > 50){
+            if (scrollPosition > 50) {
                 this.scrolledNav = true;
             }
             this.scrolledNav = false;
         },
-
-        showLogin(){
-            this.$emit('show-login')
+        showLogin() {
+            this.$emit("show-login");
         },
-    
-        showRegister(){
-            this.$emit('show-reg')
+        showRegister() {
+            this.$emit("show-reg");
         }
-    }
+    },
+    components: { NotLoggedButtons }
 };
 </script>
 

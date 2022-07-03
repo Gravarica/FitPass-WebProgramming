@@ -1,13 +1,13 @@
 <template>
   <div class="container-flex">
-    <Navigation @show-login="showLogin" @show-reg="showRegister"/>
+    <Navigation @show-login="showLogin" @show-reg="showRegister"  v-bind="this.loggedUser"/>
     <div class = "row mt-0">
       <router-view/>
     </div>
   </div>
 
   <div>
-    <LoginPopup v-if="login" @close-login="closeLogin"/> 
+    <LoginPopup v-if="login" @close-login="closeLogin" @logged-in="captureLogIn"/> 
   </div>
   <div>
     <RegistrationPopup v-if="register" @close-reg="closeRegister"/> 
@@ -25,7 +25,12 @@ export default{
     data(){
       return{
         login : false,
-        register : false
+        register : false,
+        loggedUser: {
+          username: '',
+          role: '',
+          success: false,
+        },
       }
     },
     
@@ -33,7 +38,7 @@ export default{
     Navigation,
     LoginPopup,
     RegistrationPopup
-},
+    },
     
     methods:{
       showLogin(){
@@ -47,7 +52,16 @@ export default{
       },
       closeRegister(){
         this.register = false
+      },
+      captureLogIn(loginData){
+        this.loggedUser = loginData;
       }
+    },
+    mounted(){
+      axios
+        .get('http://localhost:8081/WebShopREST/rest/users/currentUser')
+        .then((response) => {
+        })
     }
 }
 </script>
