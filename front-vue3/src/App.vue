@@ -1,36 +1,75 @@
 <template>
-  <div class="app">
-    <Navigation/>
-     <router-view/>
+  <div class="container-flex">
+    <Navigation @show-login="showLogin" @show-reg="showRegister" @logout="logout" v-bind="this.loggedUser"/>
+    <div class = "row mt-0">
+      <router-view/>
+    </div>
   </div>
-  <Popup :open="isOpen" @close = "isOpen = !isOpen">
-    
-  </Popup>
-  <router-view/>
+
+  <div>
+    <LoginPopup v-if="login" @close-login="closeLogin" @logged-in="captureLogIn"/> 
+  </div>
+  <div>
+    <RegistrationPopup v-if="register" @close-reg="closeRegister"/> 
+  </div>
 </template>
-<script>
-
-import Popup from "./components/Popup.vue";
-import { ref } from "vue";
-
-export default { 
-    components: { Popup },
-    setup(){
-      const isOpen = ref(false)
-
-      return {isOpen}
-    }
-  }
-</script>
-
 
 <script>
 import Navigation from "./components/Navigation"
+import LoginPopup from "./components/LoginPopup.vue"
+import RegistrationPopup from "./components/RegistrationPopup.vue"
+import axios from "axios";
 
 export default{
     name : "App",
+    data(){
+      return{
+        login : false,
+        register : false,
+        loggedUser: {
+          username: '',
+          role: '',
+          success: false,
+        },
+      }
+    },
+    
     components:{
-      Navigation,
+    Navigation,
+    LoginPopup,
+    RegistrationPopup
+    },
+    
+    methods:{
+      showLogin(){
+        this.login = true
+      },
+      showRegister(){
+        this.register = true;
+      },
+      closeLogin(){
+        this.login = false
+      },
+      closeRegister(){
+        this.register = false
+      },
+      captureLogIn(loginData){
+        this.loggedUser = loginData;
+      },
+      logout(){
+        axios
+          .post('http://localhost:8081/WebShopREST/rest/users/logout')
+          .then(response => {
+            this.loggedUser = null;  
+          })
+      }
+    },
+    mounted(){
+      axios
+        .get('http://localhost:8081/WebShopREST/rest/users/currentUser')
+        .then((response) => {
+          this.loggedUser = response.data
+        })
     }
 }
 </script>

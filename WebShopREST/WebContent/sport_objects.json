@@ -1,7 +1,7 @@
 [
 	{
 		"id" : "1",
-		"name" : "Ozzy Gym Telep",
+		"name" : "Ozzy",
 		"averageGrade" : 7.64,
 		"sportObjectType" : "GYM",
 		"location" : {
@@ -17,7 +17,7 @@
 	},
 	{
 		"id" : "2",
-		"name" : "Addiction Fitness Center",
+		"name" : "Coloseum",
 		"averageGrade" : 10.00,
 		"sportObjectType" : "GYM",
 		"location" : {
@@ -31,9 +31,9 @@
 			"latitude" : 12.23
 		}
 	},
-		{
+	{
 		"id" : "3",
-		"name" : "Flex Fitness",
+		"name" : "Flex",
 		"averageGrade" : 8.64,
 		"sportObjectType" : "POOL",
 		"location" : {
@@ -42,6 +42,86 @@
 				"number" : "22",
 				"city" : "Beograd",
 				"postalNumber" : "11000"
+			},
+			"longitude" : 24.42,
+			"latitude" : 12.23
+		}
+	},
+	{
+		"id" : "4",
+		"name" : "TotalGym",
+		"averageGrade" : 10.00,
+		"sportObjectType" : "GYM",
+		"location" : {
+			"address" : {
+				"street" : "Bulevar Patrijarha Pavla",
+				"number" : "35",
+				"city" : "Novi Sad",
+				"postalNumber" : "21000"
+			},
+			"longitude" : 24.42,
+			"latitude" : 12.23
+		}
+	},
+	{
+		"id" : "5",
+		"name" : "ProFitness",
+		"averageGrade" : 10.00,
+		"sportObjectType" : "GYM",
+		"location" : {
+			"address" : {
+				"street" : "Bulevar Patrijarha Pavla",
+				"number" : "35",
+				"city" : "Novi Sad",
+				"postalNumber" : "21000"
+			},
+			"longitude" : 24.42,
+			"latitude" : 12.23
+		}
+	},
+	{
+		"id" : "6",
+		"name" : "NoLimit",
+		"averageGrade" : 10.00,
+		"sportObjectType" : "GYM",
+		"location" : {
+			"address" : {
+				"street" : "Bulevar Patrijarha Pavla",
+				"number" : "35",
+				"city" : "Novi Sad",
+				"postalNumber" : "21000"
+			},
+			"longitude" : 24.42,
+			"latitude" : 12.23
+		}
+	},
+	{
+		"id" : "7",
+		"name" : "Classic",
+		"averageGrade" : 10.00,
+		"sportObjectType" : "GYM",
+		"location" : {
+			"address" : {
+				"street" : "Bulevar Patrijarha Pavla",
+				"number" : "35",
+				"city" : "Novi Sad",
+				"postalNumber" : "21000"
+			},
+			"longitude" : 24.42,
+			"latitude" : 12.23
+		}
+	},
+	{
+		"id" : "8",
+		"name" : "Synergy",
+		"averageGrade" : 10.00,
+		"sportObjectType" : "GYM",
+		"location" : {
+			"address" : {
+				"street" : "Bulevar Patrijarha Pavla",
+				"number" : "35",
+				"city" : "Novi Sad",
+				"postalNumber" : "21000"
 			},
 			"longitude" : 24.42,
 			"latitude" : 12.23

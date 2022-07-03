@@ -25,10 +25,10 @@ import enums.Role;
 import src.util.BusinessUtil;
 
 /***
- * <p>Klasa namenjena da uèita korisnike iz fajla i pruža operacije nad njima (poput pretrage).
+ * <p>Klasa namenjena da uï¿½ita korisnike iz fajla i pruï¿½a operacije nad njima (poput pretrage).
  * Korisnici se nalaze u fajlu WebContent/users.txt u obliku: <br>
  * firstName;lastName;email;username;password</p>
- * <p><b>NAPOMENA:</b> Lozinke se u praksi <b>nikada</b> ne snimaju u èistu tekstualnom obliku.</p>
+ * <p><b>NAPOMENA:</b> Lozinke se u praksi <b>nikada</b> ne snimaju u ï¿½istu tekstualnom obliku.</p>
  * @author Lazar
  *
  */
@@ -42,7 +42,7 @@ public class UserDAO {
 	}
 	
 	/***
-	 * @param contextPath Putanja do aplikacije u Tomcatu. Može se pristupiti samo iz servleta.
+	 * @param contextPath Putanja do aplikacije u Tomcatu. Moï¿½e se pristupiti samo iz servleta.
 	 */
 	public UserDAO(String contextPath) {
 		file = new File(contextPath + "/Resources/Data/users.json");
@@ -51,7 +51,7 @@ public class UserDAO {
 	}
 	
 	/**
-	 * Vraæa korisnika za prosleðeno korisnièko ime i šifru. Vraæa null ako korisnik ne postoji
+	 * Vraï¿½a korisnika za prosleï¿½eno korisniï¿½ko ime i ï¿½ifru. Vraï¿½a null ako korisnik ne postoji
 	 * @param username
 	 * @param password
 	 * @return
@@ -79,8 +79,8 @@ public class UserDAO {
 	}
 	
 	/**
-	 * Uèitava korisnike iz WebContent/users.txt fajla i dodaje ih u mapu {@link #users}.
-	 * Kljuè je korisnièko ime korisnika.
+	 * Uï¿½itava korisnike iz WebContent/users.txt fajla i dodaje ih u mapu {@link #users}.
+	 * Kljuï¿½ je korisniï¿½ko ime korisnika.
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
 	private void loadUsers(String contextPath) {
@@ -176,6 +176,12 @@ public class UserDAO {
 	public User logout() {
 		User returnUser = getLoggedUser();
 		this.loggedUser = null;
+		return returnUser;
+	}
+	
+	public User delete(String username) {
+		User returnUser = users.get(username);
+		returnUser.setDeleted(true);
 		return returnUser;
 	}
 	

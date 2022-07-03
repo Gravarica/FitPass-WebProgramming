@@ -1,98 +1,37 @@
 <template>
-        <nav class = "navbar navbar-expand">
-        <div class = "container-fluid">
-            <div class="branding">
-                <img src="@/assets/logo.png" alt="">
-            </div>
-
-        <ul v-show="!mobile" class="navigation">
-            <li><router-link class="link" :to="{name : 'Home'}">Home</router-link></li>
-            <li><router-link class="link" :to="{name : 'Objects'}">Objects</router-link></li>
-            <li><router-link class="link" :to="{name : ''}">About</router-link></li>
-            <li><router-link class="link" :to="{name : ''}">Contact</router-link></li>
-            <not-logged-buttons @show-login="showLogin" @show-reg="showRegister" :class="nav" v-if="!success"/>
-            <logged-buttons @logout="logout" @myprofile="myprofile" :username="username" :role="role" v-if="success" :class="nav"/>
-        </ul>
-
-        <transition name="mobile-nav">
-        <ul v-show="mobileNav" class="dropdown-nav">
-            <li><router-link class="link" :to="{name : 'Home'}">Home</router-link></li>
-            <li><router-link class="link" :to="{name : ''}">Objects</router-link></li>
-            <li><router-link class="link" :to="{name : ''}">About</router-link></li>
-            <li><router-link class="link" :to="{name : ''}">Contact</router-link></li>
-            <li><router-link class="link" :to="{name : ''}">Login</router-link></li>
-            <li><router-link class="link" :to="{name : ''}">Register</router-link></li>
-        </ul>
-
-        </transition>
-        </div>
-        </nav>
+    <form form class="d-flex ms-auto order-5">
+        <li class="p-4">{{username}} - {{role}}</li>
+        <li><router-link :to="{name : ''}">
+                <button @click="myprofile()" class="log">MyProfile</button>
+                <!-- <transition name="fade" appear>
+                    <div class="modal-overlay" @click="showModal = false" v-if="showModal"></div>
+                </transition> -->
+            </router-link>
+        </li>
+        <li><router-link  :to="{name : ''}">
+            <button @click="logout()" class="reg">Logout</button>
+        </router-link></li>
+    </form>
 </template>
 
 <script>
-import { booleanLiteral } from '@babel/types';
-import NotLoggedButtons from './NotLoggedButtons.vue';
-import LoggedButtons from './LoggedButtons.vue';
-export default {
-    name: "navigation",
-    props: {
-        success: Boolean,
-        username: String,
-        role: String,
-    },
-    data() {
-        return {
-            scrolledNav: null,
-            mobile: null,
-            mobileNav: null,
-            windowWidth: null,
-            showModal: null
-        };
-    },
-    created() {
-        window.addEventListener("resize", this.checkScreen);
-        this.checkScreen();
-    },
-    mounted() {
-        window.addEventListener("scroll", this.updateScroll);
-    },
-    methods: {
-        toggleMobileNav() {
-            this.mobileNav = !this.mobileNav;
+    export default{
+        props: {
+            username: String,
+            role: String,
         },
-        checkScreen() {
-            this.windowWidth = window.innerWidth;
-            if (this.windowWidth <= 750) {
-                this.mobile = true;
-                return;
+        methods:{
+            logout(){
+                this.$emit('logout')
+            },
+            myprofile(){
+                this.$emit('my-profile')
             }
-            this.mobile = false;
-            this.mobileNav = false;
-        },
-        updateScroll() {
-            const scrollPosition = window.scrollY;
-            if (scrollPosition > 50) {
-                this.scrolledNav = true;
-            }
-            this.scrolledNav = false;
-        },
-        showLogin() {
-            this.$emit("show-login");
-        },
-        showRegister() {
-            this.$emit("show-reg");
-        },
-        logout(){
-            this.$emit('logout')
         }
-    },
-    components: { NotLoggedButtons, LoggedButtons }
-};
+    }
 </script>
 
 <style lang="scss" scoped>
-
-
     nav{
         background-color: rgba(0,0,0,0.8);
     z-index: 99;
@@ -248,33 +187,4 @@ export default {
             transform: translateX(0);
         }
    }
- 
-.scrolled-nav{
-            background-color: black;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0, 0, 0,0.06);
-
-            nav{
-                padding: 8px 0;
-
-                .branding{
-                    img{
-                        width: 40px;
-                        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0, 0, 0,0.06);
-                    }
-                }
-
-            }
-        }
-
-
-.fade-enter-active,
-.fade-leave-active{
-    transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to{
-    opacity: 0;
-}
-
 </style>

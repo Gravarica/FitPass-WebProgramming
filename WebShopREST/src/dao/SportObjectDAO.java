@@ -30,9 +30,18 @@ public class SportObjectDAO {
 		try {
 			List<SportObject> list = Arrays.asList(mapper.readValue(new File(contextPath + "/sport_objects.json"),SportObject[].class));
 			objects = new ArrayList<SportObject>(list);
+			filterUndeleted();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}	
+	}
+	
+	public void filterUndeleted() {
+		for(SportObject object: objects) {
+			if(object.isDeleted()) {
+				objects.remove(object);
+			}
+		}
 	}
 
 	public ArrayList<SportObject> getAll(){
@@ -94,5 +103,11 @@ public class SportObjectDAO {
 		returnList.retainAll(searchByAverageGrade(dto.getGrade()));
 		
 		return returnList;
+	}
+	
+	public SportObject delete(int id) {
+		SportObject returnObject = getById(id);
+		returnObject.setDeleted(true);
+		return returnObject;
 	}
 }

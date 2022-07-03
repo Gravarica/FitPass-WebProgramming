@@ -59,11 +59,14 @@ public class UserService {
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
 	public LoginReturnDTO login(LoginDTO dto, @Context HttpServletRequest request) {
+		System.out.println("POGODIO SAM LOGIN");
 		LoginReturnDTO lrd = getUserDAO().login(dto);
 		if (lrd.isSuccess()) {
+			System.out.println("Usao sam ovde");
 			request.getSession().setAttribute("user", lrd);
 		}
 		
+		System.out.println("VRACAM OVO: " + lrd.getUsername() + " " + lrd.getRole() + " " + lrd.isSuccess());
 		return lrd;
 	}
 	
@@ -80,10 +83,12 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public LoginReturnDTO login(@Context HttpServletRequest request) {
+		System.out.println("Dobavljanje kolacica");
 		LoginReturnDTO lrd = (LoginReturnDTO) request.getSession().getAttribute("user");
 		if (lrd == null) {
 			return new LoginReturnDTO(null,null,false);
 		}
+		System.out.println("VRACAM OVO: " + lrd.getUsername() + " " + lrd.getRole() + " " + lrd.isSuccess());
 		return lrd;
 	}
 }
