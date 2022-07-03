@@ -13,11 +13,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.SportObject;
 import beans.User;
 import dao.ArtikalDAO;
+import dao.SportObjectDAO;
 import dao.UserDAO;
 import dto.LoginDTO;
 import dto.LoginReturnDTO;
+import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
 
 @Path("/users")
@@ -91,4 +94,14 @@ public class UserService {
 		System.out.println("VRACAM OVO: " + lrd.getUsername() + " " + lrd.getRole() + " " + lrd.isSuccess());
 		return lrd;
 	}
+	
+	@POST
+	@Path("/registerManager")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public User registerManager(ManagerRegistrationDTO dto) {
+		SportObject object = ((SportObjectDAO)ctx.getAttribute("sportObjectDAO")).getById(dto.getSportObjectId());
+		return getUserDAO().registerManager(dto, object);
+	}
+	
 }
