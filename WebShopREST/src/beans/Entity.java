@@ -19,4 +19,14 @@ public class Entity {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	
+	
 }
