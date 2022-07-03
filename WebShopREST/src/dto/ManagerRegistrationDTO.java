@@ -8,7 +8,7 @@ import enums.Role;
 
 public class ManagerRegistrationDTO extends RegistrationDTO{
 
-	private SportObject sportObject;
+	private int sportObjectId;
 	
 	public ManagerRegistrationDTO() {
 		super();
@@ -21,12 +21,12 @@ public class ManagerRegistrationDTO extends RegistrationDTO{
 		// TODO Auto-generated constructor stub
 	}
 
-	public SportObject getSportObject() {
-		return sportObject;
+	public int getSportObjectId() {
+		return sportObjectId;
 	}
 
-	public void setSportObject(SportObject sportObject) {
-		this.sportObject = sportObject;
+	public void setSportObjectId(int sportObject) {
+		this.sportObjectId = sportObject;
 	}
 
 	

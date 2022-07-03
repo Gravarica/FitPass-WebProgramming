@@ -1,6 +1,7 @@
 [
 	{
 		"id" : "1",
+		"deleted" : false,
 		"name" : "Ozzy",
 		"averageGrade" : 7.64,
 		"sportObjectType" : "GYM",
@@ -17,6 +18,7 @@
 	},
 	{
 		"id" : "2",
+		"deleted" : false,
 		"name" : "Coloseum",
 		"averageGrade" : 10.00,
 		"sportObjectType" : "GYM",
@@ -33,6 +35,7 @@
 	},
 	{
 		"id" : "3",
+		"deleted" : false,
 		"name" : "Flex",
 		"averageGrade" : 8.64,
 		"sportObjectType" : "POOL",
@@ -49,6 +52,7 @@
 	},
 	{
 		"id" : "4",
+		"deleted" : false,
 		"name" : "TotalGym",
 		"averageGrade" : 10.00,
 		"sportObjectType" : "GYM",
@@ -65,6 +69,7 @@
 	},
 	{
 		"id" : "5",
+		"deleted" : false,
 		"name" : "ProFitness",
 		"averageGrade" : 10.00,
 		"sportObjectType" : "GYM",
@@ -81,6 +86,7 @@
 	},
 	{
 		"id" : "6",
+		"deleted" : false,
 		"name" : "NoLimit",
 		"averageGrade" : 10.00,
 		"sportObjectType" : "GYM",
@@ -97,6 +103,7 @@
 	},
 	{
 		"id" : "7",
+		"deleted" : false,
 		"name" : "Classic",
 		"averageGrade" : 10.00,
 		"sportObjectType" : "GYM",
@@ -113,6 +120,7 @@
 	},
 	{
 		"id" : "8",
+		"deleted" : true,
 		"name" : "Synergy",
 		"averageGrade" : 10.00,
 		"sportObjectType" : "GYM",
