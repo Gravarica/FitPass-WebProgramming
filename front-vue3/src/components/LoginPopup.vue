@@ -5,16 +5,16 @@
                 <h2>Login</h2>
                 <form>
                     <div class="user-box">
-                    <input type="text" name="" required="">
+                    <input type="text" name="" required="" v-model="loginDTO.username">
                     <label>Username</label>
                     </div>
                     <div class="user-box">
-                    <input type="password" name="" required="">
+                    <input type="password" name="" required="" v-model="loginDTO.password">
                     <label>Password</label>
                     </div>
                     <div class="flex-container">
                     <div class="flex-child">
-                    <a href="#">
+                    <a href="#" @click="login">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -40,17 +40,27 @@
 </template>
 
 <script>
+import axios from 'axios';
+
     export default{
         name : "loginPopup",
         data(){
             return{
-
+                loginDTO: {username: '', password: ''}
             };
         },
 
         methods:{
             closeLogin(){
                 this.$emit('close-login')
+            },
+            login(){
+              axios
+                .post('http://localhost:8081/WebShopREST/rest/users/login', this.loginDTO)
+                .then((response) => {
+                  console.log(response.data)
+                })
+                .catch(err => (console.log(err)))
             }
         }
     }

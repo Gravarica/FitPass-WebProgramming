@@ -1,4 +1,27 @@
 <template>
+      <img src = "./../assets/gymguy1.jpg" alt = "Dzimara" heigth = "300"/>
+        <nav class = "navbar-default">
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Beograd</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Novi Sad</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Nis</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Subotica</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Kragujevac</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Cacak</a>
+            </li>
+          </ul>
+        </nav>
 </template>
 
 <script>

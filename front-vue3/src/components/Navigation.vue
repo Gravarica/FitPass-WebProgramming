@@ -1,6 +1,6 @@
 <template>
-    <header :class="{'scrolled-nav': scrolledNav}">
-        <nav>
+        <nav class = "navbar navbar-expand">
+        <div class = "container-fluid">
             <div class="branding">
                 <img src="@/assets/logo.png" alt="">
             </div>
@@ -24,10 +24,6 @@
             </form>
         </ul>
 
-        <div class="icon">
-            <i @click="toggleMobileNav" v-show="mobile" class="far fa-bars" :class="{'icon-active' : mobileNav}"></i>
-        </div>
-
         <transition name="mobile-nav">
         <ul v-show="mobileNav" class="dropdown-nav">
             <li><router-link class="link" :to="{name : 'Home'}">Home</router-link></li>
@@ -39,9 +35,8 @@
         </ul>
 
         </transition>
-
+        </div>
         </nav>
-    </header>
 </template>
 
 <script>
@@ -103,25 +98,20 @@ export default {
 
 <style lang="scss" scoped>
 
-header{
-    background-color: rgba(0,0,0,0.8);
+
+    nav{
+        background-color: rgba(0,0,0,0.8);
     z-index: 99;
     width: 100%;
     position: fixed;
     transition: 0.5s ease all;
     color: #fff;
-
-    nav{
         position:relative;
         display: flex;
         flex-direction: row;
         padding: 7px 0;
         transition: 0.5s ease all;
-        width: 90%;
-        margin: 0 auto;
-        @media(min-width: 1140px){
-            max-width: 1140px;
-        }
+        margin: 0;
 
         ul,
         .link{
@@ -264,7 +254,6 @@ header{
             transform: translateX(0);
         }
    }
-}
  
 .scrolled-nav{
             background-color: black;

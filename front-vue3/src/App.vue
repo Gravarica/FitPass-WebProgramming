@@ -1,7 +1,9 @@
 <template>
-  <div class="app">
+  <div class="container-flex">
     <Navigation @show-login="showLogin" @show-reg="showRegister"/>
-     <router-view/>
+    <div class = "row mt-0">
+      <router-view/>
+    </div>
   </div>
 
   <div>
@@ -16,6 +18,7 @@
 import Navigation from "./components/Navigation"
 import LoginPopup from "./components/LoginPopup.vue"
 import RegistrationPopup from "./components/RegistrationPopup.vue"
+import axios from "axios";
 
 export default{
     name : "App",
