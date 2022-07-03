@@ -51,7 +51,6 @@ import SportObjects from './SportObjects.vue'
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld,
     SportObjects
 }
 }
