@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.SportObject;
 import dao.SportObjectDAO;
+import dto.SportObjectCreateDTO;
 import dto.SportObjectSearchDTO;
 
 @Path("/sport_objects")
@@ -77,6 +78,13 @@ public class SportObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<SportObject> searchByName(SportObjectSearchDTO dto){
 		return getSportObjectDAO().searchByMultipleParameters(dto);
+	}
+	
+	@GET
+	@Path("/create")
+	@Produces(MediaType.APPLICATION_JSON)
+	public SportObject createSportObject(SportObjectCreateDTO dto) {
+		return getSportObjectDAO().createSportObject(dto);
 	}
 	
 }

@@ -13,9 +13,10 @@ import java.util.StringTokenizer;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.bcel.internal.classfile.Utility;
+//import com.sun.org.apache.bcel.internal.classfile.Utility;
 
 import beans.Artikal;
+import beans.Manager;
 import beans.User;
 import dto.LoginDTO;
 import dto.LoginReturnDTO;
@@ -185,5 +186,26 @@ public class UserDAO {
 		return returnUser;
 	}
 	
+	//Metoda koja vraca sve MENAGERE
+	public ArrayList<Manager> getAllManagers(){
+		ArrayList<Manager> retList = new ArrayList<Manager>();
+		for(User it : users.values()) {
+			if(it.roleMatches(Role.MANAGER)) {
+				retList.add((Manager)it);
+			}
+		}
+		return retList;
+	}
+	
+	//Metoda koja vraca sve SLOBODNE MENAGERE
+	public ArrayList<Manager> getAllAvailableManagers(){
+		ArrayList<Manager> retList = new ArrayList<Manager>();
+		for(User it : users.values()) {
+			if(it.roleMatches(Role.MANAGER) && ((Manager)it).getObject() == null) {
+				retList.add((Manager)it);
+			}
+		}
+		return retList;
+	}
 	
 }

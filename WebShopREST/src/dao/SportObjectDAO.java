@@ -9,6 +9,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.SportObject;
+import dto.SportObjectCreateDTO;
 import dto.SportObjectSearchDTO;
 import enums.SportObjectType;
 
@@ -110,4 +111,9 @@ public class SportObjectDAO {
 		returnObject.setDeleted(true);
 		return returnObject;
 	}
+	
+	public SportObject createSportObject(SportObjectCreateDTO dto) {
+		return new SportObject(dto);
+	}
+	
 }
