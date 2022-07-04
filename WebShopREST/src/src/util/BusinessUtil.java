@@ -3,6 +3,7 @@ package src.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import beans.Content;
 import beans.Entity;
@@ -34,5 +35,13 @@ public class BusinessUtil {
 		}
 		
 		return false;
+	}
+	
+	public static String generateRandomString() {
+
+		UUID randomUUID = UUID.randomUUID();
+
+		return randomUUID.toString().replaceAll("_", "").substring(0,9);
+
 	}
 }
