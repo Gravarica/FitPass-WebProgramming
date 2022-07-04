@@ -11,6 +11,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -105,7 +106,14 @@ public class UserService {
 		SportObject object = ((SportObjectDAO)ctx.getAttribute("sportObjectDAO")).getById(dto.getSportObjectId());
 		return getUserDAO().registerManager(dto, object);
 	}
-	
+  
+	@GET
+	@Path("/get/sport_object/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public SportObject getSportObjectByManager(@PathParam("username") String username) {
+		return getUserDAO().getManagerSportObject(username);
+  }
+  
 	@DELETE
 	@Path("/delete/{id}")
 	@Produces(MediaType.APPLICATION_JSON)

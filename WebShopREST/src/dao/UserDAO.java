@@ -13,9 +13,10 @@ import java.util.StringTokenizer;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.bcel.internal.classfile.Utility;
+//import com.sun.org.apache.bcel.internal.classfile.Utility;
 
 import beans.Artikal;
+import beans.Manager;
 import beans.Entity;
 import beans.SportObject;
 import beans.User;
@@ -130,7 +131,6 @@ public class UserDAO {
 		
 		try {
 			ArrayList<User> userList = new ArrayList<User>(users.values());
-			System.out.println("USAO SAM OVDE");
 			mapper.writeValue(file, userList);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -200,6 +200,28 @@ public class UserDAO {
 		return returnUser;
 	}
 	
+	//Metoda koja vraca sve MENAGERE
+	public ArrayList<User> getAllManagers(){
+		ArrayList<User> retList = new ArrayList<User>();
+		for(User it : users.values()) {
+			if(it.roleMatches(Role.MANAGER)) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+	
+	//Metoda koja vraca sve SLOBODNE MENAGERE
+	public ArrayList<User> getAllAvailableManagers(){
+		ArrayList<User> retList = new ArrayList<User>();
+		for(User it : users.values()) {
+			if(it.roleMatches(Role.MANAGER) && (it).getObject() == null) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+	
 	public User registerManager(ManagerRegistrationDTO dto, SportObject object) {
 		if (users.containsKey(dto.getUsername())) {
 			return null;
@@ -215,12 +237,23 @@ public class UserDAO {
 	
 	public User setSportObject(SportObject object, String username) {
 		User manager = users.get(username);
-		if(manager.roleMatches(Role.MANAGER) || manager.getObject() != null) {
+		if(!manager.roleMatches(Role.MANAGER) || manager.getObject() != null) {
 			return null;
 		}
 		
 		manager.setObject(object);
+		saveUsers();
 		return manager;
 	}
+	
+	public SportObject getManagerSportObject(String username) {
+		for(User it : getAllManagers()){
+			if(it.getUsername().equals(username)) {
+				return it.getObject();
+			}
+		}
+		return null;
+	}
+	
 	
 }

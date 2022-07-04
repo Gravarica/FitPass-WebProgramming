@@ -3,6 +3,7 @@ package beans;
 import java.util.ArrayList;
 import java.util.Base64;
 
+import dto.SportObjectCreateDTO;
 import enums.SportObjectType;
 import src.util.BusinessUtil;
 import enums.SportObjectContent;
@@ -35,6 +36,13 @@ public class SportObject extends Entity {
 		this.averageGrade = averageGrade;
 		this.workHour = workHour;
 		this.image = image;
+	}
+	
+	//Konstruktor za kreiranje novog sportskog objekta
+	public SportObject(SportObjectCreateDTO dto) {
+		this.name = dto.getName();
+		this.location = dto.getLocation();
+		this.image = dto.getLogo();
 	}
 
 	public String getName() {
