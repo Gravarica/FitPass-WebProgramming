@@ -5,7 +5,9 @@ import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -104,12 +106,19 @@ public class UserService {
 		SportObject object = ((SportObjectDAO)ctx.getAttribute("sportObjectDAO")).getById(dto.getSportObjectId());
 		return getUserDAO().registerManager(dto, object);
 	}
-	
+  
 	@GET
 	@Path("/get/sport_object/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public SportObject getSportObjectByManager(@PathParam("username") String username) {
 		return getUserDAO().getManagerSportObject(username);
+  }
+  
+	@DELETE
+	@Path("/delete/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User delete(@PathParam("id") String id) {
+		return getUserDAO().delete(id);
 	}
 	
 }

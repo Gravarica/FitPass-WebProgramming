@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -17,6 +19,7 @@ import beans.SportObject;
 import dao.SportObjectDAO;
 import dao.UserDAO;
 import dto.SportObjectCreateDTO;
+import dto.NewContentDTO;
 import dto.SportObjectSearchDTO;
 
 @Path("/sport_objects")
@@ -86,7 +89,7 @@ public class SportObjectService {
 	public ArrayList<SportObject> searchByName(SportObjectSearchDTO dto){
 		return getSportObjectDAO().searchByMultipleParameters(dto);
 	}
-	
+  
 	@POST
 	@Path("/create")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -94,5 +97,29 @@ public class SportObjectService {
 		SportObject newObject = getSportObjectDAO().createSportObject(dto);
 		getUserDAO().setSportObject(newObject, dto.getManagerUsername());
 		return newObject;
+	}
+  
+	@DELETE
+	@Path("/delete/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public SportObject delete(@PathParam("id") int id) {
+		return getSportObjectDAO().delete(id);
+	}
+	
+	@PUT
+	@Path("/addContent/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public SportObject addContent(@PathParam("id") int id, NewContentDTO dto) {
+		return getSportObjectDAO().addContent(dto, id);
+	}
+	
+	@PUT
+	@Path("/changeContent/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public SportObject changeContent(@PathParam("id") int id, NewContentDTO dto) {
+		return getSportObjectDAO().changeContent(dto, id);
 	}
 }
