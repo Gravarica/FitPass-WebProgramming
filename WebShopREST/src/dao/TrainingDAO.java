@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.SportObject;
 import beans.Training;
+import beans.TrainingHistory;
 
 public class TrainingDAO {
 	
@@ -58,9 +59,14 @@ public class TrainingDAO {
 		}
 		
 		return ++maxId;
-	}
+	}	
 
-	
-	
-	
+	public ArrayList<Training> getSportObjectTrainings(int id){
+		ArrayList<Training> retList = new ArrayList<Training>();
+		for(Training it : trainings) {
+			if(it.getObject().getId() == id)
+				retList.add(it);
+		}
+		return retList;
+	}
 }

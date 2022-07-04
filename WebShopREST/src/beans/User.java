@@ -24,11 +24,11 @@ public class User extends Entity {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	protected Date dateOfBirth;
 	protected CustomerType customerType;
-	private SportObject object;
-	private int membershipFeeId;
-	private ArrayList<SportObject> objectsVisited;
-	private int totalPoints;
-	private ArrayList<TrainingHistory> trainingHistory;
+	private SportObject object; //Manager
+	private int membershipFeeId; //Customer
+	private ArrayList<SportObject> objectsVisited; //Customer
+	private int totalPoints; //Customer
+	private ArrayList<TrainingHistory> trainingHistory; //Trainer and Customer
 	
 	public User() {
 		super();

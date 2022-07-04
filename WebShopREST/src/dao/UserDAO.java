@@ -288,7 +288,7 @@ public class UserDAO {
 	}
 
 	//Metoda koja vraca treninge trenera 
-	public ArrayList<TrainingHistory> getTrainerTrainings(String username){
+	public ArrayList<TrainingHistory> getTrainerTrainingHistory(String username){
 		for(User it : users.values()) {
 			if(it.getUsername().equals(username)) {
 				return it.getTrainingHistory();
@@ -300,7 +300,7 @@ public class UserDAO {
 	//Vraca sve personalne treninge trenera
 	public ArrayList<TrainingHistory> getTrainerPersonalTrainings(String username){
 		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
-		for(TrainingHistory it : getTrainerTrainings(username)) {
+		for(TrainingHistory it : getTrainerTrainingHistory(username)) {
 			if(it.getTraining().getType() == TrainingType.PERSONAL) {
 				retList.add(it);
 			}
@@ -311,7 +311,7 @@ public class UserDAO {
 	//Vraca sve grupne treninge trenera
 	public ArrayList<TrainingHistory> getTrainerGroupTrainings(String username){
 		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
-		for(TrainingHistory it : getTrainerTrainings(username)) {
+		for(TrainingHistory it : getTrainerTrainingHistory(username)) {
 			if(it.getTraining().getType() == TrainingType.GROUP) {
 				retList.add(it);
 			}
