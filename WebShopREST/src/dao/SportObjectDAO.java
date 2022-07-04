@@ -8,9 +8,12 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import beans.Content;
 import beans.SportObject;
+import dto.NewContentDTO;
 import dto.SportObjectSearchDTO;
 import enums.SportObjectType;
+import src.util.BusinessUtil;
 
 public class SportObjectDAO {
 
@@ -112,5 +115,37 @@ public class SportObjectDAO {
 		returnObject.setDeleted(true);
 		objects.remove(returnObject);
 		return returnObject;
+	}
+	
+	public SportObject addContent(NewContentDTO dto, int id) {
+		SportObject object = getById(id);
+		if(BusinessUtil.checkIfContentExists(object.getContents(), dto)) {
+			return null;
+		}
+		
+		Content content = new Content(dto);
+		object.addContent(content);
+		return object;
+	}
+	
+	private Content getContentByName(String name, SportObject object) {
+		for(Content content : object.getContents()) {
+			if(name.equals(content.getName())) {
+				return content;
+			}
+		}
+		
+		return null;
+	}
+	
+	public SportObject changeContent(NewContentDTO dto, int id) {
+		SportObject object = getById(id);
+		Content changeContent = getContentByName(dto.getName(), object);
+		if(changeContent == null) {
+			return null;
+		}
+		
+		changeContent.modify(dto);
+		return object;
 	}
 }

@@ -12,7 +12,7 @@ public class SportObject extends Entity {
 
 	private String name;
 	private SportObjectType sportObjectType;
-	private ArrayList<SportObjectContent> contents;
+	private ArrayList<Content> contents;
 	private boolean status;
 	private Location location;
 	private double averageGrade;
@@ -21,10 +21,10 @@ public class SportObject extends Entity {
 	
 	public SportObject() {
 		super();
-		this.contents = new ArrayList<SportObjectContent>();
+		this.contents = new ArrayList<Content>();
 	}
 	
-	public SportObject(int id, String name, SportObjectType sportObjectType, ArrayList<SportObjectContent> contents,
+	public SportObject(int id, String name, SportObjectType sportObjectType, ArrayList<Content> contents,
 			boolean status, Location location, double averageGrade, WorkHour workHour, Base64 image) {
 		super(id);
 		this.name = name;
@@ -53,11 +53,11 @@ public class SportObject extends Entity {
 		this.sportObjectType = sportObjectType;
 	}
 
-	public ArrayList<SportObjectContent> getContents() {
+	public ArrayList<Content> getContents() {
 		return contents;
 	}
 
-	public void setContents(ArrayList<SportObjectContent> contents) {
+	public void setContents(ArrayList<Content> contents) {
 		this.contents = contents;
 	}
 
@@ -111,5 +111,9 @@ public class SportObject extends Entity {
 	
 	public boolean gradeApplies(double grade) {
 		return this.averageGrade >= grade;
+	}
+	
+	public void addContent(Content content) {
+		contents.add(content);
 	}
 }
