@@ -16,7 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.sun.org.apache.bcel.internal.classfile.Utility;
 
 import beans.Artikal;
-import beans.Manager;
 import beans.Entity;
 import beans.SportObject;
 import beans.Training;
@@ -266,5 +265,7 @@ public class UserDAO {
 		return null;
 	}
 	
-	
+	public User getByUsername(String username) {
+		return users.get(username);
+	}
 }

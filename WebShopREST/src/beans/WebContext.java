@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import dao.GenericDAOImpl;
-import dao.ProductDAO;
 import dao.UserDAO;
 
 public class WebContext {
