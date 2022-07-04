@@ -50,7 +50,6 @@ public class SportObjectService {
 	@Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<SportObject> getAll(){
-		System.out.println("EEEEEEE BURAZERU");
 		return getSportObjectDAO().getAll();
 	}
 	

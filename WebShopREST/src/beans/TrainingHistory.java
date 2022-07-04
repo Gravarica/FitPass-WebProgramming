@@ -6,14 +6,14 @@ public class TrainingHistory extends Entity {
 	
 	private Date checkInDate;
 	private Training training;
-	private Customer customer;
-	private Trainer trainer;
+	private User customer;
+	private User trainer;
 	
 	public TrainingHistory() {
 		super();
 	}
 	
-	public TrainingHistory(int id, Date checkInDate, Training training, Customer customer, Trainer trainer) {
+	public TrainingHistory(int id, Date checkInDate, Training training, User customer, User trainer) {
 		super(id);
 		this.checkInDate = checkInDate;
 		this.training = training;
@@ -37,19 +37,19 @@ public class TrainingHistory extends Entity {
 		this.training = training;
 	}
 
-	public Customer getBuyer() {
+	public User getBuyer() {
 		return customer;
 	}
 
-	public void setBuyer(Customer customer) {
+	public void setBuyer(User customer) {
 		this.customer = customer;
 	}
 
-	public Trainer getTrainer() {
+	public User getTrainer() {
 		return trainer;
 	}
 
-	public void setTrainer(Trainer trainer) {
+	public void setTrainer(User trainer) {
 		this.trainer = trainer;
 	}
 }
