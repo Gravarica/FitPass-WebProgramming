@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,12 +18,18 @@ public class SubscriptionDAO {
 
 	private ArrayList<Subscription> subscriptions = new ArrayList<>();
 	private File file;
+	private ServletContext ctx;
 	
 	public SubscriptionDAO() {}
 	
-	public SubscriptionDAO(String contextPath) {
+	public SubscriptionDAO(String contextPath, ServletContext ctx) {
 		file = new File(contextPath + "/Resources/Data/subscriptions.json");
+		this.ctx = ctx;
 		loadSubscriptions(contextPath);
+	}
+	
+	private UserDAO getUserDAO() {
+		return (UserDAO) ctx.getAttribute("userDAO");
 	}
 	
 	private void loadSubscriptions(String contextPath) {
@@ -56,25 +64,30 @@ public class SubscriptionDAO {
 		for (Subscription s : subscriptions) {
 			if(s.exists(dto.getUsername())) {
 				s.setActive(false);
+				calculatePoints(s);
 			}
 		}
 		
+		
 		Subscription newInstance = new Subscription(dto);
+		newInstance.setId(getMaxId());
 		subscriptions.add(newInstance);
+		save();
 		return newInstance;
 	}
 	
 	public User addPointsToCustomer(Subscription subscription, User customer) {
 		if(subscription.isFinished()) {
-			calculatePoints(customer,subscription);
+			calculatePoints(subscription);
 		}
 		
 		return customer;
 	}
 	
-	private void calculatePoints(User customer, Subscription subscription) {
+	private void calculatePoints(Subscription subscription) {
 		int totalAppearances = subscription.getTotalAppearances();
 		double price = subscription.getPrice();
+		User customer = getUserDAO().getByUsername(subscription.getUsername());
 		int usedTrainings = customer.numberOfUsedTrainings();
 		int points = customer.getTotalPoints();
 		
@@ -87,5 +100,38 @@ public class SubscriptionDAO {
 		customer.setTotalPoints(points);
 	}
 	
+	public Subscription getByUser(String username) {
+		for(Subscription s : subscriptions) {
+			if(s.exists(username)) {
+				return s;
+			}
+		}
+		
+		return null;
+	}
+	
+	
+	private int getMaxId() {
+		Integer maxId = -1;
+		for (Subscription s : subscriptions) {
+			if (s.getId() > maxId) {
+				maxId = s.getId();
+			}
+		}
+		
+		return ++maxId;
+	}
+	
+	private void save() {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try {
+			mapper.writeValue(file, subscriptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 }

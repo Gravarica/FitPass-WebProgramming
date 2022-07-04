@@ -2,7 +2,7 @@ package beans;
 
 public class Comment extends Entity {
 
-	private Customer customer;
+	private User customer;
 	private SportObject object;
 	private String text;
 	private int grade;
@@ -12,7 +12,7 @@ public class Comment extends Entity {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Comment(int id,Customer buyer, SportObject object, String text, int grade) {
+	public Comment(int id,User buyer, SportObject object, String text, int grade) {
 		super(id);
 		this.customer = buyer;
 		this.object = object;
@@ -20,11 +20,11 @@ public class Comment extends Entity {
 		this.grade = grade;
 	}
 
-	public Customer getBuyer() {
+	public User getBuyer() {
 		return customer;
 	}
 
-	public void setBuyer(Customer buyer) {
+	public void setBuyer(User buyer) {
 		this.customer = buyer;
 	}
 

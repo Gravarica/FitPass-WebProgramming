@@ -8,7 +8,7 @@
 		"expirationDate" : "2022-07-10",
 		"price" : 2500.00,
 		"username" : "Singleton420",
-		"dailyAppearances" : 1,
+		"dailyAppearance" : 1,
 		"totalAppearances" : 10,
 		"finite" : false,
 		"active" : true
@@ -22,7 +22,7 @@
 		"expirationDate" : "2023-07-03",
 		"price" : 22500.00,
 		"username" : "Corba",
-		"dailyAppearances" : 3,
+		"dailyAppearance" : 3,
 		"totalAppearances" : 500,
 		"finite" : false,
 		"active" : true
@@ -36,7 +36,7 @@
 		"expirationDate" : "2022-07-04",
 		"price" : 500.00,
 		"username" : "LladyCroft",
-		"dailyAppearances" : 1,
+		"dailyAppearance" : 1,
 		"totalAppearances" : 1,
 		"finite" : false,
 		"active" : true
@@ -50,7 +50,7 @@
 		"expirationDate" : "2022-08-03",
 		"price" : 4500.00,
 		"username" : "Stanija",
-		"dailyAppearances" : 1,
+		"dailyAppearance" : 1,
 		"totalAppearances" : 30,
 		"finite" : false,
 		"active" : true
@@ -64,7 +64,7 @@
 		"expirationDate" : "2022-07-10",
 		"price" : 3500.00,
 		"username" : "SlobaSnajper",
-		"dailyAppearances" : 1,
+		"dailyAppearance" : 1,
 		"totalAppearances" : 10,
 		"finite" : false,
 		"active" : true
