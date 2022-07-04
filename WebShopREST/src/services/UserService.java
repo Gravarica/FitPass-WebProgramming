@@ -45,7 +45,7 @@ public class UserService {
 	private UserDAO getUserDAO() {
 		return (UserDAO) ctx.getAttribute("userDAO");
 	}
-	
+		
 	@GET
 	@Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)

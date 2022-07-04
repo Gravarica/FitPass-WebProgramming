@@ -13,14 +13,14 @@ public class Training extends Entity {
 	private double duration;
 	private String description;
 	private Base64 image;
-	private Trainer trainer;
+	private User trainer;
 	
 	public Training() {
 		super();
 	}
 		
 	public Training(int id, String name, TrainingType type, SportObject object, double duration, String description,
-			Base64 image, Trainer trainer) {
+			Base64 image, User trainer) {
 		super(id);
 		this.name = name;
 		this.type = type;
@@ -79,11 +79,11 @@ public class Training extends Entity {
 		this.image = image;
 	}
 
-	public Trainer getTrainer() {
+	public User getTrainer() {
 		return trainer;
 	}
 
-	public void setTrainer(Trainer trainer) {
+	public void setTrainer(User trainer) {
 		this.trainer = trainer;
 	}
 }

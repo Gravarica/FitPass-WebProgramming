@@ -19,6 +19,8 @@ import beans.Artikal;
 import beans.Manager;
 import beans.Entity;
 import beans.SportObject;
+import beans.Training;
+import beans.TrainingHistory;
 import beans.User;
 import dto.LoginDTO;
 import dto.LoginReturnDTO;
@@ -250,6 +252,15 @@ public class UserDAO {
 		for(User it : getAllManagers()){
 			if(it.getUsername().equals(username)) {
 				return it.getObject();
+			}
+		}
+		return null;
+	}
+	
+	public ArrayList<TrainingHistory> getCustomerTrainingHistory(String username){
+		for(User it : users.values()) {
+			if(it.getUsername().equals(username)) {
+				return it.getTrainingHistory();
 			}
 		}
 		return null;
