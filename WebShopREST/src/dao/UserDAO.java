@@ -201,22 +201,22 @@ public class UserDAO {
 	}
 	
 	//Metoda koja vraca sve MENAGERE
-	public ArrayList<Manager> getAllManagers(){
-		ArrayList<Manager> retList = new ArrayList<Manager>();
+	public ArrayList<User> getAllManagers(){
+		ArrayList<User> retList = new ArrayList<User>();
 		for(User it : users.values()) {
 			if(it.roleMatches(Role.MANAGER)) {
-				retList.add((Manager)it);
+				retList.add(it);
 			}
 		}
 		return retList;
 	}
 	
 	//Metoda koja vraca sve SLOBODNE MENAGERE
-	public ArrayList<Manager> getAllAvailableManagers(){
-		ArrayList<Manager> retList = new ArrayList<Manager>();
+	public ArrayList<User> getAllAvailableManagers(){
+		ArrayList<User> retList = new ArrayList<User>();
 		for(User it : users.values()) {
-			if(it.roleMatches(Role.MANAGER) && ((Manager)it).getObject() == null) {
-				retList.add((Manager)it);
+			if(it.roleMatches(Role.MANAGER) && (it).getObject() == null) {
+				retList.add(it);
 			}
 		}
 		return retList;
@@ -244,5 +244,15 @@ public class UserDAO {
 		manager.setObject(object);
 		return manager;
 	}
+	
+	public SportObject getManagerSportObject(String username) {
+		for(User it : getAllManagers()){
+			if(it.getUsername().equals(username)) {
+				return it.getObject();
+			}
+		}
+		return null;
+	}
+	
 	
 }

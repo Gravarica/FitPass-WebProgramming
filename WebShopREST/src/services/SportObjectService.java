@@ -95,5 +95,4 @@ public class SportObjectService {
 		getUserDAO().setSportObject(newObject, dto.getManagerUsername());
 		return newObject;
 	}
-	
 }

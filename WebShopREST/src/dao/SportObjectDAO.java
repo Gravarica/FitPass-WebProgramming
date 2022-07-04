@@ -149,5 +149,4 @@ public class SportObjectDAO {
 		saveSportObjects();
 		return newObject;
 	}
-	
 }
