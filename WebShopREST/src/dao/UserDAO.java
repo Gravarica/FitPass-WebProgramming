@@ -16,12 +16,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.sun.org.apache.bcel.internal.classfile.Utility;
 
 import beans.Artikal;
-<<<<<<< HEAD
 import beans.Manager;
-=======
 import beans.Entity;
 import beans.SportObject;
->>>>>>> 47e2a04fa522e181b050aae0b5195ee6dc33b928
 import beans.User;
 import dto.LoginDTO;
 import dto.LoginReturnDTO;
@@ -134,7 +131,6 @@ public class UserDAO {
 		
 		try {
 			ArrayList<User> userList = new ArrayList<User>(users.values());
-			System.out.println("USAO SAM OVDE");
 			mapper.writeValue(file, userList);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -241,7 +237,7 @@ public class UserDAO {
 	
 	public User setSportObject(SportObject object, String username) {
 		User manager = users.get(username);
-		if(manager.roleMatches(Role.MANAGER) || manager.getObject() != null) {
+		if(!manager.roleMatches(Role.MANAGER) || manager.getObject() != null) {
 			return null;
 		}
 		

@@ -9,6 +9,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.SportObject;
+import beans.User;
 import dto.SportObjectCreateDTO;
 import dto.SportObjectSearchDTO;
 import enums.SportObjectType;
@@ -21,7 +22,7 @@ public class SportObjectDAO {
 	public SportObjectDAO() {}
 	
 	public SportObjectDAO(String contextPath) {
-		//file = new File(contextPath + "/sport_objects.json");
+		file = new File(contextPath + "/sport_objects.json");
 		loadSportObjects(contextPath);
 	}
 		
@@ -29,12 +30,38 @@ public class SportObjectDAO {
 		ObjectMapper mapper = new ObjectMapper();
 		
 		try {
-			List<SportObject> list = Arrays.asList(mapper.readValue(new File(contextPath + "/sport_objects.json"),SportObject[].class));
+			List<SportObject> list = Arrays.asList(mapper.readValue(file,SportObject[].class));
 			objects = filterUndeleted(new ArrayList<SportObject>(list));		
 		}catch(Exception e) {
 			e.printStackTrace();
 		}	
+	}	
+	
+	private void saveSportObjects() {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try {
+			ArrayList<SportObject> objectList = new ArrayList<SportObject>(objects);
+			mapper.writeValue(file,objectList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
+	
+	//Metoda koja vraca ID
+	private int getMaxId() {
+		Integer maxId = -1;
+		for (SportObject it : objects) {
+			if (it.getId() > maxId) {
+				maxId = it.getId();
+			}
+		}
+		
+		return ++maxId;
+	}
+	
 	
 	public ArrayList<SportObject> filterUndeleted(ArrayList<SportObject> objects) {
 		ArrayList<SportObject> objectsNew = new ArrayList<SportObject>();
@@ -116,7 +143,11 @@ public class SportObjectDAO {
 	}
 	
 	public SportObject createSportObject(SportObjectCreateDTO dto) {
-		return new SportObject(dto);
+		SportObject newObject = new SportObject(dto);
+		newObject.setId(getMaxId());
+		objects.add(newObject);
+		saveSportObjects();
+		return newObject;
 	}
 	
 }
