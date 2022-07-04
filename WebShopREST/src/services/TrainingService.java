@@ -46,4 +46,26 @@ public class TrainingService {
 	public ArrayList<TrainingHistory> getCustomerTrainings(@PathParam("username") String username){
 		return getUserDAO().getCustomerTrainingHistory(username);
 	}
+
+	@GET
+	@Path("/trainer/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<TrainingHistory> getTrainerTrainings(@PathParam("username") String username){
+		return getUserDAO().getTrainerTrainings(username);
+	}
+	
+	@GET
+	@Path("/trainer/personal/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<TrainingHistory> getTrainerPersonalTrainings(@PathParam("username") String username){
+		return getUserDAO().getTrainerPersonalTrainings(username);
+	}
+	
+	@GET
+	@Path("/trainer/group/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<TrainingHistory> getTrainerGroupTrainings(@PathParam("username") String username){
+		return getUserDAO().getTrainerGroupTrainings(username);
+	}
+	
 }

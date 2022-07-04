@@ -28,6 +28,7 @@ import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
 import enums.CustomerTypeName;
 import enums.Role;
+import enums.TrainingType;
 import src.util.BusinessUtil;
 
 /***
@@ -257,6 +258,7 @@ public class UserDAO {
 		return null;
 	}
 	
+	//Svi treninzi kupca
 	public ArrayList<TrainingHistory> getCustomerTrainingHistory(String username){
 		for(User it : users.values()) {
 			if(it.getUsername().equals(username)) {
@@ -266,5 +268,54 @@ public class UserDAO {
 		return null;
 	}
 	
+	//Metoda koja vraca treninge kupca na mesecnom nivou
+	public ArrayList<TrainingHistory> getCustomerMonthlyTrainingHistory(String username){
+		for(User it : users.values()) {
+			if(it.getUsername().equals(username)) {
+				return FilterTrainingHistory(it.getTrainingHistory());
+			}
+		}
+		return null;
+	}
 	
+	//Metoda koja vrsi tu filtraciju na mesecnom nivou
+	public ArrayList<TrainingHistory> FilterTrainingHistory(ArrayList<TrainingHistory> trainings){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : trainings) {
+			//ubaciti logiku za datum !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		}
+		return retList;
+	}
+
+	//Metoda koja vraca treninge trenera 
+	public ArrayList<TrainingHistory> getTrainerTrainings(String username){
+		for(User it : users.values()) {
+			if(it.getUsername().equals(username)) {
+				return it.getTrainingHistory();
+			}
+		}
+		return null;
+	}
+	
+	//Vraca sve personalne treninge trenera
+	public ArrayList<TrainingHistory> getTrainerPersonalTrainings(String username){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : getTrainerTrainings(username)) {
+			if(it.getTraining().getType() == TrainingType.PERSONAL) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+
+	//Vraca sve grupne treninge trenera
+	public ArrayList<TrainingHistory> getTrainerGroupTrainings(String username){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : getTrainerTrainings(username)) {
+			if(it.getTraining().getType() == TrainingType.GROUP) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
 }
