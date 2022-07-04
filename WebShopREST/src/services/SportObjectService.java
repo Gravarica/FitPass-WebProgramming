@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -13,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.SportObject;
 import dao.SportObjectDAO;
+import dto.NewContentDTO;
 import dto.SportObjectSearchDTO;
 
 @Path("/sport_objects")
@@ -78,5 +82,30 @@ public class SportObjectService {
 	public ArrayList<SportObject> searchByName(SportObjectSearchDTO dto){
 		return getSportObjectDAO().searchByMultipleParameters(dto);
 	}
+	
+	@DELETE
+	@Path("/delete/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public SportObject delete(@PathParam("id") int id) {
+		return getSportObjectDAO().delete(id);
+	}
+	
+	@PUT
+	@Path("/addContent/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public SportObject addContent(@PathParam("id") int id, NewContentDTO dto) {
+		return getSportObjectDAO().addContent(dto, id);
+	}
+	
+	@PUT
+	@Path("/changeContent/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public SportObject changeContent(@PathParam("id") int id, NewContentDTO dto) {
+		return getSportObjectDAO().changeContent(dto, id);
+	}
+	
 	
 }

@@ -1,9 +1,12 @@
 package src.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import beans.Content;
 import beans.Entity;
+import dto.NewContentDTO;
 
 public class BusinessUtil {
 
@@ -21,5 +24,15 @@ public class BusinessUtil {
 				entities.remove(entity);
 			}
 		}
+	}
+	
+	public static boolean checkIfContentExists(ArrayList<Content> contents, NewContentDTO dto) {
+		for (Content content : contents) {
+			if(dto.getName().equals(content.getName())){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
