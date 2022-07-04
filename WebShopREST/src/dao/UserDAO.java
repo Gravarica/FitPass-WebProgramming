@@ -242,6 +242,7 @@ public class UserDAO {
 		}
 		
 		manager.setObject(object);
+		saveUsers();
 		return manager;
 	}
 	
