@@ -1,0 +1,72 @@
+[
+	{
+		"id" : 1,
+		"deleted" : false,
+		"code" : "XKJLI99UOL",
+		"type" : "WEEK",
+		"payDay" : "2022-07-03",
+		"expirationDate" : "2022-07-10",
+		"price" : 2500.00,
+		"username" : "Singleton420",
+		"dailyAppearances" : 1,
+		"totalAppearances" : 10,
+		"finite" : false,
+		"active" : true
+	},
+	{
+		"id" : 2,
+		"deleted" : false,
+		"code" : "XKJLI99UOL",
+		"type" : "YEAR",
+		"payDay" : "2022-07-03",
+		"expirationDate" : "2023-07-03",
+		"price" : 22500.00,
+		"username" : "Corba",
+		"dailyAppearances" : 3,
+		"totalAppearances" : 500,
+		"finite" : false,
+		"active" : true
+	},
+	{
+		"id" : 3,
+		"deleted" : false,
+		"code" : "XKJLI99UOL",
+		"type" : "DAY",
+		"payDay" : "2022-07-03",
+		"expirationDate" : "2022-07-04",
+		"price" : 500.00,
+		"username" : "LladyCroft",
+		"dailyAppearances" : 1,
+		"totalAppearances" : 1,
+		"finite" : false,
+		"active" : true
+	},
+	{
+		"id" : 4,
+		"deleted" : false,
+		"code" : "XKJLI99UOL",
+		"type" : "MONTH",
+		"payDay" : "2022-07-03",
+		"expirationDate" : "2022-08-03",
+		"price" : 4500.00,
+		"username" : "Stanija",
+		"dailyAppearances" : 1,
+		"totalAppearances" : 30,
+		"finite" : false,
+		"active" : true
+	},
+	{
+		"id" : 5,
+		"deleted" : false,
+		"code" : "XKJLI99UOL",
+		"type" : "WEEK",
+		"payDay" : "2022-07-03",
+		"expirationDate" : "2022-07-10",
+		"price" : 3500.00,
+		"username" : "SlobaSnajper",
+		"dailyAppearances" : 1,
+		"totalAppearances" : 10,
+		"finite" : false,
+		"active" : true
+	}
+]

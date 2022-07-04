@@ -213,4 +213,9 @@ public class User extends Entity {
 		return this.role == role;
 	}
 	
+	// OVA METODA ODRADJENA, ODRADITI!!!!
+	public int numberOfUsedTrainings() {
+		return trainingHistory.size();
+	}
+	
 }

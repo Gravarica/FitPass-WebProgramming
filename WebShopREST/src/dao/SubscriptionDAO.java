@@ -1,6 +1,7 @@
 package dao;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,9 +47,45 @@ public class SubscriptionDAO {
 		return filteredList;
 	}
 	
+	public ArrayList<Subscription> getAll(){
+		return subscriptions;
+	}
+	
 	public Subscription createSubscription(NewSubscriptionDTO dto) {
 		
-	} 
+		for (Subscription s : subscriptions) {
+			if(s.exists(dto.getUsername())) {
+				s.setActive(false);
+			}
+		}
+		
+		Subscription newInstance = new Subscription(dto);
+		subscriptions.add(newInstance);
+		return newInstance;
+	}
+	
+	public User addPointsToCustomer(Subscription subscription, User customer) {
+		if(subscription.isFinished()) {
+			calculatePoints(customer,subscription);
+		}
+		
+		return customer;
+	}
+	
+	private void calculatePoints(User customer, Subscription subscription) {
+		int totalAppearances = subscription.getTotalAppearances();
+		double price = subscription.getPrice();
+		int usedTrainings = customer.numberOfUsedTrainings();
+		int points = customer.getTotalPoints();
+		
+		if(usedTrainings >= totalAppearances/3) {
+			points += (int) price/1000*usedTrainings;
+		} else {
+			points -= (int) price/1000*133*4;
+		}
+		
+		customer.setTotalPoints(points);
+	}
 	
 	
 }

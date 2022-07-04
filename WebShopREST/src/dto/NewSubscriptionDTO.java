@@ -1,20 +1,26 @@
 package dto;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import enums.SubscriptionType;
 
 public class NewSubscriptionDTO {
 
 	private SubscriptionType type;
-	private Date payDay;
-	private Date expirationDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDateTime payDay;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDateTime expirationDate;
 	private double price;
 	private String username;
 	private long dailyAppearance;
 	private boolean finite;
+	private int totalAppearances;
 	
-	public NewSubscriptionDTO(SubscriptionType type, Date payDay, Date expirationDate, double price,
+	public NewSubscriptionDTO(SubscriptionType type, LocalDateTime payDay, LocalDateTime expirationDate, double price,
 			long dailyAppearance, boolean finite) {
 		super();
 		this.type = type;
@@ -31,16 +37,16 @@ public class NewSubscriptionDTO {
 	public void setType(SubscriptionType type) {
 		this.type = type;
 	}
-	public Date getPayDay() {
+	public LocalDateTime getPayDay() {
 		return payDay;
 	}
-	public void setPayDay(Date payDay) {
+	public void setPayDay(LocalDateTime payDay) {
 		this.payDay = payDay;
 	}
-	public Date getExpirationDate() {
+	public LocalDateTime getExpirationDate() {
 		return expirationDate;
 	}
-	public void setExpirationDate(Date expirationDate) {
+	public void setExpirationDate(LocalDateTime expirationDate) {
 		this.expirationDate = expirationDate;
 	}
 	public double getPrice() {
@@ -68,6 +74,14 @@ public class NewSubscriptionDTO {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public int getTotalAppearances() {
+		return totalAppearances;
+	}
+
+	public void setTotalAppearances(int totalAppearances) {
+		this.totalAppearances = totalAppearances;
 	}
 	
 	

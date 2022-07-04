@@ -1,5 +1,6 @@
 package src.util;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.UUID;
 import beans.Content;
 import beans.Entity;
 import dto.NewContentDTO;
+import enums.SubscriptionType;
 
 public class BusinessUtil {
 
@@ -43,5 +45,17 @@ public class BusinessUtil {
 
 		return randomUUID.toString().replaceAll("_", "").substring(0,9);
 
+	}
+	
+	public static LocalDateTime concludeExpirationDate(SubscriptionType type) {
+		if (type == SubscriptionType.DAY) {
+			return LocalDateTime.now().plusDays(1);
+		} else if (type == SubscriptionType.WEEK) {
+			return LocalDateTime.now().plusWeeks(1);
+		} else if (type == SubscriptionType.MONTH) {
+			return LocalDateTime.now().plusMonths(1);
+		} 
+		
+		return LocalDateTime.now().plusYears(1);
 	}
 }

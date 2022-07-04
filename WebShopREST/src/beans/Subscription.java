@@ -1,6 +1,8 @@
 package beans;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import dto.NewSubscriptionDTO;
 import enums.SubscriptionType;
@@ -10,17 +12,20 @@ public class Subscription extends Entity {
 	
 	private String code; //ograniciti na 10 karaktera
 	private SubscriptionType type;
-	private Date payDay;
-	private Date  expirationDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDateTime payDay;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDateTime expirationDate;
 	private double price;
 	private String username;
 	private boolean active;
 	private long dailyAppearance;
+	private int totalAppearances;
 	private boolean finite;
 	
 	public Subscription() {}
 	
-	public Subscription(int id,String code, SubscriptionType type, Date payDay, Date expirationDate, double price, String customer,
+	public Subscription(int id,String code, SubscriptionType type, LocalDateTime payDay, LocalDateTime expirationDate, double price, String customer,
 			boolean active, long dailyAppearance, boolean finite) {
 		super(id);
 		this.code = code;
@@ -37,6 +42,13 @@ public class Subscription extends Entity {
 	public Subscription(NewSubscriptionDTO dto) {
 		this.code = BusinessUtil.generateRandomString();
 		this.username = dto.getUsername();
+		this.payDay = LocalDateTime.now();
+		this.expirationDate = BusinessUtil.concludeExpirationDate(dto.getType());
+		this.price = dto.getPrice();
+		this.active = true;
+		this.totalAppearances = dto.getTotalAppearances();
+		this.finite = false;		/// OVO SAM HARDKODOVAO SAD, IZMENITI
+		this.type = dto.getType();
 	}
 	
 	public String getCode() {
@@ -55,19 +67,21 @@ public class Subscription extends Entity {
 		this.type = type;
 	}
 
-	public Date getPayDay() {
+	@JsonFormat(pattern="yyyy-MM-dd")
+	public LocalDateTime getPayDay() {
 		return payDay;
 	}
 
-	public void setPayDay(Date payDay) {
+	public void setPayDay(LocalDateTime payDay) {
 		this.payDay = payDay;
 	}
 
-	public Date getExpirationDate() {
+	@JsonFormat(pattern="yyyy-MM-dd")
+	public LocalDateTime getExpirationDate() {
 		return expirationDate;
 	}
 
-	public void setExpirationDate(Date expirationDate) {
+	public void setExpirationLocalDateTime(java.time.LocalDateTime expirationLocalDateTime) {
 		this.expirationDate = expirationDate;
 	}
 
@@ -79,11 +93,11 @@ public class Subscription extends Entity {
 		this.price = price;
 	}
 
-	public String getusername() {
+	public String getUsername() {
 		return username;
 	}
 
-	public void setusername(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
@@ -114,4 +128,22 @@ public class Subscription extends Entity {
 	public boolean checkForCode(String code) {
 		return code.length() == 10;	
 	}
+	
+	public boolean exists(String username) {
+		return this.username.equals(username) && active;
+	}
+	
+	public boolean isFinished() {
+		return LocalDateTime.now().isAfter(expirationDate);
+	}
+	
+	public int getTotalAppearances() {
+		return totalAppearances;
+	}
+
+	public void setTotalAppearances(int totalAppearances) {
+		this.totalAppearances = totalAppearances;
+	}
+
+	
 }
