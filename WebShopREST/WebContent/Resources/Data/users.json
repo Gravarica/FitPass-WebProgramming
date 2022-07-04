@@ -10,7 +10,8 @@
 		"role" : "ADMIN",
 		"dateOfBirth" : "2000-01-20",
 		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
-		"object" : null
+		"object" : null,
+		"totalPoints" : -1
 	},
 	{
 		"id" : 2,
@@ -23,11 +24,12 @@
 		"role" : "TRAINER",
 		"dateOfBirth" : "2000-07-25",
 		"customerType" : null,
-		"object" : null
+		"object" : null,
+		"totalPoints" : -1
 	},
 	{
 		"id" : 3,
-		"deleted" : true,
+		"deleted" : false,
 		"username" : "Singleton420",
 		"password" : "-286773544",
 		"firstName" : "Ilija",
@@ -36,6 +38,77 @@
 		"role" : "CUSTOMER",
 		"dateOfBirth" : "2000-01-01",
 		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
-		"object" : null
+		"object" : null,
+		"totalPoints" : 40
+	},
+	{
+		"id" : 4,
+		"deleted" : false,
+		"username" : "Lojke",
+		"password" : "-286773544",
+		"firstName" : "Nemanja",
+		"lastName" : "Lojovic",
+		"gender" : "MALE",
+		"role" : "MANAGER",
+		"dateOfBirth" : "2000-05-09",
+		"customerType" : null,
+		"object" : null,
+		"totalPoints" : -1
+	},
+	{
+		"id" : 5,
+		"deleted" : false,
+		"username" : "Corba",
+		"password" : "-286773544",
+		"firstName" : "Mihajlo",
+		"lastName" : "Torbica",
+		"gender" : "MALE",
+		"role" : "CUSTOMER",
+		"dateOfBirth" : "2000-05-03",
+		"customerType" : { "name" : "SILVER", "discount" : 3.0, "pointsRequired" : 500},
+		"object" : null,
+		"totalPoints" : 220
+	},
+	{
+		"id" : 6,
+		"deleted" : false,
+		"username" : "LladyCroft",
+		"password" : "-286773544",
+		"firstName" : "Lady",
+		"lastName" : "Croft",
+		"gender" : "FEMALE",
+		"role" : "CUSTOMER",
+		"dateOfBirth" : "2000-01-01",
+		"customerType" : { "name" : "GOLD", "discount" : 8.0, "pointsRequired" : 1000},
+		"object" : null,
+		"totalPoints" : 990
+	},
+	{
+		"id" : 7,
+		"deleted" : false,
+		"username" : "Stanija",
+		"password" : "-286773544",
+		"firstName" : "Stanija",
+		"lastName" : "Dobrojevic",
+		"gender" : "FEMALE",
+		"role" : "CUSTOMER",
+		"dateOfBirth" : "1985-01-01",
+		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"object" : null,
+		"totalPoints" : 50
+	},
+	{
+		"id" : 8,
+		"deleted" : false,
+		"username" : "SlobaSnajper",
+		"password" : "-286773544",
+		"firstName" : "Una",
+		"lastName" : "Jovic",
+		"gender" : "FEMALE",
+		"role" : "CUSTOMER",
+		"dateOfBirth" : "1998-01-01",
+		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"object" : null,
+		"totalPoints" : 60
 	}
 ]

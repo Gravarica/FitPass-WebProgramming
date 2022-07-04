@@ -25,7 +25,7 @@ public class User extends Entity {
 	protected Date dateOfBirth;
 	protected CustomerType customerType;
 	private SportObject object;
-	private Subscription membershipFee;
+	private int membershipFeeId;
 	private ArrayList<SportObject> objectsVisited;
 	private int totalPoints;
 	private ArrayList<TrainingHistory> trainingHistory;
@@ -79,7 +79,7 @@ public class User extends Entity {
 	private void instantiateEmptyFields() {
 		this.object = null;
 		this.totalPoints = -1;
-		this.membershipFee = null;
+		this.membershipFeeId = -1;
 		this.objectsVisited = null;
 		this.trainingHistory = null;
 		this.customerType = null;
@@ -167,12 +167,12 @@ public class User extends Entity {
 		this.object = object;
 	}
 
-	public Subscription getMembershipFee() {
-		return membershipFee;
+	public int getmembershipFeeId() {
+		return membershipFeeId;
 	}
 
-	public void setMembershipFee(Subscription membershipFee) {
-		this.membershipFee = membershipFee;
+	public void setmembershipFeeId(int membershipFeeId) {
+		this.membershipFeeId = membershipFeeId;
 	}
 
 	public ArrayList<SportObject> getObjectsVisited() {
@@ -211,6 +211,11 @@ public class User extends Entity {
 		
 	public boolean roleMatches(Role role) {
 		return this.role == role;
+	}
+	
+	// OVA METODA ODRADJENA, ODRADITI!!!!
+	public int numberOfUsedTrainings() {
+		return trainingHistory.size();
 	}
 	
 }

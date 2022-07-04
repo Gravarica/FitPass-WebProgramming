@@ -151,6 +151,7 @@ public class SportObjectDAO {
 		objects.add(newObject);
 		saveSportObjects();
 		return newObject;
+	}
     
 	public SportObject addContent(NewContentDTO dto, int id) {
 		SportObject object = getById(id);
