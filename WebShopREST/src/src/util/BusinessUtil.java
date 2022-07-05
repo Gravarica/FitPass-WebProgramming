@@ -1,5 +1,6 @@
 package src.util;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,15 +48,15 @@ public class BusinessUtil {
 
 	}
 	
-	public static LocalDateTime concludeExpirationDate(SubscriptionType type) {
+	public static LocalDate concludeExpirationDate(SubscriptionType type) {
 		if (type == SubscriptionType.DAY) {
-			return LocalDateTime.now().plusDays(1);
+			return LocalDate.now().plusDays(1);
 		} else if (type == SubscriptionType.WEEK) {
-			return LocalDateTime.now().plusWeeks(1);
+			return LocalDate.now().plusWeeks(1);
 		} else if (type == SubscriptionType.MONTH) {
-			return LocalDateTime.now().plusMonths(1);
+			return LocalDate.now().plusMonths(1);
 		} 
 		
-		return LocalDateTime.now().plusYears(1);
+		return LocalDate.now().plusYears(1);
 	}
 }

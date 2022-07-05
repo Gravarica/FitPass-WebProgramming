@@ -85,6 +85,7 @@ public class SportObjectService {
 	@GET
 	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public ArrayList<SportObject> searchByName(SportObjectSearchDTO dto){
 		return getSportObjectDAO().searchByMultipleParameters(dto);
 	}
@@ -92,6 +93,7 @@ public class SportObjectService {
 	@POST
 	@Path("/create")
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public SportObject createSportObject(SportObjectCreateDTO dto) {
 		SportObject newObject = getSportObjectDAO().createSportObject(dto);
 		getUserDAO().setSportObject(newObject, dto.getManagerUsername());

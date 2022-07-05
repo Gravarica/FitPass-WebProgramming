@@ -16,7 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.sun.org.apache.bcel.internal.classfile.Utility;
 
 import beans.Artikal;
-import beans.Manager;
 import beans.Entity;
 import beans.SportObject;
 import beans.Training;
@@ -285,7 +284,7 @@ public class UserDAO {
 		}
 		return null;
 	}
-	
+  
 	//Metoda koja vraca treninge kupca na mesecnom nivou
 	public ArrayList<TrainingHistory> getCustomerMonthlyTrainingHistory(String username){
 		for(User it : users.values()) {
@@ -339,5 +338,10 @@ public class UserDAO {
 
 	public UserAccountInformationDTO getUserAccountInfromation() {
 		return new UserAccountInformationDTO(getLoggedUser());
+  }
+	
+  public User getByUsername(String username) {
+		return users.get(username);
 	}
+
 }

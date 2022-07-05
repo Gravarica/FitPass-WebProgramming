@@ -1,31 +1,35 @@
 package beans;
 
+import enums.CommentState;
+
 public class Comment extends Entity {
 
-	private Customer customer;
+	private User customer;
 	private SportObject object;
 	private String text;
 	private int grade;
+	private CommentState state;
 	
 	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Comment(int id,Customer buyer, SportObject object, String text, int grade) {
+	public Comment(int id,User customer, SportObject object, String text, int grade) {
 		super(id);
-		this.customer = buyer;
+		this.customer = customer;
 		this.object = object;
 		this.text = text;
 		this.grade = grade;
+		this.state = CommentState.PENDING;
 	}
 
-	public Customer getBuyer() {
+	public User getCustomer() {
 		return customer;
 	}
 
-	public void setBuyer(Customer buyer) {
-		this.customer = buyer;
+	public void setCustomer(User customer) {
+		this.customer = customer;
 	}
 
 	public SportObject getObject() {
@@ -52,7 +56,31 @@ public class Comment extends Entity {
 		this.grade = grade;
 	}
 	
+	public CommentState getState() {
+		return this.state;
+	}
+	
+	public void setState(CommentState state) {
+		this.state = state;
+	}
+	
 	private boolean gradeIsValid(double grade) {
 		return grade >= 1 && grade <= 5;
+	}
+	
+	public boolean objectMatches(SportObject obj) {
+		return object.getId() == obj.getId();
+	}
+	
+	public boolean userMatches(String username) {
+		return customer.getUsername().equals(username);
+	}
+	
+	public void approve() {
+		this.state = CommentState.ACCEPTED;
+	}
+	
+	public void decline() {
+		this.state = CommentState.DENIED;
 	}
 }

@@ -3,7 +3,6 @@ package dto;
 import java.util.Base64;
 
 import beans.Location;
-import beans.Manager;
 import enums.SportObjectType;
 
 public class SportObjectCreateDTO {

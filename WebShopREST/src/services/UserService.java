@@ -18,7 +18,6 @@ import javax.ws.rs.core.MediaType;
 
 import beans.SportObject;
 import beans.User;
-import dao.ArtikalDAO;
 import dao.SportObjectDAO;
 import dao.TrainingDAO;
 import dao.UserDAO;
