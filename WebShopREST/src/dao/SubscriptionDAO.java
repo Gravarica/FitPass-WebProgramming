@@ -1,7 +1,6 @@
 package dao;
 
 import java.io.File;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +58,26 @@ public class SubscriptionDAO {
 		return subscriptions;
 	}
 	
+	public Subscription getById(int id) {
+		for(Subscription s : subscriptions) {
+			if(s.getId() == id) {
+				return s;
+			}
+		}
+		
+		return null;
+	}
+	
+	public Subscription getByCode(String code) {
+		for(Subscription s: subscriptions) {
+			if(s.getCode().equals(code)) {
+				return s;
+			}
+		}
+		
+		return null;
+	}
+	
 	public Subscription createSubscription(NewSubscriptionDTO dto) {
 		
 		for (Subscription s : subscriptions) {
@@ -88,11 +107,10 @@ public class SubscriptionDAO {
 		int totalAppearances = subscription.getTotalAppearances();
 		double price = subscription.getPrice();
 		User customer = getUserDAO().getByUsername(subscription.getUsername());
-		int usedTrainings = customer.numberOfUsedTrainings();
 		int points = customer.getTotalPoints();
 		
-		if(usedTrainings >= totalAppearances/3) {
-			points += (int) price/1000*usedTrainings;
+		if(subscription.getDoneTrainings() >= totalAppearances/3) {
+			points += (int) price/1000*subscription.getDoneTrainings();
 		} else {
 			points -= (int) price/1000*133*4;
 		}
@@ -132,6 +150,12 @@ public class SubscriptionDAO {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public Subscription increaseTrainingCounter(int id) {
+		Subscription s = getById(id);
+		s.trainingDone();
+		return s;
 	}
 	
 }

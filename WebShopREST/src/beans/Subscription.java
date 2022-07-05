@@ -28,6 +28,7 @@ public class Subscription extends Entity {
 	private boolean active;
 	private long dailyAppearance;
 	private int totalAppearances;
+	private int doneTrainings;
 	private boolean finite;
 	
 	public Subscription() {}
@@ -53,6 +54,7 @@ public class Subscription extends Entity {
 		this.expirationDate = BusinessUtil.concludeExpirationDate(dto.getType());
 		this.price = dto.getPrice();
 		this.active = true;
+		this.doneTrainings = 0;
 		this.totalAppearances = dto.getTotalAppearances();
 		this.finite = false;		/// OVO SAM HARDKODOVAO SAD, IZMENITI
 		this.type = dto.getType();
@@ -150,5 +152,15 @@ public class Subscription extends Entity {
 		this.totalAppearances = totalAppearances;
 	}
 
-	
+	public int getDoneTrainings() {
+		return doneTrainings;
+	}
+
+	public void setDoneTrainings(int doneTrainings) {
+		this.doneTrainings = doneTrainings;
+	}
+
+	public void trainingDone() {
+		this.doneTrainings++;
+	}
 }
