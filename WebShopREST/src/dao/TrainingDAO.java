@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import beans.SportObject;
 import beans.Training;
 import beans.TrainingHistory;
+import beans.User;
 
 public class TrainingDAO {
 	
@@ -69,4 +70,10 @@ public class TrainingDAO {
 		}
 		return retList;
 	}
+
+	public void setTrainingTrainer(Training t,User trener) {
+		t.setTrainer(trener);
+		saveTraining();
+	}
+	
 }

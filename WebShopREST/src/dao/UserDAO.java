@@ -26,6 +26,7 @@ import dto.LoginDTO;
 import dto.LoginReturnDTO;
 import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
+import dto.TrainerRegistrationDTO;
 import enums.CustomerTypeName;
 import enums.Role;
 import enums.TrainingType;
@@ -225,6 +226,7 @@ public class UserDAO {
 		return retList;
 	}
 	
+	//Register MANAGER
 	public User registerManager(ManagerRegistrationDTO dto, SportObject object) {
 		if (users.containsKey(dto.getUsername())) {
 			return null;
@@ -236,6 +238,21 @@ public class UserDAO {
 		saveUsers();
 		
 		return manager;
+	}
+	
+	//Register Trainer
+	public User registerTrainer(TrainerRegistrationDTO dto) {
+		if(users.containsKey(dto.getUsername())) {
+			return null;
+		}
+	
+		User newTrainer = new User(dto);
+		newTrainer.setPassword(BusinessUtil.hashPassword(newTrainer.getPassword()));
+		newTrainer.setId(getMaxId());
+		users.put(newTrainer.getUsername(), newTrainer);
+		saveUsers();
+				
+		return newTrainer;
 	}
 	
 	public User setSportObject(SportObject object, String username) {

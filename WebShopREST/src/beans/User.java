@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import dto.LoginDTO;
 import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
+import dto.TrainerRegistrationDTO;
 import enums.CustomerTypeName;
 import enums.Gender;
 import enums.Role;
@@ -56,6 +57,10 @@ public class User extends Entity {
 	public User(ManagerRegistrationDTO dto, SportObject object) {
 		instantiateData(dto);
 		this.object = object;
+	}
+	
+	public User(TrainerRegistrationDTO dto, Training training) {
+		instantiateData(dto);
 	}
 	
 	private void instantiateData(RegistrationDTO dto) {
