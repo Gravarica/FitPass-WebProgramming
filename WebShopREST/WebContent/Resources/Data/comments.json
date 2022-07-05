@@ -1,0 +1,154 @@
+[
+	{
+		"id" : 1,
+		"deleted" : false,
+		"customer" : {
+						"id" : 1,
+						"deleted" : false,
+						"username" : "gravarica",
+						"password" : "-286773544",
+						"firstName" : "Milos",
+						"lastName" : "Gravara",
+						"gender" : "MALE",
+						"role" : "ADMIN",
+						"dateOfBirth" : "2000-01-20",
+						"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+						"object" : null,
+						"totalPoints" : -1
+					},
+		"object" : 	{
+						"id" : "1",
+						"deleted" : false,
+						"name" : "Ozzy",
+						"averageGrade" : 7.64,
+						"sportObjectType" : "GYM",
+						"location" : {
+							"address" : {
+								"street" : "Jovana Ducica",
+								"number" : "12a",
+								"city" : "Novi Sad",
+								"postalNumber" : "21000"
+							},
+							"longitude" : 24.42,
+							"latitude" : 12.23
+						}
+					},
+		"text" : "Bukvalno je uzasna teretana bu raz",
+		"grade" : 2,
+		"state" : "ACCEPTED"	
+	},
+	{
+		"id" : 2,
+		"deleted" : false,
+		"customer" : {
+						"id" : 1,
+						"deleted" : false,
+						"username" : "gravarica",
+						"password" : "-286773544",
+						"firstName" : "Milos",
+						"lastName" : "Gravara",
+						"gender" : "MALE",
+						"role" : "ADMIN",
+						"dateOfBirth" : "2000-01-20",
+						"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+						"object" : null,
+						"totalPoints" : -1
+					},
+		"object" : 	{
+						"id" : "1",
+						"deleted" : false,
+						"name" : "Ozzy",
+						"averageGrade" : 7.64,
+						"sportObjectType" : "GYM",
+						"location" : {
+							"address" : {
+								"street" : "Jovana Ducica",
+								"number" : "12a",
+								"city" : "Novi Sad",
+								"postalNumber" : "21000"
+							},
+							"longitude" : 24.42,
+							"latitude" : 12.23
+						}
+					},
+		"text" : "Kida teretana",
+		"grade" : 5,
+		"state" : "PENDING"	
+	},
+	{
+		"id" : 3,
+		"deleted" : false,
+		"customer" : {
+						"id" : 1,
+						"deleted" : false,
+						"username" : "gravarica",
+						"password" : "-286773544",
+						"firstName" : "Milos",
+						"lastName" : "Gravara",
+						"gender" : "MALE",
+						"role" : "ADMIN",
+						"dateOfBirth" : "2000-01-20",
+						"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+						"object" : null,
+						"totalPoints" : -1
+					},
+		"object" : 	{
+						"id" : "1",
+						"deleted" : false,
+						"name" : "Ozzy",
+						"averageGrade" : 7.64,
+						"sportObjectType" : "GYM",
+						"location" : {
+							"address" : {
+								"street" : "Jovana Ducica",
+								"number" : "12a",
+								"city" : "Novi Sad",
+								"postalNumber" : "21000"
+							},
+							"longitude" : 24.42,
+							"latitude" : 12.23
+						}
+					},
+		"text" : "Bukvalno je uzasna teretana bu raz",
+		"grade" : 1,
+		"state" : "PENDING"	
+	},
+	{
+		"id" : 1,
+		"deleted" : false,
+		"customer" : {
+						"id" : 1,
+						"deleted" : false,
+						"username" : "gravarica",
+						"password" : "-286773544",
+						"firstName" : "Milos",
+						"lastName" : "Gravara",
+						"gender" : "MALE",
+						"role" : "ADMIN",
+						"dateOfBirth" : "2000-01-20",
+						"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+						"object" : null,
+						"totalPoints" : -1
+					},
+		"object" : 	{
+						"id" : "1",
+						"deleted" : false,
+						"name" : "Ozzy",
+						"averageGrade" : 7.64,
+						"sportObjectType" : "GYM",
+						"location" : {
+							"address" : {
+								"street" : "Jovana Ducica",
+								"number" : "12a",
+								"city" : "Novi Sad",
+								"postalNumber" : "21000"
+							},
+							"longitude" : 24.42,
+							"latitude" : 12.23
+						}
+					},
+		"text" : "Raspad sistema",
+		"grade" : 3,
+		"state" : "PENDING"	
+	}
+]

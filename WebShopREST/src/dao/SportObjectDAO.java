@@ -3,15 +3,14 @@ package dao;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Content;
 import beans.SportObject;
-import beans.User;
 import dto.SportObjectCreateDTO;
+import dto.AverageGradeDTO;
 import dto.NewContentDTO;
 import dto.SportObjectSearchDTO;
 import enums.SportObjectType;
@@ -183,5 +182,10 @@ public class SportObjectDAO {
 		
 		changeContent.modify(dto);
 		return object;
+	}
+	
+	public void calculateAverageGrade(SportObject obj, AverageGradeDTO dto) {
+		obj.setAverageGrade(dto.getAverage());
+		saveSportObjects();
 	}
 }
