@@ -27,6 +27,7 @@ import dto.LoginReturnDTO;
 import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
 import dto.TrainerRegistrationDTO;
+import dto.UserAccountInformationDTO;
 
 @Path("/users")
 public class UserService {
@@ -135,6 +136,13 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User delete(@PathParam("id") String id) {
 		return getUserDAO().delete(id);
+	}
+	
+	@GET
+	@Path("/account_info")
+	@Produces(MediaType.APPLICATION_JSON)
+	public UserAccountInformationDTO getUserAccountInformation() {
+		return getUserDAO().getUserAccountInfromation();
 	}
 
 	

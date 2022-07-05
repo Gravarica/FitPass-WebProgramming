@@ -27,6 +27,7 @@ import dto.LoginReturnDTO;
 import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
 import dto.TrainerRegistrationDTO;
+import dto.UserAccountInformationDTO;
 import enums.CustomerTypeName;
 import enums.Role;
 import enums.TrainingType;
@@ -334,5 +335,9 @@ public class UserDAO {
 			}
 		}
 		return retList;
+	}
+
+	public UserAccountInformationDTO getUserAccountInfromation() {
+		return new UserAccountInformationDTO(getLoggedUser());
 	}
 }
