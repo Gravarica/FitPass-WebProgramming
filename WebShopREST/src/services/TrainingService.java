@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -39,11 +40,11 @@ public class TrainingService {
 	private UserDAO getUserDAO() {
 		return (UserDAO) ctx.getAttribute("userDAO");
 	}
-	
+
 	@GET
-	@Path("/customer/{username}")
+	@Path("/sport_object/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<TrainingHistory> getCustomerTrainings(@PathParam("username") String username){
-		return getUserDAO().getCustomerTrainingHistory(username);
+	public ArrayList<Training> getSportObjectTrainings(@PathParam("id") int id){
+		return getTrainingDAO().getSportObjectTrainings(id);
 	}
 }
