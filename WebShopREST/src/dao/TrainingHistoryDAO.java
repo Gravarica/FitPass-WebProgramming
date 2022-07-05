@@ -74,16 +74,16 @@ public class TrainingHistoryDAO {
 	public TrainingHistory cancelPersonalTraining(int id){
 		for(TrainingHistory  it : trainingHistories) {
 			if(it.getId() == id && it.getTraining().getType() == TrainingType.PERSONAL) {
-				it.setDeleted(true);
-				saveTrainingHistory();
+				executeCancel(it);
 			}
 		}
 		return null;
 	}
 	
-	//public void executeCancel(TrainingHistory t) {
-		//if(t.getCheckInDate())
-	//}
-	
-	
+	public void executeCancel(TrainingHistory t) {
+		if(t.getCheckInDate().isBefore(t.getCheckInDate().plusDays(2)) || t.getCheckInDate().isEqual(t.getCheckInDate().plusDays(2))) {
+			t.setDeleted(true);
+			saveTrainingHistory();
+		}
+	}
 }

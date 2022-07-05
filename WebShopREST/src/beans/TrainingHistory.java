@@ -1,10 +1,19 @@
 package beans;
 
+import java.time.LocalDate;
 import java.util.Date;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import src.util.LocalDateDeserializer;
+import src.util.LocalDateSerializer;
 
 public class TrainingHistory extends Entity {
 	
-	private Date checkInDate;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate checkInDate;
 	private Training training;
 	private User customer;
 	private User trainer;
@@ -13,7 +22,7 @@ public class TrainingHistory extends Entity {
 		super();
 	}
 	
-	public TrainingHistory(int id, Date checkInDate, Training training, User customer, User trainer) {
+	public TrainingHistory(int id, LocalDate checkInDate, Training training, User customer, User trainer) {
 		super(id);
 		this.checkInDate = checkInDate;
 		this.training = training;
@@ -21,11 +30,11 @@ public class TrainingHistory extends Entity {
 		this.trainer = trainer;
 	}
 
-	public Date getCheckInDate() {
+	public LocalDate getCheckInDate() {
 		return checkInDate;
 	}
 
-	public void setCheckInDate(Date checkInDate) {
+	public void setCheckInDate(LocalDate checkInDate) {
 		this.checkInDate = checkInDate;
 	}
 

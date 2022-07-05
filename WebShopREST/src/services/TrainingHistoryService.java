@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -75,4 +76,17 @@ public class TrainingHistoryService {
 	public ArrayList<TrainingHistory> getSportObjectTrainingHistory(@PathParam("id") int id){
 		return getTrainingHistoryDAO().getSportObjectTrainingHistory(id);
 	}
+
+	@DELETE
+	@Path("/cancel/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public TrainingHistory cancelPersonalTraining(@PathParam("id") int id) {
+		return getTrainingHistoryDAO().cancelPersonalTraining(id);
+	}
+
+
+
+
+
+
 }
