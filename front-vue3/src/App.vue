@@ -1,7 +1,6 @@
 <template>
     <Navigation @show-login="showLogin" @show-reg="showRegister" @logout="logout" v-bind="this.loggedUser"/>
     <router-view/>
-
   <div>
     <LoginPopup v-if="login" @close-login="closeLogin" @logged-in="captureLogIn"/> 
   </div>
@@ -14,6 +13,8 @@
 import Navigation from "./components/Navigation"
 import LoginPopup from "./components/LoginPopup.vue"
 import RegistrationPopup from "./components/RegistrationPopup.vue"
+import OpenLayersMap from 'vue3-openlayers'
+import 'vue3-openlayers/dist/vue3-openlayers.css'
 import axios from "axios";
 
 export default{
@@ -39,7 +40,8 @@ export default{
     components:{
     Navigation,
     LoginPopup,
-    RegistrationPopup
+    RegistrationPopup,
+    OpenLayersMap
     },
     
     methods:{
