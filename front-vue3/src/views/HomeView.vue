@@ -15,22 +15,22 @@
   <nav >
           <ul class="nav justify-content-center">
             <li class="nav-item">
-              <a class="link active" @click="filterByCity('Beograd')" href="#">Beograd</a>
+              <a id="bg" class="link active" @click="filterByCity('Beograd')" href="#">Beograd</a>
             </li>
             <li>
-              <a class="link" @click="filterByCity('Novi Sad')" href="#">Novi Sad</a>
+              <a id="ns" class="link" @click="filterByCity('Novi Sad')" href="#">Novi Sad</a>
             </li>
             <li class="nav-item">
-              <a class="link" @click="filterByCity('Nis')" href="#">Nis</a>
+              <a id="ni" class="link" @click="filterByCity('Nis')" href="#">Nis</a>
             </li>
             <li class="nav-item">
-              <a class="link" @click="filterByCity('Subotica')"  href="#">Subotica</a>
+              <a id="su" class="link" @click="filterByCity('Subotica')"  href="#">Subotica</a>
             </li>
             <li class="nav-item">
-              <a class="link" @click="filterByCity('Kragujevac')" href="#">Kragujevac</a>
+              <a id="kg" class="link" @click="filterByCity('Kragujevac')" href="#">Kragujevac</a>
             </li>
             <li class="nav-item">
-              <a class="link" @click="filterByCity('Cacak')" href="#">Cacak</a>
+              <a id="ca" class="link" @click="filterByCity('Cacak')" href="#">Cacak</a>
             </li>
           </ul>
         </nav>

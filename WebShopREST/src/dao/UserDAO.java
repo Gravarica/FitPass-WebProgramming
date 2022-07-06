@@ -161,7 +161,11 @@ public class UserDAO {
 	}
 	
 	public LoginReturnDTO login(LoginDTO dto) {
+		System.out.println("OVO JE PRIMLJENO U FUNKCIJI " + dto.getUsername() +" "+ dto.getPassword());
+		System.out.println("OVO JE HARD KODOVANO" + users.get("Corba"));
+		if(users == null) {System.out.println("USERI SU NULA");}
 		User user = users.get(dto.getUsername());
+		//System.out.println("PRONADJENI USER" + user.getUsername() + user.getPassword());
 		if (user == null || !user.passwordMatches(dto)) return new LoginReturnDTO(null, null, false);
 		loggedUser = user;
 		return new LoginReturnDTO(user.getUsername(), user.getRole(), true);

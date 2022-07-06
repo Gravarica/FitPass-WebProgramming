@@ -6,10 +6,15 @@
             </div>
 
         <ul v-show="!mobile" class="navigation">
-            <li><router-link class="link" :to="{name : 'Home'}">Home</router-link></li>
+            <!-- <li><router-link class="link" :to="{name : 'Home'}">Home</router-link></li>
             <li><router-link class="link" :to="{name : 'Objects'}">Objects</router-link></li>
             <li><router-link class="link" :to="{name : ''}">About</router-link></li>
-            <li><router-link class="link" :to="{name : ''}">Contact</router-link></li>
+            <li><router-link class="link" :to="{name : ''}">Contact</router-link></li> -->
+            <user-nav-bar-buttons v-if="loginType=='USER'"/>
+            <admin-nav-bar-buttons v-if="loginType=='ADMIN'"/>
+            <manager-nav-bar-buttons v-if="loginType=='MANAGER'"/>
+            <trainer-nav-bar-buttons v-if="loginType=='TRAINER'"/>
+            <customer-nav-bar-buttons v-if="loginType=='CUSTOMER'"/>
             <not-logged-buttons @show-login="showLogin" @show-reg="showRegister" :class="nav" v-if="!success"/>
             <logged-buttons @logout="logout" @myprofile="myprofile" :username="username" :role="role" v-if="success" :class="nav"/>
         </ul>
@@ -33,6 +38,11 @@
 import { booleanLiteral } from '@babel/types';
 import NotLoggedButtons from './NotLoggedButtons.vue';
 import LoggedButtons from './LoggedButtons.vue';
+import UserNavBarButtons from './UserNavBarButtons.vue';
+import AdminNavBarButtons from './AdminNavBarButtons.vue';
+import ManagerNavBarButtons from './ManagerNavBarButtons.vue';
+import TrainerNavBarButtons from './TrainerNavBarButtons.vue';
+import CustomerNavBarButtons from './CustomerNavBarButtons.vue';
 export default {
     name: "navigation",
     props: {
@@ -46,7 +56,8 @@ export default {
             mobile: null,
             mobileNav: null,
             windowWidth: null,
-            showModal: null
+            showModal: null,
+            loginType:"USER"
         };
     },
     created() {
@@ -57,6 +68,9 @@ export default {
         window.addEventListener("scroll", this.updateScroll);
     },
     methods: {
+        showRightNavBarButtons(type){
+            this.loginType = type;
+        },
         toggleMobileNav() {
             this.mobileNav = !this.mobileNav;
         },
@@ -86,7 +100,7 @@ export default {
             this.$emit('logout')
         }
     },
-    components: { NotLoggedButtons, LoggedButtons }
+    components: { NotLoggedButtons, LoggedButtons, UserNavBarButtons, AdminNavBarButtons, ManagerNavBarButtons, TrainerNavBarButtons, CustomerNavBarButtons }
 };
 </script>
 
