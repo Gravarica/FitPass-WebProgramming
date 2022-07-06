@@ -348,6 +348,7 @@ public class UserDAO {
 		 User customer = users.get(username);
 		 if(!checkCustomersObjectVisited(object.getId(),customer)) {
 			 customer.increaseObjectVisited(object);
+			 saveUsers();
 		 }
 	}
 	
@@ -368,6 +369,7 @@ public class UserDAO {
 	public void updateTrainingHistory(TrainingHistory t) {
 		 updateTrainerTrainingHistory(t);
 		 updateCustomerTrainingHistory(t);
+		 saveUsers();
 	}
 	
 	public void updateTrainerTrainingHistory(TrainingHistory t) {
