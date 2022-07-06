@@ -8,7 +8,7 @@
         <ul v-show="!mobile" class="navigation">
             <li><router-link class="link" :to="{name : 'Home'}">Home</router-link></li>
             <li><router-link class="link" :to="{name : 'Objects'}">Objects</router-link></li>
-            <li><router-link class="link" :to="{name : 'Register'}">About</router-link></li>
+            <li><router-link class="link" :to="{name : ''}">About</router-link></li>
             <li><router-link class="link" :to="{name : ''}">Contact</router-link></li>
             <not-logged-buttons @show-login="showLogin" @show-reg="showRegister" :class="nav" v-if="!success"/>
             <logged-buttons @logout="logout" @myprofile="myprofile" :username="username" :role="role" v-if="success" :class="nav"/>

@@ -1,5 +1,5 @@
 <template>
-<div class = "row">
+<div class = "row gradient-custom">
   <div class = "bg-primary text-white rounded something">
     <p class = "display-3">Trenirajte</p>
     <p class = "text">u najboljim teretanama, fitnes studijima</p>
@@ -9,34 +9,34 @@
     <button>Registruj se</button>
   </div>
   </div>
-<div class = "mini row">
-  <nav>
+<div class = "mini row gradient-custom">
+  <nav >
           <ul class="nav justify-content-center">
             <li class="nav-item">
-              <a class="link active" href="#">Beograd</a>
+              <a class="link active" @click="filterByCity('Beograd')" href="#">Beograd</a>
             </li>
             <li>
-              <a class="link" href="#">Novi Sad</a>
+              <a class="link" @click="filterByCity('Novi Sad')" href="#">Novi Sad</a>
             </li>
             <li class="nav-item">
-              <a class="link" href="#">Nis</a>
+              <a class="link" @click="filterByCity('Nis')" href="#">Nis</a>
             </li>
             <li class="nav-item">
-              <a class="link" href="#">Subotica</a>
+              <a class="link" @click="filterByCity('Subotica')"  href="#">Subotica</a>
             </li>
             <li class="nav-item">
-              <a class="link" href="#">Kragujevac</a>
+              <a class="link" @click="filterByCity('Kragujevac')" href="#">Kragujevac</a>
             </li>
             <li class="nav-item">
-              <a class="link" href="#">Cacak</a>
+              <a class="link" @click="filterByCity('Cacak')" href="#">Cacak</a>
             </li>
           </ul>
         </nav>
 </div>
 <div class = "wrapper-content">
-  <div class="containerz">
+  <div class="containerz gradient-custom">
     <div class="view-sm isCenter">
-        <SportObjects></SportObjects>
+        <SportObjects ref="sportObjects"></SportObjects>
     </div>
 
   </div>
@@ -52,11 +52,26 @@ export default {
   name: 'HomeView',
   components: {
     SportObjects
-}
+  },
+  methods:{
+    filterByCity(city){
+      this.$refs.sportObjects.filterByCity(city)
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+
+  .gradient-custom {
+/* fallback for old browsers */
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+background-color: #f7b42c;
+background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
   .view-sm {
   max-width: 100%;

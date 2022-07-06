@@ -153,6 +153,7 @@ import axios from 'axios'
 
 
 <style>
+
     .gradient-custom {
 /* fallback for old browsers */
 
