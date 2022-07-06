@@ -3,8 +3,8 @@
         <div class="row">
               <div class="col-md-8">
                     <form class="form-inline" action="#" method="post">
-                        <input type="text" id="search" name="search" class="input-small" placeholder="Search...">
-                        <select class="select" name="searchon">
+                        <input type="text" id="search" name="search" class="input-small putin" placeholder="Search...">
+                        <select class="selectz" name="searchon">
                             <option class="option" value="0">First Name</option>
                             <option value="1">Last Name</option>
                         </select>
@@ -28,17 +28,7 @@
                     </div>
                 </div>
                 <div class="col-xl-6">
-                    <h2>TITLE HEADING</h2>
-                    <h5>Title description, Dec 7, 2020</h5>
-                    <div class="fakeimg">Fake Image</div>
-                    <p>Some text..</p>
-                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-
-                    <h2 class="mt-5">TITLE HEADING</h2>
-                    <h5>Title description, Sep 2, 2020</h5>
-                    <div class="fakeimg">Fake Image</div>
-                    <p>Some text..</p>
-                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                    <Map></Map>
                 </div>
             </div>
         </div>
@@ -47,10 +37,12 @@
 
 <script>
 import SportObjectCard from "../components/SportObjectCard.vue";
+import Map from '../components/Map.vue';
 import axios from 'axios'
 export default{
     components:{
         SportObjectCard,
+        Map
     },
     inject: ['objects'],
     data(){
@@ -69,7 +61,7 @@ export default{
 </script>
 
 <style>
-    input[type=text] {
+ .putin {
     box-sizing: border-box;
     margin-top: 10px;
     margin-left: 10px;
@@ -79,7 +71,7 @@ export default{
     border-radius:10px;
   }
 
-.select{
+.selectz{
     margin-top: 10px;
     margin-left: 20px;
     box-sizing: border-box;

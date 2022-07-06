@@ -23,9 +23,9 @@
                             <p class="h5 font-weight-bold mb-2">Sadrzaj</p>
                             <ul class="list-unstyled d-flex justify-content-start align-items-center mb-0">
                                 <div style="display:flex" class="sadrzaj">
-                                    <li>Kita -</li>
-                                    <li>Picka -</li>
-                                    <li>Sisa</li>
+                                    <li>Yoga -</li>
+                                    <li>Gym -</li>
+                                    <li>Pool</li>
                                 </div>
                             </ul>
 
