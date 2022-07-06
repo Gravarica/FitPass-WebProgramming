@@ -21,10 +21,6 @@ export default{
         showLogin(){
             this.$emit('show-login')
         },
-    
-        showRegister(){
-            this.$emit('show-reg')
-        }
     }
 
 }

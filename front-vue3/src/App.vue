@@ -1,5 +1,5 @@
 <template>
-    <Navigation @show-login="showLogin" @show-reg="showRegister" @logout="logout" v-bind="this.loggedUser"/>
+    <Navigation @show-login="showLogin" @logout="logout" v-bind="this.loggedUser"/>
     <router-view/>
   <div>
     <LoginPopup v-if="login" @close-login="closeLogin" @logged-in="captureLogIn"/> 
@@ -22,7 +22,6 @@ export default{
     data(){
       return{
         login : false,
-        register : false,
         sportObjects: null,
         loggedUser: {
           username: '',
@@ -48,14 +47,8 @@ export default{
       showLogin(){
         this.login = true
       },
-      showRegister(){
-        this.register = true;
-      },
       closeLogin(){
         this.login = false
-      },
-      closeRegister(){
-        this.register = false
       },
       captureLogIn(loginData){
         this.loggedUser = loginData;

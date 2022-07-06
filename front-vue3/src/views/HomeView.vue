@@ -6,8 +6,10 @@
     <p class = "text">i sportskim centrima širom Srbije, sa samo</p>
     <p class = "text">jednom članarinom!</p>
     <p class = "display-6" style = "color:orangered">Već od 2.900 RSD.</p>
-    <button>Registruj se</button>
-  </div>
+    <router-link :to="{name : 'Register'}">
+      <button>Registruj se</button>
+    </router-link>
+    </div>
   </div>
 <div class = "mini row gradient-custom">
   <nav >
