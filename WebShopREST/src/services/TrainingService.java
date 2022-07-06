@@ -44,6 +44,13 @@ public class TrainingService {
 	}
 
 	@GET
+	@Path("/get")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Training> getAll(){
+		return getTrainingDAO().getAll();
+	}
+	
+	@GET
 	@Path("/sport_object/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Training> getSportObjectTrainings(@PathParam("id") int id){
