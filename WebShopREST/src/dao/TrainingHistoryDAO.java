@@ -97,6 +97,7 @@ public class TrainingHistoryDAO {
 	public TrainingHistory scheduleTraining(TrainingScheduleDTO dto) {
 		TrainingHistory newTraining =  new TrainingHistory(dto);
 		newTraining.setId(getMaxId());
+		trainingHistories.add(newTraining);
 		saveTrainingHistory();
 		return newTraining;
 	}

@@ -2,35 +2,32 @@ package dto;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import beans.SportObject;
 import beans.Training;
 import beans.User;
+import src.util.LocalDateDeserializer;
+import src.util.LocalDateSerializer;
 
 public class TrainingScheduleDTO {
 
-	private SportObject sportObject; //ovo fakticki nece ni trebati al ae
 	private User customer;
 	private Training training;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate checkInDate;
 	
 	public TrainingScheduleDTO() {}
 
-	public TrainingScheduleDTO(SportObject sportObject, Training training, LocalDate checkInDate,User customer) {
+	public TrainingScheduleDTO(Training training, LocalDate checkInDate,User customer) {
 		super();
-		this.sportObject = sportObject;
 		this.customer = customer;
 		this.training = training;
 		this.checkInDate = checkInDate;
 	}
-
-	public SportObject getSportObject() {
-		return sportObject;
-	}
-
-	public void setSportObject(SportObject sportObject) {
-		this.sportObject = sportObject;
-	}
-
+	
 	public Training getTraining() {
 		return training;
 	}
