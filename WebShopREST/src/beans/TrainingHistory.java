@@ -31,6 +31,7 @@ public class TrainingHistory extends Entity {
 		this.trainer = trainer;
 	}
 
+	//Konstruktor za prijavljivanje na trening
 	public TrainingHistory(TrainingScheduleDTO dto) {
 		this.checkInDate = dto.getCheckInDate();
 		this.training = dto.getTraining();
