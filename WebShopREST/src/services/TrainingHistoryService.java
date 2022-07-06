@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
+import dao.SubscriptionDAO;
 import dao.TrainingHistoryDAO;
 import dao.UserDAO;
 import dto.TrainingScheduleDTO;
@@ -42,6 +43,10 @@ public class TrainingHistoryService {
 	
 	private UserDAO getUserDAO() {
 		return (UserDAO) ctx.getAttribute("userDAO");
+	}
+	
+	private SubscriptionDAO getSubscriptionDAO() {
+		return (SubscriptionDAO) ctx.getAttribute("subscriptionDAO");
 	}
 
 	@GET
@@ -99,9 +104,14 @@ public class TrainingHistoryService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public TrainingHistory scheduleTraining(TrainingScheduleDTO dto) {
 		dto.setCustomer(getUserDAO().getLoggedUser());
+		if(!getSubscriptionDAO().getByUser(dto.getCustomer().getUsername()).isActive()) {
+			return null;
+		}
+		
 		TrainingHistory newTraining = getTrainingHistoryDAO().scheduleTraining(dto);
 		getUserDAO().increaseObjectVisited(newTraining.getCustomer().getUsername(),newTraining.getTraining().getObject());
 		getUserDAO().updateTrainingHistory(newTraining);
+		getSubscriptionDAO().increaseTrainingCounter(getSubscriptionDAO().getByUser(dto.getCustomer().getUsername()).getId());
 		return newTraining;
 	}
 }

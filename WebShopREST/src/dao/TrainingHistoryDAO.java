@@ -101,4 +101,23 @@ public class TrainingHistoryDAO {
 		saveTrainingHistory();
 		return newTraining;
 	}
+
+	//Pretrazivanje treninga u odnosu na sportski objekat
+	public ArrayList<TrainingHistory> searchBySportObject(int id){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : trainingHistories) {
+			if(it.getTraining().getObject().getId() == id) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+
+
+
+
+
+
+
+
 }

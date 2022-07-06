@@ -82,10 +82,6 @@ import axios from 'axios';
         align-items: center;
         justify-content: center;
 
-        // .popup-inner{
-        //     background-color: white;
-        //     padding: 32px;
-        // }
     }
 
 .flex-container {
