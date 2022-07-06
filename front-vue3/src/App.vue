@@ -1,10 +1,6 @@
 <template>
-  <div class="container-flex">
     <Navigation @show-login="showLogin" @show-reg="showRegister" @logout="logout" v-bind="this.loggedUser"/>
-    <div class = "row mt-0">
-      <router-view/>
-    </div>
-  </div>
+    <router-view/>
 
   <div>
     <LoginPopup v-if="login" @close-login="closeLogin" @logged-in="captureLogIn"/> 
@@ -26,6 +22,7 @@ export default{
       return{
         login : false,
         register : false,
+        sportObjects: null,
         loggedUser: {
           username: '',
           role: '',
@@ -33,7 +30,12 @@ export default{
         },
       }
     },
-    
+    provide() {
+        return{
+          objects: this.sportObjects
+        }
+    },
+
     components:{
     Navigation,
     LoginPopup,
@@ -63,13 +65,6 @@ export default{
             this.loggedUser = null;  
           })
       }
-    },
-    mounted(){
-      axios
-        .get('http://localhost:8081/WebShopREST/rest/users/currentUser')
-        .then((response) => {
-          this.loggedUser = response.data
-        })
     }
 }
 </script>
