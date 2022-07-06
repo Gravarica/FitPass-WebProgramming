@@ -6,6 +6,7 @@ import java.util.Date;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import dto.TrainingScheduleDTO;
 import src.util.LocalDateDeserializer;
 import src.util.LocalDateSerializer;
 
@@ -30,6 +31,13 @@ public class TrainingHistory extends Entity {
 		this.trainer = trainer;
 	}
 
+	public TrainingHistory(TrainingScheduleDTO dto) {
+		this.checkInDate = dto.getCheckInDate();
+		this.training = dto.getTraining();
+		this.customer = dto.getCustomer();
+		this.trainer = dto.getTraining().getTrainer();
+	}
+	
 	public LocalDate getCheckInDate() {
 		return checkInDate;
 	}

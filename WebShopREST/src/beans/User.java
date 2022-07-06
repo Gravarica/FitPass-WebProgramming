@@ -223,4 +223,26 @@ public class User extends Entity {
 		return trainingHistory.size();
 	}
 	
+	public void increaseObjectVisited(SportObject object) {
+		if(this.objectsVisited == null) {
+			this.objectsVisited = new ArrayList<SportObject>();
+			this.objectsVisited.add(object);
+			return;
+		}
+		
+		this.objectsVisited.add(object);
+		return;
+	}
+
+	public void updateTrainingHistory(TrainingHistory t) {
+		if(this.trainingHistory == null) {
+			this.trainingHistory = new ArrayList<TrainingHistory>();
+			this.trainingHistory.add(t);
+			return;
+		}
+	
+		this.trainingHistory.add(t);
+		return;
+	}
+
 }

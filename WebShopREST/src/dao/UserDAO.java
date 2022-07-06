@@ -344,4 +344,24 @@ public class UserDAO {
 		return users.get(username);
 	}
 
+  public void increaseObjectVisited(String username,SportObject object) {
+	  User customer = users.get(username);
+	  customer.increaseObjectVisited(object);
+	  return;
+  }
+
+  public void updateTrainingHistory(TrainingHistory t) {
+	  updateTrainerTrainingHistory(t);
+	  updateCustomerTrainingHistory(t);
+  }
+
+  public void updateTrainerTrainingHistory(TrainingHistory t) {
+	  User trainer = users.get(t.getTrainer().getUsername());
+	  trainer.updateTrainingHistory(t);
+  }
+  
+  public void updateCustomerTrainingHistory(TrainingHistory t) {
+	  User customer = users.get(t.getBuyer().getUsername());
+	  customer.updateTrainingHistory(t);
+  }
 }

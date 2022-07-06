@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Training;
 import beans.TrainingHistory;
+import dto.TrainingScheduleDTO;
 import enums.TrainingType;
 
 public class TrainingHistoryDAO {
@@ -75,6 +76,7 @@ public class TrainingHistoryDAO {
 		for(TrainingHistory  it : trainingHistories) {
 			if(it.getId() == id && it.getTraining().getType() == TrainingType.PERSONAL) {
 				executeCancel(it);
+				return it;
 			}
 		}
 		return null;
@@ -85,5 +87,13 @@ public class TrainingHistoryDAO {
 			t.setDeleted(true);
 			saveTrainingHistory();
 		}
+	}
+
+	//Prijava na trening
+	public TrainingHistory scheduleTraining(TrainingScheduleDTO dto) {
+		TrainingHistory newTraining =  new TrainingHistory(dto);
+		newTraining.setId(getMaxId());
+		saveTrainingHistory();
+		return newTraining;
 	}
 }

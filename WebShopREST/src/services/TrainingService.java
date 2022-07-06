@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -16,6 +17,7 @@ import beans.Training;
 import beans.TrainingHistory;
 import dao.TrainingDAO;
 import dao.UserDAO;
+import dto.TrainingScheduleDTO;
 
 @Path("/trainings")
 public class TrainingService {	
@@ -47,4 +49,8 @@ public class TrainingService {
 	public ArrayList<Training> getSportObjectTrainings(@PathParam("id") int id){
 		return getTrainingDAO().getSportObjectTrainings(id);
 	}
+
+	
+
+
 }

@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -14,8 +15,10 @@ import javax.ws.rs.core.MediaType;
 
 import beans.Training;
 import beans.TrainingHistory;
+import beans.User;
 import dao.TrainingHistoryDAO;
 import dao.UserDAO;
+import dto.TrainingScheduleDTO;
 
 @Path("/training_histories")
 public class TrainingHistoryService {
@@ -84,9 +87,14 @@ public class TrainingHistoryService {
 		return getTrainingHistoryDAO().cancelPersonalTraining(id);
 	}
 
-
-
-
-
-
+	@POST
+	@Path("/schedule")
+	@Produces(MediaType.APPLICATION_JSON)
+	public TrainingHistory scheduleTraining(TrainingScheduleDTO dto) {
+		dto.setCustomer(getUserDAO().getLoggedUser());
+		TrainingHistory newTraining = getTrainingHistoryDAO().scheduleTraining(dto);
+		getUserDAO().increaseObjectVisited(newTraining.getBuyer().getUsername(),newTraining.getTraining().getObject());
+		getUserDAO().updateTrainingHistory(newTraining);
+		return newTraining;
+	}
 }

@@ -11,6 +11,7 @@ import beans.SportObject;
 import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
+import dto.TrainingScheduleDTO;
 
 public class TrainingDAO {
 	
@@ -75,5 +76,4 @@ public class TrainingDAO {
 		t.setTrainer(trener);
 		saveTraining();
 	}
-	
 }
