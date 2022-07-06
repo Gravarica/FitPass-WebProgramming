@@ -1,0 +1,122 @@
+[
+	{
+		"id" : "1",
+		"deleted" : false,
+		"name" : "Bicepsomanija",
+		"type" : "PERSONAL",
+		"object" : {
+			"id" : "1",
+			"deleted" : false,
+			"name" : "Ozzy",
+			"averageGrade" : 7.64,
+			"sportObjectType" : "GYM",
+			"location" : {
+				"address" : {
+					"street" : "Jovana Ducica",
+					"number" : "12a",
+					"city" : "Novi Sad",
+					"postalNumber" : "21000"
+				},
+			"longitude" : 24.42,
+			"latitude" : 12.23
+			}
+		},
+	
+		"duration" : "45.0",
+		"description" : "OVDE SE LUDUJE BICEPSIMA",
+		"trainer" : {
+			"id" : 2,
+			"deleted" : false,
+			"username" : "cica",
+			"password" : "-286773544",
+			"firstName" : "Andrija",
+			"lastName" : "Stanisic",
+			"gender" : "FEMALE",
+			"role" : "TRAINER",
+			"dateOfBirth" : "2000-07-25",
+			"customerType" : null,
+			"object" : null,
+			"totalPoints" : -1
+		}
+	},
+	{
+		"id" : "2",
+		"deleted" : false,
+		"name" : "Tricepsomanija",
+		"type" : "PERSONAL",
+		"object" : {
+			"id" : "1",
+			"deleted" : false,
+			"name" : "Ozzy",
+			"averageGrade" : 7.64,
+			"sportObjectType" : "GYM",
+			"location" : {
+				"address" : {
+					"street" : "Jovana Ducica",
+					"number" : "12a",
+					"city" : "Novi Sad",
+					"postalNumber" : "21000"
+				},
+			"longitude" : 24.42,
+			"latitude" : 12.23
+			}
+		},
+	
+		"duration" : "45.0",
+		"description" : "OVDE SE LUDUJE TRICEPSIMA",
+		"trainer" : {
+			"id" : 2,
+			"deleted" : false,
+			"username" : "cica",
+			"password" : "-286773544",
+			"firstName" : "Andrija",
+			"lastName" : "Stanisic",
+			"gender" : "FEMALE",
+			"role" : "TRAINER",
+			"dateOfBirth" : "2000-07-25",
+			"customerType" : null,
+			"object" : null,
+			"totalPoints" : -1
+		}
+	},
+	{
+		"id" : "3",
+		"deleted" : false,
+		"name" : "Nogomanija",
+		"type" : "GROUP",
+		"object" : {
+			"id" : "1",
+			"deleted" : false,
+			"name" : "Ozzy",
+			"averageGrade" : 7.64,
+			"sportObjectType" : "GYM",
+			"location" : {
+				"address" : {
+					"street" : "Jovana Ducica",
+					"number" : "12a",
+					"city" : "Novi Sad",
+					"postalNumber" : "21000"
+				},
+			"longitude" : 24.42,
+			"latitude" : 12.23
+			}
+		},
+	
+		"duration" : "45.0",
+		"description" : "OVDE SE LUDUJE NOGAMA",
+		"trainer" : {
+			"id" : 2,
+			"deleted" : false,
+			"username" : "cica",
+			"password" : "-286773544",
+			"firstName" : "Andrija",
+			"lastName" : "Stanisic",
+			"gender" : "FEMALE",
+			"role" : "TRAINER",
+			"dateOfBirth" : "2000-07-25",
+			"customerType" : null,
+			"object" : null,
+			"totalPoints" : -1
+		}
+	}
+]

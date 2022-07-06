@@ -338,10 +338,47 @@ public class UserDAO {
 
 	public UserAccountInformationDTO getUserAccountInfromation() {
 		return new UserAccountInformationDTO(getLoggedUser());
-  }
-	
-  public User getByUsername(String username) {
+	}
+		
+	public User getByUsername(String username) {
 		return users.get(username);
 	}
-
+	
+	public void increaseObjectVisited(String username,SportObject object) {
+		 User customer = users.get(username);
+		 if(!checkCustomersObjectVisited(object.getId(),customer)) {
+			 customer.increaseObjectVisited(object);
+			 saveUsers();
+		 }
+	}
+	
+	public boolean checkCustomersObjectVisited(int id,User customer) {
+		if(customer.getObjectsVisited() == null) {
+			return false;
+		}		
+	
+		for(SportObject it : customer.getObjectsVisited()) {
+			if(it.getId() == id) {
+				return true;
+			}
+		}
+	
+		return false;
+	}
+	
+	public void updateTrainingHistory(TrainingHistory t) {
+		 updateTrainerTrainingHistory(t);
+		 updateCustomerTrainingHistory(t);
+		 saveUsers();
+	}
+	
+	public void updateTrainerTrainingHistory(TrainingHistory t) {
+		 User trainer = users.get(t.getTrainer().getUsername());
+		 trainer.updateTrainingHistory(t);
+	}
+	  
+	public void updateCustomerTrainingHistory(TrainingHistory t) {
+		 User customer = users.get(t.getCustomer().getUsername());
+		 customer.updateTrainingHistory(t);
+	}
 }

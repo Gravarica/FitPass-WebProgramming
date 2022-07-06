@@ -11,6 +11,7 @@ import beans.SportObject;
 import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
+import dto.TrainingScheduleDTO;
 
 public class TrainingDAO {
 	
@@ -21,7 +22,7 @@ public class TrainingDAO {
 	public TrainingDAO() {}
 	
 	public TrainingDAO(String contextPath) {
-		file = new File(contextPath + "/Resources/Data/training.json");
+		file = new File(contextPath + "/Resources/Data/trainings.json");
 		loadTrainings(contextPath);
 	}
 	
@@ -62,6 +63,10 @@ public class TrainingDAO {
 		return ++maxId;
 	}	
 
+	public ArrayList<Training> getAll(){
+		return trainings;
+	}
+	
 	public ArrayList<Training> getSportObjectTrainings(int id){
 		ArrayList<Training> retList = new ArrayList<Training>();
 		for(Training it : trainings) {
@@ -75,5 +80,4 @@ public class TrainingDAO {
 		t.setTrainer(trener);
 		saveTraining();
 	}
-	
 }

@@ -1,0 +1,307 @@
+[
+	{
+		"id" : "1",
+		"deleted" : false,
+		"checkInDate" : "2000-03-11",
+		"training" : {
+			"id" : "1",
+			"deleted" : false,
+			"name" : "Bicepsomanija",
+			"type" : "PERSONAL",
+			"object" : {
+				"id" : "1",
+				"deleted" : false,
+				"name" : "Ozzy",
+				"averageGrade" : 7.64,
+				"sportObjectType" : "GYM",
+				"location" : {
+					"address" : {
+						"street" : "Jovana Ducica",
+						"number" : "12a",
+						"city" : "Novi Sad",
+						"postalNumber" : "21000"
+					},
+				"longitude" : 24.42,
+				"latitude" : 12.23
+				}
+			},
+	
+			"duration" : "45.0",
+			"description" : "OVDE SE LUDUJE BICEPSIMA",
+			"trainer" : {
+				"id" : 2,
+				"deleted" : false,
+				"username" : "cica",
+				"password" : "-286773544",
+				"firstName" : "Andrija",
+				"lastName" : "Stanisic",
+				"gender" : "FEMALE",
+				"role" : "TRAINER",
+				"dateOfBirth" : "2000-07-25",
+				"customerType" : null,
+				"object" : null,
+				"totalPoints" : -1
+			}
+			
+		},
+		
+		"customer" : {
+			"id" : 3,
+			"deleted" : false,
+			"username" : "Singleton420",
+			"password" : "-286773544",
+			"firstName" : "Ilija",
+			"lastName" : "Galin",
+			"gender" : "MALE",
+			"role" : "CUSTOMER",
+			"dateOfBirth" : "2000-01-01",
+			"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+			"object" : null,
+			"totalPoints" : 40
+		},
+		
+		"trainer" : {
+			"id" : 2,
+			"deleted" : false,
+			"username" : "cica",
+			"password" : "-286773544",
+			"firstName" : "Andrija",
+			"lastName" : "Stanisic",
+			"gender" : "FEMALE",
+			"role" : "TRAINER",
+			"dateOfBirth" : "2000-07-25",
+			"customerType" : null,
+			"object" : null,
+			"totalPoints" : -1
+		}
+	},
+	{
+		"id" : "2",
+		"deleted" : false,
+		"checkInDate" : "2015-11-05",
+		"training" : {
+			"id" : "2",
+			"deleted" : false,
+			"name" : "Tricepsomanija",
+			"type" : "PERSONAL",
+			"object" : {
+				"id" : "1",
+				"deleted" : false,
+				"name" : "Ozzy",
+				"averageGrade" : 7.64,
+				"sportObjectType" : "GYM",
+				"location" : {
+					"address" : {
+						"street" : "Jovana Ducica",
+						"number" : "12a",
+						"city" : "Novi Sad",
+						"postalNumber" : "21000"
+					},
+				"longitude" : 24.42,
+				"latitude" : 12.23
+				}
+			},
+		
+			"duration" : "45.0",
+			"description" : "OVDE SE LUDUJE TRICEPSIMA",
+			"trainer" : {
+				"id" : 2,
+				"deleted" : false,
+				"username" : "cica",
+				"password" : "-286773544",
+				"firstName" : "Andrija",
+				"lastName" : "Stanisic",
+				"gender" : "FEMALE",
+				"role" : "TRAINER",
+				"dateOfBirth" : "2000-07-25",
+				"customerType" : null,
+				"object" : null,
+				"totalPoints" : -1
+			}
+		},
+		
+		"customer" : {
+			"id" : 5,
+			"deleted" : false,
+			"username" : "Corba",
+			"password" : "-286773544",
+			"firstName" : "Mihajlo",
+			"lastName" : "Torbica",
+			"gender" : "MALE",
+			"role" : "CUSTOMER",
+			"dateOfBirth" : "2000-05-03",
+			"customerType" : { "name" : "SILVER", "discount" : 3.0, "pointsRequired" : 500},
+			"object" : null,
+			"totalPoints" : 220
+		},
+		
+		"trainer" : {
+			"id" : 2,
+			"deleted" : false,
+			"username" : "cica",
+			"password" : "-286773544",
+			"firstName" : "Andrija",
+			"lastName" : "Stanisic",
+			"gender" : "FEMALE",
+			"role" : "TRAINER",
+			"dateOfBirth" : "2000-07-25",
+			"customerType" : null,
+			"object" : null,
+			"totalPoints" : -1
+		}
+	
+	},
+	{
+		"id" : "3",
+		"deleted" : false,
+		"checkInDate" : "2020-03-15",
+		"training" : {
+			"id" : "3",
+			"deleted" : false,
+			"name" : "Nogomanija",
+			"type" : "GROUP",
+			"object" : {
+				"id" : "1",
+				"deleted" : false,
+				"name" : "Ozzy",
+				"averageGrade" : 7.64,
+				"sportObjectType" : "GYM",
+				"location" : {
+					"address" : {
+						"street" : "Jovana Ducica",
+						"number" : "12a",
+						"city" : "Novi Sad",
+						"postalNumber" : "21000"
+					},
+				"longitude" : 24.42,
+				"latitude" : 12.23
+				}
+			},
+		
+			"duration" : "45.0",
+			"description" : "OVDE SE LUDUJE NOGAMA",
+			"trainer" : {
+				"id" : 2,
+				"deleted" : false,
+				"username" : "cica",
+				"password" : "-286773544",
+				"firstName" : "Andrija",
+				"lastName" : "Stanisic",
+				"gender" : "FEMALE",
+				"role" : "TRAINER",
+				"dateOfBirth" : "2000-07-25",
+				"customerType" : null,
+				"object" : null,
+				"totalPoints" : -1
+			}
+		},
+		
+		"customer" : {
+			"id" : 5,
+			"deleted" : false,
+			"username" : "Corba",
+			"password" : "-286773544",
+			"firstName" : "Mihajlo",
+			"lastName" : "Torbica",
+			"gender" : "MALE",
+			"role" : "CUSTOMER",
+			"dateOfBirth" : "2000-05-03",
+			"customerType" : { "name" : "SILVER", "discount" : 3.0, "pointsRequired" : 500},
+			"object" : null,
+			"totalPoints" : 220
+		},
+		
+		"trainer" : {
+			"id" : 2,
+			"deleted" : false,
+			"username" : "cica",
+			"password" : "-286773544",
+			"firstName" : "Andrija",
+			"lastName" : "Stanisic",
+			"gender" : "FEMALE",
+			"role" : "TRAINER",
+			"dateOfBirth" : "2000-07-25",
+			"customerType" : null,
+			"object" : null,
+			"totalPoints" : -1
+		}
+	
+	},
+	{
+		"id" : "4",
+		"deleted" : false,
+		"checkInDate" : "2022-07-10",
+		"training" : {
+			"id" : "3",
+			"deleted" : false,
+			"name" : "Nogomanija",
+			"type" : "GROUP",
+			"object" : {
+				"id" : "1",
+				"deleted" : false,
+				"name" : "Ozzy",
+				"averageGrade" : 7.64,
+				"sportObjectType" : "GYM",
+				"location" : {
+					"address" : {
+						"street" : "Jovana Ducica",
+						"number" : "12a",
+						"city" : "Novi Sad",
+						"postalNumber" : "21000"
+					},
+				"longitude" : 24.42,
+				"latitude" : 12.23
+				}
+			},
+		
+			"duration" : "45.0",
+			"description" : "OVDE SE LUDUJE NOGAMA",
+			"trainer" : {
+				"id" : 2,
+				"deleted" : false,
+				"username" : "cica",
+				"password" : "-286773544",
+				"firstName" : "Andrija",
+				"lastName" : "Stanisic",
+				"gender" : "FEMALE",
+				"role" : "TRAINER",
+				"dateOfBirth" : "2000-07-25",
+				"customerType" : null,
+				"object" : null,
+				"totalPoints" : -1
+			}
+		},
+		
+		"customer" : {
+			"id" : 5,
+			"deleted" : false,
+			"username" : "Corba",
+			"password" : "-286773544",
+			"firstName" : "Mihajlo",
+			"lastName" : "Torbica",
+			"gender" : "MALE",
+			"role" : "CUSTOMER",
+			"dateOfBirth" : "2000-05-03",
+			"customerType" : { "name" : "SILVER", "discount" : 3.0, "pointsRequired" : 500},
+			"object" : null,
+			"totalPoints" : 220
+		},
+		
+		"trainer" : {
+			"id" : 2,
+			"deleted" : false,
+			"username" : "cica",
+			"password" : "-286773544",
+			"firstName" : "Andrija",
+			"lastName" : "Stanisic",
+			"gender" : "FEMALE",
+			"role" : "TRAINER",
+			"dateOfBirth" : "2000-07-25",
+			"customerType" : null,
+			"object" : null,
+			"totalPoints" : -1
+		}
+	
+	}
+
+]

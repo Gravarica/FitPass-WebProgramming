@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Training;
 import beans.TrainingHistory;
+import dto.TrainingScheduleDTO;
 import enums.TrainingType;
 
 public class TrainingHistoryDAO {
@@ -19,7 +20,7 @@ public class TrainingHistoryDAO {
 	public TrainingHistoryDAO() {}
 
 	public TrainingHistoryDAO(String contextPath) {
-		file = new File(contextPath + "/Resources/Data/training_history.json");
+		file = new File(contextPath + "/Resources/Data/training_histories.json");
 		loadTrainingHistories(contextPath);
 	}
 
@@ -59,6 +60,10 @@ public class TrainingHistoryDAO {
 		return ++maxId;
 	}
 	
+	public ArrayList<TrainingHistory> getAll(){
+		return trainingHistories;
+	}
+	
 	//Svi treninzi sportskog objekta
 	public ArrayList<TrainingHistory> getSportObjectTrainingHistory(int id){
 		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
@@ -74,16 +79,26 @@ public class TrainingHistoryDAO {
 	public TrainingHistory cancelPersonalTraining(int id){
 		for(TrainingHistory  it : trainingHistories) {
 			if(it.getId() == id && it.getTraining().getType() == TrainingType.PERSONAL) {
-				it.setDeleted(true);
-				saveTrainingHistory();
+				executeCancel(it);
+				return it;
 			}
 		}
 		return null;
 	}
 	
-	//public void executeCancel(TrainingHistory t) {
-		//if(t.getCheckInDate())
-	//}
-	
-	
+	public void executeCancel(TrainingHistory t) {
+		if(t.getCheckInDate().isBefore(t.getCheckInDate().plusDays(2)) || t.getCheckInDate().isEqual(t.getCheckInDate().plusDays(2))) {
+			t.setDeleted(true);
+			saveTrainingHistory();
+		}
+	}
+
+	//Prijava na trening
+	public TrainingHistory scheduleTraining(TrainingScheduleDTO dto) {
+		TrainingHistory newTraining =  new TrainingHistory(dto);
+		newTraining.setId(getMaxId());
+		trainingHistories.add(newTraining);
+		saveTrainingHistory();
+		return newTraining;
+	}
 }
