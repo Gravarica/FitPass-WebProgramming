@@ -25,8 +25,11 @@ import dto.LoginDTO;
 import dto.LoginReturnDTO;
 import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
+import dto.TrainerRegistrationDTO;
+import dto.UserAccountInformationDTO;
 import enums.CustomerTypeName;
 import enums.Role;
+import enums.TrainingType;
 import src.util.BusinessUtil;
 
 /***
@@ -223,6 +226,7 @@ public class UserDAO {
 		return retList;
 	}
 	
+	//Register MANAGER
 	public User registerManager(ManagerRegistrationDTO dto, SportObject object) {
 		if (users.containsKey(dto.getUsername())) {
 			return null;
@@ -234,6 +238,21 @@ public class UserDAO {
 		saveUsers();
 		
 		return manager;
+	}
+	
+	//Register Trainer
+	public User registerTrainer(TrainerRegistrationDTO dto) {
+		if(users.containsKey(dto.getUsername())) {
+			return null;
+		}
+	
+		User newTrainer = new User(dto);
+		newTrainer.setPassword(BusinessUtil.hashPassword(newTrainer.getPassword()));
+		newTrainer.setId(getMaxId());
+		users.put(newTrainer.getUsername(), newTrainer);
+		saveUsers();
+				
+		return newTrainer;
 	}
 	
 	public User setSportObject(SportObject object, String username) {
@@ -256,6 +275,7 @@ public class UserDAO {
 		return null;
 	}
 	
+	//Svi treninzi kupca
 	public ArrayList<TrainingHistory> getCustomerTrainingHistory(String username){
 		for(User it : users.values()) {
 			if(it.getUsername().equals(username)) {
@@ -264,8 +284,101 @@ public class UserDAO {
 		}
 		return null;
 	}
+  
+	//Metoda koja vraca treninge kupca na mesecnom nivou
+	public ArrayList<TrainingHistory> getCustomerMonthlyTrainingHistory(String username){
+		for(User it : users.values()) {
+			if(it.getUsername().equals(username)) {
+				return FilterTrainingHistory(it.getTrainingHistory());
+			}
+		}
+		return null;
+	}
 	
+	//Metoda koja vrsi tu filtraciju na mesecnom nivou
+	public ArrayList<TrainingHistory> FilterTrainingHistory(ArrayList<TrainingHistory> trainings){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : trainings) {
+			//ubaciti logiku za datum !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		}
+		return retList;
+	}
+
+	//Metoda koja vraca treninge trenera 
+	public ArrayList<TrainingHistory> getTrainerTrainingHistory(String username){
+		for(User it : users.values()) {
+			if(it.getUsername().equals(username)) {
+				return it.getTrainingHistory();
+			}
+		}
+		return null;
+	}
+	
+	//Vraca sve personalne treninge trenera
+	public ArrayList<TrainingHistory> getTrainerPersonalTrainings(String username){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : getTrainerTrainingHistory(username)) {
+			if(it.getTraining().getType() == TrainingType.PERSONAL) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+
+	//Vraca sve grupne treninge trenera
+	public ArrayList<TrainingHistory> getTrainerGroupTrainings(String username){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : getTrainerTrainingHistory(username)) {
+			if(it.getTraining().getType() == TrainingType.GROUP) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+
+	public UserAccountInformationDTO getUserAccountInfromation() {
+		return new UserAccountInformationDTO(getLoggedUser());
+	}
+		
 	public User getByUsername(String username) {
 		return users.get(username);
+	}
+	
+	public void increaseObjectVisited(String username,SportObject object) {
+		 User customer = users.get(username);
+		 if(!checkCustomersObjectVisited(object.getId(),customer)) {
+			 customer.increaseObjectVisited(object);
+			 saveUsers();
+		 }
+	}
+	
+	public boolean checkCustomersObjectVisited(int id,User customer) {
+		if(customer.getObjectsVisited() == null) {
+			return false;
+		}		
+	
+		for(SportObject it : customer.getObjectsVisited()) {
+			if(it.getId() == id) {
+				return true;
+			}
+		}
+	
+		return false;
+	}
+	
+	public void updateTrainingHistory(TrainingHistory t) {
+		 updateTrainerTrainingHistory(t);
+		 updateCustomerTrainingHistory(t);
+		 saveUsers();
+	}
+	
+	public void updateTrainerTrainingHistory(TrainingHistory t) {
+		 User trainer = users.get(t.getTrainer().getUsername());
+		 trainer.updateTrainingHistory(t);
+	}
+	  
+	public void updateCustomerTrainingHistory(TrainingHistory t) {
+		 User customer = users.get(t.getCustomer().getUsername());
+		 customer.updateTrainingHistory(t);
 	}
 }

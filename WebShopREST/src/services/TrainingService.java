@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -15,6 +17,7 @@ import beans.Training;
 import beans.TrainingHistory;
 import dao.TrainingDAO;
 import dao.UserDAO;
+import dto.TrainingScheduleDTO;
 
 @Path("/trainings")
 public class TrainingService {	
@@ -39,11 +42,22 @@ public class TrainingService {
 	private UserDAO getUserDAO() {
 		return (UserDAO) ctx.getAttribute("userDAO");
 	}
+
+	@GET
+	@Path("/get")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Training> getAll(){
+		return getTrainingDAO().getAll();
+	}
 	
 	@GET
-	@Path("/customer/{username}")
+	@Path("/sport_object/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<TrainingHistory> getCustomerTrainings(@PathParam("username") String username){
-		return getUserDAO().getCustomerTrainingHistory(username);
+	public ArrayList<Training> getSportObjectTrainings(@PathParam("id") int id){
+		return getTrainingDAO().getSportObjectTrainings(id);
 	}
+
+	
+
+
 }

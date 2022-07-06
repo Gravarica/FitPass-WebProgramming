@@ -1,10 +1,20 @@
 package beans;
 
+import java.time.LocalDate;
 import java.util.Date;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import dto.TrainingScheduleDTO;
+import src.util.LocalDateDeserializer;
+import src.util.LocalDateSerializer;
 
 public class TrainingHistory extends Entity {
 	
-	private Date checkInDate;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate checkInDate;
 	private Training training;
 	private User customer;
 	private User trainer;
@@ -13,7 +23,7 @@ public class TrainingHistory extends Entity {
 		super();
 	}
 	
-	public TrainingHistory(int id, Date checkInDate, Training training, User customer, User trainer) {
+	public TrainingHistory(int id, LocalDate checkInDate, Training training, User customer, User trainer) {
 		super(id);
 		this.checkInDate = checkInDate;
 		this.training = training;
@@ -21,11 +31,19 @@ public class TrainingHistory extends Entity {
 		this.trainer = trainer;
 	}
 
-	public Date getCheckInDate() {
+	//Konstruktor za prijavljivanje na trening
+	public TrainingHistory(TrainingScheduleDTO dto) {
+		this.checkInDate = dto.getCheckInDate();
+		this.training = dto.getTraining();
+		this.customer = dto.getCustomer();
+		this.trainer = dto.getTraining().getTrainer();
+	}
+	
+	public LocalDate getCheckInDate() {
 		return checkInDate;
 	}
 
-	public void setCheckInDate(Date checkInDate) {
+	public void setCheckInDate(LocalDate checkInDate) {
 		this.checkInDate = checkInDate;
 	}
 
@@ -37,11 +55,11 @@ public class TrainingHistory extends Entity {
 		this.training = training;
 	}
 
-	public User getBuyer() {
+	public User getCustomer() {
 		return customer;
 	}
 
-	public void setBuyer(User customer) {
+	public void setCustomer(User customer) {
 		this.customer = customer;
 	}
 

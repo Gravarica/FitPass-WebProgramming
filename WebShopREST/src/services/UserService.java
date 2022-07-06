@@ -19,11 +19,14 @@ import javax.ws.rs.core.MediaType;
 import beans.SportObject;
 import beans.User;
 import dao.SportObjectDAO;
+import dao.TrainingDAO;
 import dao.UserDAO;
 import dto.LoginDTO;
 import dto.LoginReturnDTO;
 import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
+import dto.TrainerRegistrationDTO;
+import dto.UserAccountInformationDTO;
 
 @Path("/users")
 public class UserService {
@@ -43,6 +46,10 @@ public class UserService {
 	
 	private UserDAO getUserDAO() {
 		return (UserDAO) ctx.getAttribute("userDAO");
+	}
+	
+	private TrainingDAO getTrainingDAO() {
+		return (TrainingDAO) ctx.getAttribute("trainingDAO");
 	}
 		
 	@GET
@@ -105,13 +112,23 @@ public class UserService {
 		SportObject object = ((SportObjectDAO)ctx.getAttribute("sportObjectDAO")).getById(dto.getSportObjectId());
 		return getUserDAO().registerManager(dto, object);
 	}
+	
+	@POST
+	@Path("/registerTrainer")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public User registerTrainer(TrainerRegistrationDTO dto) {
+		User trainer = getUserDAO().registerTrainer(dto);
+		getTrainingDAO().setTrainingTrainer(dto.getTraining(),trainer);
+		return trainer;
+	}
   
 	@GET
 	@Path("/get/sport_object/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public SportObject getSportObjectByManager(@PathParam("username") String username) {
 		return getUserDAO().getManagerSportObject(username);
-  }
+	}
   
 	@DELETE
 	@Path("/delete/{id}")
@@ -119,5 +136,13 @@ public class UserService {
 	public User delete(@PathParam("id") String id) {
 		return getUserDAO().delete(id);
 	}
+	
+	@GET
+	@Path("/account_info")
+	@Produces(MediaType.APPLICATION_JSON)
+	public UserAccountInformationDTO getUserAccountInformation() {
+		return getUserDAO().getUserAccountInfromation();
+	}
+
 	
 }

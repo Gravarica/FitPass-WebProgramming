@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import dto.LoginDTO;
 import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
+import dto.TrainerRegistrationDTO;
 import enums.CustomerTypeName;
 import enums.Gender;
 import enums.Role;
@@ -24,11 +25,11 @@ public class User extends Entity {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	protected Date dateOfBirth;
 	protected CustomerType customerType;
-	private SportObject object;
-	private int membershipFeeId;
-	private ArrayList<SportObject> objectsVisited;
-	private int totalPoints;
-	private ArrayList<TrainingHistory> trainingHistory;
+	private SportObject object; //Manager
+	private int membershipFeeId; //Customer
+	private ArrayList<SportObject> objectsVisited; //Customer
+	private int totalPoints; //Customer
+	private ArrayList<TrainingHistory> trainingHistory; //Trainer and Customer
 	
 	public User() {
 		super();
@@ -56,6 +57,10 @@ public class User extends Entity {
 	public User(ManagerRegistrationDTO dto, SportObject object) {
 		instantiateData(dto);
 		this.object = object;
+	}
+	
+	public User(TrainerRegistrationDTO dto, Training training) {
+		instantiateData(dto);
 	}
 	
 	private void instantiateData(RegistrationDTO dto) {
@@ -218,4 +223,20 @@ public class User extends Entity {
 		return trainingHistory.size();
 	}
 	
+	public void increaseObjectVisited(SportObject object) {
+		if(this.objectsVisited == null) {
+			this.objectsVisited = new ArrayList<SportObject>();
+		}
+		
+		this.objectsVisited.add(object);
+	}
+
+	public void updateTrainingHistory(TrainingHistory t) {
+		if(this.trainingHistory == null) {
+			this.trainingHistory = new ArrayList<TrainingHistory>();
+		}
+	
+		this.trainingHistory.add(t);
+	}
+
 }
