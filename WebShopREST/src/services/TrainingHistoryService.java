@@ -45,6 +45,13 @@ public class TrainingHistoryService {
 	}
 
 	@GET
+	@Path("/get")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<TrainingHistory> getAll(){
+		return getTrainingHistoryDAO().getAll();
+	}
+	
+	@GET
 	@Path("/customer/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<TrainingHistory> getCustomerTrainingHistory(@PathParam("username") String username){
@@ -93,7 +100,7 @@ public class TrainingHistoryService {
 	public TrainingHistory scheduleTraining(TrainingScheduleDTO dto) {
 		dto.setCustomer(getUserDAO().getLoggedUser());
 		TrainingHistory newTraining = getTrainingHistoryDAO().scheduleTraining(dto);
-		getUserDAO().increaseObjectVisited(newTraining.getBuyer().getUsername(),newTraining.getTraining().getObject());
+		getUserDAO().increaseObjectVisited(newTraining.getCustomer().getUsername(),newTraining.getTraining().getObject());
 		getUserDAO().updateTrainingHistory(newTraining);
 		return newTraining;
 	}

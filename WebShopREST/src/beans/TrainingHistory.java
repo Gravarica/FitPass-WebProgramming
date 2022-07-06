@@ -55,11 +55,11 @@ public class TrainingHistory extends Entity {
 		this.training = training;
 	}
 
-	public User getBuyer() {
+	public User getCustomer() {
 		return customer;
 	}
 
-	public void setBuyer(User customer) {
+	public void setCustomer(User customer) {
 		this.customer = customer;
 	}
 

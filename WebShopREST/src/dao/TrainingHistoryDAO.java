@@ -20,7 +20,7 @@ public class TrainingHistoryDAO {
 	public TrainingHistoryDAO() {}
 
 	public TrainingHistoryDAO(String contextPath) {
-		file = new File(contextPath + "/Resources/Data/training_history.json");
+		file = new File(contextPath + "/Resources/Data/training_histories.json");
 		loadTrainingHistories(contextPath);
 	}
 
@@ -58,6 +58,10 @@ public class TrainingHistoryDAO {
 		}
 		
 		return ++maxId;
+	}
+	
+	public ArrayList<TrainingHistory> getAll(){
+		return trainingHistories;
 	}
 	
 	//Svi treninzi sportskog objekta

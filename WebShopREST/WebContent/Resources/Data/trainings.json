@@ -1,5 +1,7 @@
 [
 	{
+		"id" : "1",
+		"deleted" : false,
 		"name" : "Bicepsomanija",
 		"type" : "PERSONAL",
 		"object" : {
@@ -38,6 +40,8 @@
 		}
 	},
 	{
+		"id" : "2",
+		"deleted" : false,
 		"name" : "Tricepsomanija",
 		"type" : "PERSONAL",
 		"object" : {
@@ -76,6 +80,8 @@
 		}
 	},
 	{
+		"id" : "3",
+		"deleted" : false,
 		"name" : "Nogomanija",
 		"type" : "GROUP",
 		"object" : {

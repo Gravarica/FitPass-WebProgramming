@@ -376,7 +376,7 @@ public class UserDAO {
 	}
 	  
 	public void updateCustomerTrainingHistory(TrainingHistory t) {
-		 User customer = users.get(t.getBuyer().getUsername());
+		 User customer = users.get(t.getCustomer().getUsername());
 		 customer.updateTrainingHistory(t);
 	}
 }
