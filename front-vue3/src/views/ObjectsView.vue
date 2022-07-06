@@ -18,14 +18,27 @@
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col">
-                    <div class="container" v-for="obj in this.objects">
+                <div class="col scrollable-panel">
+                    <div class="container" v-for="obj in this.sportObjects">
                             <SportObjectCard :name="obj.name"
-                                             :street="obj.address.street"
-                                             :number="obj.address.number"
-                                             :city="obj.address.city"
+                                             :street="obj.location.address.street"
+                                             :number="obj.location.address.number"
+                                             :city="obj.location.address.city"
                                              :averageGrade="obj.averageGrade"></SportObjectCard>
                     </div>
+                </div>
+                <div class="col-xl-6">
+                    <h2>TITLE HEADING</h2>
+                    <h5>Title description, Dec 7, 2020</h5>
+                    <div class="fakeimg">Fake Image</div>
+                    <p>Some text..</p>
+                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+
+                    <h2 class="mt-5">TITLE HEADING</h2>
+                    <h5>Title description, Sep 2, 2020</h5>
+                    <div class="fakeimg">Fake Image</div>
+                    <p>Some text..</p>
+                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
                 </div>
             </div>
         </div>
@@ -34,6 +47,7 @@
 
 <script>
 import SportObjectCard from "../components/SportObjectCard.vue";
+import axios from 'axios'
 export default{
     components:{
         SportObjectCard,
@@ -41,11 +55,15 @@ export default{
     inject: ['objects'],
     data(){
         return{
-            objectsList: null
+            sportObjects: null
         }
     },
     created(){
-        console.log(this.objects)
+        axios
+            .get('http://localhost:8081/WebShopREST/rest/sport_objects/get')
+            .then((response) => {
+                this.sportObjects = response.data;
+            })
     }
 }
 </script>
@@ -82,7 +100,13 @@ export default{
     color: #eee;
 }
 .bar{
-    border: 1px solid;
+    border-bottom: 1px solid;
     padding-bottom: 10px;
 }
+
+.scrollable-panel{
+      overflow-y:scroll;
+      height: 82.4vh;
+      width:100%;
+      }
 </style>

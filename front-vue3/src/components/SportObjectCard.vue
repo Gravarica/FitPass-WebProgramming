@@ -1,10 +1,13 @@
 <template>
     <div class="container card-basic">
-                    <section class="mx-5 my-5" style="max-width: 50rem;">
+                    <section class="mx-5 my-5" style="max-width: 40rem;">
                         
                       <div class="card booking-card v-2 mt-2 mb-4 rounded-bottom">
                         <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
-                          <img src="https://mdbootstrap.com/img/Photos/Others/water-lily.jpg" class="img-fluid">
+                           <div class="card-img__wrapper">
+                              <img :src="getImgUrl(name)" class="img-fluid"/>
+                           </div>
+                          
                           <a href="#!">
                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                           </a>
@@ -15,7 +18,7 @@
                                 <h4 class="card-title font-weight-bold"><a>{{name}}</a></h4>
                             </div>
                           
-                            <p class="card-text">{{street - number, city}}</p>
+                            <p class="card-text">{{street}}  {{number}}, {{city}}</p>
                             <hr class="my-2">
                             <p class="h5 font-weight-bold mb-2">Sadrzaj</p>
                             <ul class="list-unstyled d-flex justify-content-start align-items-center mb-0">
@@ -45,6 +48,12 @@
             street: String,
             number: String,
             city: String
+        },
+        methods:{
+           getImgUrl(object){
+            let images = require.context('../assets/', false, /\.png$/);
+            return images('./' + object + ".png")
+        }
         }
     }
 </script>
@@ -86,6 +95,7 @@
 
 .card-basic{
     width: 70%;
+    margin-top: 50px;
 }
 
 .card.booking-card.v-2 {
@@ -107,4 +117,9 @@
   .card.booking-card.v-2 .card-body hr {
     border-top: 1px solid #f7aa00;
   }
+
+  .card-img__wrapper {
+  position: relative;
+}
+
 </style>

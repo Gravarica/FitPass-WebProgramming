@@ -65,13 +65,6 @@ export default{
             this.loggedUser = null;  
           })
       }
-    },
-    mounted(){
-      axios
-            .get('http://localhost:8081/WebShopREST/rest/sport_objects/get')
-            .then((response) => {
-                this.sportObjects = response.data;
-            })
     }
 }
 </script>
