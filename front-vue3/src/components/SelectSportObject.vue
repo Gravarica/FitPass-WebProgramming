@@ -8,8 +8,8 @@
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Please select Sport Object, so we can show you all available type of trainings</h3>
             <form>
-              <table class="table">
-                <thead>
+              <table class="table table-hover table-bordered">
+                <thead class="table-dark">
                     <tr>
                         <th>Name</th>
                         <th>City</th>
@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="o in sportObjects">
+                  <tr v-for="o in sportObjects" @click="setSelectedItem(o)">
                     <td>{{o.name}}</td>
                     <td>{{o.location.address.city}}</td>
                     <td>{{getStreet(o)}}</td>
@@ -25,7 +25,7 @@
                 </tbody>
               </table>
               <div class="mt-4 pt-2">
-                <input class="btn btn-lg btn-grad" type="submit" value="Next" @click="register"/>
+                <input v-if="selectedItem!=null" class="btn btn-lg btn-grad" type="submit" value="Next" @click="register"/>
               </div>
 
             </form>
@@ -72,7 +72,8 @@ import axios from 'axios'
                 },
                 passwordCheck: '',
                 toast: false,
-                sportObjects : null
+                sportObjects : null,
+                selectedItem : null
             }
         },
         methods: {
@@ -90,6 +91,9 @@ import axios from 'axios'
             },
             getStreet(object){
               return object.location.address.street + ", " + object.location.address.number;
+            },
+            setSelectedItem(object){
+              this.selectedItem = object
             },
         },
          created(){

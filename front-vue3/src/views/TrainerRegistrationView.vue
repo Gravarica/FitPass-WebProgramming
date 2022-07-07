@@ -30,8 +30,7 @@ import axios from 'axios'
 </script>
 
 
-<style>
-
+<style lang="scss" scoped>
     .gradient-custom {
 /* fallback for old browsers */
 
