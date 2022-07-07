@@ -59,6 +59,7 @@ public class User extends Entity {
 		this.object = object;
 	}
 	
+	//Konstruktor za registraciju trenera
 	public User(TrainerRegistrationDTO dto, Training training) {
 		instantiateData(dto);
 	}

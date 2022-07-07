@@ -11,7 +11,7 @@
             <li><router-link class="link" :to="{name : ''}">About</router-link></li>
             <li><router-link class="link" :to="{name : ''}">Contact</router-link></li> -->
             <user-nav-bar-buttons v-if="loginType=='USER'"/>
-            <admin-nav-bar-buttons v-if="loginType=='ADMIN'"/>
+            <admin-nav-bar-buttons v-if="loginType=='ADMIN'" :class="nav"/>
             <manager-nav-bar-buttons v-if="loginType=='MANAGER'"/>
             <trainer-nav-bar-buttons v-if="loginType=='TRAINER'"/>
             <customer-nav-bar-buttons v-if="loginType=='CUSTOMER'"/>
@@ -57,7 +57,7 @@ export default {
             mobileNav: null,
             windowWidth: null,
             showModal: null,
-            loginType:"USER"
+            loginType:"ADMIN"
         };
     },
     created() {
@@ -109,11 +109,11 @@ export default {
 
     nav{
         background-color: rgba(0,0,0,0.8);
-    z-index: 99;
-    width: 100%;
-    position: fixed;
-    transition: 0.5s ease all;
-    color: #fff;
+        z-index: 99;
+        width: 100%;
+        position: fixed;
+        transition: 0.5s ease all;
+        color: #fff;
         position:relative;
         display: flex;
         flex-direction: row;

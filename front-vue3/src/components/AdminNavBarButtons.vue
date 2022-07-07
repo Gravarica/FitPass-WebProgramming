@@ -5,8 +5,13 @@
         <li><router-link class="link" :to="{name : 'Objects'}">Objects</router-link></li>
         <li><router-link class="link" :to="{name : ''}">About</router-link></li>
         <li><router-link class="link" :to="{name : ''}">Contact</router-link></li>
-        <li><router-link class="link" :to="{name : ''}">Register Trainer</router-link></li>
-        <li><router-link class="link" :to="{name : ''}">Register Manager</router-link></li>
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">REGISTER</a>
+           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><router-link class="link" :to="{name : 'RegisterTrainer'}">Trainer</router-link></li>
+            <li><router-link class="link" :to="{name : ''}">Manager</router-link></li>
+        </ul>
+        </li>
     </form>       
 
 </template>
@@ -23,16 +28,4 @@ li{
             margin-left: 16px;
             margin-top: 10px;
     }
-
-.link{
-            font-size: 14px;
-            transition: 0.5s ease all;
-            padding-bottom: 4px;
-            border-bottom: 1px solid transparent;
-
-            &:hover{
-                color : #00afea;
-                border-color: #00afea;
-            }
-        }
 </style>
