@@ -11,7 +11,7 @@
             <li><router-link class="link" :to="{name : ''}">About</router-link></li>
             <li><router-link class="link" :to="{name : ''}">Contact</router-link></li> -->
             <user-nav-bar-buttons v-if="loginType=='USER'"/>
-            <admin-nav-bar-buttons v-if="loginType=='ADMIN'" :class="nav"/>
+            <admin-nav-bar-buttons v-if="loginType=='ADMIN'"/>
             <manager-nav-bar-buttons v-if="loginType=='MANAGER'"/>
             <trainer-nav-bar-buttons v-if="loginType=='TRAINER'"/>
             <customer-nav-bar-buttons v-if="loginType=='CUSTOMER'"/>
@@ -57,7 +57,7 @@ export default {
             mobileNav: null,
             windowWidth: null,
             showModal: null,
-            loginType:"ADMIN"
+            loginType: "USER"
         };
     },
     created() {

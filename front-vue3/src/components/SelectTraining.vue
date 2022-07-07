@@ -6,26 +6,28 @@
       <div class="col-12 col-lg-9 col-xl-7">
         <div class="card shadow-2-strong card-registration" style="border-radius: 20px;">
           <div class="card-body p-4 p-md-5">
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Please select Sport Object, so we can show you all available type of trainings.</h3>
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Please select Training, that you wish to add trainer to.</h3>
             <form>
               <table class="table table-hover table-bordered">
                 <thead class="table-dark">
                     <tr>
                         <th>Name</th>
-                        <th>City</th>
-                        <th>Addres</th>
+                        <th>Type</th>
+                        <th>Duration</th>
+                        <th>Description</th>
                     </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="o in sportObjects" @click="setSelectedItem(o)">
-                    <td>{{o.name}}</td>
-                    <td>{{o.location.address.city}}</td>
-                    <td>{{getStreet(o)}}</td>
+                  <tr v-for="t in trainings" @click="setSelectedItem(t)">
+                    <td>{{t.name}}</td>
+                    <!-- <td>{{getType(t)}}</td> -->
+                    <td>{{t.duration}}</td>
+                    <td>{{t.description}}</td>
                   </tr>
                 </tbody>
               </table>
               <div class="mt-4 pt-2">
-                <router-link :to="{name : 'SelectTraining'}"><input :disabled="selectedItem==null" class="btn btn-lg btn-grad" type="submit" value="Next" @click="sendObject"/></router-link>
+                <li><router-link :to="{name : ''}"><input :disabled="selectedItem==null" class="btn btn-lg btn-grad" type="submit" value="Next" @click="register"/></router-link></li>
               </div>
 
             </form>
@@ -36,16 +38,17 @@
   </div>
   
 </section>
+
 </template>
 
 <script>
     import router from '@/router'
-    import { emitter } from '@/main.js'
 import axios from 'axios'
     export default {
         data(){
             return {
-                sportObjects : null,
+                objectID : -1,
+                trainings : null,
                 selectedItem : null,
                 color : null
             }
@@ -58,23 +61,40 @@ import axios from 'axios'
               this.selectedItem = object
               this.color = 'red'
             },
-            sendObject(){
-              console.log('Tu sam baki')
-              console.log('id objekta ' + this.selectedItem.id)
-              this.emitter.emit('load-trainings', {'eventContent' : this.selectedItem.id});
-              console.log('Tu sam baki')
+            getType(o){
+                return o.type.toString()
+            },
+            loadTrainings(id){
+                axios
+                .get('http://localhost:8081/WebShopREST/rest/trainings/sport_object/' + id)
+                .then((response) => {
+                    this.trainings = response.data;
+                    console.log(id)
+                    if(this.trainings == null){console.log("NULA")}
+                    else{console.log("KITA")}
+                }) 
             }
+
         },
-         created(){
-          axios
-            .get('http://localhost:8081/WebShopREST/rest/sport_objects/get')
-            .then((response) => {
-                this.sportObjects = response.data;
+        created(){
+            console.log("USAO")
+            this.emitter.on('load-trainings', (evt) => {
+               console.log("USAO")
+               axios
+                .get('http://localhost:8081/WebShopREST/rest/trainings/sport_object/' + evt.eventContent)
+                .then((response) => {
+                    console.log("USAO")
+                    this.trainings = response.data;
+                    console.log(evt.eventContent)
+                    if(this.trainings == null){console.log("NULA")}
+                    else{console.log("KITA")}
+                }) 
             })
     }
 }
 </script>
 
+       
 
 <style>
 

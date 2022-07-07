@@ -48,7 +48,7 @@ export default{
         this.login = true
       },
       showButtons(type){
-        this.$refs.navBar.showRightNavBarButtons(this.type)
+        this.$refs.navBar.showRightNavBarButtons(type)
       },
       closeLogin(){
         this.login = false

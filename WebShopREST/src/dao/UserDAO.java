@@ -55,6 +55,7 @@ public class UserDAO {
 	public UserDAO(String contextPath) {
 		file = new File(contextPath + "/Resources/Data/users.json");
 		loadUsers(contextPath);
+		System.out.println("PATH: " + contextPath);
 		//System.out.println(contextPath);
 	}
 	
@@ -162,7 +163,7 @@ public class UserDAO {
 	
 	public LoginReturnDTO login(LoginDTO dto) {
 		System.out.println("OVO JE PRIMLJENO U FUNKCIJI " + dto.getUsername() +" "+ dto.getPassword());
-		System.out.println("OVO JE HARD KODOVANO" + users.get("Corba"));
+		System.out.println("OVO JE HARD KODOVANO" + users.get("gravarica"));
 		if(users == null) {System.out.println("USERI SU NULA");}
 		User user = users.get(dto.getUsername());
 		//System.out.println("PRONADJENI USER" + user.getUsername() + user.getPassword());

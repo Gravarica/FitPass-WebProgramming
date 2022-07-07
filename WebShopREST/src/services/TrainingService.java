@@ -56,8 +56,4 @@ public class TrainingService {
 	public ArrayList<Training> getSportObjectTrainings(@PathParam("id") int id){
 		return getTrainingDAO().getSportObjectTrainings(id);
 	}
-
-	
-
-
 }

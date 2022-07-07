@@ -64,6 +64,8 @@ import axios from 'axios';
                   this.$emit('show-buttons',this.loggedUser.role)
                 })
                 .catch(err => (console.log(err)))
+                
+                
             }
         }
     }
