@@ -72,6 +72,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public LoginReturnDTO login(LoginDTO dto, @Context HttpServletRequest request) {
 		System.out.println("POGODIO SAM LOGIN");
+		System.out.println("OVO SAM PRIMIO " + dto.getUsername() + dto.getPassword());
 		LoginReturnDTO lrd = getUserDAO().login(dto);
 		if (lrd.isSuccess()) {
 			System.out.println("Usao sam ovde");

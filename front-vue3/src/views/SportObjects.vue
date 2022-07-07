@@ -57,6 +57,15 @@ export default{
             .then((response) => {
                 this.sportObjects = response.data;
             })
+    },
+    methods:{
+        filterByCity(city){
+            axios
+            .get('http://localhost:8081/WebShopREST/rest/sport_objects/search/city/' + city)
+            .then((response) => {
+                this.sportObjects = response.data;
+            })
+        }
     }
 }
 

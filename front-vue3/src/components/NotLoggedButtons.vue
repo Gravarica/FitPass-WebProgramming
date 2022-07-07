@@ -7,8 +7,8 @@
                 </transition> -->
             </router-link>
         </li>
-        <li><router-link  :to="{name : ''}">
-            <button @click="showRegister()" class="reg">Register</button>
+        <li><router-link  :to="{name : 'Register'}">
+            <button class="reg">Register</button>
         </router-link></li>
     </form>
 </template>
@@ -21,10 +21,6 @@ export default{
         showLogin(){
             this.$emit('show-login')
         },
-    
-        showRegister(){
-            this.$emit('show-reg')
-        }
     }
 
 }

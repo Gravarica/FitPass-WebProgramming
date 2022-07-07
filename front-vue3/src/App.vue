@@ -1,8 +1,8 @@
 <template>
-    <Navigation @show-login="showLogin" @show-reg="showRegister" @logout="logout" v-bind="this.loggedUser"/>
+    <Navigation @show-login="showLogin" @logout="logout" v-bind="this.loggedUser" ref="navBar"/>
     <router-view/>
   <div>
-    <LoginPopup v-if="login" @close-login="closeLogin" @logged-in="captureLogIn"/> 
+    <LoginPopup v-if="login" @close-login="closeLogin" @logged-in="captureLogIn" @show-buttons="showButtons"/> 
   </div>
   <div>
     <RegistrationPopup v-if="register" @close-reg="closeRegister"/> 
@@ -22,7 +22,6 @@ export default{
     data(){
       return{
         login : false,
-        register : false,
         sportObjects: null,
         loggedUser: {
           username: '',
@@ -48,14 +47,11 @@ export default{
       showLogin(){
         this.login = true
       },
-      showRegister(){
-        this.register = true;
+      showButtons(type){
+        this.$refs.navBar.showRightNavBarButtons(type)
       },
       closeLogin(){
         this.login = false
-      },
-      closeRegister(){
-        this.register = false
       },
       captureLogIn(loginData){
         this.loggedUser = loginData;
@@ -64,7 +60,8 @@ export default{
         axios
           .post('http://localhost:8081/WebShopREST/rest/users/logout')
           .then(response => {
-            this.loggedUser = null;  
+            this.loggedUser = null;
+            this.$refs.navBar.showRightNavBarButtons("USER")  
           })
       }
     }

@@ -61,6 +61,17 @@ export default{
 </script>
 
 <style>
+
+.gradient-custom {
+/* fallback for old browsers */
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+background-color: #f7b42c;
+background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
  .putin {
     box-sizing: border-box;
     margin-top: 10px;

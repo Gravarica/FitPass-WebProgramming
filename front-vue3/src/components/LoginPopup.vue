@@ -61,8 +61,11 @@ import axios from 'axios';
                 .then((response) => {
                   this.loggedUser = response.data
                   this.$emit('logged-in', this.loggedUser)
+                  this.$emit('show-buttons',this.loggedUser.role)
                 })
                 .catch(err => (console.log(err)))
+                
+                
             }
         }
     }
