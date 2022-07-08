@@ -188,4 +188,13 @@ public class SportObjectDAO {
 		obj.setAverageGrade(dto.getAverage());
 		saveSportObjects();
 	}
+	
+	public ArrayList<String> getSportObjectTypes(){
+		ArrayList<String> retList = new ArrayList<String>();
+		SportObjectType types[] = SportObjectType.values();
+		for(SportObjectType it : types) {
+			retList.add(it.toString());
+		}
+		return retList;
+	}
 }

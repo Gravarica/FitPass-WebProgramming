@@ -123,4 +123,11 @@ public class SportObjectService {
 	public SportObject changeContent(@PathParam("id") int id, NewContentDTO dto) {
 		return getSportObjectDAO().changeContent(dto, id);
 	}
+
+	@GET
+	@Path("/types")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<String> getSportObjectTypes(){
+		return getSportObjectDAO().getSportObjectTypes();
+	}
 }
