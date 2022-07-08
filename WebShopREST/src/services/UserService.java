@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -145,5 +146,11 @@ public class UserService {
 		return getUserDAO().getUserAccountInfromation();
 	}
 
+	@GET
+	@Path("/available/managers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getAvailableManagers(){
+		return getUserDAO().getAllAvailableManagers();
+	}
 	
 }

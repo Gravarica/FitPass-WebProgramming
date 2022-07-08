@@ -20,19 +20,32 @@
                       <input type="text" id="form3Example1m" placeholder="Name" class="form-control form-control-lg" />
                     </div>
                   </div>
-                  <!-- <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <input type="text" id="form3Example1n" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Example1n">Last name</label>
-                    </div>
-                  </div> -->
                 </div>
 
                 <div class="row">
-                    <select class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
-                        <option selected>Please select type of sport object</option>
-                        <option v-for="it in types" :value="it">{{it}}</option>
-                    </select>
+                    <div>
+                         <select class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
+                            <option selected>Please select type of sport object</option>
+                            <option v-for="it in types" :value="it">{{it}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                 <div class="row">
+                    <div class="col-md-6">
+                        <select class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
+                            <option selected>City</option>
+                            <option value="Beograd">Beograd</option>
+                            <option value="Novi Sad">Novi Sad</option>
+                            <option value="Nis">Subotica</option>
+                            <option value="Krajugevac">Krajugevac</option>
+                            <option value="Cacak">Cacak</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-6">
+                         <input type="text" id="form3Example1m" placeholder="Postal Number" class="form-control form-control-lg" />
+                    </div>
                 </div>
 
                 <div class="form-outline mb-4">
@@ -40,56 +53,13 @@
                   <label class="form-label" for="form3Example8">Address</label>
                 </div>
 
-                <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
-
-                  <h6 class="mb-0 me-4">Gender: </h6>
-
-                  <div class="form-check form-check-inline mb-0 me-4">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                      value="option1" />
-                    <label class="form-check-label" for="femaleGender">Female</label>
-                  </div>
-
-                  <div class="form-check form-check-inline mb-0 me-4">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                      value="option2" />
-                    <label class="form-check-label" for="maleGender">Male</label>
-                  </div>
-
-                  <div class="form-check form-check-inline mb-0">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
-                      value="option3" />
-                    <label class="form-check-label" for="otherGender">Other</label>
-                  </div>
-
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-
-                    <select class="select">
-                      <option value="1">State</option>
-                      <option value="2">Option 1</option>
-                      <option value="3">Option 2</option>
-                      <option value="4">Option 3</option>
-                    </select>
-
-                  </div>
-                  <div class="col-md-6 mb-4">
-
-                    <select class="select">
-                      <option value="1">City</option>
-                      <option value="2">Option 1</option>
-                      <option value="3">Option 2</option>
-                      <option value="4">Option 3</option>
-                    </select>
-
-                  </div>
-                </div>
-
-                <div class="form-outline mb-4">
-                  <input type="text" id="form3Example9" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example9">DOB</label>
+                <div class="row" v-if="checkForManagers()">
+                    <div>
+                         <select class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
+                            <option selected>Please select manager</option>
+                            <option v-for="it in types" :value="it">{{getFullName(it)}}</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-outline mb-4">
@@ -129,7 +99,8 @@ import axios from 'axios'
         data(){
             return {
                 types : null,
-                selected : null
+                selected : null,
+                managers : null
             }
         },
         created(){
@@ -138,6 +109,20 @@ import axios from 'axios'
                 .then((response) =>{
                     this.types = response.data
                 })
+        
+            axios
+                .get('http://localhost:8081/WebShopREST/rest/users/available/managers')
+                .then((response) =>{
+                    this.managers = response.data
+                })
+        },
+        methods:{
+            checkForManagers(){
+                return this.managers == null
+            },
+            getFullName(object){
+                return object.firstName + " " + object.lastName;
+            }
         }
     }
 </script>
