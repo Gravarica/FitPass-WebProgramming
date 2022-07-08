@@ -17,15 +17,15 @@
                 <div class="row">
                   <div class="mb-4">
                     <div class="form-outline">
-                      <input type="text" id="form3Example1m" placeholder="Name" class="form-control form-control-lg" />
+                      <input type="text" id="form3Example1m" placeholder="Name"  required v-model="name" class="form-control form-control-lg" />
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
                     <div>
-                         <select class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
-                            <option selected>Please select type of sport object</option>
+                         <select class="type form-select form-outline form-select-lg mb-4" required aria-label=".form-select-lg example">
+                            <option value="" disabled selected hidden>Please choose type of Sport Object</option>
                             <option v-for="it in types" :value="it">{{it}}</option>
                         </select>
                     </div>
@@ -33,8 +33,8 @@
 
                  <div class="row">
                     <div class="col-md-6">
-                        <select class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
-                            <option selected>City</option>
+                        <select class="type form-select form-outline form-select-lg mb-4"  required aria-label=".form-select-lg example">
+                            <option value="" disabled selected hidden>City</option>
                             <option value="Beograd">Beograd</option>
                             <option value="Novi Sad">Novi Sad</option>
                             <option value="Nis">Subotica</option>
@@ -44,43 +44,48 @@
                     </div>
                     
                     <div class="col-md-6">
-                         <input type="text" id="form3Example1m" placeholder="Postal Number" class="form-control form-control-lg" />
+                         <input type="text" v-model="postalNumber" required id="form3Example1m" placeholder="Postal Number" class="form-control form-control-lg" />
                     </div>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="text" id="form3Example8" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example8">Address</label>
+                  <input type="text" required v-model="adress" id="form3Example8" placeholder="Adress" class="form-control form-control-lg" />
                 </div>
 
-                <div class="row" v-if="checkForManagers()">
+                <div class="row" v-if="showManagers">
                     <div>
-                         <select class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
-                            <option selected>Please select manager</option>
-                            <option v-for="it in types" :value="it">{{getFullName(it)}}</option>
+                         <select required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
+                            <option value="" disabled selected hidden>Please choose manager</option>
+                            <option v-for="it in managers" :value="it">{{getFullName(it)}}</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="form-outline mb-4">
-                  <input type="text" id="form3Example90" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example90">Pincode</label>
+                <div class="row" v-if="!showManagers">
+                    <div>
+                         <p>They are no available managers, but you can allways create new one</p>
+                         <router-link :to="{name : ''}">Add Manager</router-link>
+                    </div>
                 </div>
 
-                <div class="form-outline mb-4">
-                  <input type="text" id="form3Example99" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example99">Course</label>
+                 <hr class="solid">
+
+                <div class="form-outline mb-4 row">
+                  <div class="col-md-6"><input type="text" required id="form3Example8" placeholder="From" class="form-control form-control-lg" /></div>
+                  <div class="col-md-6"><input type="text" required id="form3Example8" placeholder="To" class="form-control form-control-lg" /></div>
                 </div>
 
-                <div class="form-outline mb-4">
-                  <input type="text" id="form3Example97" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example97">Email ID</label>
+                <div class="row mt-4 mb-3">
+                    <div>
+                         <p>Please select sport object's work hour</p>
+                    </div>
                 </div>
-
-                <div class="d-flex justify-content-end pt-3">
-                  <button type="button" class="btn btn-light btn-lg">Reset all</button>
-                  <button type="button" class="btn btn-warning btn-lg ms-2">Submit form</button>
+                
+                <div class="d-flex justify-content-end pt-5">
+                  <input type="submit" @click="addNewSportObject" class="btn btn-warning btn-lg ms-2" value="Submit">
                 </div>
+                
+                
 
               </div>
             </div>
@@ -93,6 +98,7 @@
 </template>
     
 <script>
+import { FLIPPED_ALIAS_KEYS, tsNonNullExpression } from '@babel/types'
 import axios from 'axios'
 
     export default{
@@ -100,7 +106,17 @@ import axios from 'axios'
             return {
                 types : null,
                 selected : null,
-                managers : null
+                managers : null,
+                showManagers : true,
+                canSubmit : false,
+                name : null,
+                type : null,
+                city : null,
+                postalNumber : null,
+                adress : null,
+                manager : null,
+                from : null,
+                to : null,
             }
         },
         created(){
@@ -114,6 +130,9 @@ import axios from 'axios'
                 .get('http://localhost:8081/WebShopREST/rest/users/available/managers')
                 .then((response) =>{
                     this.managers = response.data
+                    if(this.managers == null){
+                        this.showManagers = false
+                    }
                 })
         },
         methods:{
@@ -122,6 +141,9 @@ import axios from 'axios'
             },
             getFullName(object){
                 return object.firstName + " " + object.lastName;
+            },
+            canSubmit(){
+                return this.canSubmit
             }
         }
     }
@@ -139,10 +161,13 @@ import axios from 'axios'
 top: 13px;
 }
 
-.type{
-    font-size: 1rem;
-    line-height: 2.15;
-    padding-left: .75em;
-    padding-right: .75em;
+.stoma{
+    font-size:x-large
 }
+
+hr.solid {
+  border-top: 3px solid #bbb;
+}
+
+select:invalid { color: gray; }
 </style>
