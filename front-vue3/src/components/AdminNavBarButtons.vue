@@ -9,7 +9,7 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Add new</a>
            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
             <router-link class="link dropdown-item" :to="{name : 'RegisterTrainer'}">Trainer</router-link>
-            <router-link class="link dropdown-item" :to="{name : ''}">Manager</router-link>
+            <router-link class="link dropdown-item" :to="{name : 'RegisterManager'}">Manager</router-link>
             <hr class="dropdown-divider">
             <router-link class="link dropdown-item" :to="{name : 'AddSportObject'}">Sport Object</router-link>
         </ul>

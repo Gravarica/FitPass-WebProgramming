@@ -6,6 +6,7 @@ import TrainerRegistrationView from '../views/TrainerRegistrationView.vue'
 import SelectSportObject from '../components/SelectSportObject.vue'
 import SelectTraining from '../components/SelectTraining.vue'
 import NewSportObject from '../views/NewSportObject.vue'
+import ManagerRegistration from '../components/ManagerRegistration.vue'
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
     path: '/add/sport_object',
     name: "AddSportObject",
     component: NewSportObject
+  },
+  {
+    path: '/register/manager',
+    name: "RegisterManager",
+    component: ManagerRegistration
   }
 
 
