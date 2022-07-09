@@ -7,6 +7,7 @@ import SelectSportObject from '../components/SelectSportObject.vue'
 import SelectTraining from '../components/SelectTraining.vue'
 import NewSportObject from '../views/NewSportObject.vue'
 import ManagerRegistration from '../components/ManagerRegistration.vue'
+import CustomerTrainings from '../views/CustomerTrainings.vue'
 
 const routes = [
   {
@@ -49,9 +50,12 @@ const routes = [
     path: '/register/manager',
     name: "RegisterManager",
     component: ManagerRegistration
+  },
+  {
+    path: '/customer/trainings',
+    name: "CustomerTrainings",
+    component: CustomerTrainings
   }
-
-
 ]
 
 const router = createRouter({
