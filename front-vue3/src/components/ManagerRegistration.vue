@@ -5,14 +5,14 @@
       <div class="col-12 col-lg-9 col-xl-7">
         <div class="card shadow-2-strong card-registration" style="border-radius: 20px;">
           <div class="card-body p-4 p-md-5">
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Register Manager</h3>
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Register</h3>
             <form>
 
               <div class="row">
                 <div class="col-md-6 mb-4">
 
                   <div class="form-outline">
-                    <input type="text" id="firstName" class="form-control form-control-lg"  v-model="registrationDTO.firstName"/>
+                    <input type="text" id="firstName" class="form-control form-control-lg"  v-model="this.registrationDTO.firstName"/>
                     <label class="form-label" for="firstName">First Name</label>
                   </div>
 
@@ -20,7 +20,7 @@
                 <div class="col-md-6 mb-4">
 
                   <div class="form-outline">
-                    <input type="text" id="lastName" class="form-control form-control-lg"  v-model="registrationDTO.lastName"/>
+                    <input type="text" id="lastName" class="form-control form-control-lg"  v-model="this.registrationDTO.lastName"/>
                     <label class="form-label" for="lastName">Last Name</label>
                   </div>
 
@@ -31,7 +31,7 @@
                 <div class="col-md-6 mb-3 d-flex align-items-center">
 
                   <div class="form-outline datepicker w-100">
-                    <input type="date" class="form-control form-control-lg" id="birthdayDate"  v-model="registrationDTO.dateOfBirth"/>
+                    <input type="date" class="form-control form-control-lg" id="birthdayDate"  v-model="this.registrationDTO.dateOfBirth"/>
                     <label for="birthdayDate" class="form-label">Birthday</label>
                   </div>
 
@@ -59,7 +59,7 @@
                 <div class="col-md-12 pb-2">
 
                   <div class="form-outline">
-                    <input type="text" id="phoneNumber" class="form-control form-control-lg"  v-model="registrationDTO.username"/>
+                    <input type="text" id="phoneNumber" class="form-control form-control-lg"  v-model="this.registrationDTO.username"/>
                     <label class="form-label" for="username">Username</label>
                   </div>
 
@@ -69,7 +69,7 @@
               <div class="row">
                 <div class="col-12">
 
-                  <input type="password" id="password" class="form-control form-control-lg"  v-model="registrationDTO.password"/>
+                  <input type="password" id="password" class="form-control form-control-lg"  v-model="this.registrationDTO.password"/>
                   <label class="form-label select-label">Password</label>
 
                 </div>
@@ -78,7 +78,7 @@
               <div class="row">
                 <div class="col-12">
 
-                  <input type="password" id="password-re" class="form-control form-control-lg"  v-model="passwordCheck"/>
+                  <input type="password" id="password-re" class="form-control form-control-lg"  v-model="this.passwordCheck"/>
                   <label class="form-label select-label">Confirm Password</label>
 
                 </div>
@@ -97,7 +97,7 @@
   
 </section>
 
-<!-- <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;" v-if="toast">
+<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;" v-if="toast">
   <div class="toast" style="position: absolute; top: 0; right: 0;">
     <div class="toast-header">
       <img src="../assets/point.png" class="rounded mr-2" alt="...">
@@ -111,12 +111,12 @@
       Passwords dont match
     </div>
   </div>
-</div> -->
+</div>
 
 </template>
 
 <script>
-import router from '@/router'
+    import router from '@/router'
 import axios from 'axios'
     export default {
         data(){
@@ -141,10 +141,10 @@ import axios from 'axios'
                     return
                 }
                 axios
-                    .post('http://localhost:8081/WebShopREST/rest/users/register', this.registrationDTO)
+                    .post('http://localhost:8081/WebShopREST/rest/users/registration', this.registrationDTO)
                     .then((response) => {
                         console.log('Uspesna registracija')
-                        // this.$router.push({path: '/'})
+                        this.$router.push({path: '/'})
                     })
             }
         }
