@@ -8,14 +8,14 @@
         <h1 class="fw-light">Training History</h1>
         <p class="lead text-center">Here you can see your training history in previous month.</p>
         <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+          <!-- <a href="#" class="btn btn-primary my-2">Main call to action</a>
+          <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
         </p>
       </div>
     </div>
   </section>
 
-<div class="container">
+<div class="container" v-if="hasHistory">
     <div class="row row-cols-md-3">
         <div class="col-5" v-for="t in trainingHistory">
         <TrainingAlbumCard
@@ -25,10 +25,11 @@
             :duration="t.training.duration"
             :training-type="t.training.type">
         </TrainingAlbumCard>
-        </div>
-       
+        </div>   
+    </div>
 </div>
-</div>
+
+
 
 </body>
 </template>
@@ -41,7 +42,8 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
     data() {
         return {
             trainingHistory: null,
-            loggedUser: null
+            loggedUser: null,
+            hasHistory : false
         };
     },
     components:{
@@ -55,11 +57,9 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             axios
             .get("http://localhost:8081/WebShopREST/rest/training_histories/customer/" + this.loggedUser.username)
             .then((response) => {
-                console.log("USAO")
                 this.trainingHistory = response.data;
-                console.log(this.trainingHistory)
-                if (this.trainingHistory == null) {
-                    console.log("PRAZNO");
+                if (this.trainingHistory != null) {
+                    this.hasHistory = true;
                 }
             });
         }
