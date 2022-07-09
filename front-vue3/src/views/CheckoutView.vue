@@ -7,7 +7,7 @@
                 <div class="info-holder-inner">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4>{{title}}</h4>
-                        <h4>{{price}} RSD</h4>
+                        <h4>{{priceDisplay}} RSD</h4>
                     </div>
                     <span class="small text-down">1 {{type}} / {{totalAppearances}} Trainings / {{dailyAppearance}} appearances daily</span>
                 </div>
@@ -19,7 +19,7 @@
                 <div class="infoz">
                     <div class="item d-flex align-items-center justify-content-between">
                         <span class="text-item">Subscription</span>
-                        <span>{{price}} RSD</span>
+                        <span>{{priceDisplay}} RSD</span>
                     </div>
                     <div class="item d-flex align-items-center justify-content-between" v-if="valid">
                         <span class="text-item">Promo code</span>
@@ -29,7 +29,7 @@
                 <div class="totally-spies">
                     <div class="d-flex justify-content-between">
                         <span class="h3 pr-1">Total</span>
-                        <span class="h2">{{price}} RSD</span>
+                        <span class="h2">{{priceDisplay}} RSD</span>
                     </div>
                 </div>
             </div>
@@ -38,15 +38,16 @@
             <div class="col-6 ms-l">
                 <h6 class="small text-down">Got a promo code?</h6>
                 <div class="form-holden">
-                    <form class="card p-2">
+                    <form class="card p-2" onsubmit="return false">
                         <div class="input-group">
-                            <input type="text" class="form-control lolz" placeholder="Enter">
+                            <input type="text" class="form-control lolz" placeholder="Enter" v-model="this.promoCode">
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-secondary">Redeem</button>
+                                <button type="submit" class="btn btn-secondary" @click="this.redeem()">Redeem</button>
                             </div>
                         </div>
                     </form>
                 </div>
+                <h6 class="small message-text">{{this.returnPromoCodeDTO.message}}</h6>
             </div>
         </div>
         <div class="accept-button d-flex justify-content-center">
@@ -57,6 +58,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
     export default {
         props: {
             title: {
@@ -82,7 +85,26 @@
         },
         data() {
             return{
-                promoCode: ''
+                promoCode: '',
+                returnPromoCodeDTO: {discount: null, message: ''},
+                priceDisplay: this.$props.price,
+                disablePromoCode: false
+            }
+        },
+        methods: {
+            redeem(){
+                if(!this.disablePromoCode){
+                    axios
+                    .get('http://localhost:8081/WebShopREST/rest/promos/redeem/' + this.promoCode)
+                    .then(response => {
+                        this.returnPromoCodeDTO = response.data
+                        this.priceDisplay = this.priceDisplay * (1 - this.returnPromoCodeDTO.discount/100)
+                        this.disablePromoCode = true
+                    })
+                } else {
+                    this.returnPromoCodeDTO.message = 'You have already redeemed promo code'
+                }
+                
             }
         }
     }
@@ -131,6 +153,12 @@
 .levak{
     width: 25%;
     height: 50px;
+}
+
+.message-text{
+    padding-top: 5px;
+    padding-left: 55px;
+    color: #a4a4e8;
 }
 
 .btn-secondary{
