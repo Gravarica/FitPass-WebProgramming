@@ -66,7 +66,9 @@
                 <div class="row" v-if="!showManagers">
                     <div>
                          <p>They are no available managers, but you can allways create new one</p>
-                         <router-link :to="{name : ''}">Add Manager</router-link>
+                           <div class="d-grid gap-2">
+                            <router-link class="d-grid gap-2 enrico" :to="{name : 'RegisterManager'}"><button class="btn btn-warning" type="button">Add New Manager</button></router-link>
+                          </div>
                     </div>
                 </div>
 
@@ -195,4 +197,9 @@ hr.solid {
 }
 
 select:invalid { color: gray; }
+
+.enrico {
+  text-decoration: none;
+  color: inherit;
+}
 </style>
