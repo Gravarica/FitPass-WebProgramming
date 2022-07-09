@@ -36,7 +36,7 @@
         </nav>
 </div>
 <div class = "wrapper-content">
-  <div class="containerz gradient-custom">
+  <div class="containerz gradient-custom vh-100">
     <div class="view-sm isCenter">
         <SportObjects ref="sportObjects"></SportObjects>
     </div>
@@ -94,7 +94,7 @@ background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
   display: flex;
   flex-direction: column;
   min-height: 70vh;
-  margin-top: 80px; // if header is fixed do mt: headerHeight
+  margin-top: 0px; // if header is fixed do mt: headerHeight
 }
 
 .containerz {
@@ -165,6 +165,7 @@ background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
             color: grey;
             list-style: none;
             text-decoration: none;  
+            font-size: 20px;
         }
 
         .link:hover{

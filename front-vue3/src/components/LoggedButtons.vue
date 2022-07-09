@@ -1,7 +1,7 @@
 <template>
     <form form class="d-flex ms-auto order-5">
         <li class="p-4">{{username}} - {{role}}</li>
-        <li><router-link :to="{name : ''}">
+        <li><router-link :to="{ name : 'MyProfile'}">
                 <button @click="myprofile()" class="log">MyProfile</button>
                 <!-- <transition name="fade" appear>
                     <div class="modal-overlay" @click="showModal = false" v-if="showModal"></div>

@@ -158,4 +158,14 @@ public class SubscriptionDAO {
 		return s;
 	}
 	
+	public Subscription getByLoggedUser() {
+		User user = getUserDAO().getLoggedUser();
+		for (Subscription s : subscriptions) {
+			if(s.exists(user.getUsername())) {
+				return s;
+			}
+		}
+		return null;
+	}
+	
 }

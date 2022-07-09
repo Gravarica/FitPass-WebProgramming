@@ -57,4 +57,12 @@ public class SubscriptionService {
 	public Subscription createSubscription(NewSubscriptionDTO dto) {
 		return getSubscriptionDAO().createSubscription(dto);
 	}
+	
+	@GET
+	@Path("/get/user")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Subscription getByLoggedUser(){
+		return getSubscriptionDAO().getByLoggedUser();
+	}
 }

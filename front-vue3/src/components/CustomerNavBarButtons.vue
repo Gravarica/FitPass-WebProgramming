@@ -3,7 +3,7 @@
     <form form class="d-flex ms-left">
         <li><router-link class="link" :to="{name : 'Home'}">Home</router-link></li>
         <li><router-link class="link" :to="{name : 'Objects'}">Objects</router-link></li>
-        <li><router-link class="link" :to="{name : ''}">About</router-link></li>
+        <li><router-link class="link" :to="{name : 'Subscription'}">Subscriptions</router-link></li>
         <li><router-link class="link" :to="{name : ''}">Contact</router-link></li>
         <li><router-link class="link" :to="{name : ''}">New Training</router-link></li>
     </form>       

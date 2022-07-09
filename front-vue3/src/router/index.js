@@ -5,6 +5,13 @@ import RegistrationView from '../views/RegistrationView'
 import TrainerRegistrationView from '../views/TrainerRegistrationView.vue'
 import SelectSportObject from '../components/SelectSportObject.vue'
 import SelectTraining from '../components/SelectTraining.vue'
+import MyProfileView from '../views/MyProfileView'
+import UsersView from '../views/UsersView'
+import DeatilsView from '../views/DetailsView'
+import EditProfileView from '../views/EditProfileView'
+import SubscriptionView from '../views/SubscriptionView'
+import SubscribeView from '../views/SubscribeView'
+import CheckoutView from '../views/CheckoutView'
 
 const routes = [
   {
@@ -37,6 +44,44 @@ const routes = [
     path: '/register/trainer/training',
     name: 'SelectTraining',
     component: SelectTraining
+  },
+  {
+    path: '/myprofile',
+    name: 'MyProfile',
+    component: MyProfileView
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: UsersView
+  },
+  {
+    path: '/details',
+    name: 'Details',
+    component: DeatilsView
+  },
+  {
+    path: '/editprofile',
+    name: 'EditProfile',
+    component: EditProfileView
+  },
+  {
+    path: '/subscription',
+    name: 'Subscription',
+    component: SubscriptionView
+  },
+  {
+    path: '/subscribe',
+    name: 'Subscribe',
+    component: SubscribeView
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: CheckoutView,
+    props: (route) => ({
+       ...route.params
+    })
   }
 
 
@@ -44,7 +89,9 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  linkActiveClass: "active",
+  linkExactActiveClass: "exact-active"
 })
 
 export default router

@@ -26,6 +26,7 @@ import dto.LoginReturnDTO;
 import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
 import dto.TrainerRegistrationDTO;
+import dto.UpdateProfileDTO;
 import dto.UserAccountInformationDTO;
 import enums.CustomerTypeName;
 import enums.Role;
@@ -385,5 +386,18 @@ public class UserDAO {
 	public void updateCustomerTrainingHistory(TrainingHistory t) {
 		 User customer = users.get(t.getCustomer().getUsername());
 		 customer.updateTrainingHistory(t);
+	}
+	
+	public UserAccountInformationDTO editProfile(UpdateProfileDTO dto) {
+		User user = getLoggedUser();
+		System.out.println("PRIMIO SAM: " + dto.getFirstName() + " | " + dto.getLastName() + " | " + dto.getUsername() + " | " + dto.getOldPassword() + " | " + dto.getNewPassword());
+		if(dto.getOldPassword() != null) {
+			user.setPassword(BusinessUtil.hashPassword(dto.getNewPassword()));
+		}
+		user.setFirstName(dto.getFirstName());
+		user.setLastName(dto.getLastName());
+		user.setDateOfBirth(dto.getDateOfBirth());
+		saveUsers();
+		return getUserAccountInfromation();
 	}
 }
