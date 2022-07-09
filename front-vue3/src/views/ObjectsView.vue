@@ -2,23 +2,31 @@
     <div class="container-fluid bar">
         <div class="row">
               <div class="col-md-8">
-                    <form class="form-inline" action="#" method="post">
-                        <input type="text" id="search" name="search" class="input-small putin" placeholder="Search...">
-                        <select class="selectz" name="searchon">
-                            <option class="option" value="0">First Name</option>
-                            <option value="1">Last Name</option>
+                    <form class="form-inline">
+                        <input type="text" id="search" name="search" class="input-small putin" placeholder="Pretraga..." v-model="this.searchDTO.parameter">
+                        <select class="selectz" name="searchon" v-model="this.searchDTO.type">
+                            <option value="">Discipline</option>
+                            <option value="GYM">Teretana</option>
+                            <option value="POOL">Bazen</option>
+                            <option value="SPORTS_CENTER">Sportski centar</option>
+                            <option value="DANCE_STUDIO">Plesni studio</option>
                         </select>
-                        <select class="select" name="searchon">
-                            <option value="0">First Name</option>
-                            <option value="1">Last Name</option>
+                        <select class="selectz" name="searchon" v-model="this.searchDTO.city">
+                            <option value="">Izaberite Grad</option>
+                            <option value="Beograd">Beograd</option>
+                            <option value="Novi Sad">Novi Sad</option>
+                            <option value="Nis">Nis</option>
+                            <option value="Subotica">Subotica</option>
+                            <option value="Kragujevac">Kragujevac</option>
+                            <option value="Cacak">Cacak</option>
                         </select>
-                        <button type="submit" class="button btn-succes">Search</button>
+                        <input type="submit" class="button btn-succes" v-on:click="submit" value="Pretrazi"/>
                     </form>       
               </div>      
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col scrollable-panel">
+                <div class="col scrollable-panel ">
                     <div class="container" v-for="obj in this.sportObjects">
                             <SportObjectCard :name="obj.name"
                                              :street="obj.location.address.street"
@@ -47,7 +55,8 @@ export default{
     inject: ['objects'],
     data(){
         return{
-            sportObjects: null
+            sportObjects: null,
+            searchDTO: { parameter: '', city: '', type: ''}
         }
     },
     created(){
@@ -56,6 +65,34 @@ export default{
             .then((response) => {
                 this.sportObjects = response.data;
             })
+    },
+    methods: {
+        submit(){
+            console.log('EEEEEEEEE' + this.searchDTO)
+            if(this.searchDTO.parameter == '' || this.searchDTO.parameter == 'Pretraga...'){
+                if(this.searchDTO.type == ""){
+                    axios
+                    .get('http://localhost:8081/WebShopREST/rest/sport_objects/search/city/' + this.searchDTO.city)
+                    .then((response) => {
+                        this.sportObjects = response.data
+                    })
+                }
+            } else if (this.searchDTO.type == "" && this.searchDTO.city == "") {
+                axios
+                    .get('http://localhost:8081/WebShopREST/rest/sport_objects/search/' + this.searchDTO.parameter)
+                    .then((response) => {
+                        this.sportObjects = response.data
+                    })
+            } else {
+                axios
+                    .get('http://localhost:8081/WebShopREST/rest/sport_objects/search', this.searchDTO)
+                    .then((response) => {
+                        this.sportObjects = response.data
+                    })
+            }
+            
+
+        }
     }
 }
 </script>
@@ -105,6 +142,7 @@ background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
 .bar{
     border-bottom: 1px solid;
     padding-bottom: 10px;
+    
 }
 
 .scrollable-panel{

@@ -1,32 +1,38 @@
 package dto;
 
+import java.time.LocalDate;
 import java.util.Date;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import beans.CustomerType;
 import beans.User;
 import enums.Gender;
 import enums.Role;
+import src.util.LocalDateDeserializer;
+import src.util.LocalDateSerializer;
 
 public class UserAccountInformationDTO {
 	private String firstName;
 	private String lastName;
 	private String username;
-	private String password;
 	private Gender gender;
-	private Date dateOfBirth;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate dateOfBirth;
 	private Role role;
 	private CustomerType type;
 	private int totalPoints;
 	
 	public UserAccountInformationDTO() {}
 
-	public UserAccountInformationDTO(String firstName, String lastName, String username, String password, Gender gender,
-			Date dateOfBirth, Role role, CustomerType type, int totalPoints) {
+	public UserAccountInformationDTO(String firstName, String lastName, String username, Gender gender,
+			LocalDate dateOfBirth, Role role, CustomerType type, int totalPoints) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
-		this.password = password;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 		this.role = role;
@@ -38,7 +44,6 @@ public class UserAccountInformationDTO {
 		this.firstName = user.getFirstName();
 		this.lastName = user.getLastName();
 		this.username = user.getUsername();
-		this.password = user.getPassword();
 		this.gender = user.getGender();
 		this.dateOfBirth = user.getDateOfBirth();
 		this.role = user.getRole();
@@ -70,14 +75,6 @@ public class UserAccountInformationDTO {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public Gender getGender() {
 		return gender;
 	}
@@ -86,11 +83,11 @@ public class UserAccountInformationDTO {
 		this.gender = gender;
 	}
 
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

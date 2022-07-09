@@ -1,6 +1,9 @@
 <template>
     <Navigation @show-login="showLogin" @logout="logout" v-bind="this.loggedUser" ref="navBar"/>
     <router-view/>
+    <div class="my-notification">
+      <notifications position="top center" width="250px" height="100px"/>
+    </div>
   <div>
     <LoginPopup v-if="login" @close-login="closeLogin" @logged-in="captureLogIn" @show-buttons="showButtons"/> 
   </div>
@@ -30,6 +33,14 @@ export default{
         },
       }
     },
+    created(){
+        console.log('Saljem zahtev')
+        axios
+        .get('http://localhost:8081/WebShopREST/rest/users/currentUser')
+        .then(response => {
+          this.loggedUser = response.data;
+        })
+    },
     provide() {
         return{
           objects: this.sportObjects
@@ -48,6 +59,9 @@ export default{
         this.login = true
       },
       showButtons(type){
+        if(type == null){
+          return
+        }
         this.$refs.navBar.showRightNavBarButtons(type)
       },
       closeLogin(){
@@ -55,6 +69,19 @@ export default{
       },
       captureLogIn(loginData){
         this.loggedUser = loginData;
+        if(this.loggedUser.success){
+            this.$notify({
+              title: 'Welcome ' + this.loggedUser.username,
+              text: 'You have been logged in'
+            })
+            
+            this.login = false;
+          } else {
+            this.$notify({
+              title: 'Wrong credentials',
+              text: 'Please try again'
+            })
+          }
       },
       logout(){
         axios
@@ -62,19 +89,25 @@ export default{
           .then(response => {
             this.loggedUser = null;
             this.$refs.navBar.showRightNavBarButtons("USER")  
+            this.$router.push({ path: '/'})
           })
-      }
+      },
+      
     }
 }
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Ralewey:wght@400;500&display=swap");
+@font-face {
+  font-family: "Lato";
+  src: local("Lato"),
+       url(./fonts/Lato-Regular.ttf) format('truetype')
+}
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Raleway", sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 400;
 }
 .app {

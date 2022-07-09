@@ -1,11 +1,16 @@
 package dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import enums.Gender;
 import enums.Role;
+import src.util.LocalDateDeserializer;
+import src.util.LocalDateSerializer;
 
 public class RegistrationDTO {
 
@@ -15,11 +20,12 @@ public class RegistrationDTO {
 	protected String lastName;
 	protected Gender gender;
 	protected Role role;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	protected Date dateOfBirth;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	protected LocalDate dateOfBirth;
 	
 	public RegistrationDTO(String username, String password, String firstName, String lastName, Gender gender,
-			Role role, Date dateOfBirth) {
+			Role role, LocalDate dateOfBirth) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -80,11 +86,11 @@ public class RegistrationDTO {
 		this.role = role;
 	}
 
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	

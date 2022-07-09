@@ -1,5 +1,6 @@
 package dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import beans.SportObject;
@@ -16,7 +17,7 @@ public class ManagerRegistrationDTO extends RegistrationDTO{
 	}
 
 	public ManagerRegistrationDTO(String username, String password, String firstName, String lastName, Gender gender,
-			Role role, Date dateOfBirth) {
+			Role role, LocalDate dateOfBirth) {
 		super(username, password, firstName, lastName, gender, role, dateOfBirth);
 		// TODO Auto-generated constructor stub
 	}

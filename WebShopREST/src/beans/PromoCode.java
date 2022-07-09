@@ -7,6 +7,7 @@ public class PromoCode extends Entity{
 	private String code;
 	private double discount;
 	private int numberOfUsages;
+	private boolean used;
 	private Date expirationDate;
 	
 	public PromoCode() {
@@ -57,6 +58,14 @@ public class PromoCode extends Entity{
 
 	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
+	}
+
+	public boolean isUsed() {
+		return used;
+	}
+
+	public void setUsed(boolean used) {
+		this.used = used;
 	}
 	
 	
