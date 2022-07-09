@@ -14,7 +14,7 @@
               <div class="card-body p-md-5 text-black">
                 <h3 class="mb-5 text-uppercase">New Object</h3>
 
-                <form onsubmit="addNewSportObject()">
+                <form id="myForm" onsubmit="addNewSportObject()">
                 <div class="row">
                   <div class="mb-4">
                     <div class="form-outline">
@@ -27,7 +27,7 @@
                     <div>
                          <select v-model="addObjectDTO.type" class="type form-select form-outline form-select-lg mb-4" required aria-label=".form-select-lg example">
                             <option value="" disabled>Please choose type of Sport Object</option>
-                            <option v-for="it in types" :value="it">{{it}}</option>
+                            <option v-for="it in types" :value="it">{{convertType(it)}}</option>
                         </select>
                     </div>
                 </div>
@@ -73,8 +73,8 @@
                  <hr class="solid">
 
                 <div class="form-outline mb-4 row">
-                  <div class="col-md-6"><input type="text" required id="form3Example8" placeholder="From" class="form-control form-control-lg" /></div>
-                  <div class="col-md-6"><input type="text" required id="form3Example8" placeholder="To" class="form-control form-control-lg" /></div>
+                  <div class="col-md-6"><input v-model="startTime" type="text" required id="form3Example8" placeholder="From" class="form-control form-control-lg" /></div>
+                  <div class="col-md-6"><input v-model="endTime" type="text" required id="form3Example8" placeholder="To" class="form-control form-control-lg" /></div>
                 </div>
 
                 <div class="row mt-4 mb-3">
@@ -109,14 +109,13 @@ import axios from 'axios'
                 showManagers : true,
                 canSubmit : false,
                 newSportObject : null,
-                addObjectDTO : { name: "", type : "" , managerUsername: "", location:{ address:{ street : "" , number: "", city : "" , postalNumber : ""}, longitude:"", latitude:""} , logo : null}
+                addObjectDTO : { name: "", type : "" , managerUsername: "", startTime: "", endTime: "", location:{ address:{ street : "" , number: "", city : "" , postalNumber : ""}, longitude:"", latitude:""} , logo : null}
             }
         },
         created(){
             axios
                 .get('http://localhost:8081/WebShopREST/rest/sport_objects/types')
                 .then((response) =>{
-                    console.log("STA SE DESAVA BUKI?")
                     this.types = response.data
                 })
         
@@ -145,9 +144,23 @@ import axios from 'axios'
                     .then((response) => {
                         this.newSportObject = response.data
                     })
+                this.$router.push("/")
+            },
+            convertType(it){
+                switch(it){
+                    case "GYM":
+                        return "Gym"
+                    case "POOL":
+                        return "Pool"
+                     case "SPORTS_CENTER":
+                        return "Sports Center"
+                     case "DANCE_STUDIO":
+                        return "Dance Studio"
+                }
             }
         }
     }
+
 </script>
 
 <style>

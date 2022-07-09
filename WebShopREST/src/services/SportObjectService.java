@@ -95,7 +95,7 @@ public class SportObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public SportObject createSportObject(SportObjectCreateDTO dto) {
-		//System.out.println("PRIMIO SAM OVO" + dto.getManagerUsername() + dto.getName() + dto.getType());
+		System.out.println("POZVAN SAM");
 		SportObject newObject = getSportObjectDAO().createSportObject(dto);
 		getUserDAO().setSportObject(newObject, dto.getManagerUsername());
 		return newObject;

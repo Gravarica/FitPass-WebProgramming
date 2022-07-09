@@ -12,20 +12,40 @@ public class SportObjectCreateDTO {
 	private Location location;
 	private Base64 logo;
 	private String managerUsername;
+	private String startTime;
+	private String endTime;
 	
 	public SportObjectCreateDTO() {
 		super();
 	}
 	
-	public SportObjectCreateDTO(String name, String type, Location location, Base64 logo,String manager) {
+	public SportObjectCreateDTO(String name, String type, Location location, Base64 logo,String manager,String startTime,String endTime) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.location = location;
 		this.logo = logo;
 		this.managerUsername = manager;
+		this.startTime = startTime;
+		this.endTime = endTime;
 	}
 
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	
 	public String getName() {
 		return name;
 	}

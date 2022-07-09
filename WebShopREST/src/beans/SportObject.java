@@ -44,6 +44,7 @@ public class SportObject extends Entity {
 		this.location = dto.getLocation();
 		this.image = dto.getLogo();
 		this.sportObjectType = dto.convertToType(dto.getType());
+		this.workHour = new WorkHour(dto.getStartTime(),dto.getEndTime());
 	}
 
 	public String getName() {

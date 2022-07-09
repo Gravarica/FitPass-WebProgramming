@@ -1,41 +1,30 @@
 package beans;
 
-import java.time.DayOfWeek;
-import java.util.Date;
-
 public class WorkHour {
-	
-	private DayOfWeek dayOfWeek;
-	private Date startTime;
-	private Date endTime;
+
+	private String startTime;
+	private String endTime;
 	
 	public WorkHour() {
 		super();
 	}
 	
-	public WorkHour(DayOfWeek dayOfWeek, Date startTime, Date endTime) {
+	public WorkHour(String startTime, String endTime) {
 		super();
-		this.dayOfWeek = dayOfWeek;
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
 	
-	public DayOfWeek getDayOfWeek() {
-		return dayOfWeek;
-	}
-	public void setDayOfWeek(DayOfWeek dayOfWeek) {
-		this.dayOfWeek = dayOfWeek;
-	}
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 }
