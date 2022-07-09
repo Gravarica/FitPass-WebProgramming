@@ -14,10 +14,11 @@
               <div class="card-body p-md-5 text-black">
                 <h3 class="mb-5 text-uppercase">New Object</h3>
 
+                <form onsubmit="addNewSportObject()">
                 <div class="row">
                   <div class="mb-4">
                     <div class="form-outline">
-                      <input type="text" id="form3Example1m" placeholder="Name"  required v-model="addObjectDTO.name" class="form-control form-control-lg" />
+                      <input type="text" id="form3Example1m" placeholder="Name" pattern="[a-z]{3-15}" required v-model="addObjectDTO.name" class="form-control form-control-lg" />
                     </div>
                   </div>
                 </div>
@@ -83,8 +84,9 @@
                 </div>
                 
                 <div class="d-flex justify-content-end pt-5">
-                  <input type="submit" @click="addNewSportObject" class="btn btn-warning btn-lg ms-2" value="Submit">
+                  <input type="submit" class="btn btn-warning btn-lg ms-2" value="Submit">
                 </div>
+                </form>
               </div>
             </div>
           </div>
@@ -138,7 +140,6 @@ import axios from 'axios'
                 return this.canSubmit
             },
             addNewSportObject(){
-                console.log("OVO SALJEM"  + this.addObjectDTO.name)
                 axios
                     .post('http://localhost:8081/WebShopREST/rest/sport_objects/create', this.addObjectDTO)
                     .then((response) => {

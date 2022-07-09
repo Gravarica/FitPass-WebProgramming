@@ -223,8 +223,18 @@ public class UserDAO {
 	//Metoda koja vraca sve SLOBODNE MENAGERE
 	public ArrayList<User> getAllAvailableManagers(){
 		ArrayList<User> retList = new ArrayList<User>();
-		for(User it : users.values()) {
-			if(it.roleMatches(Role.MANAGER) && (it).getObject() == null) {
+		for(User it : getAllManagers()) {
+			if((it).getObject() == null) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+	
+	public ArrayList<User> getAllEmployedManagers(){
+		ArrayList<User> retList = new ArrayList<User>();
+		for(User it : getAllManagers()) {
+			if((it).getObject() != null) {
 				retList.add(it);
 			}
 		}
@@ -385,5 +395,13 @@ public class UserDAO {
 	public void updateCustomerTrainingHistory(TrainingHistory t) {
 		 User customer = users.get(t.getCustomer().getUsername());
 		 customer.updateTrainingHistory(t);
+	}
+	
+	public void unemployManager(int id) {
+		for(User it : getAllEmployedManagers()) {
+			if(it.getObject().getId() == id) {
+				it.setObject(null);
+			}
+		}
 	}
 }

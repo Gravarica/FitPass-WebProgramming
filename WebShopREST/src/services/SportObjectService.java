@@ -106,6 +106,7 @@ public class SportObjectService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public SportObject delete(@PathParam("id") int id) {
+		getUserDAO().unemployManager(id);
 		return getSportObjectDAO().delete(id);
 	}
 	
