@@ -95,6 +95,7 @@ public class SportObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public SportObject createSportObject(SportObjectCreateDTO dto) {
+		//System.out.println("PRIMIO SAM OVO" + dto.getManagerUsername() + dto.getName() + dto.getType());
 		SportObject newObject = getSportObjectDAO().createSportObject(dto);
 		getUserDAO().setSportObject(newObject, dto.getManagerUsername());
 		return newObject;
@@ -128,6 +129,7 @@ public class SportObjectService {
 	@Path("/types")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<String> getSportObjectTypes(){
+		System.out.println("POZVAN SAM");
 		return getSportObjectDAO().getSportObjectTypes();
 	}
 }

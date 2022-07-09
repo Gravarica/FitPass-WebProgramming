@@ -8,17 +8,16 @@ import enums.SportObjectType;
 public class SportObjectCreateDTO {
 
 	private String name;
-	private SportObjectType type;
+	private String type;
 	private Location location;
 	private Base64 logo;
-	
 	private String managerUsername;
 	
 	public SportObjectCreateDTO() {
 		super();
 	}
 	
-	public SportObjectCreateDTO(String name, SportObjectType type, Location location, Base64 logo,String manager) {
+	public SportObjectCreateDTO(String name, String type, Location location, Base64 logo,String manager) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -35,11 +34,11 @@ public class SportObjectCreateDTO {
 		this.name = name;
 	}
 
-	public SportObjectType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(SportObjectType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -65,5 +64,14 @@ public class SportObjectCreateDTO {
 
 	public void setManagerUsername(String manager) {
 		this.managerUsername = manager;
+	}
+
+	public SportObjectType convertToType(String type) {
+		for(SportObjectType it : SportObjectType.values()) {
+			if(it.toString().equals(type)) {
+				return it;
+			}
+		}
+		return null;
 	}
 }

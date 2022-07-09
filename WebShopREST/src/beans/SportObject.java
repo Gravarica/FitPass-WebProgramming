@@ -43,6 +43,7 @@ public class SportObject extends Entity {
 		this.name = dto.getName();
 		this.location = dto.getLocation();
 		this.image = dto.getLogo();
+		this.sportObjectType = dto.convertToType(dto.getType());
 	}
 
 	public String getName() {

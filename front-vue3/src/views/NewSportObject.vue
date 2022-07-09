@@ -17,15 +17,15 @@
                 <div class="row">
                   <div class="mb-4">
                     <div class="form-outline">
-                      <input type="text" id="form3Example1m" placeholder="Name"  required v-model="name" class="form-control form-control-lg" />
+                      <input type="text" id="form3Example1m" placeholder="Name"  required v-model="addObjectDTO.name" class="form-control form-control-lg" />
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
                     <div>
-                         <select class="type form-select form-outline form-select-lg mb-4" required aria-label=".form-select-lg example">
-                            <option value="" disabled selected hidden>Please choose type of Sport Object</option>
+                         <select v-model="addObjectDTO.type" class="type form-select form-outline form-select-lg mb-4" required aria-label=".form-select-lg example">
+                            <option value="" disabled>Please choose type of Sport Object</option>
                             <option v-for="it in types" :value="it">{{it}}</option>
                         </select>
                     </div>
@@ -33,8 +33,8 @@
 
                  <div class="row">
                     <div class="col-md-6">
-                        <select class="type form-select form-outline form-select-lg mb-4"  required aria-label=".form-select-lg example">
-                            <option value="" disabled selected hidden>City</option>
+                        <select v-model="addObjectDTO.location.address.city" class="type form-select form-outline form-select-lg mb-4"  required aria-label=".form-select-lg example">
+                            <option value="" disabled>City</option>
                             <option value="Beograd">Beograd</option>
                             <option value="Novi Sad">Novi Sad</option>
                             <option value="Nis">Subotica</option>
@@ -44,19 +44,20 @@
                     </div>
                     
                     <div class="col-md-6">
-                         <input type="text" v-model="postalNumber" required id="form3Example1m" placeholder="Postal Number" class="form-control form-control-lg" />
+                         <input type="text" v-model="addObjectDTO.location.address.postalNumber" required id="form3Example1m" placeholder="Postal Number" class="form-control form-control-lg" />
                     </div>
                 </div>
 
-                <div class="form-outline mb-4">
-                  <input type="text" required v-model="adress" id="form3Example8" placeholder="Adress" class="form-control form-control-lg" />
+                <div class="form-outline mb-4 row">
+                  <div class="col-md-8"><input type="text" required v-model="addObjectDTO.location.address.street" id="form3Example8" placeholder="Adress" class="form-control form-control-lg" /></div>
+                  <div class="col-md-4"><input type="text" required v-model="addObjectDTO.location.address.number" id="form3Example8" placeholder="Number" class="form-control form-control-lg" /></div>
                 </div>
 
                 <div class="row" v-if="showManagers">
                     <div>
-                         <select required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
-                            <option value="" disabled selected hidden>Please choose manager</option>
-                            <option v-for="it in managers" :value="it">{{getFullName(it)}}</option>
+                         <select v-model="addObjectDTO.managerUsername" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
+                            <option value="" disabled>Please choose manager</option>
+                            <option v-for="it in managers" :value="it.username">{{getFullName(it)}}</option>
                         </select>
                     </div>
                 </div>
@@ -84,9 +85,6 @@
                 <div class="d-flex justify-content-end pt-5">
                   <input type="submit" @click="addNewSportObject" class="btn btn-warning btn-lg ms-2" value="Submit">
                 </div>
-                
-                
-
               </div>
             </div>
           </div>
@@ -98,7 +96,6 @@
 </template>
     
 <script>
-import { FLIPPED_ALIAS_KEYS, tsNonNullExpression } from '@babel/types'
 import axios from 'axios'
 
     export default{
@@ -109,20 +106,15 @@ import axios from 'axios'
                 managers : null,
                 showManagers : true,
                 canSubmit : false,
-                name : null,
-                type : null,
-                city : null,
-                postalNumber : null,
-                adress : null,
-                manager : null,
-                from : null,
-                to : null,
+                newSportObject : null,
+                addObjectDTO : { name: "", type : "" , managerUsername: "", location:{ address:{ street : "" , number: "", city : "" , postalNumber : ""}, longitude:"", latitude:""} , logo : null}
             }
         },
         created(){
             axios
                 .get('http://localhost:8081/WebShopREST/rest/sport_objects/types')
                 .then((response) =>{
+                    console.log("STA SE DESAVA BUKI?")
                     this.types = response.data
                 })
         
@@ -144,6 +136,14 @@ import axios from 'axios'
             },
             canSubmit(){
                 return this.canSubmit
+            },
+            addNewSportObject(){
+                console.log("OVO SALJEM"  + this.addObjectDTO.name)
+                axios
+                    .post('http://localhost:8081/WebShopREST/rest/sport_objects/create', this.addObjectDTO)
+                    .then((response) => {
+                        this.newSportObject = response.data
+                    })
             }
         }
     }

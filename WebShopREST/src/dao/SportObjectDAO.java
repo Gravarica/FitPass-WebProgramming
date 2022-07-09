@@ -141,6 +141,7 @@ public class SportObjectDAO {
 		SportObject returnObject = getById(id);
 		returnObject.setDeleted(true);
 		objects.remove(returnObject);
+		saveSportObjects();
 		return returnObject;
 	}
   
