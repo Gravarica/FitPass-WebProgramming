@@ -290,15 +290,7 @@ public class UserDAO {
 		return null;
 	}
 	
-	//Svi treninzi kupca
-	public ArrayList<TrainingHistory> getCustomerTrainingHistory(String username){
-		for(User it : users.values()) {
-			if(it.getUsername().equals(username)) {
-				return it.getTrainingHistory();
-			}
-		}
-		return null;
-	}
+	
   
 	//Metoda koja vraca treninge kupca na mesecnom nivou
 	public ArrayList<TrainingHistory> getCustomerMonthlyTrainingHistory(String username){

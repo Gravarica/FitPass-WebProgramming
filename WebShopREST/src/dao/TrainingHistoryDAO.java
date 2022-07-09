@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Training;
 import beans.TrainingHistory;
+import beans.User;
 import dto.TrainingScheduleDTO;
 import enums.TrainingType;
 
@@ -113,11 +114,14 @@ public class TrainingHistoryDAO {
 		return retList;
 	}
 
-
-
-
-
-
-
-
+	//Svi treninzi kupca
+	public ArrayList<TrainingHistory> getCustomerTrainingHistory(String username){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : trainingHistories) {
+			if(it.getCustomer().getUsername().equals(username)) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
 }

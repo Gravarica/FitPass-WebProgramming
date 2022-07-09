@@ -54,6 +54,14 @@ public class UserService {
 		return (TrainingDAO) ctx.getAttribute("trainingDAO");
 	}
 		
+	//DUPLI KOD
+	@GET
+	@Path("/loggedUser")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getLoggedUser(){
+		return getUserDAO().getLoggedUser();
+	}
+	
 	@GET
 	@Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)
