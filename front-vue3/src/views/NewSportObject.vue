@@ -1,5 +1,5 @@
 <template>
-<section class="h-100 bg-dark">
+<section class="vh-100 gradient-custom">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col">
@@ -12,7 +12,7 @@
             </div>
             <div class="col-xl-6">
               <div class="card-body p-md-5 text-black">
-                <h3 class="mb-5 text-uppercase">New Object</h3>
+                <h3 class="mb-5 text-uppercase">Adding New Object</h3>
 
                 <form id="myForm" onsubmit="addNewSportObject()">
                 <div class="row">
@@ -164,6 +164,17 @@ import axios from 'axios'
 </script>
 
 <style>
+
+.gradient-custom {
+/* fallback for old browsers */
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+background-color: #f7b42c;
+background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
     font-size: 1rem;
     line-height: 2.15;
