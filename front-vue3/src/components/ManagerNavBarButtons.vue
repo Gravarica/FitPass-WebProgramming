@@ -1,12 +1,12 @@
 <template>
 
     <form form class="d-flex ms-left">
-        <li><router-link class="link" :to="{name : 'Home'}">Home</router-link></li>
-        <li><router-link class="link" :to="{name : 'Objects'}">Objects</router-link></li>
-        <li><router-link class="link" :to="{name : ''}">About</router-link></li>
-        <li><router-link class="link" :to="{name : ''}">Contact</router-link></li>
-        <li><router-link class="link" :to="{name : ''}">My Object</router-link></li>
-        <li><router-link class="link" :to="{name : ''}">Add Content</router-link></li>
+        <li><router-link class="link enrico" :to="{name : 'Home'}">Home</router-link></li>
+        <li><router-link class="link enrico" :to="{name : 'Objects'}">Objects</router-link></li>
+        <li><router-link class="link enrico" :to="{name : ''}">About</router-link></li>
+        <li><router-link class="link enrico" :to="{name : ''}">Contact</router-link></li>
+        <li><router-link class="link enrico" :to="{name : ''}">My Object</router-link></li>
+        <li><router-link class="link enrico" :to="{name : ''}">Add Content</router-link></li>
     </form>       
 
 </template>
@@ -35,4 +35,10 @@ li{
                 border-color: #00afea;
             }
         }
+
+.enrico {
+  text-decoration: none;
+  color: inherit;
+}
+
 </style>

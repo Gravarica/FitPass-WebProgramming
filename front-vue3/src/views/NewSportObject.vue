@@ -85,8 +85,8 @@
                     </div>
                 </div>
                 
-                <div class="d-flex justify-content-end pt-5">
-                  <input type="submit" class="btn btn-warning btn-lg ms-2" value="Submit">
+                <div class="d-grid gap-2 pt-5 md-6">
+                  <input type="submit" class=" btn btn-warning btn-lg" value="Submit">
                 </div>
                 </form>
               </div>
