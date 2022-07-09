@@ -1,37 +1,14 @@
 <template>
-    <!-- <div class="card shadow-sm">
-            <img class="card-img-top" :src="getSource(sportObjectName)" alt="Card image cap"/>
-            <div class="card-body">
-              <p class="card-text">:training-name</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div> -->
-
-    <!-- <div class="card container">
-        <div class="card-body">
-            <img class="card-img-top" :src="getSource(sportObjectName)" alt="Card image cap"/>
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-  </div> -->
-
      <div>
         <div class="card lotina">
-        <img :src="getSource()" class="card-img-top" alt="...">
-        <div class="card-body">
-        <h5 class="card-title">{{trainingName}}</h5>
-        <p class="card-text">{{sportObjectName}}</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
+            <img :src="getSource()" class="card-img-top" alt="...">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Gym: {{sportObjectName}}</li>
+                <li class="list-group-item">Training Name: {{trainingName}}</li>
+                <li class="list-group-item">Training Type: {{trainingType}}</li>
+                <li class="list-group-item">Date: {{checkInDate}}</li>
+                <li class="list-group-item">Duration: {{setDuration()}}</li>
+            </ul>
     </div>
      </div>
     
@@ -49,12 +26,18 @@
         },
         props:{
             sportObjectName : String,
-            trainingName : String
+            trainingName : String,
+            trainingType : String,
+            duration : Number,
+            checkInDate : Date
         },
         methods:{
             getSource(){
                 let images = require.context('../assets/', false, /\.png$/);
                 return images('./' + this.sportObjectName + ".png")
+            },
+            setDuration(){
+                return this.duration + "min"
             }
         }
     }
