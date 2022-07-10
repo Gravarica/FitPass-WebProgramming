@@ -8,6 +8,7 @@ import SelectTraining from '../components/SelectTraining.vue'
 import NewSportObject from '../views/NewSportObject.vue'
 import ManagerRegistration from '../components/ManagerRegistration.vue'
 import CustomerTrainings from '../views/CustomerTrainings.vue'
+import TrainerTrainings from '../views/TrainerTrainings.vue'
 
 const routes = [
   {
@@ -55,6 +56,11 @@ const routes = [
     path: '/customer/trainings',
     name: "CustomerTrainings",
     component: CustomerTrainings
+  },
+  {
+    path: '/trainer/trainings',
+    name: "TrainerTrainings",
+    component: TrainerTrainings
   }
 ]
 

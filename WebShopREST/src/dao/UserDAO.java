@@ -310,39 +310,7 @@ public class UserDAO {
 		}
 		return retList;
 	}
-
-	//Metoda koja vraca treninge trenera 
-	public ArrayList<TrainingHistory> getTrainerTrainingHistory(String username){
-		for(User it : users.values()) {
-			if(it.getUsername().equals(username)) {
-				return it.getTrainingHistory();
-			}
-		}
-		return null;
-	}
 	
-	//Vraca sve personalne treninge trenera
-	public ArrayList<TrainingHistory> getTrainerPersonalTrainings(String username){
-		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
-		for(TrainingHistory it : getTrainerTrainingHistory(username)) {
-			if(it.getTraining().getType() == TrainingType.PERSONAL) {
-				retList.add(it);
-			}
-		}
-		return retList;
-	}
-
-	//Vraca sve grupne treninge trenera
-	public ArrayList<TrainingHistory> getTrainerGroupTrainings(String username){
-		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
-		for(TrainingHistory it : getTrainerTrainingHistory(username)) {
-			if(it.getTraining().getType() == TrainingType.GROUP) {
-				retList.add(it);
-			}
-		}
-		return retList;
-	}
-
 	public UserAccountInformationDTO getUserAccountInfromation() {
 		return new UserAccountInformationDTO(getLoggedUser());
 	}

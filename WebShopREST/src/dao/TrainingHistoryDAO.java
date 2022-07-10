@@ -124,4 +124,40 @@ public class TrainingHistoryDAO {
 		}
 		return retList;
 	}
+
+
+	//Metoda koja vraca treninge trenera 
+	public ArrayList<TrainingHistory> getTrainerTrainingHistory(String username){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : trainingHistories) {
+			if(it.getTrainer().getUsername().equals(username)) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+
+	//Vraca sve personalne treninge
+	public ArrayList<TrainingHistory> getTrainerPersonalTrainings(String username){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : getTrainerTrainingHistory(username)) {
+			if(it.getTraining().getType() == TrainingType.PERSONAL) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+
+	//Vraca sve grupne treninge trenera
+	public ArrayList<TrainingHistory> getTrainerGroupTrainings(String username){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : getTrainerTrainingHistory(username)) {
+			if(it.getTraining().getType() == TrainingType.GROUP) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+
+
 }

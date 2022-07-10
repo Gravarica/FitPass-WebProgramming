@@ -5,7 +5,7 @@
         <li><router-link class="link enrico" :to="{name : 'Objects'}">Objects</router-link></li>
         <li><router-link class="link enrico" :to="{name : ''}">About</router-link></li>
         <li><router-link class="link enrico" :to="{name : ''}">Contact</router-link></li>
-        <li><router-link class="link enrico" :to="{name : ''}">My Trainings</router-link></li>
+        <li><router-link class="link enrico" :to="{name : 'TrainerTrainings'}">My Trainings</router-link></li>
     </form>       
 
 </template>

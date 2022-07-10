@@ -67,21 +67,21 @@ public class TrainingHistoryService {
 	@Path("/trainer/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<TrainingHistory> getTrainerTrainingHistory(@PathParam("username") String username){
-		return getUserDAO().getTrainerTrainingHistory(username);
+		return getTrainingHistoryDAO().getTrainerTrainingHistory(username);
 	}
 	
 	@GET
 	@Path("/trainer/personal/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<TrainingHistory> getTrainerPersonalTrainings(@PathParam("username") String username){
-		return getUserDAO().getTrainerPersonalTrainings(username);
+		return getTrainingHistoryDAO().getTrainerPersonalTrainings(username);
 	}
 	
 	@GET
 	@Path("/trainer/group/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<TrainingHistory> getTrainerGroupTrainings(@PathParam("username") String username){
-		return getUserDAO().getTrainerGroupTrainings(username);
+		return getTrainingHistoryDAO().getTrainerGroupTrainings(username);
 	}
 	
 	
