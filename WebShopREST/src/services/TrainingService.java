@@ -57,4 +57,12 @@ public class TrainingService {
 		System.out.println("POZVAN SAM SA ID-em " + id);
 		return getTrainingDAO().getSportObjectTrainings(id);
 	}
+
+	@GET
+	@Path("/without/trainer/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Training> getTrainingsWithoutTrainer(@PathParam("id") int id){
+		return getTrainingDAO().getTrainingsWithoutTrainer(id);
+	}
+
 }

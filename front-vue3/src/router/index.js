@@ -37,7 +37,7 @@ const routes = [
   {
     path: '/register/trainer',
     name: 'RegisterTrainer',
-    component: SelectSportObject,
+    component: TrainerRegistrationView,
     // childern:[
     //   {
     //     path: '/',

@@ -146,7 +146,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User registerTrainer(TrainerRegistrationDTO dto) {
 		User trainer = getUserDAO().registerTrainer(dto);
-		getTrainingDAO().setTrainingTrainer(dto.getTraining(),trainer);
+		if(dto.getTraining() != null) getTrainingDAO().setTrainingTrainer(dto.getTraining(),trainer);
 		return trainer;
 	}
   

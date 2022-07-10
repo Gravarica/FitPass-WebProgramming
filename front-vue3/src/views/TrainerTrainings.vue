@@ -15,7 +15,7 @@
     </div>
   </section>
 
-<div class="container" v-if="hasHistory == true">
+<div class="container" v-if="!hasHistory == true">
     <div class="row row-cols-md-3">
         <div class="col-5" v-for="t in trainingHistory">
         <TrainingAlbumCard
