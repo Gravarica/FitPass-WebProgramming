@@ -33,6 +33,7 @@ import dto.RegistrationDTO;
 import dto.TrainerRegistrationDTO;
 import dto.UpdateProfileDTO;
 import dto.UserAccountInformationDTO;
+import enums.Role;
 
 @Path("/users")
 public class UserService {
@@ -96,7 +97,9 @@ public class UserService {
 		System.out.println("POGODIO SAM LOGIN");
 		System.out.println("OVO SAM PRIMIO " + dto.getUsername() + dto.getPassword());
 		LoginReturnDTO lrd = getUserDAO().login(dto);
-		getSubscriptionDAO().checkForExpired();
+		if(lrd.getRole() == Role.CUSTOMER) {
+			getSubscriptionDAO().checkForExpired();
+		}
 		if (lrd.isSuccess()) {
 			System.out.println("Usao sam ovde");
 			request.getSession().setAttribute("user", lrd);
