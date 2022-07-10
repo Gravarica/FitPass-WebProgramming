@@ -57,6 +57,7 @@ public class Subscription extends Entity {
 		this.priceWithDiscount = dto.getPrice();
 		this.active = true;
 		this.doneTrainings = 0;
+		this.dailyAppearance = dto.getDailyAppearance();
 		this.totalAppearances = dto.getTotalAppearances();
 		this.finite = false;		/// OVO SAM HARDKODOVAO SAD, IZMENITI
 		this.type = dto.getType();
