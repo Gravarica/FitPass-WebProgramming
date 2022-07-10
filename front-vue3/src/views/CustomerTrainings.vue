@@ -60,7 +60,7 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
         return {
             trainingHistory: null,
             loggedUser: null,
-            hasHistory : false
+            hasHistory : true
         };
     },
     components:{
@@ -71,13 +71,16 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             return "../assets/" + name + ".png";
         },
         loadTrainingHistory(){
+            console.log(this.hasHistory)
             axios
             .get("http://localhost:8081/WebShopREST/rest/training_histories/customer/" + this.loggedUser.username)
             .then((response) => {
+                console.log(response.data)
                 this.trainingHistory = response.data;
-                if (this.trainingHistory != null) {
-                    this.hasHistory = true;
+                if (response == undefined) {
+                    this.hasHistory = false;
                 }
+                console.log(this.hasHistory)
             });
         }
     },
@@ -85,7 +88,6 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
         axios
             .get("http://localhost:8081/WebShopREST/rest/users/loggedUser")
             .then((response) => {
-            console.log(response.data);
             this.loggedUser = response.data;
             console.log("USERNAME: " + this.loggedUser.username);
             this.loadTrainingHistory()

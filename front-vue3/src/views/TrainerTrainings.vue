@@ -15,7 +15,7 @@
     </div>
   </section>
 
-<div class="container" v-if="!hasHistory">
+<div class="container" v-if="hasHistory == true">
     <div class="row row-cols-md-3">
         <div class="col-5" v-for="t in trainingHistory">
         <TrainingAlbumCard
@@ -39,7 +39,7 @@
                 <h2>You dont have any trainings, but you can allways schedule a new one!</h2>
             </div>
             <div class="container pt-5 center">
-                <router-link class="enrico" :to="{name: ''}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
+                <router-link class="enrico" :to="{name: 'ScheduleTraining'}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
             </div>
         </div>
     </div>
@@ -74,8 +74,9 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             axios
             .get("http://localhost:8081/WebShopREST/rest/training_histories/trainer/" + this.loggedUser.username)
             .then((response) => {
+                console.log(this.hasHistory)
                 this.trainingHistory = response.data;
-                if (this.trainingHistory != null) {
+                if (response.data != null) {
                     this.hasHistory = true;
                 }
             });
@@ -105,7 +106,7 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
         axios
             .get("http://localhost:8081/WebShopREST/rest/users/loggedUser")
             .then((response) => {
-            console.log(response.data);
+            console.log(this.hasHistory);
             this.loggedUser = response.data;
             console.log("USERNAME: " + this.loggedUser.username);
             this.loadTrainingHistory()
