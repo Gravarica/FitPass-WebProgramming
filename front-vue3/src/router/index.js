@@ -5,6 +5,10 @@ import RegistrationView from '../views/RegistrationView'
 import TrainerRegistrationView from '../views/TrainerRegistrationView.vue'
 import SelectSportObject from '../components/SelectSportObject.vue'
 import SelectTraining from '../components/SelectTraining.vue'
+import NewSportObject from '../views/NewSportObject.vue'
+import ManagerRegistration from '../components/ManagerRegistration.vue'
+import CustomerTrainings from '../views/CustomerTrainings.vue'
+import TrainerTrainings from '../views/TrainerTrainings.vue'
 import MyProfileView from '../views/MyProfileView'
 import UsersView from '../views/UsersView'
 import DeatilsView from '../views/DetailsView'
@@ -46,6 +50,26 @@ const routes = [
     component: SelectTraining
   },
   {
+    path: '/add/sport_object',
+    name: "AddSportObject",
+    component: NewSportObject
+  },
+  {
+    path: '/register/manager',
+    name: "RegisterManager",
+    component: ManagerRegistration
+  },
+  {
+    path: '/customer/trainings',
+    name: "CustomerTrainings",
+    component: CustomerTrainings
+  },
+  {
+    path: '/trainer/trainings',
+    name: "TrainerTrainings",
+    component: TrainerTrainings
+  },
+  {
     path: '/myprofile',
     name: 'MyProfile',
     component: MyProfileView
@@ -83,8 +107,6 @@ const routes = [
        ...route.params
     })
   }
-
-
 ]
 
 const router = createRouter({

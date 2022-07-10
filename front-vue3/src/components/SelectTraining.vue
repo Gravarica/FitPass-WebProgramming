@@ -12,15 +12,13 @@
                 <thead class="table-dark">
                     <tr>
                         <th>Name</th>
-                        <th>Type</th>
                         <th>Duration</th>
                         <th>Description</th>
                     </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="t in trainings" @click="setSelectedItem(t)">
+                  <tr v-for="t in showTrainings()" @click="setSelectedItem(t)">
                     <td>{{t.name}}</td>
-                    <!-- <td>{{getType(t)}}</td> -->
                     <td>{{t.duration}}</td>
                     <td>{{t.description}}</td>
                   </tr>
@@ -42,7 +40,7 @@
 </template>
 
 <script>
-    import router from '@/router'
+import router from '@/router'
 import axios from 'axios'
     export default {
         data(){
@@ -54,9 +52,6 @@ import axios from 'axios'
             }
         },
         methods: {
-            getStreet(object){
-              return object.location.address.street + ", " + object.location.address.number;
-            },
             setSelectedItem(object){
               this.selectedItem = object
               this.color = 'red'
@@ -64,33 +59,25 @@ import axios from 'axios'
             getType(o){
                 return o.type.toString()
             },
-            loadTrainings(id){
-                axios
-                .get('http://localhost:8081/WebShopREST/rest/trainings/sport_object/' + id)
-                .then((response) => {
-                    this.trainings = response.data;
-                    console.log(id)
-                    if(this.trainings == null){console.log("NULA")}
-                    else{console.log("KITA")}
-                }) 
-            }
-
-        },
-        created(){
-            console.log("USAO")
-            this.emitter.on('load-trainings', (evt) => {
-               console.log("USAO")
-               axios
-                .get('http://localhost:8081/WebShopREST/rest/trainings/sport_object/' + evt.eventContent)
-                .then((response) => {
+            showTrainings(id){
+              axios
+              .get('http://localhost:8081/WebShopREST/rest/trainings/sport_object/' + id)
+              .then((response) => {
                     console.log("USAO")
                     this.trainings = response.data;
-                    console.log(evt.eventContent)
                     if(this.trainings == null){console.log("NULA")}
                     else{console.log("KITA")}
                 }) 
+            },
+        },
+       created(){
+          this.emitter.on('load-trainings', (evt) => {
+              console.log("USAO")
+              this.objectID = evt
+              console.log("objectID" + this.objectID)
+              this.showTrainings(evt)
             })
-    }
+       },
 }
 </script>
 

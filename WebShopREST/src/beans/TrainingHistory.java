@@ -18,17 +18,19 @@ public class TrainingHistory extends Entity {
 	private Training training;
 	private User customer;
 	private User trainer;
+	private boolean canCancel = false;
 	
 	public TrainingHistory() {
 		super();
 	}
 	
-	public TrainingHistory(int id, LocalDate checkInDate, Training training, User customer, User trainer) {
+	public TrainingHistory(int id, LocalDate checkInDate, Training training, User customer, User trainer,boolean canCancel) {
 		super(id);
 		this.checkInDate = checkInDate;
 		this.training = training;
 		this.customer = customer;
 		this.trainer = trainer;
+		this.canCancel = canCancel;
 	}
 
 	//Konstruktor za prijavljivanje na trening
@@ -69,5 +71,13 @@ public class TrainingHistory extends Entity {
 
 	public void setTrainer(User trainer) {
 		this.trainer = trainer;
+	}
+	
+	public boolean isCanCancel() {
+		return canCancel;
+	}
+
+	public void setCanCancel(boolean canCancel) {
+		this.canCancel = canCancel;
 	}
 }

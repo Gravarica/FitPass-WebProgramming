@@ -1,23 +1,41 @@
 <template>
 
-    <form form class="d-flex ms-left my-2" >
-        <li><router-link class="link" :to="{name : 'Home'}" exact>Home</router-link></li>
-        <li><router-link class="link" :to="{name : 'Objects'}" exact>Objects</router-link></li>
+    <form form class="d-flex ms-left my-2">
+        <li><router-link class="link enrico" :to="{name : 'Home'}">Home</router-link></li>
+        <li><router-link class="link enrico" :to="{name : 'Objects'}">Objects</router-link></li>
         <li><router-link class="link" :to="{name : 'Users'}" exact>Users</router-link></li>
-        <li><router-link class="link" :to="{name : 'EditProfile'}">Contact</router-link></li>
-        <li class="nav-item dropdown disko">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">REGISTER</a>
-           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><router-link class="link" :to="{name : 'RegisterTrainer'}">Trainer</router-link></li>
-            <li><router-link class="link" :to="{name : ''}">Manager</router-link></li>
-        </ul>
+        <li><router-link class="link enrico" :to="{name : ''}">Contact</router-link></li>
+        <!-- <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+            </li>
+        </div> -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle enrico" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Add new
+        </a>
+           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                <router-link class="link enrico dropdown-item" :to="{name : 'RegisterTrainer'}">Trainer</router-link>
+                <router-link class="link  enrico dropdown-item" :to="{name : 'RegisterManager'}">Manager</router-link>
+                <hr class="dropdown-divider">
+                <router-link class="link enrico dropdown-item" :to="{name : 'AddSportObject'}">Sport Object</router-link>
+            </ul>
         </li>
     </form>       
 
 </template>
 
 <script>
+    export default{
 
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -34,12 +52,21 @@ li{
             text-decoration: none;
     }
 
- nav li:hover,
- nav li.router-link-active,
- nav li.router-link-exact-active {
-   color: indianred;
-   cursor: pointer;
-   border: 0;
-   text-decoration: none;
- }
+.link{
+            font-size: 14px;
+            transition: 0.5s ease all;
+            padding-bottom: 4px;
+            border-bottom: 1px solid transparent;
+
+            &:hover{
+                color : #00afea;
+                border-color: #00afea;
+            }
+        }
+
+.enrico {
+  text-decoration: none;
+  color: inherit;
+}
+
 </style>

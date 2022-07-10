@@ -110,5 +110,47 @@
 		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
 		"totalPoints" : 60
+	},
+	{
+		"id" : 9,
+		"deleted" : false,
+		"username" : "Zokrat69",
+		"password" : "-286773544",
+		"firstName" : "Zokrat",
+		"lastName" : "Zokratic",
+		"gender" : "FEMALE",
+		"role" : "MANAGER",
+		"dateOfBirth" : "1998-01-01",
+		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"object" : null,
+		"totalPoints" : 60
+	},
+	{
+		"id" : 10,
+		"deleted" : false,
+		"username" : "samuraj",
+		"password" : "-286773544",
+		"firstName" : "Torbakina",
+		"lastName" : "Makina",
+		"gender" : "MALE",
+		"role" : "MANAGER",
+		"dateOfBirth" : "1998-01-01",
+		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"object" : null,
+		"totalPoints" : 60
+	},
+	{
+		"id" : 11,
+		"deleted" : false,
+		"username" : "mrmovic",
+		"password" : "-286773544",
+		"firstName" : "Mrkenzi",
+		"lastName" : "Shasija",
+		"gender" : "MALE",
+		"role" : "MANAGER",
+		"dateOfBirth" : "1998-01-01",
+		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"object" : null,
+		"totalPoints" : 60
 	}
 ]

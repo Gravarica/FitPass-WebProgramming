@@ -227,8 +227,18 @@ public class UserDAO {
 	//Metoda koja vraca sve SLOBODNE MENAGERE
 	public ArrayList<User> getAllAvailableManagers(){
 		ArrayList<User> retList = new ArrayList<User>();
-		for(User it : users.values()) {
-			if(it.roleMatches(Role.MANAGER) && (it).getObject() == null) {
+		for(User it : getAllManagers()) {
+			if((it).getObject() == null) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+	
+	public ArrayList<User> getAllEmployedManagers(){
+		ArrayList<User> retList = new ArrayList<User>();
+		for(User it : getAllManagers()) {
+			if((it).getObject() != null) {
 				retList.add(it);
 			}
 		}
@@ -284,15 +294,7 @@ public class UserDAO {
 		return null;
 	}
 	
-	//Svi treninzi kupca
-	public ArrayList<TrainingHistory> getCustomerTrainingHistory(String username){
-		for(User it : users.values()) {
-			if(it.getUsername().equals(username)) {
-				return it.getTrainingHistory();
-			}
-		}
-		return null;
-	}
+	
   
 	//Metoda koja vraca treninge kupca na mesecnom nivou
 	public ArrayList<TrainingHistory> getCustomerMonthlyTrainingHistory(String username){
@@ -312,39 +314,7 @@ public class UserDAO {
 		}
 		return retList;
 	}
-
-	//Metoda koja vraca treninge trenera 
-	public ArrayList<TrainingHistory> getTrainerTrainingHistory(String username){
-		for(User it : users.values()) {
-			if(it.getUsername().equals(username)) {
-				return it.getTrainingHistory();
-			}
-		}
-		return null;
-	}
 	
-	//Vraca sve personalne treninge trenera
-	public ArrayList<TrainingHistory> getTrainerPersonalTrainings(String username){
-		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
-		for(TrainingHistory it : getTrainerTrainingHistory(username)) {
-			if(it.getTraining().getType() == TrainingType.PERSONAL) {
-				retList.add(it);
-			}
-		}
-		return retList;
-	}
-
-	//Vraca sve grupne treninge trenera
-	public ArrayList<TrainingHistory> getTrainerGroupTrainings(String username){
-		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
-		for(TrainingHistory it : getTrainerTrainingHistory(username)) {
-			if(it.getTraining().getType() == TrainingType.GROUP) {
-				retList.add(it);
-			}
-		}
-		return retList;
-	}
-
 	public UserAccountInformationDTO getUserAccountInfromation() {
 		return new UserAccountInformationDTO(getLoggedUser());
 	}
@@ -390,7 +360,15 @@ public class UserDAO {
 		 User customer = users.get(t.getCustomer().getUsername());
 		 customer.updateTrainingHistory(t);
 	}
-	
+  
+	public void unemployManager(int id) {
+		for(User it : getAllEmployedManagers()) {
+			if(it.getObject().getId() == id) {
+				it.setObject(null);
+			}
+		}
+  }
+    
 	public UserAccountInformationDTO editProfile(UpdateProfileDTO dto) {
 		User user = getLoggedUser();
 		System.out.println("PRIMIO SAM: " + dto.getFirstName() + " | " + dto.getLastName() + " | " + dto.getUsername() + " | " + dto.getOldPassword() + " | " + dto.getNewPassword());

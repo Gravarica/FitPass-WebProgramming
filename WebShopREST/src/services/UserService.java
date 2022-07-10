@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -65,6 +66,14 @@ public class UserService {
 		return (SubscriptionDAO) ctx.getAttribute("subscriptionDAO");
 	}
 		
+	//DUPLI KOD
+	@GET
+	@Path("/loggedUser")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getLoggedUser(){
+		return getUserDAO().getLoggedUser();
+	}
+	
 	@GET
 	@Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -158,6 +167,13 @@ public class UserService {
 	public UserAccountInformationDTO getUserAccountInformation() {
 		return getUserDAO().getUserAccountInfromation();
 	}
+  
+	@GET
+	@Path("/available/managers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getAvailableManagers(){
+		return getUserDAO().getAllAvailableManagers();
+	}	
 
 	@PUT
 	@Path("/editProfile")
