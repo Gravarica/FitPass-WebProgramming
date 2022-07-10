@@ -16,6 +16,7 @@ import EditProfileView from '../views/EditProfileView'
 import SubscriptionView from '../views/SubscriptionView'
 import SubscribeView from '../views/SubscribeView'
 import CheckoutView from '../views/CheckoutView'
+import PromoCode from '../views/PromoCode'
 
 const routes = [
   {
@@ -106,6 +107,11 @@ const routes = [
     props: (route) => ({
        ...route.params
     })
+  },
+  {
+    path: '/promoCode',
+    name: 'PromoCode',
+    component: PromoCode
   }
 ]
 
