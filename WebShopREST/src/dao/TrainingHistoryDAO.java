@@ -1,6 +1,7 @@
 package dao;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -122,7 +123,7 @@ public class TrainingHistoryDAO {
 				retList.add(it);
 			}
 		}
-		return retList;
+		return FilterTrainingHistory(retList);
 	}
 
 
@@ -158,6 +159,18 @@ public class TrainingHistoryDAO {
 		}
 		return retList;
 	}
+	
+	//Metoda koja vraca treninge u prethodnih mesec dana
+	public ArrayList<TrainingHistory> FilterTrainingHistory(ArrayList<TrainingHistory> trainings){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : trainings) {
+			if(it.getCheckInDate().isAfter(LocalDate.now().minusMonths(1))) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
 
+	//LocalDate.now().plusDays(2).isBefore(it.getCheckInDate()) || LocalDate.now().plusDays(2).isEqual(it.getCheckInDate())
 
 }
