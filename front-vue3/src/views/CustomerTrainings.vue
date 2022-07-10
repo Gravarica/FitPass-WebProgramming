@@ -26,7 +26,7 @@
             :check-in-date="t.checkInDate"
             :duration="t.training.duration"
             :training-type="t.training.type"
-            :customer="t.customer"
+            :trainer="t.trainer"
             :is-trainer="false">
         </TrainingAlbumCard>
         </div>   
