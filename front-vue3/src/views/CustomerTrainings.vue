@@ -9,14 +9,15 @@
         <p class="lead text-center">Here you can see your training history in previous month.</p>
         <p class="lead text-center">Of course you can allways schedule a new one!</p>
         <p>
-          <!-- <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
+          <div class="container pt-5 center" v-if="hasHistory">
+                <router-link class="enrico" :to="{name: ''}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
+            </div>
         </p>
       </div>
     </div>
   </section>
 
-<div class="container" v-if="!hasHistory">
+<div class="container" v-if="hasHistory">
     <div class="row row-cols-md-3">
         <div class="col-5" v-for="t in trainingHistory">
         <TrainingAlbumCard
@@ -32,7 +33,7 @@
     </div>
 </div>
 
-<div class="active container-fluid">
+<div class="active container-fluid" v-if="!hasHistory">
     <div class="main-container container">
         <div class="inner-container container">
             <div class="container">

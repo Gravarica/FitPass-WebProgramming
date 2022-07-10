@@ -1,5 +1,5 @@
 <template>
- <div class="gradient-custom wh-100">
+ <div class="gradient-custom mw-100 container-fluid vh-100">
 
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
