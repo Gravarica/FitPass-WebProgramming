@@ -37,7 +37,7 @@
     <div class="main-container container">
         <div class="inner-container container">
             <div class="container">
-                <h2>You dony have any trainings in last month, hurry up and schedule a new one!</h2>
+                <h2>You don't have any trainings in last month, hurry up and schedule a new one!</h2>
             </div>
             <div class="container pt-5 center">
                 <router-link class="enrico" :to="{name: ''}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
