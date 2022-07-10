@@ -9,7 +9,7 @@
         <p>
           <a href="#" @click="loadTrainingHistory()" class="btn btn-primary my-2">ALL TRAININGS</a>
           <a href="#" @click="showPersonal()" class="btn btn-primary my-2">PERSONAL TRAININGS</a>
-          <a href="#" @click="showGroup()" class="btn btn-secondary my-2">GROUP TRAININGS</a>
+          <a href="#" @click="showGroup()" class="btn btn-primary my-2">GROUP TRAININGS</a>
         </p>
       </div>
     </div>
