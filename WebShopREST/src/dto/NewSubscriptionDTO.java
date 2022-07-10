@@ -11,6 +11,7 @@ public class NewSubscriptionDTO {
 
 	private SubscriptionType type;
 	private double price;
+	private double actualPrice;
 	private String username;
 	private long dailyAppearance;
 	private int totalAppearances;
@@ -50,6 +51,14 @@ public class NewSubscriptionDTO {
 
 	public void setTotalAppearances(int totalAppearances) {
 		this.totalAppearances = totalAppearances;
+	}
+
+	public double getActualPrice() {
+		return actualPrice;
+	}
+
+	public void setActualPrice(double actualPrice) {
+		this.actualPrice = actualPrice;
 	}
 	
 	

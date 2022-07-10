@@ -15,6 +15,7 @@ import dto.TrainerRegistrationDTO;
 import enums.CustomerTypeName;
 import enums.Gender;
 import enums.Role;
+import src.util.Bridge;
 import src.util.BusinessUtil;
 import src.util.LocalDateDeserializer;
 import src.util.LocalDateSerializer;
@@ -34,7 +35,7 @@ public class User extends Entity {
 	private SportObject object; //Manager
 	private int membershipFeeId; //Customer
 	private ArrayList<SportObject> objectsVisited; //Customer
-	private int totalPoints; //Customer
+	private double totalPoints; //Customer
 	private ArrayList<TrainingHistory> trainingHistory; //Trainer and Customer
 	
 	public User() {
@@ -103,7 +104,7 @@ public class User extends Entity {
 	
 	private void instantiateCustomerFields() {
 		this.totalPoints = 0;
-		this.customerType = new CustomerType(CustomerTypeName.BRONZE);
+		this.customerType = Bridge.getCustomerType(CustomerTypeName.BRONZE);
 	}
 	
 	public String getUsername() {
@@ -195,11 +196,11 @@ public class User extends Entity {
 		this.objectsVisited = objectsVisited;
 	}
 
-	public int getTotalPoints() {
+	public double getTotalPoints() {
 		return totalPoints;
 	}
 
-	public void setTotalPoints(int totalPoints) {
+	public void setTotalPoints(double totalPoints) {
 		this.totalPoints = totalPoints;
 	}
 

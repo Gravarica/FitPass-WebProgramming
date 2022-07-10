@@ -21,9 +21,13 @@
                         <span class="text-item">Subscription</span>
                         <span>{{priceDisplay}} RSD</span>
                     </div>
-                    <div class="item d-flex align-items-center justify-content-between" v-if="valid">
+                    <div class="item d-flex align-items-center justify-content-between" v-if="disablePromoCode">
                         <span class="text-item">Promo code</span>
-                        <span>-2999 RSD</span>
+                        <span>-{{this.discountPromo}} RSD</span>
+                    </div>
+                    <div class="item d-flex align-items-center justify-content-between" v-if="this.customerTypeDTO.show">
+                        <span class="text-item">{{this.customerTypeDTO.name}}</span>
+                        <span>-{{this.discountType}} RSD</span>
                     </div>
                 </div>
                 <div class="totally-spies">
@@ -88,7 +92,10 @@ import axios from 'axios'
                 promoCode: '',
                 returnPromoCodeDTO: {discount: null, message: ''},
                 priceDisplay: this.$props.price,
-                disablePromoCode: false
+                disablePromoCode: false,
+                discountPromo: null,
+                discountType: null,
+                customerTypeDTO: { name: '', discount: null, show: false}
             }
         },
         methods: {
@@ -98,14 +105,31 @@ import axios from 'axios'
                     .get('http://localhost:8081/WebShopREST/rest/promos/redeem/' + this.promoCode)
                     .then(response => {
                         this.returnPromoCodeDTO = response.data
-                        this.priceDisplay = this.priceDisplay * (1 - this.returnPromoCodeDTO.discount/100)
-                        this.disablePromoCode = true
+                        this.discountPromo = this.priceDisplay * this.returnPromoCodeDTO.discount/100
+                        this.priceDisplay = this.priceDisplay - this.discountPromo
+                        this.priceDisplay = Math.round(this.priceDisplay * 100) / 100
+                        this.discountPromo = Math.round(this.discountPromo * 100) / 100
+                        if(this.returnPromoCodeDTO.discount > 0){
+                            this.disablePromoCode = true
+                        }
+                        
                     })
                 } else {
                     this.returnPromoCodeDTO.message = 'You have already redeemed promo code'
                 }
                 
             }
+        },
+        mounted(){
+            axios
+                .get('http://localhost:8081/WebShopREST/rest/users/loggedUser/customerType')
+                .then(response => {
+                    this.customerTypeDTO = response.data
+                    this.discountType = this.priceDisplay * this.customerTypeDTO.discount/100
+                    this.priceDisplay = this.priceDisplay - this.discountType
+                    this.discountType = Math.round(this.discountType * 100) / 100
+                    this.priceDisplay = Math.round(this.priceDisplay * 100) / 100
+                })
         }
     }
 </script>

@@ -30,7 +30,7 @@ public class SubscriptionService {
 	public void init() {
 		if(ctx.getAttribute("subscriptionDAO") == null) {
 			String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("subscriptionDAO", new SubscriptionDAO(contextPath, ctx));
+			ctx.setAttribute("subscriptionDAO", new SubscriptionDAO(ctx));
 		}
 	}
 	

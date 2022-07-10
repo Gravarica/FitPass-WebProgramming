@@ -17,11 +17,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.CustomerType;
 import beans.SportObject;
 import beans.User;
 import dao.SportObjectDAO;
+import dao.SubscriptionDAO;
 import dao.TrainingDAO;
 import dao.UserDAO;
+import dto.CustomerTypeDTO;
 import dto.LoginDTO;
 import dto.LoginReturnDTO;
 import dto.ManagerRegistrationDTO;
@@ -53,6 +56,14 @@ public class UserService {
 	private TrainingDAO getTrainingDAO() {
 		return (TrainingDAO) ctx.getAttribute("trainingDAO");
 	}
+	
+	private SubscriptionDAO getSubscriptionDAO() {
+		if(ctx.getAttribute("subscriptionDAO") == null) {
+			ctx.setAttribute("subscriptionDAO", new SubscriptionDAO(ctx));
+		}
+		
+		return (SubscriptionDAO) ctx.getAttribute("subscriptionDAO");
+	}
 		
 	@GET
 	@Path("/get")
@@ -76,6 +87,7 @@ public class UserService {
 		System.out.println("POGODIO SAM LOGIN");
 		System.out.println("OVO SAM PRIMIO " + dto.getUsername() + dto.getPassword());
 		LoginReturnDTO lrd = getUserDAO().login(dto);
+		getSubscriptionDAO().checkForExpired();
 		if (lrd.isSuccess()) {
 			System.out.println("Usao sam ovde");
 			request.getSession().setAttribute("user", lrd);
@@ -153,5 +165,13 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public UserAccountInformationDTO changeProfile(UpdateProfileDTO dto) {
 		return getUserDAO().editProfile(dto);
+	}
+	
+	@GET
+	@Path("/loggedUser/customerType")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public CustomerTypeDTO getCustomerType() {
+		return getUserDAO().getLoggedUserCustomerType();
 	}
 }

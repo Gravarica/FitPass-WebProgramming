@@ -1,0 +1,26 @@
+[
+	{
+		"name" : "BRONZE",
+		"next" : "SILVER",
+		"discount": 0.0,
+		"pointsRequired" : 500
+	},
+	{
+		"name" : "SILVER",
+		"next" : "GOLD",
+		"discount": 3.0,
+		"pointsRequired" : 1000
+	},
+	{
+		"name" : "GOLD",
+		"next" : "PLATINUM",
+		"discount": 7.0,
+		"pointsRequired" : 1500
+	},
+	{
+		"name" : "PLATINUM",
+		"next" : "PLATINUM",
+		"discount": 15.0,
+		"pointsRequired" : 7000
+	}
+]

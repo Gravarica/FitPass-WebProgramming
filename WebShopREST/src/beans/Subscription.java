@@ -24,6 +24,7 @@ public class Subscription extends Entity {
 	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate expirationDate;
 	private double price;
+	private double priceWithDiscount;
 	private String username;
 	private boolean active;
 	private long dailyAppearance;
@@ -53,6 +54,7 @@ public class Subscription extends Entity {
 		this.payDay = LocalDate.now();
 		this.expirationDate = BusinessUtil.concludeExpirationDate(dto.getType());
 		this.price = dto.getPrice();
+		this.priceWithDiscount = dto.getPrice();
 		this.active = true;
 		this.doneTrainings = 0;
 		this.totalAppearances = dto.getTotalAppearances();
@@ -140,8 +142,8 @@ public class Subscription extends Entity {
 		return this.username.equals(username) && active;
 	}
 	
-	public boolean isFinished() {
-		return LocalDate.now().isAfter(expirationDate);
+	public boolean hasExpired() {
+		return LocalDate.now().isAfter(expirationDate) && active;
 	}
 	
 	public int getTotalAppearances() {
@@ -163,4 +165,14 @@ public class Subscription extends Entity {
 	public void trainingDone() {
 		this.doneTrainings++;
 	}
+
+	public double getPriceWithDiscount() {
+		return priceWithDiscount;
+	}
+
+	public void setPriceWithDiscount(double priceWithDiscount) {
+		this.priceWithDiscount = priceWithDiscount;
+	}
+	
+	
 }

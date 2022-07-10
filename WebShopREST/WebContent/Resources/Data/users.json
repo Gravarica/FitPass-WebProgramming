@@ -9,7 +9,7 @@
 		"gender" : "MALE",
 		"role" : "ADMIN",
 		"dateOfBirth" : "2000-01-20",
-		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
 		"totalPoints" : -1
 	},
@@ -37,7 +37,7 @@
 		"gender" : "MALE",
 		"role" : "CUSTOMER",
 		"dateOfBirth" : "2000-01-01",
-		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
 		"totalPoints" : 40
 	},
@@ -65,9 +65,9 @@
 		"gender" : "MALE",
 		"role" : "CUSTOMER",
 		"dateOfBirth" : "2000-05-03",
-		"customerType" : { "name" : "SILVER", "discount" : 3.0, "pointsRequired" : 500},
+		"customerType" : { "name" : "SILVER", "discount" : 3.0, "pointsRequired" : 1000},
 		"object" : null,
-		"totalPoints" : 220
+		"totalPoints" : 520
 	},
 	{
 		"id" : 6,
@@ -79,9 +79,9 @@
 		"gender" : "FEMALE",
 		"role" : "CUSTOMER",
 		"dateOfBirth" : "2000-01-01",
-		"customerType" : { "name" : "GOLD", "discount" : 8.0, "pointsRequired" : 1000},
+		"customerType" : { "name" : "GOLD", "discount" : 7.0, "pointsRequired" : 1500},
 		"object" : null,
-		"totalPoints" : 990
+		"totalPoints" : 1490
 	},
 	{
 		"id" : 7,
@@ -93,7 +93,7 @@
 		"gender" : "FEMALE",
 		"role" : "CUSTOMER",
 		"dateOfBirth" : "1985-01-01",
-		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
 		"totalPoints" : 50
 	},
@@ -107,7 +107,7 @@
 		"gender" : "FEMALE",
 		"role" : "CUSTOMER",
 		"dateOfBirth" : "1998-01-01",
-		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
 		"totalPoints" : 60
 	}

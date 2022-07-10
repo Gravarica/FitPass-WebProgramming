@@ -16,11 +16,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.sun.org.apache.bcel.internal.classfile.Utility;
 
 import beans.Artikal;
+import beans.CustomerType;
 import beans.Entity;
 import beans.SportObject;
 import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
+import dto.CustomerTypeDTO;
 import dto.LoginDTO;
 import dto.LoginReturnDTO;
 import dto.ManagerRegistrationDTO;
@@ -31,6 +33,7 @@ import dto.UserAccountInformationDTO;
 import enums.CustomerTypeName;
 import enums.Role;
 import enums.TrainingType;
+import src.util.Bridge;
 import src.util.BusinessUtil;
 
 /***
@@ -399,5 +402,24 @@ public class UserDAO {
 		user.setDateOfBirth(dto.getDateOfBirth());
 		saveUsers();
 		return getUserAccountInfromation();
+	}
+	
+	public CustomerTypeDTO getLoggedUserCustomerType() {
+		CustomerType retVal = loggedUser.getCustomerType();
+		boolean show = true;
+		if (retVal.getName() == CustomerTypeName.BRONZE) {
+			show = false;
+		}
+		
+		return new CustomerTypeDTO(retVal.getName(), retVal.getDiscount(), show);
+	}
+	
+	public void checkForUpgrade() {
+		User loggedUser = getLoggedUser();
+		int pointsRequired = Bridge.getPointsNeeded(loggedUser.getCustomerType().getName());
+		if (loggedUser.getTotalPoints() >= pointsRequired) {
+			loggedUser.setCustomerType(Bridge.getBasedOnPoints(loggedUser.getTotalPoints()));
+		}
+		saveUsers();
 	}
 }

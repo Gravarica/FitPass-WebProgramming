@@ -23,12 +23,12 @@ public class UserAccountInformationDTO {
 	private LocalDate dateOfBirth;
 	private Role role;
 	private CustomerType type;
-	private int totalPoints;
+	private double totalPoints;
 	
 	public UserAccountInformationDTO() {}
 
 	public UserAccountInformationDTO(String firstName, String lastName, String username, Gender gender,
-			LocalDate dateOfBirth, Role role, CustomerType type, int totalPoints) {
+			LocalDate dateOfBirth, Role role, CustomerType type, double totalPoints) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -107,11 +107,11 @@ public class UserAccountInformationDTO {
 		this.type = type;
 	}
 
-	public int getTotalPoints() {
+	public double getTotalPoints() {
 		return totalPoints;
 	}
 
-	public void setTotalPoints(int totalPoints) {
+	public void setTotalPoints(double totalPoints) {
 		this.totalPoints = totalPoints;
 	}
 }
