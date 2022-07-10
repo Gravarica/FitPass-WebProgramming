@@ -4,7 +4,7 @@
         <li><router-link class="link enrico" :to="{name : 'Home'}">Home</router-link></li>
         <li><router-link class="link enrico" :to="{name : 'Objects'}">Objects</router-link></li>
         <li><router-link class="link enrico" :to="{name : 'Users'}" exact>Users</router-link></li>
-        <li><router-link class="link enrico" :to="{name : ''}">Contact</router-link></li>
+        <li><router-link class="link enrico" :to="{name : 'PromoCode'}">Promo Codes</router-link></li>
         <!-- <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">

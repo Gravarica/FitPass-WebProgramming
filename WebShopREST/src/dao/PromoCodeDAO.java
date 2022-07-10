@@ -23,6 +23,8 @@ public class PromoCodeDAO {
 	private static final String EXPIRED_CODE_MESSAGE = "The code you entered is expired.";
 	private static final String USED_CODE = "The code you entered has already been redeemed.";
 	private static final String INVALID_CODE = "The code you entered is invalid.";
+	private static final String CODE_EXISTS = "The code you entered already exists";
+	private static final String CREATE_SUCCESS = "Code successfully created";
 	
 	public PromoCodeDAO() {}
 	
@@ -126,16 +128,16 @@ public class PromoCodeDAO {
 		return false;
 	}
 	
-	public PromoCode create(NewPromoCodeDTO dto) {
+	public String create(NewPromoCodeDTO dto) {
 		if (checkIfExists(dto.getCode())) {
-			return null;
+			return CODE_EXISTS;
 		}
 		
 		PromoCode newInstance = new PromoCode(dto);
 		newInstance.setId(getMaxId());
 		codes.add(newInstance);
 		save();
-		return newInstance;
+		return CREATE_SUCCESS;
 	}
 	
 	public ReturnPromoCodeDTO redeem(String entry) {

@@ -73,7 +73,7 @@ public class PromoCodeService {
 	@Path("/create")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public PromoCode create(NewPromoCodeDTO dto) {
+	public String create(NewPromoCodeDTO dto) {
 		return getPromoCodeDAO().create(dto);
 	}
 	
