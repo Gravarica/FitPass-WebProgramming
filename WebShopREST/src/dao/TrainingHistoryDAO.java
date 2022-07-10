@@ -98,6 +98,10 @@ public class TrainingHistoryDAO {
 	//Prijava na trening
 	public TrainingHistory scheduleTraining(TrainingScheduleDTO dto) {
 		TrainingHistory newTraining =  new TrainingHistory(dto);
+		if(dto.getTraining().getType()==TrainingType.PERSONAL) {
+			newTraining.setCanCancel(checkForDate(dto.getCheckInDate()));
+			}
+		
 		newTraining.setId(getMaxId());
 		trainingHistories.add(newTraining);
 		saveTrainingHistory();
@@ -171,6 +175,8 @@ public class TrainingHistoryDAO {
 		return retList;
 	}
 
-	//LocalDate.now().plusDays(2).isBefore(it.getCheckInDate()) || LocalDate.now().plusDays(2).isEqual(it.getCheckInDate())
-
+	public boolean checkForDate(LocalDate date) {
+		return LocalDate.now().plusDays(2).isBefore(date) || LocalDate.now().plusDays(2).isEqual(date);
+	}
+	
 }

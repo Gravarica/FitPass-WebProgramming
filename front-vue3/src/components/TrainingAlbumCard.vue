@@ -14,14 +14,11 @@
                 <li class="list-group-item">Date: {{checkInDate}}</li>
                 <li class="list-group-item">Duration: {{setDuration()}}</li>
             </ul>
-            <div class="d-grid gap-2 pt-0 md-6">
+            <div class="d-grid gap-2 pt-0 md-6" v-if="canDelete">
                 <input type="submit" class=" btn btn-warning btn-lg" value="Cancel Training">
             </div>
     </div>
      </div>
-    
-   
-
 </template>
 
 
@@ -40,7 +37,8 @@
             checkInDate : Date,
             isTrainer : Boolean,
             trainer : Object,
-            customer : Object
+            customer : Object,
+            canDelete : Boolean
         },
         methods:{
             getSource(){

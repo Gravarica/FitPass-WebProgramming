@@ -25,7 +25,8 @@
             :duration="t.training.duration"
             :training-type="t.training.type"
             :trainer="t.trainer"
-            :is-trainer="true">
+            :is-trainer="true"
+            :can-delete="t.canCancel">
         </TrainingAlbumCard>
         </div>   
     </div>
