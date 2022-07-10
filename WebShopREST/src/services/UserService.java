@@ -193,4 +193,14 @@ public class UserService {
 	public CustomerTypeDTO getCustomerType() {
 		return getUserDAO().getLoggedUserCustomerType();
 	}
+	
+	
+	@GET
+	@Path("/sport_object/visited/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getCustomersFromSportObject(@PathParam("id") int id) {
+		return getUserDAO().getCustomersFromSportObject(id);
+	}
+	
 }

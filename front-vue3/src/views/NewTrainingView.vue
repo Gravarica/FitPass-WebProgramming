@@ -6,7 +6,7 @@
         <div class="card shadow-2-strong card-registration" style="border-radius: 20px;">
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 center">NEW TRAINING</h3>
-            <form>
+            <form onsubmit="scheduleTraining()">
 
               <div class="row">
                     <div>
@@ -17,15 +17,26 @@
                     </div>
               </div>
 
+               <div class="row">
+                    <div>
+                         <select v-model="newTrainingDTO.customer" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
+                            <option value=null disabled>Choose customer</option>
+                            <option v-for="it in customers" :value="it">{{getFullName(it)}}</option>
+                        </select>
+                    </div>
+              </div>
+
+
               <div class="row">
                     <div>
                          <select v-model="newTrainingDTO.training" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
-                            <option value=null disabled>Please choose training</option>
+                            <option value=null disabled>Choose training</option>
                             <option v-for="it in trainings" :value="it">{{it.name}}</option>
                         </select>
                     </div>
               </div>
 
+            
               <hr/>
                <div class="row">
                 <div class="mb-3 d-flex align-items-center">
@@ -39,7 +50,7 @@
               </div>
 
               <div class="d-grid gap-2 pt-5 md-6">
-                <input class="btn btn-lg btn-warning" type="submit" value="Submit"/>
+                <input class=" btn-lg btn-warning" type="submit" value="Submit"/>
               </div>
 
             </form>
@@ -62,24 +73,42 @@ import axios from 'axios'
             return {
                 sportObjects : null,
                 trainings : null,
-                newTrainingDTO : { sportObject : null , training : null , checkInDate : null},
+                customers : null,
+                newTrainingDTO : { sportObject : null , training : null , customer : null , checkInDate : null},
                 selected : null
             }
         },
         methods: {
             fillTrainings(id){
-                console.log(id)
                 axios
                     .get('http://localhost:8081/WebShopREST/rest/trainings/sport_object/' + id)
                     .then((response) =>{
                         this.trainings = response.data
                     })
+            },
+            fillCustomers(id){
+                 axios
+                    .get('http://localhost:8081/WebShopREST/rest/users/sport_object/visited/' + id)
+                    .then((response) =>{
+                        this.customers = response.data
+                    })
+            },
+            scheduleTraining(){
+                axios
+                    .post('http://localhost:8081/WebShopREST/rest/training_histories/schedule',this.newTrainingDTO)
+                    .then((response) =>{
+                        console.log(response.data)
+                    })
+            },
+            getFullName(object){
+                return object.firstName + " " + object.lastName 
             }
         },
         watch:{
             selected(object){
                 this.newTrainingDTO.sportObject = object
                 this.fillTrainings(object.id)
+                this.fillCustomers(object.id)
             }
         },
         created(){
