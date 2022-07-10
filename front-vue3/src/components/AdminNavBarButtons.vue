@@ -3,7 +3,7 @@
     <form form class="d-flex ms-left my-2">
         <li><router-link class="link enrico" :to="{name : 'Home'}">Home</router-link></li>
         <li><router-link class="link enrico" :to="{name : 'Objects'}">Objects</router-link></li>
-        <li><router-link class="link" :to="{name : 'Users'}" exact>Users</router-link></li>
+        <li><router-link class="link enrico" :to="{name : 'Users'}" exact>Users</router-link></li>
         <li><router-link class="link enrico" :to="{name : ''}">Contact</router-link></li>
         <!-- <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <li class="nav-item dropdown">
