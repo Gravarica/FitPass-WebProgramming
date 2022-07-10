@@ -2,10 +2,15 @@
      <div>
         <div class="card lotina">
             <img :src="getSource()" class="card-img-top" alt="...">
+            <div class="card-header info bg-dark text-white">
+                Training Info
+            </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Gym: {{sportObjectName}}</li>
-                <li class="list-group-item">Training Name: {{trainingName}}</li>
-                <li class="list-group-item">Training Type: {{trainingType}}</li>
+                <li class="list-group-item">Name: {{trainingName}}</li>
+                <li class="list-group-item">Type: {{trainingType}}</li>
+                <li class="list-group-item" v-if="isTrainer">Customer: {{getFullName(trainer)}}</li>
+                <li class="list-group-item" v-else>Trainer: {{getFullName(customer)}}</li>
                 <li class="list-group-item">Date: {{checkInDate}}</li>
                 <li class="list-group-item">Duration: {{setDuration()}}</li>
             </ul>
@@ -29,7 +34,10 @@
             trainingName : String,
             trainingType : String,
             duration : Number,
-            checkInDate : Date
+            checkInDate : Date,
+            isTrainer : Boolean,
+            trainer : Object,
+            customer : Object
         },
         methods:{
             getSource(){
@@ -38,6 +46,9 @@
             },
             setDuration(){
                 return this.duration + "min"
+            },
+            getFullName(object){
+                return object.firstName + " " + object.lastName
             }
         }
     }
@@ -48,6 +59,11 @@
 
 .lotina{
     width: 18rem;
+}
+
+.info{
+    text-align: center;
+    
 }
 
 </style>

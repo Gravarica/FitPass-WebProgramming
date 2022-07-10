@@ -1,6 +1,6 @@
 <template>
 
-  <body class="gradient-custom">
+  <div class="gradient-custom wh-100">
 
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
@@ -23,7 +23,9 @@
             :training-name="t.training.name"
             :check-in-date="t.checkInDate"
             :duration="t.training.duration"
-            :training-type="t.training.type">
+            :training-type="t.training.type"
+            :customer="t.customer"
+            :is-trainer="false">
         </TrainingAlbumCard>
         </div>   
     </div>
@@ -31,7 +33,7 @@
 
 
 
-</body>
+</div>
 </template>
 
 <script>
