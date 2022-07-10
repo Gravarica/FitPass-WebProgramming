@@ -14,6 +14,9 @@
                 <li class="list-group-item">Date: {{checkInDate}}</li>
                 <li class="list-group-item">Duration: {{setDuration()}}</li>
             </ul>
+            <div class="d-grid gap-2 pt-0 md-6">
+                <input type="submit" class=" btn btn-warning btn-lg" value="Cancel Training">
+            </div>
     </div>
      </div>
     
