@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="accept-button d-flex justify-content-center">
-            <button class="btn-grad levak">Confirm</button>
+            <button class="btn-grad levak" @click="this.confirm()">Confirm</button>
         </div>
     </div>
 </div>
@@ -118,6 +118,17 @@ import axios from 'axios'
                     this.returnPromoCodeDTO.message = 'You have already redeemed promo code'
                 }
                 
+            },
+            confirm(){
+                axios
+                    .post('http://localhost:8081/WebShopREST/rest/subscriptions/create', { type: this.$props.type,
+                                                                                          price: this.$props.price,
+                                                                                          priceWithDiscount: this.priceDisplay,
+                                                                                          totalAppearances: this.$props.totalAppearances,
+                                                                                          dailyAppearance: this.$props.dailyAppearance })
+                    .then(response => {
+                        this.$router.push( { name: 'Subscription'})
+                    })
             }
         },
         mounted(){
