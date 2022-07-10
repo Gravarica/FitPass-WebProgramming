@@ -104,7 +104,7 @@
                 </div>
               </div>
 
-              <div class="mt-4 pt-2">
+              <div class="d-grid gap-2 pt-5 md-6">
                 <input class="btn btn-lg btn-grad" type="submit" value="Submit" @click="register"/>
               </div>
 
