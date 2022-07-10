@@ -60,28 +60,28 @@ public class TrainingHistoryService {
 	@Path("/customer/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<TrainingHistory> getCustomerTrainingHistory(@PathParam("username") String username){
-		return getUserDAO().getCustomerTrainingHistory(username);
+		return getTrainingHistoryDAO().getCustomerTrainingHistory(username);
 	}
 
 	@GET
 	@Path("/trainer/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<TrainingHistory> getTrainerTrainingHistory(@PathParam("username") String username){
-		return getUserDAO().getTrainerTrainingHistory(username);
+		return getTrainingHistoryDAO().getTrainerTrainingHistory(username);
 	}
 	
 	@GET
 	@Path("/trainer/personal/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<TrainingHistory> getTrainerPersonalTrainings(@PathParam("username") String username){
-		return getUserDAO().getTrainerPersonalTrainings(username);
+		return getTrainingHistoryDAO().getTrainerPersonalTrainings(username);
 	}
 	
 	@GET
 	@Path("/trainer/group/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<TrainingHistory> getTrainerGroupTrainings(@PathParam("username") String username){
-		return getUserDAO().getTrainerGroupTrainings(username);
+		return getTrainingHistoryDAO().getTrainerGroupTrainings(username);
 	}
 	
 	
@@ -110,7 +110,7 @@ public class TrainingHistoryService {
 		
 		TrainingHistory newTraining = getTrainingHistoryDAO().scheduleTraining(dto);
 		getUserDAO().increaseObjectVisited(newTraining.getCustomer().getUsername(),newTraining.getTraining().getObject());
-		getUserDAO().updateTrainingHistory(newTraining);
+		//getUserDAO().updateTrainingHistory(newTraining);
 		getSubscriptionDAO().increaseTrainingCounter(getSubscriptionDAO().getByUser(dto.getCustomer().getUsername()).getId());
 		return newTraining;
 	}

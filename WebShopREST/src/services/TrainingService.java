@@ -54,6 +54,7 @@ public class TrainingService {
 	@Path("/sport_object/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Training> getSportObjectTrainings(@PathParam("id") int id){
+		System.out.println("POZVAN SAM SA ID-em " + id);
 		return getTrainingDAO().getSportObjectTrainings(id);
 	}
 }

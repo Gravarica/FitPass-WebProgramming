@@ -61,8 +61,7 @@ import axios from 'axios'
             sendObject(){
               console.log('Tu sam baki')
               console.log('id objekta ' + this.selectedItem.id)
-              this.emitter.emit('load-trainings', {'eventContent' : this.selectedItem.id});
-              console.log('Tu sam baki')
+              this.emitter.emit('load-trainings', this.selectedItem.id);
             }
         },
          created(){

@@ -95,6 +95,7 @@ public class SportObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public SportObject createSportObject(SportObjectCreateDTO dto) {
+		System.out.println("POZVAN SAM");
 		SportObject newObject = getSportObjectDAO().createSportObject(dto);
 		getUserDAO().setSportObject(newObject, dto.getManagerUsername());
 		return newObject;
@@ -105,6 +106,7 @@ public class SportObjectService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public SportObject delete(@PathParam("id") int id) {
+		getUserDAO().unemployManager(id);
 		return getSportObjectDAO().delete(id);
 	}
 	
@@ -122,5 +124,13 @@ public class SportObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public SportObject changeContent(@PathParam("id") int id, NewContentDTO dto) {
 		return getSportObjectDAO().changeContent(dto, id);
+	}
+
+	@GET
+	@Path("/types")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<String> getSportObjectTypes(){
+		System.out.println("POZVAN SAM");
+		return getSportObjectDAO().getSportObjectTypes();
 	}
 }

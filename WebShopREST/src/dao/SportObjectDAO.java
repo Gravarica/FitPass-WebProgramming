@@ -143,6 +143,7 @@ public class SportObjectDAO {
 		SportObject returnObject = getById(id);
 		returnObject.setDeleted(true);
 		objects.remove(returnObject);
+		saveSportObjects();
 		return returnObject;
 	}
   
@@ -189,5 +190,14 @@ public class SportObjectDAO {
 	public void calculateAverageGrade(SportObject obj, AverageGradeDTO dto) {
 		obj.setAverageGrade(dto.getAverage());
 		saveSportObjects();
+	}
+	
+	public ArrayList<String> getSportObjectTypes(){
+		ArrayList<String> retList = new ArrayList<String>();
+		SportObjectType types[] = SportObjectType.values();
+		for(SportObjectType it : types) {
+			retList.add(it.toString());
+		}
+		return retList;
 	}
 }
