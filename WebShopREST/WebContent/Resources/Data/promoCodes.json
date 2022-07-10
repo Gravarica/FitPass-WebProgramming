@@ -1,0 +1,50 @@
+[
+	{
+		"id": 1,
+		"deleted": false,
+		"code" : "BAKAPRASE",
+		"numberOfUsages": 30,
+		"used": false,
+		"expirationDate": "2022-07-14"
+	},
+	{
+		"id": 2,
+		"deleted": false,
+		"code" : "MUDJA",
+		"numberOfUsages": 0,
+		"used": true,
+		"expirationDate": "2022-07-22"
+	},
+	{
+		"id": 3,
+		"deleted": false,
+		"code" : "SINAN",
+		"numberOfUsages": 20,
+		"used": false,
+		"expirationDate": "2022-07-08"
+	},
+	{
+		"id": 4,
+		"deleted": true,
+		"code" : "JANKO",
+		"numberOfUsages": 0,
+		"used": true,
+		"expirationDate": "2022-07-22"
+	},
+	{
+		"id": 5,
+		"deleted": false,
+		"code" : "CHODA19A",
+		"numberOfUsages": 13,
+		"used": false,
+		"expirationDate": "2022-07-22"
+	},
+	{
+		"id": 6,
+		"deleted": false,
+		"code" : "DEVITO",
+		"numberOfUsages": 1,
+		"used": false,
+		"expirationDate": "2022-07-22"
+	}
+]

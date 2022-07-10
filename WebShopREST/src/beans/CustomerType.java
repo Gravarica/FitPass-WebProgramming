@@ -5,6 +5,7 @@ import enums.CustomerTypeName;
 public class CustomerType {
 
 	private CustomerTypeName name;
+	private CustomerTypeName next;
 	private double discount;
 	private int pointsRequired;
 	
@@ -13,12 +14,6 @@ public class CustomerType {
 		this.name = name;
 		this.discount = discount;
 		this.pointsRequired = pointsRequired;
-	}
-	
-	public CustomerType(CustomerTypeName name) {
-		this.name = name;
-		this.discount = 10;
-		this.pointsRequired = 1000;
 	}
 	
 	public CustomerType() {}
@@ -46,5 +41,15 @@ public class CustomerType {
 	public void setPointsRequired(int pointsRequired) {
 		this.pointsRequired = pointsRequired;
 	}
+
+	public CustomerTypeName getNext() {
+		return next;
+	}
+
+	public void setNext(CustomerTypeName next) {
+		this.next = next;
+	}
+	
+	
 		
 }

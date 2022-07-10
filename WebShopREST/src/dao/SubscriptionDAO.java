@@ -21,17 +21,17 @@ public class SubscriptionDAO {
 	
 	public SubscriptionDAO() {}
 	
-	public SubscriptionDAO(String contextPath, ServletContext ctx) {
-		file = new File(contextPath + "/Resources/Data/subscriptions.json");
+	public SubscriptionDAO(ServletContext ctx) {
+		file = new File(ctx.getRealPath("") + "/Resources/Data/subscriptions.json");
 		this.ctx = ctx;
-		loadSubscriptions(contextPath);
+		loadSubscriptions();
 	}
 	
 	private UserDAO getUserDAO() {
 		return (UserDAO) ctx.getAttribute("userDAO");
 	}
 	
-	private void loadSubscriptions(String contextPath) {
+	private void loadSubscriptions() {
 
 		ObjectMapper mapper = new ObjectMapper();
 	
@@ -96,7 +96,7 @@ public class SubscriptionDAO {
 	}
 	
 	public User addPointsToCustomer(Subscription subscription, User customer) {
-		if(subscription.isFinished()) {
+		if(subscription.hasExpired()) {
 			calculatePoints(subscription);
 		}
 		
@@ -107,14 +107,15 @@ public class SubscriptionDAO {
 		int totalAppearances = subscription.getTotalAppearances();
 		double price = subscription.getPrice();
 		User customer = getUserDAO().getByUsername(subscription.getUsername());
-		int points = customer.getTotalPoints();
+		double points = customer.getTotalPoints();
 		
 		if(subscription.getDoneTrainings() >= totalAppearances/3) {
-			points += (int) price/1000*subscription.getDoneTrainings();
+			points += price/1000*subscription.getDoneTrainings();
 		} else {
-			points -= (int) price/1000*133*4;
+			points -= price/1000*133*4;
 		}
 		
+		points = points < 0 ? 0 : points;
 		customer.setTotalPoints(points);
 	}
 	
@@ -168,4 +169,13 @@ public class SubscriptionDAO {
 		return null;
 	}
 	
+	public void checkForExpired() {
+		Subscription s = getByLoggedUser();
+		if (!s.hasExpired()) return;
+			
+		s.setActive(false);
+		calculatePoints(s);
+		save();
+		getUserDAO().checkForUpgrade();
+	}
 }

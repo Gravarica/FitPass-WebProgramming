@@ -7,7 +7,7 @@
                 <div class="info-holder-inner">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4>{{title}}</h4>
-                        <h4>{{price}} RSD</h4>
+                        <h4>{{priceDisplay}} RSD</h4>
                     </div>
                     <span class="small text-down">1 {{type}} / {{totalAppearances}} Trainings / {{dailyAppearance}} appearances daily</span>
                 </div>
@@ -19,17 +19,21 @@
                 <div class="infoz">
                     <div class="item d-flex align-items-center justify-content-between">
                         <span class="text-item">Subscription</span>
-                        <span>{{price}} RSD</span>
+                        <span>{{priceDisplay}} RSD</span>
                     </div>
-                    <div class="item d-flex align-items-center justify-content-between" v-if="valid">
+                    <div class="item d-flex align-items-center justify-content-between" v-if="disablePromoCode">
                         <span class="text-item">Promo code</span>
-                        <span>-2999 RSD</span>
+                        <span>-{{this.discountPromo}} RSD</span>
+                    </div>
+                    <div class="item d-flex align-items-center justify-content-between" v-if="this.customerTypeDTO.show">
+                        <span class="text-item">{{this.customerTypeDTO.name}}</span>
+                        <span>-{{this.discountType}} RSD</span>
                     </div>
                 </div>
                 <div class="totally-spies">
                     <div class="d-flex justify-content-between">
                         <span class="h3 pr-1">Total</span>
-                        <span class="h2">{{price}} RSD</span>
+                        <span class="h2">{{priceDisplay}} RSD</span>
                     </div>
                 </div>
             </div>
@@ -38,15 +42,16 @@
             <div class="col-6 ms-l">
                 <h6 class="small text-down">Got a promo code?</h6>
                 <div class="form-holden">
-                    <form class="card p-2">
+                    <form class="card p-2" onsubmit="return false">
                         <div class="input-group">
-                            <input type="text" class="form-control lolz" placeholder="Enter">
+                            <input type="text" class="form-control lolz" placeholder="Enter" v-model="this.promoCode">
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-secondary">Redeem</button>
+                                <button type="submit" class="btn btn-secondary" @click="this.redeem()">Redeem</button>
                             </div>
                         </div>
                     </form>
                 </div>
+                <h6 class="small message-text">{{this.returnPromoCodeDTO.message}}</h6>
             </div>
         </div>
         <div class="accept-button d-flex justify-content-center">
@@ -57,6 +62,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
     export default {
         props: {
             title: {
@@ -82,8 +89,47 @@
         },
         data() {
             return{
-                promoCode: ''
+                promoCode: '',
+                returnPromoCodeDTO: {discount: null, message: ''},
+                priceDisplay: this.$props.price,
+                disablePromoCode: false,
+                discountPromo: null,
+                discountType: null,
+                customerTypeDTO: { name: '', discount: null, show: false}
             }
+        },
+        methods: {
+            redeem(){
+                if(!this.disablePromoCode){
+                    axios
+                    .get('http://localhost:8081/WebShopREST/rest/promos/redeem/' + this.promoCode)
+                    .then(response => {
+                        this.returnPromoCodeDTO = response.data
+                        this.discountPromo = this.priceDisplay * this.returnPromoCodeDTO.discount/100
+                        this.priceDisplay = this.priceDisplay - this.discountPromo
+                        this.priceDisplay = Math.round(this.priceDisplay * 100) / 100
+                        this.discountPromo = Math.round(this.discountPromo * 100) / 100
+                        if(this.returnPromoCodeDTO.discount > 0){
+                            this.disablePromoCode = true
+                        }
+                        
+                    })
+                } else {
+                    this.returnPromoCodeDTO.message = 'You have already redeemed promo code'
+                }
+                
+            }
+        },
+        mounted(){
+            axios
+                .get('http://localhost:8081/WebShopREST/rest/users/loggedUser/customerType')
+                .then(response => {
+                    this.customerTypeDTO = response.data
+                    this.discountType = this.priceDisplay * this.customerTypeDTO.discount/100
+                    this.priceDisplay = this.priceDisplay - this.discountType
+                    this.discountType = Math.round(this.discountType * 100) / 100
+                    this.priceDisplay = Math.round(this.priceDisplay * 100) / 100
+                })
         }
     }
 </script>
@@ -131,6 +177,12 @@
 .levak{
     width: 25%;
     height: 50px;
+}
+
+.message-text{
+    padding-top: 5px;
+    padding-left: 55px;
+    color: #a4a4e8;
 }
 
 .btn-secondary{
