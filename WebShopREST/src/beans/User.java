@@ -1,9 +1,12 @@
 package beans;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import dto.LoginDTO;
 import dto.ManagerRegistrationDTO;
@@ -13,6 +16,8 @@ import enums.CustomerTypeName;
 import enums.Gender;
 import enums.Role;
 import src.util.BusinessUtil;
+import src.util.LocalDateDeserializer;
+import src.util.LocalDateSerializer;
 
 public class User extends Entity {
 
@@ -22,8 +27,9 @@ public class User extends Entity {
 	protected String lastName;
 	protected Gender gender;
 	protected Role role;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	protected Date dateOfBirth;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	protected LocalDate dateOfBirth;
 	protected CustomerType customerType;
 	private SportObject object; //Manager
 	private int membershipFeeId; //Customer
@@ -36,7 +42,7 @@ public class User extends Entity {
 	}
 	
 	public User(int id, String username, String password, String firstName, String lastName, 
-			Gender gender, Role role, Date dateOfBirth, CustomerType userType) {
+			Gender gender, Role role, LocalDate dateOfBirth, CustomerType userType) {
 		super(id);
 		this.username = username;
 		this.password = password;
@@ -157,11 +163,11 @@ public class User extends Entity {
 		this.customerType = userType;
 	}
 
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

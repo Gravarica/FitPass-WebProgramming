@@ -1,9 +1,9 @@
 <template>
 
-    <form form class="d-flex ms-left">
+    <form form class="d-flex ms-left my-2">
         <li><router-link class="link enrico" :to="{name : 'Home'}">Home</router-link></li>
         <li><router-link class="link enrico" :to="{name : 'Objects'}">Objects</router-link></li>
-        <li><router-link class="link enrico" :to="{name : ''}">About</router-link></li>
+        <li><router-link class="link" :to="{name : 'Users'}" exact>Users</router-link></li>
         <li><router-link class="link enrico" :to="{name : ''}">Contact</router-link></li>
         <!-- <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <li class="nav-item dropdown">
@@ -40,11 +40,16 @@
 
 <style lang="scss" scoped>
 
+.disko{
+    padding-top: 10px;
+}
+
 li{
             text-transform: uppercase;
             padding: 13px;
             margin-left: 16px;
             margin-top: 10px;
+            text-decoration: none;
     }
 
 .link{
@@ -63,4 +68,5 @@ li{
   text-decoration: none;
   color: inherit;
 }
+
 </style>

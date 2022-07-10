@@ -90,8 +90,10 @@ public class SportObjectDAO {
 	
 	public ArrayList<SportObject> search(String parameter){
 		ArrayList<SportObject> returnList = new ArrayList<>();
+		System.out.println("PRIMIO SAM OVO: " + parameter);
 		for(SportObject searchObj : objects) {
 			if (searchObj.containsParameter(parameter)) {
+				System.out.println("VRACAM: " + searchObj.getName());
 				returnList.add(searchObj);
 			}
 		}
@@ -132,7 +134,7 @@ public class SportObjectDAO {
 	public ArrayList<SportObject> searchByMultipleParameters(SportObjectSearchDTO dto){
 		ArrayList<SportObject> returnList = searchByCity(dto.getCity());
 		returnList.retainAll(searchByType(dto.getType()));
-		returnList.retainAll(searchByAverageGrade(dto.getGrade()));
+		returnList.retainAll(search(dto.getParameter()));
 		
 		return returnList;
 	}

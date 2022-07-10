@@ -28,6 +28,7 @@ import dto.LoginReturnDTO;
 import dto.ManagerRegistrationDTO;
 import dto.RegistrationDTO;
 import dto.TrainerRegistrationDTO;
+import dto.UpdateProfileDTO;
 import dto.UserAccountInformationDTO;
 
 @Path("/users")
@@ -154,11 +155,19 @@ public class UserService {
 	public UserAccountInformationDTO getUserAccountInformation() {
 		return getUserDAO().getUserAccountInfromation();
 	}
-
+  
 	@GET
 	@Path("/available/managers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<User> getAvailableManagers(){
 		return getUserDAO().getAllAvailableManagers();
 	}	
+
+	@PUT
+	@Path("/editProfile")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public UserAccountInformationDTO changeProfile(UpdateProfileDTO dto) {
+		return getUserDAO().editProfile(dto);
+	}
 }

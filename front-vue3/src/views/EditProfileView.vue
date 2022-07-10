@@ -1,18 +1,18 @@
 <template>
-    <section class="vh-100 gradient-custom">
+     <section class="vh-100 gradient-custom">
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
         <div class="card shadow-2-strong card-registration" style="border-radius: 20px;">
           <div class="card-body p-4 p-md-5">
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Register</h3>
-            <form>
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Edit Profile</h3>
+            <form onsubmit="return false">
 
               <div class="row">
                 <div class="col-md-6 mb-4">
 
                   <div class="form-outline">
-                    <input type="text" id="firstName" class="form-control form-control-lg"  v-model="this.registrationDTO.firstName"/>
+                    <input type="text" id="firstName" class="form-control form-control-lg"  v-model="this.loggedUserDTO.firstName"/>
                     <label class="form-label" for="firstName">First Name</label>
                   </div>
 
@@ -20,7 +20,7 @@
                 <div class="col-md-6 mb-4">
 
                   <div class="form-outline">
-                    <input type="text" id="lastName" class="form-control form-control-lg"  v-model="this.registrationDTO.lastName"/>
+                    <input type="text" id="lastName" class="form-control form-control-lg"  v-model="this.loggedUserDTO.lastName"/>
                     <label class="form-label" for="lastName">Last Name</label>
                   </div>
 
@@ -31,25 +31,8 @@
                 <div class="col-md-6 mb-3 d-flex align-items-center">
 
                   <div class="form-outline datepicker w-100">
-                    <input type="date" class="form-control form-control-lg" id="birthdayDate"  v-model="this.registrationDTO.dateOfBirth"/>
+                    <input type="date" class="form-control form-control-lg" id="birthdayDate"  v-model="this.loggedUserDTO.dateOfBirth"/>
                     <label for="birthdayDate" class="form-label">Birthday</label>
-                  </div>
-
-                </div>
-                <div class="col-md-6 mb-3">
-
-                  <h6 class="mb-2 pb-1">Gender: </h6>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="femaleGender"
-                      value="FEMALE" v-model="this.registrationDTO.gender" />
-                    <label class="form-check-label" for="femaleGender">Female</label>
-                  </div>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="maleGender"
-                      value="MALE" v-model="this.registrationDTO.gender"/>
-                    <label class="form-check-label" for="maleGender">Male</label>
                   </div>
 
                 </div>
@@ -59,7 +42,7 @@
                 <div class="col-md-12 pb-2">
 
                   <div class="form-outline">
-                    <input type="text" id="phoneNumber" class="form-control form-control-lg"  v-model="this.registrationDTO.username"/>
+                    <input type="text" id="phoneNumber" class="form-control form-control-lg " disabled :placeholder="this.loggedUserDTO.username"/>
                     <label class="form-label" for="username">Username</label>
                   </div>
 
@@ -68,16 +51,25 @@
 
               <div class="row">
                 <div class="col-12">
-
-                  <input type="password" id="password" class="form-control form-control-lg"  v-model="this.registrationDTO.password"/>
-                  <label class="form-label select-label">Password</label>
+                  <div class="invalid-feedback" v-if="wrongPassword">Wrong old password</div>
+                  <input type="password" id="password" class="form-control form-control-lg"  v-model="this.password"/>
+                  <label class="form-label select-label">Old Password</label>
 
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-12">
+                  <div class="feedback" v-if="this.passwordMatch">Passwords dont match</div>
+                  <input type="password" id="password-re" class="form-control form-control-lg"  v-model="this.passwordNew"/>
+                  <label class="form-label select-label">New Password</label>
 
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="feedback" v-if="!this.oldAndNewMatch">Passwords dont match</div>
                   <input type="password" id="password-re" class="form-control form-control-lg"  v-model="this.passwordCheck"/>
                   <label class="form-label select-label">Confirm Password</label>
 
@@ -85,7 +77,7 @@
               </div>
 
               <div class="mt-4 pt-2">
-                <input class="btn btn-lg btn-grad" type="submit" value="Submit" @click="register"/>
+                <input class="btn btn-lg btn-grad" type="submit" value="Submit" @click="submit"/>
               </div>
 
             </form>
@@ -96,63 +88,58 @@
   </div>
   
 </section>
-
-<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;" v-if="toast">
-  <div class="toast" style="position: absolute; top: 0; right: 0;">
-    <div class="toast-header">
-      <img src="../assets/point.png" class="rounded mr-2" alt="...">
-      <strong class="mr-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="toast-body">
-      Passwords dont match
-    </div>
-  </div>
-</div>
-
 </template>
 
 <script>
-    import router from '@/router'
-import axios from 'axios'
+    import axios from 'axios';
+
     export default {
-        data(){
+        data() {
             return {
-                registrationDTO: {
-                    username: '',
-                    password: '',
-                    firstName: '',
-                    lastName: '',
-                    role: 'CUSTOMER',
-                    dateOfBirth: '',
-                    gender: 'MALE'
-                },
+                loggedUserDTO: {username: '', firstName: '', lastName: '', dateOfBirth: '', role: '', gender: '', password: ''},
+                password: '',
+                passwordNew: '',
                 passwordCheck: '',
-                toast: false
+                wrongPassword: false,
+                passwordMatch: false,
+                oldAndNewMatch: true,
             }
         },
+        mounted(){
+            axios
+                .get('http://localhost:8081/WebShopREST/rest/users/account_info')
+                .then((response) => {
+                    this.loggedUserDTO = response.data;
+                    console.log(this.loggedUserDTO)
+                })
+        },
         methods: {
-            register(){
-                if (this.registrationDTO.password != this.passwordCheck){
-                    this.toast = true
+            submit() {
+                if(this.passwordNew != this.passwordCheck){
+                    this.oldAndNewMatch = false;
                     return
                 }
+                this.oldAndNewMatch = true;
+                let userEditDTO = {
+                    username: this.loggedUserDTO.username,
+                    firstName: this.loggedUserDTO.firstName,
+                    lastName: this.loggedUserDTO.lastName,
+                    dateOfBirth: this.loggedUserDTO.dateOfBirth,
+                    oldPassword: this.password,
+                    newPassword: this.passwordNew
+                }
                 axios
-                    .post('http://localhost:8081/WebShopREST/rest/users/registration', this.registrationDTO)
-                
-                this.$router.push({path: '/'})
+                    .put("http://localhost:8081/WebShopREST/rest/users/editProfile", userEditDTO)
+                    .then((response) => {
+                        this.loggedUserDTO = response.data
+                    })
             }
         }
     }
 </script>
 
-
 <style>
-
-    .gradient-custom {
+        .gradient-custom {
 /* fallback for old browsers */
 
 /* Chrome 10-25, Safari 5.1-6 */
@@ -199,7 +186,7 @@ top: 13px;
             color: #fff;
             text-decoration: none;
           }
-         
-
+.feedback {
+    color: #DD2476
+}
 </style>
-

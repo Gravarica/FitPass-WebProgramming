@@ -6,13 +6,13 @@ public class SportObjectSearchDTO {
 
 	private String city;
 	private SportObjectType type;
-	private double grade;
+	private String parameter;
 	
-	public SportObjectSearchDTO(String city, SportObjectType type, double grade) {
+	public SportObjectSearchDTO(String city, SportObjectType type, String parameter) {
 		super();
 		this.city = city;
 		this.type = type;
-		this.grade = grade;
+		this.parameter = parameter;
 	}
 
 	public SportObjectSearchDTO() {
@@ -36,12 +36,12 @@ public class SportObjectSearchDTO {
 		this.type = type;
 	}
 
-	public double getGrade() {
-		return grade;
+	public String getParameter() {
+		return parameter;
 	}
 
-	public void setGrade(double grade) {
-		this.grade = grade;
+	public void setParameter(String parameter) {
+		this.parameter = parameter;
 	}
 	
 	

@@ -1,5 +1,6 @@
 package dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import beans.Training;
@@ -14,7 +15,7 @@ public class TrainerRegistrationDTO extends RegistrationDTO{
 	public TrainerRegistrationDTO() {}
 	
 	public TrainerRegistrationDTO(String username, String password, String firstName, String lastName, Gender gender,
-			Role role, Date dateOfBirth) {
+			Role role, LocalDate dateOfBirth) {
 		super(username, password, firstName, lastName, gender, role, dateOfBirth);
 	}
 
