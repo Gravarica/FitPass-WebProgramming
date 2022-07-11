@@ -250,7 +250,6 @@ import {reactive,computed} from 'vue'
                     })
                  }
                 
-                // this.$router.push("/")
             },
             convertType(it){
                 switch(it){

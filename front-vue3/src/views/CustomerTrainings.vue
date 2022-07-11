@@ -10,7 +10,7 @@
         <p class="lead text-center">Of course you can allways schedule a new one!</p>
         <p>
           <div class="container pt-5 center" v-if="hasHistory">
-                <router-link class="enrico" :to="{name: ''}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
+                <router-link class="enrico" :to="{name: 'CustomerScheduleTraining'}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
             </div>
         </p>
       </div>
@@ -40,7 +40,7 @@
                 <h2>You don't have any trainings in last month, hurry up and schedule a new one!</h2>
             </div>
             <div class="container pt-5 center">
-                <router-link class="enrico" :to="{name: ''}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
+                <router-link class="enrico" :to="{name: 'CustomerScheduleTraining'}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
             </div>
         </div>
     </div>
