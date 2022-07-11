@@ -37,25 +37,33 @@
 						      <td>{{user.role}}</td>
 							  <td>{{getCustomerType(user)}}</td>
 							  <td>{{user.totalPoints}}</td>
-                              <td><button type="button" class="btn btn-danger" @click="deleteUser(user)" v-if="user.role != 'ADMIN'">Delete</button></td>
+                              <td><button type="button" class="btn btn-danger" @click="showPopup(user)" v-if="user.role != 'ADMIN'">Delete</button></td>
 						    </tr>
 						  </tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-		</div>
+		
+        <ConfirmationDialogue @execute-del="execute()" @close="closePopup()" ref="popup" v-if="show">
+            <h5>Are you sure you want to delete this user. This action can't be undone</h5>
+        </ConfirmationDialogue>
+
+        </div>
 	</section>
 </div>
 </template>
 
 <script>
 import axios from 'axios'
+import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
 
     export default {
         data(){
             return{
-                users: null
+                users: null,
+                show : false,
+                deleteUser : null
             }
             
         },
@@ -74,14 +82,26 @@ import axios from 'axios'
 
                 return user.customerType.name
             },
-            deleteUser(user){
+            execute(){
                 axios
-                    .delete('http://localhost:8081/WebShopREST/rest/users/delete/' + user.username)
+                    .delete('http://localhost:8081/WebShopREST/rest/users/delete/' + this.deleteUser.username)
                 
-                this.users = this.users.filter(i => i.username !== user.username)
-                alert("You have successfully deleted user" + user.firstName + " " + user.lastName)
+                this.users = this.users.filter(i => i.username !== this.deleteUser.username)
+                this.show = false
+                alert("You have successfully deleted user" + this.deleteUser.firstName + " " + this.deleteUser.lastName)
+            },
+        
+            showPopup(object){
+                this.show = true
+                this.deleteUser = object
+                console.log(this.deleteUser.username)
+            },
+            closePopup(){
+                this.show = false
             }
-        }
+        },
+    
+        components : {ConfirmationDialogue}
     }
 </script>
 
