@@ -32,7 +32,7 @@
     </div>
 </div>
 
-<div class="active container-fluid" v-if="hasHistory">
+<div class="active container-fluid" v-if="!hasHistory">
     <div class="main-container container">
         <div class="inner-container container">
             <div class="container">
@@ -60,7 +60,7 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
         return {
             trainingHistory: null,
             loggedUser: null,
-            hasHistory : false
+            hasHistory : null
         };
     },
     components:{
@@ -76,9 +76,12 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             .then((response) => {
                 console.log(this.hasHistory)
                 this.trainingHistory = response.data;
-                if (response.data != null) {
-                    this.hasHistory = true;
+                if (response.data.lenght == 0) {
+                    this.hasHistory = false;
+                }else{
+                    this.hasHistory = true
                 }
+                console.log(this.hasHistory)
             });
         },
         showPersonal(){
@@ -86,9 +89,6 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             .get("http://localhost:8081/WebShopREST/rest/training_histories/trainer/personal/" + this.loggedUser.username)
             .then((response) => {
                 this.trainingHistory = response.data;
-                if (this.trainingHistory != null) {
-                    this.hasHistory = true;
-                }
             });
         },
         showGroup(){
@@ -96,9 +96,6 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             .get("http://localhost:8081/WebShopREST/rest/training_histories/trainer/group/" + this.loggedUser.username)
             .then((response) => {
                 this.trainingHistory = response.data;
-                if (this.trainingHistory != null) {
-                    this.hasHistory = true;
-                }
             });
         }
     },
@@ -108,7 +105,6 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             .then((response) => {
             console.log(this.hasHistory);
             this.loggedUser = response.data;
-            console.log("USERNAME: " + this.loggedUser.username);
             this.loadTrainingHistory()
         });
         

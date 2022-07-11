@@ -8,25 +8,7 @@
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 center">Register Trainer</h3>
             <form>
 
-              <div class="row">
-                    <div>
-                        <select v-model="selected" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
-                            <option value=null disabled>Choose sport object</option>
-                            <option v-for="it in sportObjects" :value="it">{{it.name}}</option>
-                        </select>
-                    </div>
-              </div>
               
-             <div class="row">
-                    <div>
-                        <select v-model="trainerRegistrationDTO.training" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
-                            <option value=null disabled>Choose training</option>
-                            <option v-for="it in trainings" :value="it">{{it.name}}</option>
-                        </select>
-                    </div>
-              </div>
-
-              <hr/>
 
               <div class="row">
                 <div class="col-md-6 mb-4 pt-3">
@@ -104,6 +86,31 @@
                 </div>
               </div>
 
+              <hr/>
+
+              <div class="row" v-if="employ==false">
+                <a href="#" @click="showForm" class="enrico gumica">Want to employ trainer right away, click here</a>
+
+              </div>
+
+              <div class="row pt-3" v-if="employ">
+                    <div>
+                        <select v-model="selected" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
+                            <option value=null disabled>Choose sport object</option>
+                            <option v-for="it in sportObjects" :value="it">{{it.name}}</option>
+                        </select>
+                    </div>
+              </div>
+              
+             <div class="row" v-if="employ">
+                    <div>
+                        <select v-model="trainerRegistrationDTO.training" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
+                            <option value=null disabled>Choose training</option>
+                            <option v-for="it in trainings" :value="it">{{it.name}}</option>
+                        </select>
+                    </div>
+              </div>
+
               <div class="d-grid gap-2 pt-5 md-6">
                 <input class="btn btn-lg btn-grad" type="submit" value="Submit" @click="register"/>
               </div>
@@ -158,7 +165,8 @@ import axios from 'axios'
                 toast: false,
                 sportObjects : null,
                 trainings : null,
-                selected : null
+                selected : null,
+                employ : false
             }
         },
         watch:{
@@ -183,6 +191,9 @@ import axios from 'axios'
                     .then((response) =>{
                         this.trainings = response.data
                     })
+            },
+            showForm(){
+              this.employ = true
             }
         },
         created(){
@@ -246,6 +257,10 @@ top: 13px;
             text-decoration: none;
           }
          
+.gumica{
+  font-size: large;
+}
+
 
 </style>
 

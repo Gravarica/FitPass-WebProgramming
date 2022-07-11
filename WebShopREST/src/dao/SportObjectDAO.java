@@ -25,7 +25,9 @@ public class SportObjectDAO {
 	
 	public SportObjectDAO(String contextPath) {
 		file = new File(contextPath + "/sport_objects.json");
+		System.out.println(contextPath);
 		loadSportObjects(contextPath);
+		
 	}
 		
 	private void loadSportObjects(String contextPath) {
