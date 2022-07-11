@@ -25,7 +25,7 @@
 
                   <div class="form-outline">
                     <input type="text" id="lastName" placeholder="Last Name" class="form-control form-control-lg"  v-model="state.trainerRegistrationDTO.registrationDTO.lastName"/>
-                    <span clas="jabuka" v-if="v$.trainerRegistrationDTO.registrationDTO.lastName.$error">
+                    <span class="jabuka" v-if="v$.trainerRegistrationDTO.registrationDTO.lastName.$error">
                         {{ v$.trainerRegistrationDTO.registrationDTO.lastName.$errors[0].$message}}
                     </span>
                   </div>

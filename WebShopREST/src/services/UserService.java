@@ -203,6 +203,11 @@ public class UserService {
 		return getUserDAO().getCustomersFromSportObject(id);
 	}
 
-	
+	@GET
+	@Path("/check/username/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean checkUsername(@PathParam("username") String username) {
+		return getUserDAO().checkUsername(username);
+	}
 	
 }

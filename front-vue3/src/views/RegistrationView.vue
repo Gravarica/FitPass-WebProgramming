@@ -127,7 +127,9 @@ import {reactive,computed} from 'vue'
                     gender: 'MALE'
                 },
                 passwordCheck: '',
-                toast: false
+                toast: false,
+                canUsername : true,
+                users : null
         })
 
         const rules = computed(() => {
@@ -136,6 +138,10 @@ import {reactive,computed} from 'vue'
                     username: {
                       required, 
                       minLength : minLength(3),
+                      user : helpers.withMessage(
+                        'Username allready exists',
+                        user
+                      )
                     },
                     
                     password: {
@@ -171,8 +177,8 @@ import {reactive,computed} from 'vue'
         })
 
        const pass = (value) => value.regex("[a-zA-z]{6}[0-9]*")
-       const user = (value) => checkUsername(value)
-
+       const user = (value) => value.canUsername
+       
        const v$ = useValidate(rules,state)
         
         return{
@@ -194,8 +200,20 @@ import {reactive,computed} from 'vue'
               }
             },
             checkUsername(username){
-               
+              for(const it in this.state.users){
+                  if(it.username == username){
+                    return false;
+                  }
+              }     
+              return true
             }
+        },
+        created(){
+           axios
+              .get('http://localhost:8081/WebShopREST/rest/users/get')
+              .then((response) => {
+                  this.state.users = response.data
+              })
         }
     }
 </script>
