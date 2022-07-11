@@ -156,7 +156,7 @@
 <script>
 import router from '@/router'
 import useValidate from '@vuelidate/core'
-import { required, sameAs, minLength } from '@vuelidate/validators'
+import { required, sameAs, minLength, helpers} from '@vuelidate/validators'
 import {reactive,computed} from 'vue'
 
 import axios from 'axios'
@@ -194,7 +194,13 @@ import axios from 'axios'
                           required, 
                           minLength : minLength(3) 
                         },
-                        password: { required },
+                        password: {
+                           required, 
+                           pass : helpers.withMessage(
+                              'Password must contain minimum six characters, at least one letter and one number',
+                              pass
+                           )
+                        },
                         firstName: { 
                           required,
                           minLength : minLength(3)
@@ -206,10 +212,18 @@ import axios from 'axios'
                     },
                     training : { required }
                 },
-                passwordCheck: { required, sameAs:sameAs(state.trainerRegistrationDTO.registrationDTO.password) },
+                passwordCheck: { 
+                  required,
+                  sameAs: helpers.withMessage(
+                    'Passwords must be equal',
+                    sameAs(state.trainerRegistrationDTO.registrationDTO.password)
+                  )
+                },
           }
         })
       
+        const pass = (value) => value.regex("[a-zA-z]{6}[0-9]*")
+
         const v$ = useValidate(rules,state)
         
         return{
@@ -226,20 +240,14 @@ import axios from 'axios'
         },
         methods: {
             register(){
-                // if (this.registrationDTO.password != this.passwordCheck){
-                //     this.toast = true
-                //     return
-                // }
                 this.v$.$validate()
                 if(!this.v$.$error){
                    axios
                     .post('http://localhost:8081/WebShopREST/rest/users/registration', this.registrationDTO)
                 
                   this.$router.push({path: '/'})
-                  alert("Uspesno")
+                  alert("Succsessful registration")
                 }
-               
-               alert("Nuspesno logovanje")
             },
             fillTrainings(id){
                 axios
