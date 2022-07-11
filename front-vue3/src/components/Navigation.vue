@@ -57,7 +57,7 @@ export default {
             mobileNav: null,
             windowWidth: null,
             showModal: null,
-            loginType: "ADMIN"
+            loginType: "USER"
         };
     },
     created() {

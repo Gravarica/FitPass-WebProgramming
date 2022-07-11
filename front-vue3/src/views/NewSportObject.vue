@@ -121,8 +121,6 @@
                       </span>  
                   </div>
                 </div>
-
-                
                 
                 <div class="d-grid gap-2 pt-5 md-6">
                   <input type="button" class="btn btn-lg btn-grad" @click="addNewSportObject()" value="Submit">
@@ -246,7 +244,7 @@ import {reactive,computed} from 'vue'
                 this.v$.$validate()
                  if(!this.v$.$error){
                     axios
-                    .post('http://localhost:8081/WebShopREST/rest/sport_objects/create', this.addObjectDTO)
+                    .post('http://localhost:8081/WebShopREST/rest/sport_objects/create', this.state.addObjectDTO)
                     .then((response) => {
                         this.newSportObject = response.data
                     })

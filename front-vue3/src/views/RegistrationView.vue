@@ -138,18 +138,18 @@ import {reactive,computed} from 'vue'
                     username: {
                       required, 
                       minLength : minLength(3),
-                      user : helpers.withMessage(
-                        'Username allready exists',
-                        user
-                      )
+                      // user : helpers.withMessage(
+                      //   'Username allready exists',
+                      //   user
+                      // )
                     },
                     
                     password: {
                       required, 
-                      pass : helpers.withMessage(
-                        'Password must contain minimum six characters, at least one letter and one number',
-                        pass
-                      )
+                      // pass : helpers.withMessage(
+                      //   'Password must contain minimum six characters, at least one letter and one number',
+                      //   pass
+                      // )
                     },
                     
                     firstName: {
@@ -192,7 +192,7 @@ import {reactive,computed} from 'vue'
               this.v$.$validate()
               if(!this.v$.$error){
                   axios
-                    .post('http://localhost:8081/WebShopREST/rest/users/registration', this.registrationDTO)
+                    .post('http://localhost:8081/WebShopREST/rest/users/registration', this.state.registrationDTO)
                     .then((response) => {
                         console.log('Uspesna registracija')
                         this.$router.push({path: '/'})

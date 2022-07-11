@@ -4,7 +4,7 @@
 		<div class="container obod">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section pt-4">Prikaz korisnika</h2>
+					<h2 class="heading-section pt-4">Users in System</h2>
 				</div>
 			</div>
             <div class="row">
@@ -26,6 +26,7 @@
 						      <th>Role</th>
 							  <th>Status</th>
 							  <th>Points</th>
+                              <th></th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -36,6 +37,7 @@
 						      <td>{{user.role}}</td>
 							  <td>{{getCustomerType(user)}}</td>
 							  <td>{{user.totalPoints}}</td>
+                              <td><button type="button" class="btn btn-danger" @click="deleteUser(user)" v-if="user.role != 'ADMIN'">Delete</button></td>
 						    </tr>
 						  </tbody>
 						</table>
@@ -71,6 +73,13 @@ import axios from 'axios'
                 }
 
                 return user.customerType.name
+            },
+            deleteUser(user){
+                axios
+                    .delete('http://localhost:8081/WebShopREST/rest/users/delete/' + user.username)
+                
+                this.users = this.users.filter(i => i.username !== user.username)
+                alert("You have successfully deleted user" + user.firstName + " " + user.lastName)
             }
         }
     }

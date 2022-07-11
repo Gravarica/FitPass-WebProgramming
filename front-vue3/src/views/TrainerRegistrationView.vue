@@ -14,9 +14,9 @@
                 <div class="col-md-6 mb-4 pt-3">
 
                   <div class="form-outline">
-                    <input type="text" id="firstName" placeholder="First Name" class="form-control form-control-lg"  v-model="state.trainerRegistrationDTO.registrationDTO.firstName"/>
-                    <span class="jabuka" v-if="v$.trainerRegistrationDTO.registrationDTO.firstName.$error">
-                        {{ v$.trainerRegistrationDTO.registrationDTO.firstName.$errors[0].$message}}
+                    <input type="text" id="firstName" placeholder="First Name" class="form-control form-control-lg"  v-model="state.trainerRegistrationDTO.firstName"/>
+                    <span class="jabuka" v-if="v$.trainerRegistrationDTO.firstName.$error">
+                        {{ v$.trainerRegistrationDTO.firstName.$errors[0].$message}}
                     </span>
                   </div>
 
@@ -24,9 +24,9 @@
                 <div class="col-md-6 mb-4 pt-3">
 
                   <div class="form-outline">
-                    <input type="text" id="lastName" placeholder="Last Name" class="form-control form-control-lg"  v-model="state.trainerRegistrationDTO.registrationDTO.lastName"/>
-                    <span class="jabuka" v-if="v$.trainerRegistrationDTO.registrationDTO.lastName.$error">
-                        {{ v$.trainerRegistrationDTO.registrationDTO.lastName.$errors[0].$message}}
+                    <input type="text" id="lastName" placeholder="Last Name" class="form-control form-control-lg"  v-model="state.trainerRegistrationDTO.lastName"/>
+                    <span class="jabuka" v-if="v$.trainerRegistrationDTO.lastName.$error">
+                        {{ v$.trainerRegistrationDTO.lastName.$errors[0].$message}}
                     </span>
                   </div>
 
@@ -37,7 +37,7 @@
                 <div class="col-md-6 mb-3 d-flex align-items-center">
 
                   <div class="form-outline datepicker w-100">
-                    <input type="date" max="2000-01-01" class="form-control form-control-lg" id="birthdayDate"  v-model="state.trainerRegistrationDTO.registrationDTO.dateOfBirth"/>
+                    <input type="date" max="2000-01-01" class="form-control form-control-lg" id="birthdayDate"  v-model="state.trainerRegistrationDTO.dateOfBirth"/>
                     <label for="birthdayDate" class="form-label">Date of Birth</label>
                   </div>
 
@@ -48,13 +48,13 @@
 
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="femaleGender"
-                      value="FEMALE" v-model="state.trainerRegistrationDTO.registrationDTO.gender" />
+                      value="FEMALE" v-model="state.trainerRegistrationDTO.gender" />
                     <label class="form-check-label" for="femaleGender">Female</label>
                   </div>
 
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="maleGender"
-                      value="MALE" v-model="state.trainerRegistrationDTO.registrationDTO.gender"/>
+                      value="MALE" v-model="state.trainerRegistrationDTO.gender"/>
                     <label class="form-check-label" for="maleGender">Male</label>
                   </div>
 
@@ -64,9 +64,9 @@
               <div class="row mt-4">
                 <div class="col-md-12 pb-4">
                   <div class="form-outline">
-                    <input type="text" id="phoneNumber" class="form-control form-control-lg" placeholder="Username" v-model="state.trainerRegistrationDTO.registrationDTO.username"/>
-                    <span class="jabuka" v-if="v$.trainerRegistrationDTO.registrationDTO.username.$error">
-                        {{ v$.trainerRegistrationDTO.registrationDTO.username.$errors[0].$message}}
+                    <input type="text" id="phoneNumber" class="form-control form-control-lg" placeholder="Username" v-model="state.trainerRegistrationDTO.username"/>
+                    <span class="jabuka" v-if="v$.trainerRegistrationDTO.username.$error">
+                        {{ v$.trainerRegistrationDTO.username.$errors[0].$message}}
                     </span>
                   </div>
 
@@ -76,9 +76,9 @@
               <div class="row">
                 <div class="col-12 pb-4">
 
-                  <input type="password" id="password" class="form-control form-control-lg" placeholder="Password" v-model="state.trainerRegistrationDTO.registrationDTO.password"/>
-                  <span class="jabuka" v-if="v$.trainerRegistrationDTO.registrationDTO.password.$error">
-                        {{ v$.trainerRegistrationDTO.registrationDTO.password.$errors[0].$message}}
+                  <input type="password" id="password" class="form-control form-control-lg" placeholder="Password" v-model="state.trainerRegistrationDTO.password"/>
+                  <span class="jabuka" v-if="v$.trainerRegistrationDTO.password.$error">
+                        {{ v$.trainerRegistrationDTO.password.$errors[0].$message}}
                   </span>
                 </div>
               </div>
@@ -95,11 +95,11 @@
               <hr/>
 
               <div class="row" v-if="state.employ==false">
-                <a href="#" @click="showForm" class="enrico gumica">Want to employ trainer right away, click here</a>
+                <a href="#" @click="showForm()" class="enrico gumica">Want to employ trainer right away, click here</a>
               </div>
 
 
-              <div class="row " v-if="state.employ">
+              <div class="row" v-if="state.employ">
 
                 <div class="pb-3">
                   <button type="button" @click="hideForm()" class="btn-close float-end" aria-label="Close"></button>
@@ -156,7 +156,7 @@
 <script>
 import router from '@/router'
 import useValidate from '@vuelidate/core'
-import { required, sameAs, minLength, helpers, alpha} from '@vuelidate/validators'
+import { required, sameAs, minLength, helpers, alpha,requiredIf} from '@vuelidate/validators'
 import {reactive,computed} from 'vue'
 
 import axios from 'axios'
@@ -166,16 +166,16 @@ import axios from 'axios'
       setup(){
         const state = reactive({
           trainerRegistrationDTO : {
-                    registrationDTO: {
-                        username: '',
-                        password: '',
-                        firstName: '',
-                        lastName: '',
-                        role: 'TRAINER',
-                        dateOfBirth: '',
-                        gender: 'MALE',
-                    },
-                    training : null
+                  
+                  username: '',
+                  password: '',
+                  firstName: '',
+                  lastName: '',
+                  role: 'TRAINER',
+                  dateOfBirth: '',
+                  gender: 'MALE',
+                  
+                  training : null
                 },
 
                 passwordCheck: '',
@@ -183,23 +183,23 @@ import axios from 'axios'
                 sportObjects : null,
                 trainings : null,
                 selected : null,
-                employ : false
+                employ : false,
+                mustChoose : false
         })
       
         const rules = computed(() => {
           return{
              trainerRegistrationDTO : {
-                    registrationDTO: {
                         username: { 
                           required, 
                           minLength : minLength(3) 
                         },
                         password: {
                            required, 
-                           pass : helpers.withMessage(
-                              'Password must contain minimum six characters, at least one letter and one number',
-                              pass
-                           )
+                          //  pass : helpers.withMessage(
+                          //     'Password must contain minimum six characters, at least one letter and one number',
+                          //     pass
+                          //  )
                         },
                         firstName: { 
                           required,
@@ -213,20 +213,20 @@ import axios from 'axios'
                         role: { required },
                         dateOfBirth: { required },
                         gender: { required },
-                    },
-                    training : { required }
+
+                    // training : requiredIf(state.mustChoose)
                 },
                 passwordCheck: { 
                   required,
                   sameAs: helpers.withMessage(
                     'Passwords must be equal',
-                    sameAs(state.trainerRegistrationDTO.registrationDTO.password)
+                    sameAs(state.trainerRegistrationDTO.password)
                   )
                 },
           }
         })
       
-        const pass = (value) => value.regex("[a-zA-z]{6}[0-9]*")
+        const pass = (value) => value.regex("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$")
 
         const v$ = useValidate(rules,state)
         
@@ -240,15 +240,19 @@ import axios from 'axios'
         watch:{
             selected(object){
                 this.fillTrainings(object.id)
+                this.setMustChoose()
             }
         },
         methods: {
             register(){
                 this.v$.$validate()
                 if(!this.v$.$error){
-                   axios
-                    .post('http://localhost:8081/WebShopREST/rest/users/registration', this.registrationDTO)
-                
+                  console.log(this.state.trainerRegistrationDTO)
+                  axios
+                    .post('http://localhost:8081/WebShopREST/rest/users/registerTrainer', this.state.trainerRegistrationDTO)
+                    .then((response) =>{
+                      console.log(response.data)
+                    })
                   this.$router.push({path: '/'})
                   alert("Succsessful registration")
                 }
@@ -265,6 +269,9 @@ import axios from 'axios'
             },
             hideForm(){
               this.state.employ = false
+            },
+            setMustChoose(){
+              this.state.mustChoose = true
             }
         },
         created(){
