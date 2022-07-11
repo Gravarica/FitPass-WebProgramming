@@ -146,7 +146,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User registerTrainer(TrainerRegistrationDTO dto) {
 		User trainer = getUserDAO().registerTrainer(dto);
-		getTrainingDAO().setTrainingTrainer(dto.getTraining(),trainer);
+		if(dto.getTraining() != null) getTrainingDAO().setTrainingTrainer(dto.getTraining(),trainer);
 		return trainer;
 	}
   
@@ -193,4 +193,14 @@ public class UserService {
 	public CustomerTypeDTO getCustomerType() {
 		return getUserDAO().getLoggedUserCustomerType();
 	}
+	
+	
+	@GET
+	@Path("/sport_object/visited/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getCustomersFromSportObject(@PathParam("id") int id) {
+		return getUserDAO().getCustomersFromSportObject(id);
+	}
+	
 }

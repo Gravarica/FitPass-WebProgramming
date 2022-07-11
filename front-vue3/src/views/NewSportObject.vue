@@ -86,7 +86,7 @@
                 </div>
                 
                 <div class="d-grid gap-2 pt-5 md-6">
-                  <input type="submit" class=" btn btn-warning btn-lg" value="Submit">
+                  <input type="submit" class="btn btn-lg btn-grad" value="Submit">
                 </div>
                 </form>
               </div>
