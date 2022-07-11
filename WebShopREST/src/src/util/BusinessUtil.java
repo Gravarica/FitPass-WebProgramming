@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import beans.Content;
 import beans.Entity;
+import beans.SportObject;
 import dto.NewContentDTO;
 import enums.SubscriptionType;
 
@@ -58,5 +59,15 @@ public class BusinessUtil {
 		} 
 		
 		return LocalDate.now().plusYears(1);
+	}
+	
+	public static boolean listContains(ArrayList<SportObject> objects, SportObject obj) {
+		for(SportObject o : objects) {
+			if(o.getId() == obj.getId()) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }

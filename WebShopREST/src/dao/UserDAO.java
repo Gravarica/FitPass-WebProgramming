@@ -400,4 +400,8 @@ public class UserDAO {
 		}
 		saveUsers();
 	}
+	
+	public ArrayList<SportObject> getObjectsVisitedByUser(){
+		return getLoggedUser().getObjectsVisited();
+	}
 }

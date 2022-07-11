@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.SportObject;
 import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
@@ -113,5 +114,12 @@ public class TrainingHistoryService {
 		//getUserDAO().updateTrainingHistory(newTraining);
 		getSubscriptionDAO().increaseTrainingCounter(getSubscriptionDAO().getByUser(dto.getCustomer().getUsername()).getId());
 		return newTraining;
+	}
+	
+	@GET
+	@Path("/objects")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<SportObject> getObjectsVisitedByUser(){
+		return getTrainingHistoryDAO().getObjectsVisitedByLoggedUser(getUserDAO().getLoggedUser().getUsername());
 	}
 }

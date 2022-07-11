@@ -97,9 +97,12 @@
 import OneObjectMap from '@/components/OneObjectMap.vue';
     export default {
         components: {
-    Map,
-    OneObjectMap
-}
+            Map,
+            OneObjectMap
+        },
+        props: {
+            objectId: null
+        }
     }
 </script>
 

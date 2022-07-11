@@ -144,7 +144,7 @@ public class CommentDAO {
 	}
 	
 	public Comment create(NewCommentDTO dto) {
-		User customer = getUserDAO().getByUsername(dto.getUsername());
+		User customer = getUserDAO().getLoggedUser();
 		SportObject obj = getSportObjectDAO().getById(dto.getObjectId());
 		Comment newInstance = new Comment(getMaxId(), customer, obj, dto.getText(), dto.getGrade());
 		comments.add(newInstance);

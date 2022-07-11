@@ -17,6 +17,8 @@ import SubscriptionView from '../views/SubscriptionView'
 import SubscribeView from '../views/SubscribeView'
 import CheckoutView from '../views/CheckoutView'
 import PromoCode from '../views/PromoCode'
+import CreateCommentView from '../views/CreateCommentView.vue'
+import CommentsView from '../views/CommentsView.vue'
 
 const routes = [
   {
@@ -112,6 +114,19 @@ const routes = [
     path: '/promoCode',
     name: 'PromoCode',
     component: PromoCode
+  },
+  {
+    path: '/createComment',
+    name: 'CreateComment',
+    component: CreateCommentView,
+    props: (route) => ({
+      ...route.params
+    })
+  },
+  {
+    path: '/comments',
+    name: 'Comments',
+    component: CommentsView
   }
 ]
 
