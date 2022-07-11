@@ -33,11 +33,22 @@ public class SportObjectDAO {
 		
 		try {
 			List<SportObject> list = Arrays.asList(mapper.readValue(file,SportObject[].class));
-			objects = filterUndeleted(new ArrayList<SportObject>(list));		
+			objects = filterUndeleted(new ArrayList<SportObject>(list));
+			setStatus();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}	
 	}	
+	
+	private void setStatus() {
+		for (SportObject obj : objects) {
+			if(BusinessUtil.timeIsInZone(obj.getWorkHour())) {
+				obj.setStatus(true);
+			} else {
+				obj.setStatus(false);
+			}
+		}
+	}
 	
 	private void saveSportObjects() {
 		

@@ -3,24 +3,7 @@
 		"id" : "1",
 		"deleted" : false,
 		"name" : "Ozzy",
-		"averageGrade" : 7.64,
-		"sportObjectType" : "GYM",
-		"location" : {
-			"address" : {
-				"street" : "Jovana Ducica",
-				"number" : "12a",
-				"city" : "Novi Sad",
-				"postalNumber" : "21000"
-			},
-			"longitude" : 24.42,
-			"latitude" : 12.23
-		}
-	},
-	{
-		"id" : "2",
-		"deleted" : false,
-		"name" : "Coloseum",
-		"averageGrade" : 10.00,
+		"averageGrade" : 2.00,
 		"sportObjectType" : "GYM",
 		"location" : {
 			"address" : {
@@ -29,15 +12,42 @@
 				"city" : "Novi Sad",
 				"postalNumber" : "21000"
 			},
-			"longitude" : 24.42,
-			"latitude" : 12.23
+			"longitude" : 19.81762,
+			"latitude" : 45.24055
+		},
+		"description": "Our gym (Ozzy) is one of the first to open in Novi Sad. The story began in 1997 at SPENS, where it is still located today. Following the trends, it went through various transformations and is now one of the most equipped and modern in Serbia.",
+		"workHour": {
+			"startTime": "09:00",
+			"endTime": "22:00"
+		}
+	},
+	{
+		"id" : "2",
+		"deleted" : false,
+		"name" : "Coloseum",
+		"averageGrade" : 0.00,
+		"sportObjectType" : "GYM",
+		"location" : {
+			"address" : {
+				"street" : "Temerinska",
+				"number" : "95",
+				"city" : "Novi Sad",
+				"postalNumber" : "21000"
+			},
+			"longitude" : 19.84161,
+			"latitude" : 45.27072
+		},
+		"description": "THE LARGEST FITNESS CENTER IN THE REGION HAS OPENED. Visit us at Temerinska 95 and make sure that we are more than a fitness center. 2500m2 of new and modernly equipped space is waiting for you! Special offers for first time members! Last generation machines!",
+		"workHour": {
+			"startTime": "06:00",
+			"endTime": "00:00"
 		}
 	},
 	{
 		"id" : "3",
 		"deleted" : false,
 		"name" : "Flex",
-		"averageGrade" : 8.64,
+		"averageGrade" : 0.00,
 		"sportObjectType" : "POOL",
 		"location" : {
 			"address" : {
@@ -46,93 +56,123 @@
 				"city" : "Beograd",
 				"postalNumber" : "11000"
 			},
-			"longitude" : 24.42,
-			"latitude" : 12.23
+			"longitude" : 20.41801,
+			"latitude" : 44.81769
+		},
+		"description" : "THE LARGEST FITNESS CENTER IN THE REGION HAS OPENED. Visit us at Temerinska 95 and make sure that we are more than a fitness center. 2500m2 of new and modernly equipped space is waiting for you! Special offers for first time members! Last generation machines!",
+		"workHour": {
+			"startTime": "05:00",
+			"endTime": "23:00"
 		}
 	},
 	{
 		"id" : "4",
 		"deleted" : false,
 		"name" : "TotalGym",
-		"averageGrade" : 10.00,
+		"averageGrade" : 0.00,
 		"sportObjectType" : "GYM",
 		"location" : {
 			"address" : {
-				"street" : "Bulevar Patrijarha Pavla",
-				"number" : "35",
+				"street" : "Sutjeska",
+				"number" : "2",
 				"city" : "Novi Sad",
 				"postalNumber" : "21000"
 			},
-			"longitude" : 24.42,
-			"latitude" : 12.23
+			"longitude" : 19.84710,
+			"latitude" : 45.24746
+		},
+		"description": "THE LARGEST FITNESS CENTER IN THE REGION HAS OPENED. Visit us at Temerinska 95 and make sure that we are more than a fitness center. 2500m2 of new and modernly equipped space is waiting for you! Special offers for first time members! Last generation machines!",
+		"workHour": {
+			"startTime": "10:00",
+			"endTime": "00:00"
 		}
 	},
 	{
 		"id" : "5",
 		"deleted" : false,
 		"name" : "ProFitness",
-		"averageGrade" : 10.00,
+		"averageGrade" : 0.00,
 		"sportObjectType" : "GYM",
 		"location" : {
 			"address" : {
-				"street" : "Bulevar Patrijarha Pavla",
-				"number" : "35",
+				"street" : "Bulevar Oslobodjenja",
+				"number" : "119",
 				"city" : "Novi Sad",
 				"postalNumber" : "21000"
 			},
-			"longitude" : 24.42,
-			"latitude" : 12.23
+			"longitude" : 19.84310,
+			"latitude" : 45.24522
+		},
+		"description": "Due to a sedentary lifestyle, many problems arise: obesity, back pain, deformities of the spinal column, more and more problems with the cardiorespiratory system. Our goal is to make your life better by getting you moving.",
+		"workHour": {
+			"startTime": "08:00",
+			"endTime": "22:00"
 		}
 	},
 	{
 		"id" : "6",
 		"deleted" : false,
 		"name" : "NoLimit",
-		"averageGrade" : 10.00,
+		"averageGrade" : 0.00,
 		"sportObjectType" : "GYM",
 		"location" : {
 			"address" : {
-				"street" : "Bulevar Patrijarha Pavla",
-				"number" : "35",
+				"street" : "Branka Bajica",
+				"number" : "11",
 				"city" : "Novi Sad",
 				"postalNumber" : "21000"
 			},
-			"longitude" : 24.42,
-			"latitude" : 12.23
+			"longitude" : 19.81653,
+			"latitude" : 45.25432
+		},
+		"description": "The sports and business center Vojvodina, popularly called SPENS (which is actually an abbreviation of the Novi Sad Table Tennis Championship held in 1981), is a sports and business center located in Novi Sad, in the Stari Grad part of the city.",
+		"workHour": {
+			"startTime": "07:00",
+			"endTime": "23:00"
 		}
 	},
 	{
 		"id" : "7",
 		"deleted" : false,
 		"name" : "Classic",
-		"averageGrade" : 10.00,
+		"averageGrade" : 0.00,
 		"sportObjectType" : "GYM",
 		"location" : {
 			"address" : {
-				"street" : "Bulevar Patrijarha Pavla",
-				"number" : "35",
+				"street" : "Bulevar Oslobodjenja",
+				"number" : "83",
 				"city" : "Novi Sad",
 				"postalNumber" : "21000"
 			},
-			"longitude" : 24.42,
-			"latitude" : 12.23
+			"longitude" : 19.83630,
+			"latitude" : 45.25407
+		},
+		"description" : "Exercise on 1200 m2 of space equipped with equipment and props that will make you stronger and healthier! Since 2014, when the SYNERGY training center was founded, we have been developing a pleasant and efficient environment in which everyone has found the necessary support when realizing their goals",
+		"workHour": {
+			"startTime": "00:00",
+			"endTime": "00:00"
 		}
 	},
 	{
 		"id" : "8",
 		"deleted" : true,
 		"name" : "Synergy",
-		"averageGrade" : 10.00,
+		"averageGrade" : 0.00,
 		"sportObjectType" : "GYM",
 		"location" : {
 			"address" : {
-				"street" : "Bulevar Patrijarha Pavla",
-				"number" : "35",
+				"street" : "Veselina Maslese",
+				"number" : "74",
 				"city" : "Novi Sad",
 				"postalNumber" : "21000"
 			},
-			"longitude" : 24.42,
-			"latitude" : 12.23
+			"longitude" : 19.80957,
+			"latitude" : 45.26033
+		},
+		"description": "Exercise on 1200 m2 of space equipped with equipment and props that will make you stronger and healthier! Since 2014, when the SYNERGY training center was founded, we have been developing a pleasant and efficient environment in which everyone has found the necessary support when realizing their goals",
+		"workHour": {
+			"startTime": "00:00",
+			"endTime": "00:00"
 		}
 	}
 ]

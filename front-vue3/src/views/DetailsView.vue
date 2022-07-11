@@ -6,18 +6,18 @@
             <div class="col-md-12 col-lg-9">
                 <div class="header-info">
                     <div class="d-flex">
-                        <img src="./../assets/IronRepublic2.png" class="slika"/>
+                        <img :src="this.getImgUrl()" class="slika"/>
                         <div class="ml-1 naslovnica">
-                            <h1 class="black-text mb-0">Flex Fitness</h1>
+                            <h1 class="black-text mb-0">{{this.object.name}}</h1>
                             <div class="pointer">
                                 <i class="fas fa-star orange-text"></i>
                                 <p>Ocena:</p>
-                                <span class="badge badgez">9.34</span>
+                                <span class="badge badgez">{{this.object.averageGrade}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="disciplines mt-1 position-relative">
-                        <span class="badge badgez1"> Teretana </span>
+                        <span class="badge badgez1">{{this.getType()}}</span>
                     </div>
                 </div>
                 <div class="row main-info-row">
@@ -26,31 +26,31 @@
                         <div class="work-hours mt-1 pr-3">
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Ponedeljak</span>
-                                <span>0:00-0:00</span>
+                                <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Utorak</span>
-                                <span>0:00-0:00</span>
+                                <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Sreda</span>
-                                <span>0:00-0:00</span>
+                                <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Cetvrtak</span>
-                                <span>0:00-0:00</span>
+                                <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Petak</span>
-                                <span>0:00-0:00</span>
+                                <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Subota</span>
-                                <span>0:00-0:00</span>
+                                <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Nedelja</span>
-                                <span>0:00-0:00</span>
+                                <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                         </div>
                     </div>
@@ -58,31 +58,33 @@
                         <h4 class="black-text headline">Opis</h4>
                         <div class="text-content mt-1">
                             <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit voluptate reiciendis consequatur rerum hic atque fugiat, dignissimos veniam, enim totam explicabo suscipit aspernatur alias. Eveniet quod officiis atque deserunt molestiae.
+                                {{this.object.description}}
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="comments">
                     <h4 class="black-text title pb-1">Komentari i ocene</h4>
-                    <div class="comment-item pt-1 mb-1">
+                    <div class="comment-item pt-1 mb-1" v-for="comment in this.comments">
                         <div class="top-part d-flex align-items-center pointer sheeshz">
-                            <span class="badge badgez" style="margin-right: 20px">9.34</span>
-                            <span>20.01.2020.</span>
+                            <span class="badge badgez" style="margin-right: 20px">{{comment.grade}}</span>
+                            <span>{{comment.time}}</span>
                         </div>
-                            <p class="mt-1 mb-0 comment-text">"Osoblje je jako neljubazno"</p>
+                            <p class="mt-1 mb-0 comment-text">"{{comment.text}}"</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="basic-info">
                     <div class="map-container">
-                        <OneObjectMap id="map"></OneObjectMap>
+                        <OneObjectMap :longitude="this.object.location.longitude"
+                                      :latitude="this.object.location.latitude"></OneObjectMap>
                     </div>
                     <div class="address-info">
                         <h6 class="pr-2 address-holder mb-1 position-relative">
                             <i class="fas fa-map-marker-alt pin mr-1"></i>
-                            Vojvode Jabucila 31, Novi Sad
+                            {{this.object.location.address.street}} {{this.object.location.address.number}}, {{this.object.location.address.city}}
+                            {{this.object.location.longitude}} , {{this.object.location.latitude}}
                         </h6>
                     </div>
                 </div>    
@@ -95,11 +97,61 @@
 <script>
     import Map from '../components/Map.vue';
 import OneObjectMap from '@/components/OneObjectMap.vue';
+import axios from 'axios';
     export default {
         components: {
-    Map,
-    OneObjectMap
-}
+            Map,
+            OneObjectMap
+        },
+        props: {
+            objectId: null
+        },
+        data(){
+            return{
+                object: { name: '',
+                          sportObjectType: '',
+                          contents: null,
+                          status: false,
+                          location: null,
+                          averageGrade: null,
+                          workHour: null,
+                          description: ''},
+                comments: {
+                    grade: null,
+                    time: '',
+                    text: ''
+                }
+            }
+        },
+        created() {
+            axios
+                .get('http://localhost:8081/WebShopREST/rest/sport_objects/get/' + this.$props.objectId)
+                .then(response => {
+                    this.object = response.data
+                })
+            axios
+                .get('http://localhost:8081/WebShopREST/rest/comments/get/id/' + this.$props.objectId)
+                .then(response => {
+                    this.comments = response.data
+                })
+        },
+        methods: {
+            getType(){
+                if(this.object.sportObjectType == 'GYM'){
+                    return 'Teretana'
+                } else if(this.object.sportObjectType == 'POOL'){
+                    return 'Pool'
+                } else if(this.object.sportObjectType == 'DANCE_STUDIO'){
+                    return 'Dance Studio'
+                }
+
+                return 'Sports Center'
+            },
+            getImgUrl(object){
+                let images = require.context('../assets/sheesh/', false, /\.png$/);
+                return images('./' + this.object.name + ".png")
+        }
+        }
     }
 </script>
 
@@ -240,11 +292,16 @@ import OneObjectMap from '@/components/OneObjectMap.vue';
 .comment-item{
     border-bottom: 1px solid #6d6d64;
     padding-bottom: 20px;
+    margin-top: 30px;
 }
 
 .headline{
     padding-bottom: 5px;
     font-size: 30px;
+}
+
+.slika{
+    border: 1px solid #a4a4e8
 }
 
 template{

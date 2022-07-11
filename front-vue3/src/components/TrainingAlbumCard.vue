@@ -2,7 +2,7 @@
      <div>
         <div class="card lotina">
             <img :src="getSource()" class="card-img-top" alt="...">
-            <div class="card-header info bg-dark text-white">
+            <div class="card-header okvir infozz bg-dark text-white">
                 Training Info
             </div>
             <ul class="list-group list-group-flush">
@@ -59,12 +59,14 @@
 <style>
 
 .lotina{
-    width: 18rem;
+    width: 25rem;
+    margin-bottom: 100px;
+    border: 2px solid #a4a4e8;
 }
 
-.info{
+.infozz{
     text-align: center;
-    
+    margin-bottom: 0px;
 }
 
 </style>

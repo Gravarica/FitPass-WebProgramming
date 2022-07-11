@@ -15,7 +15,7 @@
     </div>
   </section>
 
-<div class="container" v-if="!hasHistory == true">
+<div class="container-fluid kokain" v-if="hasHistory">
     <div class="row row-cols-md-3">
         <div class="col-5" v-for="t in trainingHistory">
         <TrainingAlbumCard
@@ -117,5 +117,7 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
 </script>
 
 <style>
-
+    .kokain{
+        padding-left: 250px;
+    }
 </style>

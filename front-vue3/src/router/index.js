@@ -17,6 +17,9 @@ import SubscriptionView from '../views/SubscriptionView'
 import SubscribeView from '../views/SubscribeView'
 import CheckoutView from '../views/CheckoutView'
 import ScheduleTraining from '../views/NewTrainingView.vue'
+import PromoCode from '../views/PromoCode'
+import CreateCommentView from '../views/CreateCommentView.vue'
+import CommentsView from '../views/CommentsView.vue'
 
 const routes = [
   {
@@ -83,7 +86,10 @@ const routes = [
   {
     path: '/details',
     name: 'Details',
-    component: DeatilsView
+    component: DeatilsView,
+    props: (route) => ({
+      ...route.params
+    })
   },
   {
     path: '/editprofile',
@@ -112,6 +118,24 @@ const routes = [
     path: '/schedule/training',
     name: 'ScheduleTraining',
     component: ScheduleTraining
+  },
+  {
+    path: '/promoCode',
+    name: 'PromoCode',
+    component: PromoCode
+  },
+  {
+    path: '/createComment',
+    name: 'CreateComment',
+    component: CreateCommentView,
+    props: (route) => ({
+      ...route.params
+    })
+  },
+  {
+    path: '/comments',
+    name: 'Comments',
+    component: CommentsView
   }
 ]
 

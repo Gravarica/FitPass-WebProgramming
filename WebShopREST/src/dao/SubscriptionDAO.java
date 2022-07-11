@@ -79,11 +79,13 @@ public class SubscriptionDAO {
 	}
 	
 	public Subscription createSubscription(NewSubscriptionDTO dto) {
+		dto.setUsername(getUserDAO().getLoggedUser().getUsername());
 		
 		for (Subscription s : subscriptions) {
 			if(s.exists(dto.getUsername())) {
 				s.setActive(false);
 				calculatePoints(s);
+				getUserDAO().checkForUpgrade();
 			}
 		}
 		
@@ -171,7 +173,7 @@ public class SubscriptionDAO {
 	
 	public void checkForExpired() {
 		Subscription s = getByLoggedUser();
-		if (!s.hasExpired()) return;
+		if (s == null || !s.hasExpired()) return;
 			
 		s.setActive(false);
 		calculatePoints(s);

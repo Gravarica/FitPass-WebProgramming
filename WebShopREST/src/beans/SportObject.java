@@ -18,6 +18,7 @@ public class SportObject extends Entity {
 	private Location location;
 	private double averageGrade;
 	private WorkHour workHour;
+	private String description;
 	private Base64 image;
 	
 	public SportObject() {
@@ -119,6 +120,15 @@ public class SportObject extends Entity {
 		return this.sportObjectType == type;
 	}
 	
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public boolean gradeApplies(double grade) {
 		return this.averageGrade >= grade;
 	}

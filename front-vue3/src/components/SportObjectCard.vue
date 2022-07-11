@@ -5,7 +5,7 @@
                       <div class="card booking-card v-2 mt-2 mb-4 rounded-bottom">
                         <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
                            <div class="card-img__wrapper">
-                              <img :src="getImgUrl(name)" class="img-fluid"/>
+                              <img :src="getImgUrl(name)" class="img-fluid" @click="this.goToDetails()"/>
                            </div>
                           
                           <a href="#!">
@@ -29,9 +29,13 @@
                                 </div>
                             </ul>
 
-                            <div style="display:flex" class="mt-2">
+                            <div style="display:flex" class="mt-2" v-if="!status">
                                 <span class="badge badgez1">Zatvoreno</span>
-                                <p class="text1">Otvara se u 09:00</p>
+                                <p class="text1">Otvara se u {{startTime}}</p>
+                            </div>
+                            <div style="display:flex" class="mt-2" v-if="status">
+                                <span class="badge badgez2">Otvoreno</span>
+                                <p class="text1">Zatvara se u {{endTime}}</p>
                             </div>
                         </div>
                       </div>
@@ -47,13 +51,25 @@
             averageGrade: String,
             street: String,
             number: String,
-            city: String
+            city: String,
+            startTime: String,
+            endTime: String,
+            status: Boolean,
+            id: Number
         },
         methods:{
            getImgUrl(object){
             let images = require.context('../assets/', false, /\.png$/);
             return images('./' + object + ".png")
-        }
+          },
+          goToDetails(){
+            this.$router.push({
+            name: 'Details',
+            params: {
+              objectId : this.$props.id
+            }
+          })
+          }
         }
     }
 </script>
@@ -77,6 +93,19 @@
     margin-bottom: 10px;
     border: 1px solid #ee7600;
     color: #ee7600;
+    background-color: transparent;
+    padding: 5px;
+}
+
+.badgez2{
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 100;
+    border: 1px solid #357960;
+    color: #357950;
     background-color: transparent;
     padding: 5px;
 }
@@ -120,6 +149,10 @@
 
   .card-img__wrapper {
   position: relative;
+}
+
+.card-img__wrapper:hover{
+  cursor: pointer;
 }
 
 </style>

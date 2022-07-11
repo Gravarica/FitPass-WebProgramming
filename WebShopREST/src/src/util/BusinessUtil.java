@@ -2,6 +2,8 @@ package src.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.UUID;
 
 import beans.Content;
 import beans.Entity;
+import beans.SportObject;
+import beans.WorkHour;
 import dto.NewContentDTO;
 import enums.SubscriptionType;
 
@@ -58,5 +62,29 @@ public class BusinessUtil {
 		} 
 		
 		return LocalDate.now().plusYears(1);
+	}
+	
+	public static boolean listContains(ArrayList<SportObject> objects, SportObject obj) {
+		for(SportObject o : objects) {
+			if(o.getId() == obj.getId()) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public static boolean timeIsInZone(WorkHour wh) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+		LocalTime target = LocalTime.now();
+		LocalTime startTime = LocalTime.parse(wh.getStartTime(), formatter);
+		LocalTime endTime = LocalTime.parse(wh.getEndTime(), formatter);
+		
+		// U slucaj da je od 00 do 00
+		if (startTime.equals(endTime)) {
+			return true;
+		}
+		
+		return target.isAfter(startTime) && target.isBefore(endTime);
 	}
 }

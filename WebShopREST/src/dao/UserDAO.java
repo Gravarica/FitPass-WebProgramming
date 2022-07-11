@@ -401,6 +401,7 @@ public class UserDAO {
 		saveUsers();
 	}
 
+
 	public ArrayList<User> getCustomersFromSportObject(int id){
 		ArrayList<User> retList = new ArrayList<User>();
 		for(User it : users.values()) {
@@ -421,5 +422,9 @@ public class UserDAO {
 			}
 		}
 		return false;
+	}
+	
+  public ArrayList<SportObject> getObjectsVisitedByUser(){
+		return getLoggedUser().getObjectsVisited();
 	}
 }
