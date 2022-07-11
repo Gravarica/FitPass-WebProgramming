@@ -15,7 +15,7 @@
 
                   <div class="form-outline">
                     <input type="text" id="firstName" placeholder="First Name" class="form-control form-control-lg"  v-model="state.trainerRegistrationDTO.registrationDTO.firstName"/>
-                    <span v-if="v$.trainerRegistrationDTO.registrationDTO.firstName.$error">
+                    <span class="jabuka" v-if="v$.trainerRegistrationDTO.registrationDTO.firstName.$error">
                         {{ v$.trainerRegistrationDTO.registrationDTO.firstName.$errors[0].$message}}
                     </span>
                   </div>
@@ -25,7 +25,7 @@
 
                   <div class="form-outline">
                     <input type="text" id="lastName" placeholder="Last Name" class="form-control form-control-lg"  v-model="state.trainerRegistrationDTO.registrationDTO.lastName"/>
-                    <span v-if="v$.trainerRegistrationDTO.registrationDTO.lastName.$error">
+                    <span clas="jabuka" v-if="v$.trainerRegistrationDTO.registrationDTO.lastName.$error">
                         {{ v$.trainerRegistrationDTO.registrationDTO.lastName.$errors[0].$message}}
                     </span>
                   </div>
@@ -38,7 +38,7 @@
 
                   <div class="form-outline datepicker w-100">
                     <input type="date" class="form-control form-control-lg" id="birthdayDate"  v-model="state.trainerRegistrationDTO.registrationDTO.dateOfBirth"/>
-                    <label for="birthdayDate" class="form-label">Birthday</label>
+                    <label for="birthdayDate" class="form-label">Date of Birth</label>
                   </div>
 
                 </div>
@@ -62,31 +62,33 @@
               </div>
               <hr/>
               <div class="row mt-4">
-                <div class="col-md-12 pb-2">
-
+                <div class="col-md-12 pb-4">
                   <div class="form-outline">
-                    <input type="text" id="phoneNumber" class="form-control form-control-lg"  v-model="state.trainerRegistrationDTO.registrationDTO.username"/>
-                    <label class="form-label" for="username">Username</label>
+                    <input type="text" id="phoneNumber" class="form-control form-control-lg" placeholder="Username" v-model="state.trainerRegistrationDTO.registrationDTO.username"/>
+                    <span class="jabuka" v-if="v$.trainerRegistrationDTO.registrationDTO.username.$error">
+                        {{ v$.trainerRegistrationDTO.registrationDTO.username.$errors[0].$message}}
+                    </span>
                   </div>
 
                 </div>
               </div>
 
               <div class="row">
-                <div class="col-12">
+                <div class="col-12 pb-4">
 
-                  <input type="password" id="password" class="form-control form-control-lg"  v-model="state.trainerRegistrationDTO.registrationDTO.password"/>
-                  <label class="form-label select-label">Password</label>
-
+                  <input type="password" id="password" class="form-control form-control-lg" placeholder="Password" v-model="state.trainerRegistrationDTO.registrationDTO.password"/>
+                  <span class="jabuka" v-if="v$.trainerRegistrationDTO.registrationDTO.password.$error">
+                        {{ v$.trainerRegistrationDTO.registrationDTO.password.$errors[0].$message}}
+                  </span>
                 </div>
               </div>
 
               <div class="row">
-                <div class="col-12">
-
-                  <input type="password" id="password-re" class="form-control form-control-lg"  v-model="state.passwordCheck"/>
-                  <label class="form-label select-label">Confirm Password</label>
-
+                <div class="col-12 pb-2">
+                  <input type="password" id="password-re" class="form-control form-control-lg"  placeholder="Confirm Password" v-model="state.passwordCheck"/>
+                  <span class="jabuka" v-if="v$.passwordCheck.$error">
+                        {{ v$.passwordCheck.$errors[0].$message}}
+                  </span>
                 </div>
               </div>
 
@@ -199,7 +201,7 @@ import axios from 'axios'
                     },
                     training : { required }
                 },
-                passwordCheck: { required, sameAs:sameAs(state.trainerRegistrationDTO.password) },
+                passwordCheck: { required, sameAs:sameAs(state.trainerRegistrationDTO.registrationDTO.password) },
           }
         })
       
@@ -310,6 +312,10 @@ top: 13px;
   font-size: large;
 }
 
+
+.jabuka{
+  color: red;
+}
 
 </style>
 
