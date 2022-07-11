@@ -7,16 +7,15 @@
         <span class="card-title">{{name}}</span>
         <div class="card-body">
             <slot name="body"></slot>
-            <router-link v-if="link"
-                         class="link btn btn-primary"
-                         style="display: block; margin-top : 16px"
-                         :to="link">Details</router-link>
+            <button class="btn-grad"
+                    style="display: block; margin-top : 16px"
+                    @click="this.pushz()">Details</button>
         </div>
     </div>
 </template>
 
 <script>
-export default{
+export default {
     props: {
         name: {
             type: String,
@@ -26,14 +25,23 @@ export default{
             type: String,
             required: true,
         },
-        link:{
-            type : String,
+        id: {
+            type: Number,
+            required: true
         }
     },
     methods:{
         getImgUrl(object){
             let images = require.context('../assets/', false, /\.png$/);
             return images('./' + object + ".png")
+        },
+        pushz(){
+          this.$router.push({
+            name: 'Details',
+            params: {
+              objectId : this.$props.id
+            }
+          })
         }
     }
 }
@@ -89,5 +97,26 @@ $border-radius-size: 14px;
   padding: 20px;
   margin-bottom: 16px;
 }
+
+.btn-grad {
+            background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%);
+            margin-left: 24px;
+            margin-bottom: 0px;
+            padding: 10px 70px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+          }
+
+.btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
 
 </style>

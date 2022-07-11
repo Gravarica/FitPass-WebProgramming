@@ -85,7 +85,10 @@ const routes = [
   {
     path: '/details',
     name: 'Details',
-    component: DeatilsView
+    component: DeatilsView,
+    props: (route) => ({
+      ...route.params
+    })
   },
   {
     path: '/editprofile',

@@ -103,5 +103,8 @@ public class Comment extends Entity {
 		this.time = time;
 	}
 	
+	public boolean hasBeenApproved() {
+		return state == CommentState.ACCEPTED;
+	}
 	
 }

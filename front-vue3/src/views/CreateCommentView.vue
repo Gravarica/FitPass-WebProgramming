@@ -12,7 +12,7 @@
                     <div class="col-md-12 mb-4">
 
                         <div class="form-outline ">
-                            <select class="form-select selectz" aria-label="Default select example" v-model="this.comment.objectId">
+                            <select class="form-select selectzz" aria-label="Default select example" v-model="this.comment.objectId">
                                 <option v-for="obj in this.sportObjectsVisited" :value="obj.id">{{obj.name}}</option>
                             </select>
                         </div>
@@ -100,7 +100,7 @@ import StarRating from "vue-star-rating";
 
 
 <style>
-    .selectz{
+    .selectzz{
         width:100%;
         margin-left: 0px;
     }

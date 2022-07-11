@@ -32,7 +32,11 @@
                                              :street="obj.location.address.street"
                                              :number="obj.location.address.number"
                                              :city="obj.location.address.city"
-                                             :averageGrade="obj.averageGrade"></SportObjectCard>
+                                             :averageGrade="obj.averageGrade"
+                                             :startTime="obj.workHour.startTime"
+                                             :endTime="obj.workHour.endTime"
+                                             :status="obj.status"
+                                             :id="obj.id"></SportObjectCard>
                     </div>
                 </div>
                 <div class="col-xl-6">
