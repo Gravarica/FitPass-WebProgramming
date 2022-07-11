@@ -1,6 +1,13 @@
 package beans;
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import enums.CommentState;
+import src.util.LocalDateDeserializer;
+import src.util.LocalDateSerializer;
 
 public class Comment extends Entity {
 
@@ -8,6 +15,9 @@ public class Comment extends Entity {
 	private SportObject object;
 	private String text;
 	private int grade;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate time;
 	private CommentState state;
 	
 	public Comment() {
@@ -21,6 +31,7 @@ public class Comment extends Entity {
 		this.object = object;
 		this.text = text;
 		this.grade = grade;
+		this.time = LocalDate.now();
 		this.state = CommentState.PENDING;
 	}
 
@@ -83,4 +94,14 @@ public class Comment extends Entity {
 	public void decline() {
 		this.state = CommentState.DENIED;
 	}
+
+	public LocalDate getTime() {
+		return time;
+	}
+
+	public void setTime(LocalDate time) {
+		this.time = time;
+	}
+	
+	
 }

@@ -8,11 +8,13 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import beans.SportObject;
 import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
 import dto.TrainingScheduleDTO;
 import enums.TrainingType;
+import src.util.BusinessUtil;
 
 public class TrainingHistoryDAO {
 
@@ -129,6 +131,16 @@ public class TrainingHistoryDAO {
 		}
 		return FilterTrainingHistory(retList);
 	}
+	
+	public ArrayList<TrainingHistory> getTotalCustomerTrainingHistory(String username){
+		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory it : trainingHistories) {
+			if(it.getCustomer().getUsername().equals(username)) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
 
 
 	//Metoda koja vraca treninge trenera 
@@ -177,6 +189,17 @@ public class TrainingHistoryDAO {
 
 	public boolean checkForDate(LocalDate date) {
 		return LocalDate.now().plusDays(2).isBefore(date) || LocalDate.now().plusDays(2).isEqual(date);
+	}
+	
+	public ArrayList<SportObject> getObjectsVisitedByLoggedUser(String username){
+		ArrayList<SportObject> returnList = new ArrayList<SportObject>();
+		for (TrainingHistory th : getTotalCustomerTrainingHistory(username)) {
+			if(!BusinessUtil.listContains(returnList, th.getTraining().getObject())) {
+				returnList.add(th.getTraining().getObject());
+			}
+		}
+		
+		return returnList;
 	}
 	
 }

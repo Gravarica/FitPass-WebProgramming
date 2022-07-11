@@ -33,6 +33,7 @@
 							"latitude" : 12.23
 						}
 					},
+		"time": "2022-07-10",
 		"text" : "Bukvalno je uzasna teretana bu raz",
 		"grade" : 2,
 		"state" : "ACCEPTED"	
@@ -71,6 +72,7 @@
 							"latitude" : 12.23
 						}
 					},
+		"time": "2022-07-10",
 		"text" : "Kida teretana",
 		"grade" : 5,
 		"state" : "PENDING"	
@@ -109,6 +111,7 @@
 							"latitude" : 12.23
 						}
 					},
+		"time": "2022-07-10",
 		"text" : "Bukvalno je uzasna teretana bu raz",
 		"grade" : 1,
 		"state" : "PENDING"	
@@ -147,6 +150,7 @@
 							"latitude" : 12.23
 						}
 					},
+		"time": "2022-07-10",
 		"text" : "Raspad sistema",
 		"grade" : 3,
 		"state" : "PENDING"	

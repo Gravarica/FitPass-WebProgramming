@@ -173,7 +173,7 @@ public class SubscriptionDAO {
 	
 	public void checkForExpired() {
 		Subscription s = getByLoggedUser();
-		if (!s.hasExpired()) return;
+		if (s == null || !s.hasExpired()) return;
 			
 		s.setActive(false);
 		calculatePoints(s);
