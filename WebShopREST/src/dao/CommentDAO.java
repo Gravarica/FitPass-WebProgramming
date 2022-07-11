@@ -100,7 +100,7 @@ public class CommentDAO {
 	public ArrayList<Comment> getCommentsBySportsObject(SportObject obj){
 		ArrayList<Comment> objectsComments = new ArrayList<>();
 		for(Comment c : comments) {
-			if (c.objectMatches(obj)) {
+			if (c.objectMatches(obj) && c.hasBeenApproved()) {
 				objectsComments.add(c);
 			}
 		}
@@ -112,7 +112,7 @@ public class CommentDAO {
 		int sum = 0;
 		int count = 0;
 		for (Comment c : comments) {
-			if(c.objectMatches(obj)) {
+			if(c.objectMatches(obj) && c.hasBeenApproved()) {
 				sum += c.getGrade();
 				count++;
 			}
