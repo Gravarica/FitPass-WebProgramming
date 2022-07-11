@@ -15,7 +15,7 @@
     </div>
   </section>
 
-<div class="container-fluid kokain" v-if="hasHistory">
+<div class="container-fluid kokain" v-if="!hasHistory">
     <div class="row row-cols-md-3">
         <div class="col-5" v-for="t in trainingHistory">
         <TrainingAlbumCard
@@ -32,7 +32,7 @@
     </div>
 </div>
 
-<div class="active container-fluid" v-if="!hasHistory">
+<div class="active container-fluid" v-if="hasHistory">
     <div class="main-container container">
         <div class="inner-container container">
             <div class="container">
