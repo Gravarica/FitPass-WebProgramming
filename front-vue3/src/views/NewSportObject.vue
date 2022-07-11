@@ -14,27 +14,33 @@
               <div class="card-body p-md-5 text-black">
                 <h3 class="mb-5 text-uppercase">Adding New Object</h3>
 
-                <form id="myForm" onsubmit="addNewSportObject()">
+                <form id="myForm">
                 <div class="row">
                   <div class="mb-4">
                     <div class="form-outline">
-                      <input type="text" id="form3Example1m" placeholder="Name" pattern="[a-z]{3-15}" required v-model="addObjectDTO.name" class="form-control form-control-lg" />
+                      <input type="text" id="form3Example1m" placeholder="Name"  required v-model="state.addObjectDTO.name" class="form-control form-control-lg" />
+                      <span class="jabuka" v-if="v$.addObjectDTO.name.$error">
+                        {{ v$.addObjectDTO.name.$errors[0].$message}}
+                      </span>
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
-                    <div>
-                         <select v-model="addObjectDTO.type" class="type form-select form-outline form-select-lg mb-4" required aria-label=".form-select-lg example">
+                    <div class="pb-4">
+                         <select v-model="state.addObjectDTO.type" class="type form-select form-outline form-select-lg" required aria-label=".form-select-lg example">
                             <option value="" disabled>Please choose type of Sport Object</option>
-                            <option v-for="it in types" :value="it">{{convertType(it)}}</option>
+                            <option v-for="it in state.types" :value="it">{{convertType(it)}}</option>
                         </select>
+                        <span class="jabuka" v-if="v$.addObjectDTO.type.$error">
+                          {{ v$.addObjectDTO.type.$errors[0].$message}}
+                        </span>
                     </div>
                 </div>
 
                  <div class="row">
-                    <div class="col-md-6">
-                        <select v-model="addObjectDTO.location.address.city" class="type form-select form-outline form-select-lg mb-4"  required aria-label=".form-select-lg example">
+                    <div class="col-md-6 pb-3">
+                        <select v-model="state.addObjectDTO.location.address.city" class="type form-select form-outline form-select-lg"  required aria-label=".form-select-lg example">
                             <option value="" disabled>City</option>
                             <option value="Beograd">Beograd</option>
                             <option value="Novi Sad">Novi Sad</option>
@@ -42,28 +48,49 @@
                             <option value="Krajugevac">Krajugevac</option>
                             <option value="Cacak">Cacak</option>
                         </select>
+
+                      <span class="jabuka" v-if="v$.addObjectDTO.location.address.city.$error">
+                        {{ v$.addObjectDTO.location.address.city.$errors[0].$message}}
+                      </span>
+                    
                     </div>
                     
-                    <div class="col-md-6">
-                         <input type="text" v-model="addObjectDTO.location.address.postalNumber" required id="form3Example1m" placeholder="Postal Number" class="form-control form-control-lg" />
+                    <div class="col-md-6 pb-3">
+                        <input type="text" v-model="state.addObjectDTO.location.address.postalNumber" required id="form3Example1m" placeholder="Postal Number" class="form-control form-control-lg" />
+                        <span class="jabuka" v-if="v$.addObjectDTO.location.address.postalNumber.$error">
+                          {{ v$.addObjectDTO.location.address.postalNumber.$errors[0].$message}}
+                        </span>
                     </div>
                 </div>
 
-                <div class="form-outline mb-4 row">
-                  <div class="col-md-8"><input type="text" required v-model="addObjectDTO.location.address.street" id="form3Example8" placeholder="Adress" class="form-control form-control-lg" /></div>
-                  <div class="col-md-4"><input type="text" required v-model="addObjectDTO.location.address.number" id="form3Example8" placeholder="Number" class="form-control form-control-lg" /></div>
+                <div class="form-outline pb-3 row">
+                  <div class="col-md-8">
+                    <input type="text" required v-model="state.addObjectDTO.location.address.street" id="form3Example8" placeholder="Adress" class="form-control form-control-lg" />
+                     <span class="jabuka" v-if="v$.addObjectDTO.location.address.street.$error">
+                          {{ v$.addObjectDTO.location.address.street.$errors[0].$message}}
+                        </span>
+                  </div>
+                  <div class="col-md-4">
+                    <input type="text" required v-model="state.addObjectDTO.location.address.number" id="form3Example8" placeholder="Number" class="form-control form-control-lg" />
+                     <span class="jabuka" v-if="v$.addObjectDTO.location.address.number.$error">
+                          {{ v$.addObjectDTO.location.address.number.$errors[0].$message}}
+                      </span>
+                  </div>
                 </div>
 
-                <div class="row" v-if="showManagers">
+                <div class="row" v-if="state.showManagers">
                     <div>
-                         <select v-model="addObjectDTO.managerUsername" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
+                         <select v-model="state.addObjectDTO.managerUsername" required class="type form-select form-outline form-select-lg" aria-label=".form-select-lg example">
                             <option value="" disabled>Please choose manager</option>
-                            <option v-for="it in managers" :value="it.username">{{getFullName(it)}}</option>
+                            <option v-for="it in state.managers" :value="it.username">{{getFullName(it)}}</option>
                         </select>
                     </div>
+                    <span class="jabuka" v-if="v$.addObjectDTO.managerUsername.$error">
+                          {{ v$.addObjectDTO.managerUsername.$errors[0].$message}}
+                    </span>
                 </div>
 
-                <div class="row" v-if="!showManagers">
+                <div class="row" v-if="!state.showManagers">
                     <div>
                          <p>They are no available managers, but you can allways create new one</p>
                            <div class="d-grid gap-2">
@@ -74,19 +101,31 @@
 
                  <hr class="solid">
 
-                <div class="form-outline mb-4 row">
-                  <div class="col-md-6"><input v-model="startTime" type="text" required id="form3Example8" placeholder="From" class="form-control form-control-lg" /></div>
-                  <div class="col-md-6"><input v-model="endTime" type="text" required id="form3Example8" placeholder="To" class="form-control form-control-lg" /></div>
-                </div>
-
-                <div class="row mt-4 mb-3">
+                <div class="row mt-2">
                     <div>
-                         <p>Please select sport object's work hour</p>
+                         <p>Please select sport object's work hour:</p>
                     </div>
                 </div>
+
+                <div class="form-outline mb-4 row">
+                  <div class="col-md-6">
+                    <input v-model="state.addObjectDTO.startTime" type="text" required id="form3Example8" placeholder="From" class="form-control form-control-lg" />
+                     <span class="jabuka" v-if="v$.addObjectDTO.startTime.$error">
+                          {{ v$.addObjectDTO.startTime.$errors[0].$message}}
+                      </span>
+                  </div>
+                  <div class="col-md-6">
+                    <input v-model="state.addObjectDTO.endTime" type="text" required id="form3Example8" placeholder="To" class="form-control form-control-lg" />
+                     <span class="jabuka" v-if="v$.addObjectDTO.endTime.$error">
+                          {{ v$.addObjectDTO.endTime.$errors[0].$message}}
+                      </span>  
+                  </div>
+                </div>
+
+                
                 
                 <div class="d-grid gap-2 pt-5 md-6">
-                  <input type="submit" class="btn btn-lg btn-grad" value="Submit">
+                  <input type="button" class="btn btn-lg btn-grad" @click="addNewSportObject()" value="Submit">
                 </div>
                 </form>
               </div>
@@ -101,32 +140,90 @@
     
 <script>
 import axios from 'axios'
+import useValidate from '@vuelidate/core'
+import { required, sameAs, minLength, helpers} from '@vuelidate/validators'
+import {reactive,computed} from 'vue'
 
     export default{
-        data(){
-            return {
-                types : null,
+        setup(){
+         const state = reactive({
+              types : null,
                 selected : null,
                 managers : null,
                 showManagers : true,
                 canSubmit : false,
                 newSportObject : null,
-                addObjectDTO : { name: "", type : "" , managerUsername: "", startTime: "", endTime: "", location:{ address:{ street : "" , number: "", city : "" , postalNumber : ""}, longitude:"", latitude:""} , logo : null}
-            }
+                
+                addObjectDTO : { 
+                  name: "", 
+                  type : "" , 
+                  managerUsername: "", 
+                  startTime: "", endTime: "", 
+                  
+                  location:{ 
+                    address:{
+                      street : "" ,
+                      number: "", 
+                      city : "" , 
+                      postalNumber : ""
+                      }, 
+                    
+                    longitude:"", 
+                    latitude:""
+                  }, 
+                    
+                    logo : null
+                }
+         }) 
+
+
+        const rules = computed(() => {
+          return{
+              addObjectDTO : { 
+                  name: {required}, 
+                  type : {required}, 
+                  managerUsername: {required}, 
+                  startTime: {required} , 
+                  endTime: {required}, 
+                  location:{ 
+                    address:{
+                      street : { required },
+                      number: {required}, 
+                      city : {required}, 
+                      postalNumber : {required}
+                      } 
+                    
+                    // longitude:"", 
+                    // latitude:""
+                  }, 
+                    
+                    //logo : null
+                }
+          }
+        })
+
+        const v$ = useValidate(rules,state)
+        
+        return{
+          state,
+          v$
+        }
+
         },
+
         created(){
             axios
                 .get('http://localhost:8081/WebShopREST/rest/sport_objects/types')
                 .then((response) =>{
-                    this.types = response.data
+                    this.state.types = response.data
                 })
         
             axios
                 .get('http://localhost:8081/WebShopREST/rest/users/available/managers')
                 .then((response) =>{
-                    this.managers = response.data
-                    if(this.managers == null){
-                        this.showManagers = false
+                    this.state.managers = response.data
+                    if(this.state.managers == null){
+                        this.state.showManagers = false
                     }
                 })
         },
@@ -141,12 +238,16 @@ import axios from 'axios'
                 return this.canSubmit
             },
             addNewSportObject(){
-                axios
+                this.v$.$validate()
+                 if(!this.v$.$error){
+                    axios
                     .post('http://localhost:8081/WebShopREST/rest/sport_objects/create', this.addObjectDTO)
                     .then((response) => {
                         this.newSportObject = response.data
                     })
-                this.$router.push("/")
+                 }
+                
+                // this.$router.push("/")
             },
             convertType(it){
                 switch(it){
