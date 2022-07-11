@@ -202,5 +202,7 @@ public class UserService {
 	public ArrayList<User> getCustomersFromSportObject(@PathParam("id") int id) {
 		return getUserDAO().getCustomersFromSportObject(id);
 	}
+
+	
 	
 }

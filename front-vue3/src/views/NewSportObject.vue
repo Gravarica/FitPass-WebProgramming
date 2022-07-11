@@ -141,7 +141,7 @@
 <script>
 import axios from 'axios'
 import useValidate from '@vuelidate/core'
-import { required, sameAs, minLength, helpers} from '@vuelidate/validators'
+import { required, sameAs, minLength, helpers, alpha,numeric, maxLength} from '@vuelidate/validators'
 import {reactive,computed} from 'vue'
 
     export default{
@@ -180,17 +180,22 @@ import {reactive,computed} from 'vue'
         const rules = computed(() => {
           return{
               addObjectDTO : { 
-                  name: {required}, 
+                  name: {required,alpha}, 
                   type : {required}, 
                   managerUsername: {required}, 
                   startTime: {required} , 
                   endTime: {required}, 
                   location:{ 
                     address:{
-                      street : { required },
-                      number: {required}, 
+                      street : { required,alpha},
+                      number: {required,}, 
                       city : {required}, 
-                      postalNumber : {required}
+                      postalNumber : {
+                        required,
+                        numeric,
+                        minLength : helpers.withMessage('Must be 5 characters long' , minLength(5)),
+                        maxLength : helpers.withMessage('Must be 5 characters long' , maxLength(5))
+                      }
                       } 
                     
                     // longitude:"", 

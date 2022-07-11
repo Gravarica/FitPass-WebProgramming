@@ -37,7 +37,7 @@
                 <div class="col-md-6 mb-3 d-flex align-items-center">
 
                   <div class="form-outline datepicker w-100">
-                    <input type="date" class="form-control form-control-lg" id="birthdayDate"  v-model="state.trainerRegistrationDTO.registrationDTO.dateOfBirth"/>
+                    <input type="date" max="2000-01-01" class="form-control form-control-lg" id="birthdayDate"  v-model="state.trainerRegistrationDTO.registrationDTO.dateOfBirth"/>
                     <label for="birthdayDate" class="form-label">Date of Birth</label>
                   </div>
 
@@ -156,7 +156,7 @@
 <script>
 import router from '@/router'
 import useValidate from '@vuelidate/core'
-import { required, sameAs, minLength, helpers} from '@vuelidate/validators'
+import { required, sameAs, minLength, helpers, alpha} from '@vuelidate/validators'
 import {reactive,computed} from 'vue'
 
 import axios from 'axios'
@@ -203,9 +203,13 @@ import axios from 'axios'
                         },
                         firstName: { 
                           required,
-                          minLength : minLength(3)
+                          minLength : minLength(3),
+                          alpha
                         },
-                        lastName: { required },
+                        lastName: { 
+                          required, 
+                          alpha
+                        },
                         role: { required },
                         dateOfBirth: { required },
                         gender: { required },

@@ -111,7 +111,7 @@
 import router from '@/router'
 import axios from 'axios'
 import useValidate from '@vuelidate/core'
-import { required, sameAs, minLength, helpers} from '@vuelidate/validators'
+import { required, sameAs, minLength, helpers,alpha} from '@vuelidate/validators'
 import {reactive,computed} from 'vue'
     export default {
 
@@ -148,10 +148,14 @@ import {reactive,computed} from 'vue'
                     
                     firstName: {
                       required,
-                      minLength : minLength(3)
+                      minLength : minLength(3),
+                      alpha
                     },
                     
-                    lastName: { required },
+                    lastName: { 
+                      required, 
+                      alpha
+                    },
                     role: { required },
                     dateOfBirth: { required },
                     gender: { required }
