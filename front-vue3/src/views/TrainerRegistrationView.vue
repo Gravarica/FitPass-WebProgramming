@@ -96,10 +96,15 @@
 
               <div class="row" v-if="state.employ==false">
                 <a href="#" @click="showForm" class="enrico gumica">Want to employ trainer right away, click here</a>
-
               </div>
 
-              <div class="row pt-3" v-if="state.employ">
+
+              <div class="row " v-if="state.employ">
+
+                <div class="pb-3">
+                  <button type="button" @click="hideForm()" class="btn-close float-end" aria-label="Close"></button>
+                </div>
+                    
                     <div>
                         <select v-model="state.selected" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
                             <option value=null disabled>Choose sport object</option>
@@ -245,6 +250,9 @@ import axios from 'axios'
             },
             showForm(){
               this.state.employ = true
+            },
+            hideForm(){
+              this.state.employ = false
             }
         },
         created(){
