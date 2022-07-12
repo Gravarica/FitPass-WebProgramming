@@ -240,7 +240,8 @@ public class SportObjectDAO {
 		ArrayList<String> retList = new ArrayList<String>();
 		SportObjectType types[] = SportObjectType.values();
 		for(SportObjectType it : types) {
-			retList.add(it.toString());
+			if(!it.equals(SportObjectType.NONE))
+				retList.add(it.toString());
 		}
 		return retList;
 	}
