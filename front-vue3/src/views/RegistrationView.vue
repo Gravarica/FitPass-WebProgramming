@@ -35,10 +35,14 @@
                 <div class="col-md-6 mb-3 d-flex align-items-center">
 
                   <div class="form-outline datepicker w-100">
-                    <input type="date" class="form-control form-control-lg" id="birthdayDate"  v-model="state.registrationDTO.dateOfBirth"/>
-                    <label for="birthdayDate" class="form-label">Date of Birth</label>
-                  </div>
+                    <input type="date" max="2003-01-01" class="form-control form-control-lg" id="birthdayDate"  v-model="state.registrationDTO.dateOfBirth"/>
+                    <label for="birthdayDate" class="form-label">Date of Birth </label>
+                    <span class="jabuka row" v-if="v$.registrationDTO.dateOfBirth.$error">
+                        {{ v$.registrationDTO.dateOfBirth.$errors[0].$message}}
+                    </span>
 
+                  </div>
+                  
                 </div>
                 <div class="col-md-6 mb-3">
 
@@ -63,10 +67,11 @@
                 <div class="col-md-12 pb-4">
 
                   <div class="form-outline">
-                    <input type="text" id="phoneNumber" placeholder="Username" class="form-control form-control-lg"  v-model="state.registrationDTO.username"/>
+                    <input type="text" id="phoneNumber"  placeholder="Username" class="form-control form-control-lg"  v-model="state.registrationDTO.username" @keyup="checkUsername()"/>
                     <span class="jabuka" v-if="v$.registrationDTO.username.$error">
                         {{ v$.registrationDTO.username.$errors[0].$message}}
                     </span>
+                    <span v-if="isAvailable" class="notavailable"> Username taken, try again.</span>
                   </div>
 
                 </div>
@@ -118,7 +123,7 @@ import {reactive,computed} from 'vue'
       setup(){
         const state = reactive({
           registrationDTO: {
-                    username: '',
+                    username: "",
                     password: '',
                     firstName: '',
                     lastName: '',
@@ -163,7 +168,7 @@ import {reactive,computed} from 'vue'
                       alpha
                     },
                     role: { required },
-                    dateOfBirth: { required },
+                    dateOfBirth: {required},
                     gender: { required }
                 },
                 passwordCheck: {
@@ -186,11 +191,18 @@ import {reactive,computed} from 'vue'
           v$
         }
 
-      },  
+      },
+
+      data(){
+        return{
+          isAvailable : false,
+          responseMessage : ""
+        }
+      },
         methods: {
             register(){
               this.v$.$validate()
-              if(!this.v$.$error){
+              if(!this.v$.$error && this.isAvailable==false){
                   axios
                     .post('http://localhost:8081/WebShopREST/rest/users/registration', this.state.registrationDTO)
                     .then((response) => {
@@ -199,13 +211,14 @@ import {reactive,computed} from 'vue'
                     })
               }
             },
-            checkUsername(username){
-              for(const it in this.state.users){
-                  if(it.username == username){
-                    return false;
-                  }
-              }     
-              return true
+            checkUsername(){
+              console.log(this.state.registrationDTO.username)
+              axios
+                .get('http://localhost:8081/WebShopREST/rest/users/check/username/' + this.state.registrationDTO.username)
+                .then((response) =>{
+                  console.log(response.data)
+                  this.isAvailable = response.data
+                })
             }
         },
         created(){
@@ -268,7 +281,13 @@ top: 13px;
             color: #fff;
             text-decoration: none;
           }
-         
+
+.available{
+  color: green;
+}
+.notavailable{
+  color: red;
+}
 
 </style>
 
