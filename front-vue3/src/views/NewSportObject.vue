@@ -76,6 +76,15 @@
                   </div>
                 </div>
 
+                <div class="form-outline pb-3 row">
+                    <div class="col-md-6">
+                        <input type="text" required disabled v-model="latitudeBrate" id="form3Example8" placeholder="Latitude" class="form-control form-control-lg" />
+                    </div>
+                     <div class="col-md-6">
+                        <input type="text" required  disabled v-model="longitudeBrate" id="form3Example8" placeholder="Longitude" class="form-control form-control-lg" />
+                    </div>
+                </div>
+
                 <div class="row" v-if="state.showManagers">
                     <div>
                          <select v-model="state.addObjectDTO.managerUsername" required class="type form-select form-outline form-select-lg" aria-label=".form-select-lg example">
@@ -151,7 +160,7 @@
 <script>
 import axios from 'axios'
 import useValidate from '@vuelidate/core'
-import { required, sameAs, minLength, helpers, alpha,numeric, maxLength} from '@vuelidate/validators'
+import { required, sameAs, minLength, helpers,alphaNum,alpha,numeric, maxLength} from '@vuelidate/validators'
 import {reactive,computed} from 'vue'
 import MapSelect from '@/components/MapSelect.vue'
 
@@ -196,7 +205,7 @@ import MapSelect from '@/components/MapSelect.vue'
                     endTime: { required },
                     location: {
                         address: {
-                            street: { required, alpha },
+                            street: { required},
                             number: { required, },
                             city: { required },
                             postalNumber: {
@@ -247,10 +256,14 @@ import MapSelect from '@/components/MapSelect.vue'
         addNewSportObject() {
             this.v$.$validate();
             if (!this.v$.$error) {
+                this.state.addObjectDTO.location.latitude = this.latitudeBrate
+                this.state.addObjectDTO.location.longitude = this.longitudeBrate
                 axios
                     .post("http://localhost:8081/WebShopREST/rest/sport_objects/create", this.state.addObjectDTO)
                     .then((response) => {
-                    this.newSportObject = response.data;
+                      this.newSportObject = response.data;
+                      alert("You have successufully created sport object")
+                      this.$router.push({name : 'Home'})
                 });
             }
         },
@@ -268,9 +281,18 @@ import MapSelect from '@/components/MapSelect.vue'
         },
         captureCoordinates(event){
           console.log(event)
+          this.longitudeBrate = event[0]
+          this.latitudeBrate = event[1]
+          console.log(this.state.latitude)
         }
     },
-    components: { MapSelect }
+    components: { MapSelect },
+    data(){
+        return{
+          longitudeBrate : null,
+          latitudeBrate : null
+        }
+    }
 }
 
 </script>
