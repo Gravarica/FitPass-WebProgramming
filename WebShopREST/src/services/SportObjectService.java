@@ -21,6 +21,7 @@ import dao.UserDAO;
 import dto.SportObjectCreateDTO;
 import dto.NewContentDTO;
 import dto.SportObjectSearchDTO;
+import enums.SportObjectContent;
 import enums.SportObjectType;
 
 @Path("/sport_objects")
@@ -166,5 +167,13 @@ public class SportObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<SportObject> sortByLocation(@PathParam("asc") boolean asc){
 		return getSportObjectDAO().sortByLocation(asc);
+	}
+
+	@GET
+	@Path("/content/types")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<SportObjectContent> getSportObjectContentTypes(){
+		if(getUserDAO().getLoggedUser().getObject() == null) return null;
+		return getSportObjectDAO().getSportObjectContentTypes(getUserDAO().getLoggedUser().getObject().getId());
 	}
 }

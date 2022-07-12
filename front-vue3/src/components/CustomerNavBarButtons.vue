@@ -4,7 +4,6 @@
         <li><router-link class="link enrico" :to="{name : 'Home'}">Home</router-link></li>
         <li><router-link class="link enrico" :to="{name : 'Objects'}">Objects</router-link></li>
         <li><router-link class="link enrico" :to="{name : 'Subscription'}">Subscriptions</router-link></li>
-        <li><router-link class="link enrico" :to="{name : ''}">Contact</router-link></li>
         <li><router-link class="link enrico" :to="{name : 'CustomerTrainings'}">My Trainings</router-link></li>
         <li><router-link class="link enrico" :to="{name : 'CreateComment'}">Rate</router-link></li>
     </form>       

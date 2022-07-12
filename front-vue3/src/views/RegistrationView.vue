@@ -202,7 +202,7 @@ import {reactive,computed} from 'vue'
         methods: {
             register(){
               this.v$.$validate()
-              if(!this.v$.$error && this.isAvailable==false){
+              if(!this.v$.$error && this.isAvailable == false){
                   axios
                     .post('http://localhost:8081/WebShopREST/rest/users/registration', this.state.registrationDTO)
                     .then((response) => {
