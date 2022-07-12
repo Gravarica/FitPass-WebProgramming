@@ -182,7 +182,6 @@ import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
                     })
             }
       }
-    }
 </script>
 
 <style>
