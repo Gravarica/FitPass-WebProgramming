@@ -8,40 +8,26 @@
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 center">Register Trainer</h3>
             <form>
 
-              <div class="row">
-                    <div>
-                        <select v-model="selected" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
-                            <option value=null disabled>Choose sport object</option>
-                            <option v-for="it in sportObjects" :value="it">{{it.name}}</option>
-                        </select>
-                    </div>
-              </div>
               
-             <div class="row">
-                    <div>
-                        <select v-model="trainerRegistrationDTO.training" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
-                            <option value=null disabled>Choose training</option>
-                            <option v-for="it in trainings" :value="it">{{it.name}}</option>
-                        </select>
-                    </div>
-              </div>
-
-              <hr/>
 
               <div class="row">
                 <div class="col-md-6 mb-4 pt-3">
 
                   <div class="form-outline">
-                    <input type="text" id="firstName" class="form-control form-control-lg"  v-model="this.trainerRegistrationDTO.registrationDTO.firstName"/>
-                    <label class="form-label" for="firstName">First Name</label>
+                    <input type="text" id="firstName" placeholder="First Name" class="form-control form-control-lg"  v-model="state.trainerRegistrationDTO.firstName"/>
+                    <span class="jabuka" v-if="v$.trainerRegistrationDTO.firstName.$error">
+                        {{ v$.trainerRegistrationDTO.firstName.$errors[0].$message}}
+                    </span>
                   </div>
 
                 </div>
                 <div class="col-md-6 mb-4 pt-3">
 
                   <div class="form-outline">
-                    <input type="text" id="lastName" class="form-control form-control-lg"  v-model="this.trainerRegistrationDTO.registrationDTO.lastName"/>
-                    <label class="form-label" for="lastName">Last Name</label>
+                    <input type="text" id="lastName" placeholder="Last Name" class="form-control form-control-lg"  v-model="state.trainerRegistrationDTO.lastName"/>
+                    <span class="jabuka" v-if="v$.trainerRegistrationDTO.lastName.$error">
+                        {{ v$.trainerRegistrationDTO.lastName.$errors[0].$message}}
+                    </span>
                   </div>
 
                 </div>
@@ -51,8 +37,8 @@
                 <div class="col-md-6 mb-3 d-flex align-items-center">
 
                   <div class="form-outline datepicker w-100">
-                    <input type="date" class="form-control form-control-lg" id="birthdayDate"  v-model="this.trainerRegistrationDTO.registrationDTO.dateOfBirth"/>
-                    <label for="birthdayDate" class="form-label">Birthday</label>
+                    <input type="date" max="2000-01-01" class="form-control form-control-lg" id="birthdayDate"  v-model="state.trainerRegistrationDTO.dateOfBirth"/>
+                    <label for="birthdayDate" class="form-label">Date of Birth</label>
                   </div>
 
                 </div>
@@ -62,13 +48,13 @@
 
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="femaleGender"
-                      value="FEMALE" v-model="this.trainerRegistrationDTO.registrationDTO.gender" />
+                      value="FEMALE" v-model="state.trainerRegistrationDTO.gender" />
                     <label class="form-check-label" for="femaleGender">Female</label>
                   </div>
 
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="maleGender"
-                      value="MALE" v-model="this.trainerRegistrationDTO.registrationDTO.gender"/>
+                      value="MALE" v-model="state.trainerRegistrationDTO.gender"/>
                     <label class="form-check-label" for="maleGender">Male</label>
                   </div>
 
@@ -76,36 +62,68 @@
               </div>
               <hr/>
               <div class="row mt-4">
-                <div class="col-md-12 pb-2">
-
+                <div class="col-md-12 pb-4">
                   <div class="form-outline">
-                    <input type="text" id="phoneNumber" class="form-control form-control-lg"  v-model="this.trainerRegistrationDTO.registrationDTO.username"/>
-                    <label class="form-label" for="username">Username</label>
+                    <input type="text" id="phoneNumber" class="form-control form-control-lg" placeholder="Username" v-model="state.trainerRegistrationDTO.username"/>
+                    <span class="jabuka" v-if="v$.trainerRegistrationDTO.username.$error">
+                        {{ v$.trainerRegistrationDTO.username.$errors[0].$message}}
+                    </span>
                   </div>
 
                 </div>
               </div>
 
               <div class="row">
-                <div class="col-12">
+                <div class="col-12 pb-4">
 
-                  <input type="password" id="password" class="form-control form-control-lg"  v-model="this.trainerRegistrationDTO.registrationDTO.password"/>
-                  <label class="form-label select-label">Password</label>
-
+                  <input type="password" id="password" class="form-control form-control-lg" placeholder="Password" v-model="state.trainerRegistrationDTO.password"/>
+                  <span class="jabuka" v-if="v$.trainerRegistrationDTO.password.$error">
+                        {{ v$.trainerRegistrationDTO.password.$errors[0].$message}}
+                  </span>
                 </div>
               </div>
 
               <div class="row">
-                <div class="col-12">
-
-                  <input type="password" id="password-re" class="form-control form-control-lg"  v-model="this.passwordCheck"/>
-                  <label class="form-label select-label">Confirm Password</label>
-
+                <div class="col-12 pb-2">
+                  <input type="password" id="password-re" class="form-control form-control-lg"  placeholder="Confirm Password" v-model="state.passwordCheck"/>
+                  <span class="jabuka" v-if="v$.passwordCheck.$error">
+                        {{ v$.passwordCheck.$errors[0].$message}}
+                  </span>
                 </div>
               </div>
 
+              <hr/>
+
+              <div class="row" v-if="state.employ==false">
+                <a href="#" @click="showForm()" class="enrico gumica">Want to employ trainer right away, click here</a>
+              </div>
+
+
+              <div class="row" v-if="state.employ">
+
+                <div class="pb-3">
+                  <button type="button" @click="hideForm()" class="btn-close float-end" aria-label="Close"></button>
+                </div>
+                    
+                    <div>
+                        <select v-model="state.selected" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
+                            <option value=null disabled>Choose sport object</option>
+                            <option v-for="it in state.sportObjects" :value="it">{{it.name}}</option>
+                        </select>
+                    </div>
+              </div>
+              
+             <div class="row" v-if="state.employ">
+                    <div>
+                        <select v-model="state.trainerRegistrationDTO.training" required class="type form-select form-outline form-select-lg mb-4" aria-label=".form-select-lg example">
+                            <option value=null disabled>Choose training</option>
+                            <option v-for="it in state.trainings" :value="it">{{it.name}}</option>
+                        </select>
+                    </div>
+              </div>
+
               <div class="d-grid gap-2 pt-5 md-6">
-                <input class="btn btn-lg btn-grad" type="submit" value="Submit" @click="register"/>
+                <input class="btn btn-lg btn-grad" type="button" value="Submit" @click="register"/>
               </div>
 
             </form>
@@ -136,60 +154,131 @@
 </template>
 
 <script>
-    import router from '@/router'
+import router from '@/router'
+import useValidate from '@vuelidate/core'
+import { required, sameAs, minLength, helpers, alpha,requiredIf} from '@vuelidate/validators'
+import {reactive,computed} from 'vue'
+
 import axios from 'axios'
+    
     export default {
-        data(){
-            return {
-                trainerRegistrationDTO : {
-                    registrationDTO: {
-                        username: '',
-                        password: '',
-                        firstName: '',
-                        lastName: '',
-                        role: 'TRAINER',
-                        dateOfBirth: '',
-                        gender: 'MALE',
-                    },
-                    training : null
+
+      setup(){
+        const state = reactive({
+          trainerRegistrationDTO : {
+                  
+                  username: '',
+                  password: '',
+                  firstName: '',
+                  lastName: '',
+                  role: 'TRAINER',
+                  dateOfBirth: '',
+                  gender: 'MALE',
+                  
+                  training : null
                 },
 
                 passwordCheck: '',
                 toast: false,
                 sportObjects : null,
                 trainings : null,
-                selected : null
-            }
-        },
+                selected : null,
+                employ : false,
+                mustChoose : false
+        })
+      
+        const rules = computed(() => {
+          return{
+             trainerRegistrationDTO : {
+                        username: { 
+                          required, 
+                          minLength : minLength(3) 
+                        },
+                        password: {
+                           required, 
+                          //  pass : helpers.withMessage(
+                          //     'Password must contain minimum six characters, at least one letter and one number',
+                          //     pass
+                          //  )
+                        },
+                        firstName: { 
+                          required,
+                          minLength : minLength(3),
+                          alpha
+                        },
+                        lastName: { 
+                          required, 
+                          alpha
+                        },
+                        role: { required },
+                        dateOfBirth: { required },
+                        gender: { required },
+
+                    // training : requiredIf(state.mustChoose)
+                },
+                passwordCheck: { 
+                  required,
+                  sameAs: helpers.withMessage(
+                    'Passwords must be equal',
+                    sameAs(state.trainerRegistrationDTO.password)
+                  )
+                },
+          }
+        })
+      
+        const pass = (value) => value.regex("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$")
+
+        const v$ = useValidate(rules,state)
+        
+        return{
+          state,
+          v$
+        }
+
+      },
+      
         watch:{
             selected(object){
                 this.fillTrainings(object.id)
+                this.setMustChoose()
             }
         },
         methods: {
             register(){
-                if (this.registrationDTO.password != this.passwordCheck){
-                    this.toast = true
-                    return
+                this.v$.$validate()
+                if(!this.v$.$error){
+                  console.log(this.state.trainerRegistrationDTO)
+                  axios
+                    .post('http://localhost:8081/WebShopREST/rest/users/registerTrainer', this.state.trainerRegistrationDTO)
+                    .then((response) =>{
+                      console.log(response.data)
+                    })
+                  this.$router.push({path: '/'})
+                  alert("Succsessful registration")
                 }
-                axios
-                    .post('http://localhost:8081/WebShopREST/rest/users/registration', this.registrationDTO)
-                
-                this.$router.push({path: '/'})
             },
             fillTrainings(id){
                 axios
                     .get('http://localhost:8081/WebShopREST/rest/trainings/without/trainer/' + id)
                     .then((response) =>{
-                        this.trainings = response.data
+                        this.state.trainings = response.data
                     })
+            },
+            showForm(){
+              this.state.employ = true
+            },
+            hideForm(){
+              this.state.employ = false
+            },
+            setMustChoose(){
+              this.state.mustChoose = true
             }
         },
         created(){
              axios
                 .get('http://localhost:8081/WebShopREST/rest/sport_objects/get')
                 .then((response) =>{
-                    this.sportObjects = response.data
+                    this.state.sportObjects = response.data
                 })
         }
     }
@@ -246,6 +335,14 @@ top: 13px;
             text-decoration: none;
           }
          
+.gumica{
+  font-size: large;
+}
+
+
+.jabuka{
+  color: red;
+}
 
 </style>
 

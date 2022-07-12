@@ -1,5 +1,5 @@
 <template>
- <div class="gradient-custom mw-100 container-fluid vh-100">
+ <div class="gradient-custom mw-100 container-fluid vh-200">
 
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
@@ -18,7 +18,9 @@
 <div class="container-fluid kokain" v-if="hasHistory">
     <div class="row row-cols-md-3">
         <div class="col-5" v-for="t in trainingHistory">
-        <TrainingAlbumCard
+        <TrainingAlbumCard 
+            @update-list="updateList()"
+            @show-popup = "showPopup"
             :sport-object-name="t.training.object.name"
             :training-name="t.training.name"
             :check-in-date="t.checkInDate"
@@ -26,13 +28,17 @@
             :training-type="t.training.type"
             :customer="t.customer"
             :is-trainer="true"
-            :can-delete="t.canCancel">
+            :can-delete="t.canCancel"
+            :object = t>
         </TrainingAlbumCard>
         </div>   
     </div>
+    <ConfirmationDialogue  @execute-del="execute()" @close="closePopup()" ref="popup" v-if="show">
+                    <h5>Are you sure you want to cancel this training. This action can't be undone!</h5>
+    </ConfirmationDialogue>
 </div>
 
-<div class="active container-fluid" v-if="hasHistory">
+<div class="active container-fluid" v-if="!hasHistory">
     <div class="main-container container">
         <div class="inner-container container">
             <div class="container">
@@ -54,17 +60,21 @@
 <script>
 import axios from 'axios'
 import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
+import ConfirmationDialogue from "@/components/ConfirmationDialogue.vue";
 
    export default {
     data() {
         return {
             trainingHistory: null,
             loggedUser: null,
-            hasHistory : false
+            hasHistory : null,
+            toDelete : null,
+            show : false
         };
     },
     components:{
-        TrainingAlbumCard
+        TrainingAlbumCard,
+        ConfirmationDialogue 
     },
     methods: {
         getSource(name) {
@@ -76,9 +86,12 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             .then((response) => {
                 console.log(this.hasHistory)
                 this.trainingHistory = response.data;
-                if (response.data != null) {
-                    this.hasHistory = true;
+                if (response.data.lenght == 0) {
+                    this.hasHistory = false;
+                }else{
+                    this.hasHistory = true
                 }
+                console.log(this.hasHistory)
             });
         },
         showPersonal(){
@@ -86,9 +99,6 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             .get("http://localhost:8081/WebShopREST/rest/training_histories/trainer/personal/" + this.loggedUser.username)
             .then((response) => {
                 this.trainingHistory = response.data;
-                if (this.trainingHistory != null) {
-                    this.hasHistory = true;
-                }
             });
         },
         showGroup(){
@@ -96,10 +106,28 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             .get("http://localhost:8081/WebShopREST/rest/training_histories/trainer/group/" + this.loggedUser.username)
             .then((response) => {
                 this.trainingHistory = response.data;
-                if (this.trainingHistory != null) {
-                    this.hasHistory = true;
-                }
             });
+        },
+        updateList(id){
+            console.log(id)
+            this.trainingHistory = this.trainingHistory.filter(i => i.id !== id)   
+        },
+        showPopup(id){
+            console.log(id)
+            this.show = true
+            this.toDelete = id
+        },
+        closePopup(){
+            this.show = false
+        },
+        execute(){
+            console.log(this.toDelete)
+            axios
+                .delete('http://localhost:8081/WebShopREST/rest/training_histories/cancel/' + this.toDelete)
+            
+            this.trainingHistory = this.trainingHistory.filter(i => i.id !== this.toDelete)
+            this.closePopup()
+            alert("You have successfully canceled training")
         }
     },
     created() {
@@ -108,7 +136,6 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             .then((response) => {
             console.log(this.hasHistory);
             this.loggedUser = response.data;
-            console.log("USERNAME: " + this.loggedUser.username);
             this.loadTrainingHistory()
         });
         

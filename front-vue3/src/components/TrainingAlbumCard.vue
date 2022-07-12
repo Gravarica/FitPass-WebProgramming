@@ -15,7 +15,8 @@
                 <li class="list-group-item">Duration: {{setDuration()}}</li>
             </ul>
             <div class="d-grid gap-2 pt-0 md-6" v-if="canDelete">
-                <input type="submit" class=" btn btn-warning btn-lg" value="Cancel Training">
+                <input type="submit" class=" btn btn-warning btn-lg" @click="showPopup()" value="Cancel Training">
+               
             </div>
     </div>
      </div>
@@ -23,36 +24,53 @@
 
 
 <script>
-    export default{
-        data(){
-            return{
+import axios from "axios";
 
-            }
+    export default{
+    data() {
+        return {
+        };
+    },
+    props: {
+        sportObjectName: String,
+        trainingName: String,
+        trainingType: String,
+        duration: Number,
+        checkInDate: Date,
+        isTrainer: Boolean,
+        trainer: Object,
+        customer: Object,
+        canDelete: Boolean,
+        object : Object
+    },
+    methods: {
+        getSource() {
+            let images = require.context("../assets/", false, /\.png$/);
+            return images("./" + this.sportObjectName + ".png");
         },
-        props:{
-            sportObjectName : String,
-            trainingName : String,
-            trainingType : String,
-            duration : Number,
-            checkInDate : Date,
-            isTrainer : Boolean,
-            trainer : Object,
-            customer : Object,
-            canDelete : Boolean
+        setDuration() {
+            return this.duration + "min";
         },
-        methods:{
-            getSource(){
-                let images = require.context('../assets/', false, /\.png$/);
-                return images('./' + this.sportObjectName + ".png")
-            },
-            setDuration(){
-                return this.duration + "min"
-            },
-            getFullName(object){
-                return object.firstName + " " + object.lastName
-            }
-        }
+        getFullName(object) {
+            return object.firstName + " " + object.lastName;
+        },
+        showPopup(){
+            console.log("ID" + this.object.id)
+            this.$emit('show-popup',this.object.id)
+        },
+        closePopup(){
+            this.show = false
+        },
+        execute(){
+            console.log(this.object.id)
+            axios
+                .delete('http://localhost:8081/WebShopREST/rest/training_histories/cancel/' + this.object.id)
+            
+            this.$emit('update-list',this.object.id)
+            this.closePopup()
+       }
     }
+}
 
 </script>
 

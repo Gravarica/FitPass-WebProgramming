@@ -67,6 +67,11 @@ public class TrainingDAO {
 		return trainings;
 	}
 	
+	public void setTrainingTrainer(Training t,User trener) {
+		t.setTrainer(trener);
+		saveTraining();
+	}
+	
 	public ArrayList<Training> getSportObjectTrainings(int id){
 		ArrayList<Training> retList = new ArrayList<Training>();
 		for(Training it : trainings) {
@@ -76,10 +81,6 @@ public class TrainingDAO {
 		return retList;
 	}
 
-	public void setTrainingTrainer(Training t,User trener) {
-		t.setTrainer(trener);
-		saveTraining();
-	}
 
 	public ArrayList<Training> getTrainingsWithoutTrainer(int id){
 		ArrayList<Training> retList = new ArrayList<Training>();
@@ -90,4 +91,16 @@ public class TrainingDAO {
 		}
 		return retList;
 	}
+
+
+	public ArrayList<Training> getSportObjectTrainingsWithTrainer(int id){
+		ArrayList<Training> retList = new ArrayList<Training>();
+		for(Training it : trainings) {
+			if(it.getObject().getId() == id && it.getTrainer() != null) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+
 }

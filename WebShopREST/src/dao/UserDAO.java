@@ -433,8 +433,12 @@ public class UserDAO {
 		return false;
 	}
 	
-  public ArrayList<SportObject> getObjectsVisitedByUser(){
+	public ArrayList<SportObject> getObjectsVisitedByUser(){
 		return getLoggedUser().getObjectsVisited();
+	}
+
+ 	public boolean checkUsername(String username) {
+		return users.containsKey(username);
 	}
 	
 	public ArrayList<User> sortByFirstName(boolean asc){
@@ -496,5 +500,4 @@ public class UserDAO {
 		}
 		return retList;
 	}
-	
-}
+ }

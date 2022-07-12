@@ -146,6 +146,7 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public User registerTrainer(TrainerRegistrationDTO dto) {
+		System.out.println("TU SAM BAKULE");
 		User trainer = getUserDAO().registerTrainer(dto);
 		if(dto.getTraining() != null) getTrainingDAO().setTrainingTrainer(dto.getTraining(),trainer);
 		return trainer;
@@ -249,6 +250,13 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ArrayList<User> getCustomersFromSportObject(@PathParam("id") int id) {
 		return getUserDAO().getCustomersFromSportObject(id);
+	}
+
+	@GET
+	@Path("/check/username/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean checkUsername(@PathParam("username") String username) {
+		return getUserDAO().checkUsername(username);
 	}
 	
 }
