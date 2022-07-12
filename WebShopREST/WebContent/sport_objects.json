@@ -3,7 +3,7 @@
 		"id" : "1",
 		"deleted" : false,
 		"name" : "Ozzy",
-		"averageGrade" : 2.00,
+		"averageGrade" : 5.00,
 		"sportObjectType" : "GYM",
 		"location" : {
 			"address" : {
@@ -47,7 +47,7 @@
 		"id" : "3",
 		"deleted" : false,
 		"name" : "Flex",
-		"averageGrade" : 0.00,
+		"averageGrade" : 3.00,
 		"sportObjectType" : "POOL",
 		"location" : {
 			"address" : {
@@ -91,7 +91,7 @@
 		"id" : "5",
 		"deleted" : false,
 		"name" : "ProFitness",
-		"averageGrade" : 0.00,
+		"averageGrade" : 3.00,
 		"sportObjectType" : "GYM",
 		"location" : {
 			"address" : {

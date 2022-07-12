@@ -144,9 +144,8 @@ public class CommentDAO {
 	}
 	
 	public Comment create(NewCommentDTO dto) {
-		User customer = getUserDAO().getLoggedUser();
-		SportObject obj = getSportObjectDAO().getById(dto.getObjectId());
-		Comment newInstance = new Comment(getMaxId(), customer, obj, dto.getText(), dto.getGrade());
+		Comment newInstance = new Comment(getMaxId(), dto.getUsername(), dto.getObjectId(), dto.getText(), dto.getGrade());
+		newInstance.setObjectName(getSportObjectDAO().getById(dto.getObjectId()).getName());
 		comments.add(newInstance);
 		save();
 		return newInstance;
@@ -154,8 +153,9 @@ public class CommentDAO {
 	
 	public Comment approve(int id) {
 		Comment c = getById(id);
+		SportObject obj = getSportObjectDAO().getById(c.getObjectId());
 		c.approve();
-		getSportObjectDAO().calculateAverageGrade(c.getObject(), getObjectStats(c.getObject()));
+		getSportObjectDAO().calculateAverageGrade(obj, getObjectStats(obj));
 		save();
 		return c;
 	}

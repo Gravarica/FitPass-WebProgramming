@@ -2,37 +2,9 @@
 	{
 		"id" : 1,
 		"deleted" : false,
-		"customer" : {
-						"id" : 1,
-						"deleted" : false,
-						"username" : "gravarica",
-						"password" : "-286773544",
-						"firstName" : "Milos",
-						"lastName" : "Gravara",
-						"gender" : "MALE",
-						"role" : "ADMIN",
-						"dateOfBirth" : "2000-01-20",
-						"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
-						"object" : null,
-						"totalPoints" : -1
-					},
-		"object" : 	{
-						"id" : "1",
-						"deleted" : false,
-						"name" : "Ozzy",
-						"averageGrade" : 7.64,
-						"sportObjectType" : "GYM",
-						"location" : {
-							"address" : {
-								"street" : "Jovana Ducica",
-								"number" : "12a",
-								"city" : "Novi Sad",
-								"postalNumber" : "21000"
-							},
-							"longitude" : 24.42,
-							"latitude" : 12.23
-						}
-					},
+		"username": "Singleton420",
+		"objectId": 3,
+		"objectName": "Flex",
 		"time": "2022-07-10",
 		"text" : "Bukvalno je uzasna teretana bu raz",
 		"grade" : 2,
@@ -41,37 +13,9 @@
 	{
 		"id" : 2,
 		"deleted" : false,
-		"customer" : {
-						"id" : 1,
-						"deleted" : false,
-						"username" : "gravarica",
-						"password" : "-286773544",
-						"firstName" : "Milos",
-						"lastName" : "Gravara",
-						"gender" : "MALE",
-						"role" : "ADMIN",
-						"dateOfBirth" : "2000-01-20",
-						"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
-						"object" : null,
-						"totalPoints" : -1
-					},
-		"object" : 	{
-						"id" : "1",
-						"deleted" : false,
-						"name" : "Ozzy",
-						"averageGrade" : 7.64,
-						"sportObjectType" : "GYM",
-						"location" : {
-							"address" : {
-								"street" : "Jovana Ducica",
-								"number" : "12a",
-								"city" : "Novi Sad",
-								"postalNumber" : "21000"
-							},
-							"longitude" : 24.42,
-							"latitude" : 12.23
-						}
-					},
+		"username": "Corba",
+		"objectId": 2,
+		"objectName": "Coloseum",
 		"time": "2022-07-10",
 		"text" : "Kida teretana",
 		"grade" : 5,
@@ -80,79 +24,89 @@
 	{
 		"id" : 3,
 		"deleted" : false,
-		"customer" : {
-						"id" : 1,
-						"deleted" : false,
-						"username" : "gravarica",
-						"password" : "-286773544",
-						"firstName" : "Milos",
-						"lastName" : "Gravara",
-						"gender" : "MALE",
-						"role" : "ADMIN",
-						"dateOfBirth" : "2000-01-20",
-						"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
-						"object" : null,
-						"totalPoints" : -1
-					},
-		"object" : 	{
-						"id" : "1",
-						"deleted" : false,
-						"name" : "Ozzy",
-						"averageGrade" : 7.64,
-						"sportObjectType" : "GYM",
-						"location" : {
-							"address" : {
-								"street" : "Jovana Ducica",
-								"number" : "12a",
-								"city" : "Novi Sad",
-								"postalNumber" : "21000"
-							},
-							"longitude" : 24.42,
-							"latitude" : 12.23
-						}
-					},
+		"username": "LladyCroft",
+		"objectId": 1,
+		"objectName": "Ozzy",
 		"time": "2022-07-10",
-		"text" : "Bukvalno je uzasna teretana bu raz",
+		"text" : "Nisam zadovoljna osobljem",
 		"grade" : 1,
 		"state" : "PENDING"	
 	},
 	{
-		"id" : 1,
+		"id" : 4,
 		"deleted" : false,
-		"customer" : {
-						"id" : 1,
-						"deleted" : false,
-						"username" : "gravarica",
-						"password" : "-286773544",
-						"firstName" : "Milos",
-						"lastName" : "Gravara",
-						"gender" : "MALE",
-						"role" : "ADMIN",
-						"dateOfBirth" : "2000-01-20",
-						"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
-						"object" : null,
-						"totalPoints" : -1
-					},
-		"object" : 	{
-						"id" : "1",
-						"deleted" : false,
-						"name" : "Ozzy",
-						"averageGrade" : 7.64,
-						"sportObjectType" : "GYM",
-						"location" : {
-							"address" : {
-								"street" : "Jovana Ducica",
-								"number" : "12a",
-								"city" : "Novi Sad",
-								"postalNumber" : "21000"
-							},
-							"longitude" : 24.42,
-							"latitude" : 12.23
-						}
-					},
+		"username": "Singleton420",
+		"objectId": 3,
+		"objectName": "Flex",
 		"time": "2022-07-10",
-		"text" : "Raspad sistema",
+		"text" : "Fino skroz!",
+		"grade" : 4,
+		"state" : "ACCEPTED"	
+	},
+	{
+		"id" : 5,
+		"deleted" : false,
+		"username": "Singleton420",
+		"objectId": 5,
+		"objectName": "ProFitness",
+		"time": "2022-07-10",
+		"text" : "Skroz dobra teretana!",
+		"grade" : 5,
+		"state" : "ACCEPTED"	
+	},
+	{
+		"id" : 6,
+		"deleted" : false,
+		"username": "Corba",
+		"objectId": 1,
+		"objectName": "Ozzy",
+		"time": "2022-07-10",
+		"text" : "Neodovljno dobre sprave za noge",
 		"grade" : 3,
 		"state" : "PENDING"	
+	},
+	{
+		"id" : 7,
+		"deleted" : false,
+		"username": "Singleton420",
+		"objectId": 5,
+		"objectName": "ProFitness",
+		"time": "2022-07-10",
+		"text" : "Raspad sistema",
+		"grade" : 2,
+		"state" : "ACCEPTED"	
+	},
+	{
+		"id" : 8,
+		"deleted" : false,
+		"username": "SlobaSnajper",
+		"objectId": 6,
+		"objectName": "NoLimit",
+		"time": "2022-07-10",
+		"text" : "Fali fen za kosu",
+		"grade" : 4,
+		"state" : "PENDING"	
+	},
+	{
+		"id" : 9,
+		"deleted" : false,
+		"username": "Singleton420",
+		"objectId": 5,
+		"objectName": "ProFitness",
+		"time": "2022-07-10",
+		"text" : "Raspad sistema",
+		"grade" : 2,
+		"state" : "ACCEPTED"	
+	},
+	{
+		"id" : 10,
+		"deleted" : false,
+		"username": "Stanija",
+		"objectId": 1,
+		"objectName": "Ozzy",
+		"time": "2022-07-10",
+		"text" : "Skroz je solidno",
+		"grade" : 5,
+		"state" : "ACCEPTED"	
 	}
 ]
