@@ -521,4 +521,15 @@ public class UserDAO {
 		}
 		return retList;
 	}
+	
+	public ArrayList<User> getAllCustomers(){
+		ArrayList<User> retList = new ArrayList<User>();
+		for(User it : users.values()) {
+			if(it.getRole() == Role.CUSTOMER) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+	
 }

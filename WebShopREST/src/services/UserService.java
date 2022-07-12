@@ -264,4 +264,12 @@ public class UserService {
 	public ArrayList<User> getAllTrainers(){
 		return getUserDAO().getAllTrainers();
 	}
+	
+	@GET
+	@Path("/get/customers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getAllCutomers(){
+		return getUserDAO().getAllCustomers();
+	}
+	
 }

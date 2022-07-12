@@ -14,8 +14,8 @@
                             <option value=null disabled>Choose sport object</option>
                             <option v-for="it in state.sportObjects" :value="it">{{it.name}}</option>
                         </select>
-                        <span class="jabuka" v-if="v$.newTrainingDTO.sportObject.$error">
-                          {{ v$.newTrainingDTO.sportObject.$errors[0].$message}}
+                        <span class="jabuka" v-if="v$.sportObject.$error">
+                          {{ v$.sportObject.$errors[0].$message}}
                         </span>
                     </div>
               </div>
@@ -89,10 +89,10 @@ import {reactive,computed} from 'vue'
           trainings : null,
           customers : null,
           loggedUser : null,
+          sportObject : null , 
           
           
           newTrainingDTO : { 
-            sportObject : null , 
             training : null , 
             customer : null , 
             checkInDate : null
@@ -102,11 +102,11 @@ import {reactive,computed} from 'vue'
         const rules = computed(() =>{
           return{
             newTrainingDTO : { 
-              sportObject : {required} , 
               training : {required}, 
               customer : {required}, 
               checkInDate : {required}
-            }
+            },
+            sportObject : {required},
           }
         })
 
@@ -134,7 +134,7 @@ import {reactive,computed} from 'vue'
             },
             fillCustomers(id){
                  axios
-                    .get('http://localhost:8081/WebShopREST/rest/users/sport_object/visited/' + id)
+                    .get('http://localhost:8081/WebShopREST/rest/users/get/customers')
                     .then((response) =>{
                         this.state.customers = response.data
                     })
@@ -145,7 +145,8 @@ import {reactive,computed} from 'vue'
                     axios
                     .post('http://localhost:8081/WebShopREST/rest/training_histories/schedule',this.state.newTrainingDTO)
                     .then((response) =>{
-                        console.log(response.data)
+                        alert("You have successfully scheduled training")
+                        this.$router.push({name : 'TrainerTrainings'})
                     })
                  }
             },
@@ -155,9 +156,10 @@ import {reactive,computed} from 'vue'
         },
         watch:{
             selected(object){
-                this.state.newTrainingDTO.sportObject = object
+                this.state.sportObject = object
                 this.fillTrainings(object.id)
                 this.fillCustomers(object.id)
+                console.log(object.id)
             }
         },
         created(){

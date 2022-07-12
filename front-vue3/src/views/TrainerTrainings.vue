@@ -16,7 +16,7 @@
     </div>
   </section>
 
-<div class="container-fluid kokain vh-100" v-if="hasHistory">
+<div class="container-fluid kokain vh-200" v-if="hasHistory">
     <div class="row row-cols-md-3">
         <div class="col-5" v-for="t in trainingHistory">
         <TrainingAlbumCard 

@@ -106,14 +106,14 @@ public class TrainingHistoryService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public TrainingHistory scheduleTraining(TrainingScheduleDTO dto) {
 		dto.setCustomer(getUserDAO().getLoggedUser());
-		if(!getSubscriptionDAO().getByUser(dto.getCustomer().getUsername()).isActive()) {
-			return null;
-		}
+		//if(!getSubscriptionDAO().getByUser(dto.getCustomer().getUsername()).isActive()) {
+			//return null;
+		//}
 		
 		TrainingHistory newTraining = getTrainingHistoryDAO().scheduleTraining(dto);
 		getUserDAO().increaseObjectVisited(newTraining.getCustomer().getUsername(),newTraining.getTraining().getObject());
 		//getUserDAO().updateTrainingHistory(newTraining);
-		getSubscriptionDAO().increaseTrainingCounter(getSubscriptionDAO().getByUser(dto.getCustomer().getUsername()).getId());
+		//getSubscriptionDAO().increaseTrainingCounter(getSubscriptionDAO().getByUser(dto.getCustomer().getUsername()).getId());
 		return newTraining;
 	}
 	
