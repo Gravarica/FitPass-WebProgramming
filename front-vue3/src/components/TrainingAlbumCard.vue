@@ -16,9 +16,7 @@
             </ul>
             <div class="d-grid gap-2 pt-0 md-6" v-if="canDelete">
                 <input type="submit" class=" btn btn-warning btn-lg" @click="showPopup()" value="Cancel Training">
-                <ConfirmationDialogue  @execute-del="execute()" @close="closePopup()" ref="popup" v-if="show">
-                    <h5>Are you sure you want to cancel this training. This action can't be undone!</h5>
-                </ConfirmationDialogue>
+               
             </div>
     </div>
      </div>
@@ -27,11 +25,10 @@
 
 <script>
 import axios from "axios";
-import ConfirmationDialogue from "./ConfirmationDialogue.vue";
+
     export default{
     data() {
         return {
-            show : false
         };
     },
     props: {
@@ -58,7 +55,8 @@ import ConfirmationDialogue from "./ConfirmationDialogue.vue";
             return object.firstName + " " + object.lastName;
         },
         showPopup(){
-            this.show = true
+            console.log("ID" + this.object.id)
+            this.$emit('show-popup',this.object.id)
         },
         closePopup(){
             this.show = false
@@ -71,8 +69,7 @@ import ConfirmationDialogue from "./ConfirmationDialogue.vue";
             this.$emit('update-list',this.object.id)
             this.closePopup()
        }
-    },
-    components: { ConfirmationDialogue }
+    }
 }
 
 </script>
