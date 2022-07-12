@@ -14,8 +14,8 @@
                             <option value=null disabled>Choose sport object</option>
                             <option v-for="it in state.sportObjects" :value="it">{{it.name}}</option>
                         </select>
-                        <span class="jabuka" v-if="v$.newTrainingDTO.sportObject.$error">
-                          {{ v$.newTrainingDTO.sportObject.$errors[0].$message}}
+                        <span class="jabuka" v-if="v$.sportObject.$error">
+                          {{ v$.sportObject.$errors[0].$message}}
                         </span>
                     </div>
               </div>
@@ -33,18 +33,6 @@
                   </div>
               </div>
 
-               <div class="row pb-4">
-                    <div>
-                         <select v-model="state.newTrainingDTO.customer" required class="type form-select form-outline form-select-lg" aria-label=".form-select-lg example">
-                            <option value=null disabled>Choose customer</option>
-                            <option v-for="it in state.customers" :value="it">{{getFullName(it)}}</option>
-                        </select>
-                        <span class="jabuka" v-if="v$.newTrainingDTO.customer.$error">
-                          {{ v$.newTrainingDTO.customer.$errors[0].$message}}
-                        </span>
-                    </div>
-              </div>
-            
               <hr/>
                <div class="row">
                 <div class="mb-3 d-flex align-items-center">
@@ -89,10 +77,10 @@ import {reactive,computed} from 'vue'
           trainings : null,
           customers : null,
           loggedUser : null,
+          sportObject : null, 
           
           
           newTrainingDTO : { 
-            sportObject : null , 
             training : null , 
             customer : null , 
             checkInDate : null
@@ -102,11 +90,11 @@ import {reactive,computed} from 'vue'
         const rules = computed(() =>{
           return{
             newTrainingDTO : { 
-              sportObject : {required} , 
-              training : {required}, 
+                training : {required}, 
               customer : {required}, 
               checkInDate : {required}
-            }
+            },
+            sportObject : {required}  
           }
         })
 
@@ -145,7 +133,8 @@ import {reactive,computed} from 'vue'
                     axios
                     .post('http://localhost:8081/WebShopREST/rest/training_histories/schedule',this.state.newTrainingDTO)
                     .then((response) =>{
-                        console.log(response.data)
+                        alert("You have succesfully scheduled your training")
+                        this.$router.push({path: '/customer/trainings'})
                     })
                  }
             },
@@ -155,7 +144,7 @@ import {reactive,computed} from 'vue'
         },
         watch:{
             selected(object){
-                this.state.newTrainingDTO.sportObject = object
+                this.state.sportObject = object
                 this.fillTrainings(object.id)
                 this.fillCustomers(object.id)
             }
@@ -170,7 +159,8 @@ import {reactive,computed} from 'vue'
              axios
                 .get('http://localhost:8081/WebShopREST/rest/users/loggedUser')
                 .then((response) =>{
-                    this.state.loggedUser = response.data
+                    this.state.newTrainingDTO.customer = response.data
+                    console.log(this.state.newTrainingDTO.customer)
                 })
         }
     }

@@ -5,6 +5,11 @@
             <h1> Users </h1>
         </div>
 		<div class="container obod">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section pt-4">Users in System</h2>
+				</div>
+			</div>
             <div class="row">
                 <div class="col-md-8 ms-left d-flex">
                     <div class="inputic">
@@ -38,6 +43,8 @@
                               <th @click="this.sortByLastName()" class="hoverboard">Last Name</th>
 						      <th>Role</th>
 							  <th>Status</th>
+							  <th>Points</th>
+                              <th></th>
 							  <th @click="this.sortByPoints()" class="hoverboard">Points</th>
 						    </tr>
 						  </thead>
@@ -50,24 +57,33 @@
 						      <td>{{user.role}}</td>
 							  <td>{{getCustomerType(user)}}</td>
 							  <td>{{user.totalPoints}}</td>
+                              <td><button type="button" class="btn btn-danger" @click="showPopup(user)" v-if="user.role != 'ADMIN'">Delete</button></td>
 						    </tr>
 						  </tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-		</div>
+		
+        <ConfirmationDialogue @execute-del="execute()" @close="closePopup()" ref="popup" v-if="show">
+            <h5>Are you sure you want to delete this user. This action can't be undone!</h5>
+        </ConfirmationDialogue>
+
+        </div>
 	</section>
 </div>
 </template>
 
 <script>
 import axios from 'axios'
+import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
 
     export default {
         data(){
             return{
                 users: null,
+                show : false,
+                deleteUser : null,
                 usernameAsc: true,
                 firstNameAsc: true,
                 lastNameAsc: true,
@@ -76,6 +92,7 @@ import axios from 'axios'
             }
             
         },
+        components : {ConfirmationDialogue},
         created(){
             axios
                 .get('http://localhost:8081/WebShopREST/rest/users/get')
@@ -91,7 +108,27 @@ import axios from 'axios'
 
                 return user.customerType.name
             },
-            sortByUsername(){
+            
+            execute(){
+                axios
+                    .delete('http://localhost:8081/WebShopREST/rest/users/delete/' + this.deleteUser.username)
+                
+                this.users = this.users.filter(i => i.username !== this.deleteUser.username)
+                this.show = false
+                alert("You have successfully deleted user" + this.deleteUser.firstName + " " + this.deleteUser.lastName)
+            },
+        
+            showPopup(object){
+                this.show = true
+                this.deleteUser = object
+                console.log(this.deleteUser.username)
+            },
+            closePopup(){
+                this.show = false
+            }
+        }, 
+          
+          sortByUsername(){
                 axios
                     .get('http://localhost:8081/WebShopREST/rest/users/sort/username/' + this.usernameAsc)
                     .then(response => {
@@ -144,7 +181,7 @@ import axios from 'axios'
                         this.users = response.data
                     })
             }
-    }
+      }
     }
 </script>
 
