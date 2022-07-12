@@ -87,6 +87,7 @@ public class TrainingHistoryDAO {
 				return it;
 			}
 		}
+		
 		return null;
 	}
 	
@@ -95,6 +96,7 @@ public class TrainingHistoryDAO {
 			t.setDeleted(true);
 			saveTrainingHistory();
 		}
+		System.out.println("ID : " + t.getId() + "DELETED: " + t.isDeleted());
 	}
 
 	//Prijava na trening
@@ -147,7 +149,7 @@ public class TrainingHistoryDAO {
 	public ArrayList<TrainingHistory> getTrainerTrainingHistory(String username){
 		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
 		for(TrainingHistory it : trainingHistories) {
-			if(it.getTrainer().getUsername().equals(username)) {
+			if(it.getTrainer().getUsername().equals(username) && it.isDeleted() == false) {
 				retList.add(it);
 			}
 		}
@@ -161,7 +163,7 @@ public class TrainingHistoryDAO {
 	public ArrayList<TrainingHistory> getTrainerPersonalTrainings(String username){
 		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
 		for(TrainingHistory it : getTrainerTrainingHistory(username)) {
-			if(it.getTraining().getType() == TrainingType.PERSONAL) {
+			if(it.getTraining().getType() == TrainingType.PERSONAL && it.isDeleted() == false) {
 				retList.add(it);
 			}
 		}
@@ -172,7 +174,7 @@ public class TrainingHistoryDAO {
 	public ArrayList<TrainingHistory> getTrainerGroupTrainings(String username){
 		ArrayList<TrainingHistory> retList = new ArrayList<TrainingHistory>();
 		for(TrainingHistory it : getTrainerTrainingHistory(username)) {
-			if(it.getTraining().getType() == TrainingType.GROUP) {
+			if(it.getTraining().getType() == TrainingType.GROUP && it.isDeleted() == false) {
 				retList.add(it);
 			}
 		}

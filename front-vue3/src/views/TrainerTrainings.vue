@@ -1,5 +1,5 @@
 <template>
- <div class="gradient-custom mw-100 container-fluid vh-100">
+ <div class="gradient-custom mw-100 container-fluid vh-200">
 
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
@@ -15,10 +15,11 @@
     </div>
   </section>
 
-<div class="container-fluid kokain" v-if="!hasHistory">
+<div class="container-fluid kokain" v-if="hasHistory">
     <div class="row row-cols-md-3">
         <div class="col-5" v-for="t in trainingHistory">
-        <TrainingAlbumCard
+        <TrainingAlbumCard 
+            @update-list="updateList()"
             :sport-object-name="t.training.object.name"
             :training-name="t.training.name"
             :check-in-date="t.checkInDate"
@@ -26,13 +27,14 @@
             :training-type="t.training.type"
             :customer="t.customer"
             :is-trainer="true"
-            :can-delete="t.canCancel">
+            :can-delete="t.canCancel"
+            :object = t>
         </TrainingAlbumCard>
         </div>   
     </div>
 </div>
 
-<div class="active container-fluid" v-if="hasHistory">
+<div class="active container-fluid" v-if="!hasHistory">
     <div class="main-container container">
         <div class="inner-container container">
             <div class="container">
@@ -60,7 +62,8 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
         return {
             trainingHistory: null,
             loggedUser: null,
-            hasHistory : null
+            hasHistory : null,
+            toDelete : null
         };
     },
     components:{
@@ -97,6 +100,11 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             .then((response) => {
                 this.trainingHistory = response.data;
             });
+        },
+        updateList(id){
+            console.log(id)
+            this.trainingHistory = this.trainingHistory.filter(i => i.id !== id)
+            
         }
     },
     created() {

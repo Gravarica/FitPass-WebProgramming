@@ -97,6 +97,7 @@ public class TrainingHistoryService {
 	@Path("/cancel/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public TrainingHistory cancelPersonalTraining(@PathParam("id") int id) {
+		System.out.println("STIGO BRAAAAAAAAAAAAAT");
 		return getTrainingHistoryDAO().cancelPersonalTraining(id);
 	}
 

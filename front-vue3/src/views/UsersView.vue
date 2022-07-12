@@ -46,7 +46,7 @@
 			</div>
 		
         <ConfirmationDialogue @execute-del="execute()" @close="closePopup()" ref="popup" v-if="show">
-            <h5>Are you sure you want to delete this user. This action can't be undone</h5>
+            <h5>Are you sure you want to delete this user. This action can't be undone!</h5>
         </ConfirmationDialogue>
 
         </div>

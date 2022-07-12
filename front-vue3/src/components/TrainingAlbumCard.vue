@@ -15,7 +15,10 @@
                 <li class="list-group-item">Duration: {{setDuration()}}</li>
             </ul>
             <div class="d-grid gap-2 pt-0 md-6" v-if="canDelete">
-                <input type="submit" class=" btn btn-warning btn-lg" value="Cancel Training">
+                <input type="submit" class=" btn btn-warning btn-lg" @click="showPopup()" value="Cancel Training">
+                <ConfirmationDialogue  @execute-del="execute()" @close="closePopup()" ref="popup" v-if="show">
+                    <h5>Are you sure you want to cancel this training. This action can't be undone!</h5>
+                </ConfirmationDialogue>
             </div>
     </div>
      </div>
@@ -23,36 +26,54 @@
 
 
 <script>
+import axios from "axios";
+import ConfirmationDialogue from "./ConfirmationDialogue.vue";
     export default{
-        data(){
-            return{
-
-            }
+    data() {
+        return {
+            show : false
+        };
+    },
+    props: {
+        sportObjectName: String,
+        trainingName: String,
+        trainingType: String,
+        duration: Number,
+        checkInDate: Date,
+        isTrainer: Boolean,
+        trainer: Object,
+        customer: Object,
+        canDelete: Boolean,
+        object : Object
+    },
+    methods: {
+        getSource() {
+            let images = require.context("../assets/", false, /\.png$/);
+            return images("./" + this.sportObjectName + ".png");
         },
-        props:{
-            sportObjectName : String,
-            trainingName : String,
-            trainingType : String,
-            duration : Number,
-            checkInDate : Date,
-            isTrainer : Boolean,
-            trainer : Object,
-            customer : Object,
-            canDelete : Boolean
+        setDuration() {
+            return this.duration + "min";
         },
-        methods:{
-            getSource(){
-                let images = require.context('../assets/', false, /\.png$/);
-                return images('./' + this.sportObjectName + ".png")
-            },
-            setDuration(){
-                return this.duration + "min"
-            },
-            getFullName(object){
-                return object.firstName + " " + object.lastName
-            }
-        }
-    }
+        getFullName(object) {
+            return object.firstName + " " + object.lastName;
+        },
+        showPopup(){
+            this.show = true
+        },
+        closePopup(){
+            this.show = false
+        },
+        execute(){
+            console.log(this.object.id)
+            axios
+                .delete('http://localhost:8081/WebShopREST/rest/training_histories/cancel/' + this.object.id)
+            
+            this.$emit('update-list',this.object.id)
+            this.closePopup()
+       }
+    },
+    components: { ConfirmationDialogue }
+}
 
 </script>
 

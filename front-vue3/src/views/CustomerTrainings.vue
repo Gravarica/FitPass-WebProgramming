@@ -1,6 +1,6 @@
 <template>
 
-  <div class="gradient-custom mw-100 container-fluid vh-100">
+  <div class="gradient-custom mw-100 container-fluid vh-200">
 
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
@@ -17,7 +17,7 @@
     </div>
   </section>
 
-<div class="container" v-if="hasHistory">
+<div class="container-fluid kokain" v-if="hasHistory">
     <div class="row row-cols-md-3">
         <div class="col-5" v-for="t in trainingHistory">
         <TrainingAlbumCard
