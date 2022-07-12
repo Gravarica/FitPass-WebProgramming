@@ -14,7 +14,7 @@
   </div>
 </div>
 <div class = "mini row gradient-custom">
-  <nav >
+  <nav>
           <ul class="nav justify-content-center">
             <li class="nav-item">
               <a id="bg" class="link active" @click="filterByCity('Beograd')" href="#">Beograd</a>
@@ -35,7 +35,7 @@
               <a id="ca" class="link" @click="filterByCity('Cacak')" href="#">Cacak</a>
             </li>
           </ul>
-        </nav>
+    </nav>
 </div>
 <div class = "wrapper-content">
   <div class="containerz gradient-custom vh-100">

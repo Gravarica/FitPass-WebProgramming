@@ -16,6 +16,7 @@ import EditProfileView from '../views/EditProfileView'
 import SubscriptionView from '../views/SubscriptionView'
 import SubscribeView from '../views/SubscribeView'
 import CheckoutView from '../views/CheckoutView'
+import ScheduleTraining from '../views/NewTrainingView.vue'
 import PromoCode from '../views/PromoCode'
 import CreateCommentView from '../views/CreateCommentView.vue'
 import CommentsView from '../views/CommentsView.vue'
@@ -42,7 +43,7 @@ const routes = [
   {
     path: '/register/trainer',
     name: 'RegisterTrainer',
-    component: SelectSportObject,
+    component: TrainerRegistrationView,
     // childern:[
     //   {
     //     path: '/',
@@ -115,6 +116,11 @@ const routes = [
     props: (route) => ({
        ...route.params
     })
+  },
+  {
+    path: '/schedule/training',
+    name: 'ScheduleTraining',
+    component: ScheduleTraining
   },
   {
     path: '/promoCode',

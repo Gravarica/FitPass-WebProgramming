@@ -1,5 +1,5 @@
 <template>
- <div class="gradient-custom wh-100">
+ <div class="gradient-custom mw-100 container-fluid vh-100">
 
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
@@ -9,7 +9,7 @@
         <p>
           <a href="#" @click="loadTrainingHistory()" class="btn btn-primary my-2">ALL TRAININGS</a>
           <a href="#" @click="showPersonal()" class="btn btn-primary my-2">PERSONAL TRAININGS</a>
-          <a href="#" @click="showGroup()" class="btn btn-secondary my-2">GROUP TRAININGS</a>
+          <a href="#" @click="showGroup()" class="btn btn-primary my-2">GROUP TRAININGS</a>
         </p>
       </div>
     </div>
@@ -24,7 +24,7 @@
             :check-in-date="t.checkInDate"
             :duration="t.training.duration"
             :training-type="t.training.type"
-            :trainer="t.trainer"
+            :customer="t.customer"
             :is-trainer="true"
             :can-delete="t.canCancel">
         </TrainingAlbumCard>
@@ -32,6 +32,18 @@
     </div>
 </div>
 
+<div class="active container-fluid" v-if="hasHistory">
+    <div class="main-container container">
+        <div class="inner-container container">
+            <div class="container">
+                <h2>You dont have any trainings, but you can allways schedule a new one!</h2>
+            </div>
+            <div class="container pt-5 center">
+                <router-link class="enrico" :to="{name: 'ScheduleTraining'}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </div>
@@ -62,8 +74,9 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             axios
             .get("http://localhost:8081/WebShopREST/rest/training_histories/trainer/" + this.loggedUser.username)
             .then((response) => {
+                console.log(this.hasHistory)
                 this.trainingHistory = response.data;
-                if (this.trainingHistory != null) {
+                if (response.data != null) {
                     this.hasHistory = true;
                 }
             });
@@ -93,7 +106,7 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
         axios
             .get("http://localhost:8081/WebShopREST/rest/users/loggedUser")
             .then((response) => {
-            console.log(response.data);
+            console.log(this.hasHistory);
             this.loggedUser = response.data;
             console.log("USERNAME: " + this.loggedUser.username);
             this.loadTrainingHistory()

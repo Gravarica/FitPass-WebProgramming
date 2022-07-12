@@ -80,4 +80,14 @@ public class TrainingDAO {
 		t.setTrainer(trener);
 		saveTraining();
 	}
+
+	public ArrayList<Training> getTrainingsWithoutTrainer(int id){
+		ArrayList<Training> retList = new ArrayList<Training>();
+		for(Training it : trainings) {
+			if(it.getObject().getId() == id && it.getTrainer() == null) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
 }

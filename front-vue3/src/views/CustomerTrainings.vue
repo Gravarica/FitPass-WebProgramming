@@ -1,15 +1,17 @@
 <template>
 
-  <div class="gradient-custom wh-100">
+  <div class="gradient-custom mw-100 container-fluid vh-100">
 
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
+      <div class="col-lg-9 col-md-8 mx-auto">
         <h1 class="fw-light">Training History</h1>
         <p class="lead text-center">Here you can see your training history in previous month.</p>
+        <p class="lead text-center">Of course you can allways schedule a new one!</p>
         <p>
-          <!-- <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
+          <div class="container pt-5 center" v-if="hasHistory">
+                <router-link class="enrico" :to="{name: ''}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
+            </div>
         </p>
       </div>
     </div>
@@ -24,10 +26,23 @@
             :check-in-date="t.checkInDate"
             :duration="t.training.duration"
             :training-type="t.training.type"
-            :customer="t.customer"
+            :trainer="t.trainer"
             :is-trainer="false">
         </TrainingAlbumCard>
         </div>   
+    </div>
+</div>
+
+<div class="active container-fluid" v-if="!hasHistory">
+    <div class="main-container container">
+        <div class="inner-container container">
+            <div class="container">
+                <h2>You don't have any trainings in last month, hurry up and schedule a new one!</h2>
+            </div>
+            <div class="container pt-5 center">
+                <router-link class="enrico" :to="{name: ''}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -45,7 +60,7 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
         return {
             trainingHistory: null,
             loggedUser: null,
-            hasHistory : false
+            hasHistory : true
         };
     },
     components:{
@@ -56,13 +71,16 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             return "../assets/" + name + ".png";
         },
         loadTrainingHistory(){
+            console.log(this.hasHistory)
             axios
             .get("http://localhost:8081/WebShopREST/rest/training_histories/customer/" + this.loggedUser.username)
             .then((response) => {
+                console.log(response.data)
                 this.trainingHistory = response.data;
-                if (this.trainingHistory != null) {
-                    this.hasHistory = true;
+                if (response == undefined) {
+                    this.hasHistory = false;
                 }
+                console.log(this.hasHistory)
             });
         }
     },
@@ -70,7 +88,6 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
         axios
             .get("http://localhost:8081/WebShopREST/rest/users/loggedUser")
             .then((response) => {
-            console.log(response.data);
             this.loggedUser = response.data;
             console.log("USERNAME: " + this.loggedUser.username);
             this.loadTrainingHistory()
@@ -81,5 +98,21 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
 </script>
 
 <style>
+.lol{
+    padding: 10;
+}
 
+.enrico {
+  text-decoration: none;
+  color: inherit;
+}
+
+.ludilo{
+    width: 500px;
+    align-self: center;
+}
+
+.center{
+   text-align: center;
+}
 </style>

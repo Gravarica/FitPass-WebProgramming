@@ -409,8 +409,31 @@ public class UserDAO {
 		}
 		saveUsers();
 	}
+
+
+	public ArrayList<User> getCustomersFromSportObject(int id){
+		ArrayList<User> retList = new ArrayList<User>();
+		for(User it : users.values()) {
+			if(checkForObject(it.getObjectsVisited(),id)){
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+
+	public boolean checkForObject(ArrayList<SportObject> objects,int id) {
+		if(objects == null)
+			return false;
+		
+		for(SportObject it : objects) {
+			if(it.getId() == id) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
-	public ArrayList<SportObject> getObjectsVisitedByUser(){
+  public ArrayList<SportObject> getObjectsVisitedByUser(){
 		return getLoggedUser().getObjectsVisited();
 	}
 	

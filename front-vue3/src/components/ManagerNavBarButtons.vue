@@ -3,8 +3,6 @@
     <form form class="d-flex ms-left">
         <li><router-link class="link enrico" :to="{name : 'Home'}">Home</router-link></li>
         <li><router-link class="link enrico" :to="{name : 'Objects'}">Objects</router-link></li>
-        <li><router-link class="link enrico" :to="{name : ''}">About</router-link></li>
-        <li><router-link class="link enrico" :to="{name : ''}">Contact</router-link></li>
         <li><router-link class="link enrico" :to="{name : ''}">My Object</router-link></li>
         <li><router-link class="link enrico" :to="{name : ''}">Add Content</router-link></li>
     </form>       

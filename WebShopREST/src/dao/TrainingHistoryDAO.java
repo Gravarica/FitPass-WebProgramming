@@ -184,6 +184,10 @@ public class TrainingHistoryDAO {
 				retList.add(it);
 			}
 		}
+		
+		if(retList.size()==0)
+			return null;		
+		
 		return retList;
 	}
 

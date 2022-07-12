@@ -152,5 +152,19 @@
 		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
 		"object" : null,
 		"totalPoints" : 60
+	},
+	{
+		"id" : 12,
+		"deleted" : false,
+		"username" : "lepak",
+		"password" : "-286773544",
+		"firstName" : "Naruto",
+		"lastName" : "Barut",
+		"gender" : "MALE",
+		"role" : "TRAINER",
+		"dateOfBirth" : "2000-07-25",
+		"customerType" : null,
+		"object" : null,
+		"totalPoints" : -1	
 	}
 ]
