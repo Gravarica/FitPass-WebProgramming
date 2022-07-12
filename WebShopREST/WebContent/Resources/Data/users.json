@@ -11,6 +11,7 @@
 		"dateOfBirth" : "2000-01-20",
 		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : -1
 	},
 	{
@@ -25,6 +26,7 @@
 		"dateOfBirth" : "2000-07-25",
 		"customerType" : null,
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : -1
 	},
 	{
@@ -39,6 +41,7 @@
 		"dateOfBirth" : "2000-01-01",
 		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 40
 	},
 	{
@@ -52,65 +55,8 @@
 		"role" : "MANAGER",
 		"dateOfBirth" : "2000-05-09",
 		"customerType" : null,
-		"object" : {
-			"id" : "1",
-		"deleted" : false,
-		"name" : "Ozzy",
-		"averageGrade" : 5.00,
-		"sportObjectType" : "GYM",
-		"contents": [
-            {
-                "name": "Sheesh",
-                "imgUrl": "stake",
-                "contentType": "SAUNA",
-                "duration": 30,
-                "description": "Hot, hot, hot..."
-            },
-            {
-                "name": "This is getting personal",
-                "imgUrl": "stake",
-                "contentType": "PERSONAL_TRAINING",
-                "duration": 30,
-                "description": "Achieve your maximum with best trainers!"
-            },
-            {
-                "name": "Pilates of the Carribean",
-                "imgUrl": "stake",
-                "contentType": "PILATES",
-                "duration": 30,
-                "description": "This will steal your fat cells like Jack Sparrow stole Black Pearl"
-            },
-            {
-                "name": "!Fat pass",
-                "imgUrl": "stake",
-                "contentType": "GROUP_TRAINING",
-                "duration": 30,
-                "description": "Not your regular fit pass!"
-            },
-            {
-                "name": "Chakra cleanse",
-                "imgUrl": "stake",
-                "contentType": "YOGA",
-                "duration": 30,
-                "description": "Get that chakra ready for 9-tailed fox"
-            }
-        ],
-		"location" : {
-			"address" : {
-				"street" : "Bulevar Patrijarha Pavla",
-				"number" : "35",
-				"city" : "Novi Sad",
-				"postalNumber" : "21000"
-			},
-			"longitude" : 19.81762,
-			"latitude" : 45.24055
-		},
-		"description": "Our gym (Ozzy) is one of the first to open in Novi Sad. The story began in 1997 at SPENS, where it is still located today. Following the trends, it went through various transformations and is now one of the most equipped and modern in Serbia.",
-		"workHour": {
-			"startTime": "09:00",
-			"endTime": "22:00"
-		}
-		},
+		"object" : null,
+		"objectId": 1,
 		"totalPoints" : -1
 	},
 	{
@@ -125,6 +71,7 @@
 		"dateOfBirth" : "2000-05-03",
 		"customerType" : { "name" : "SILVER", "discount" : 3.0, "pointsRequired" : 1000},
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 520
 	},
 	{
@@ -139,6 +86,7 @@
 		"dateOfBirth" : "2000-01-01",
 		"customerType" : { "name" : "GOLD", "discount" : 7.0, "pointsRequired" : 1500},
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 1490
 	},
 	{
@@ -153,6 +101,7 @@
 		"dateOfBirth" : "1985-01-01",
 		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 50
 	},
 	{
@@ -167,6 +116,7 @@
 		"dateOfBirth" : "1998-01-01",
 		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 60
 	},
 	{
@@ -179,8 +129,9 @@
 		"gender" : "FEMALE",
 		"role" : "MANAGER",
 		"dateOfBirth" : "1998-01-01",
-		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"customerType" : null,
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 60
 	},
 	{
@@ -193,8 +144,9 @@
 		"gender" : "MALE",
 		"role" : "MANAGER",
 		"dateOfBirth" : "1998-01-01",
-		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"customerType" : null,
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 60
 	},
 	{
@@ -207,8 +159,9 @@
 		"gender" : "MALE",
 		"role" : "MANAGER",
 		"dateOfBirth" : "1998-01-01",
-		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"customerType" : null,
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 60
 	},
 	{
@@ -223,6 +176,7 @@
 		"dateOfBirth" : "2000-07-25",
 		"customerType" : null,
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : -1	
 	}
 ]

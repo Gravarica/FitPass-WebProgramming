@@ -3,7 +3,7 @@
     <form form class="d-flex ms-left">
         <li><router-link class="link enrico" :to="{name : 'Home'}">Home</router-link></li>
         <li><router-link class="link enrico" :to="{name : 'Objects'}">Objects</router-link></li>
-        <li><router-link class="link enrico" :to="{name : ''}">My Object</router-link></li>
+        <li><router-link class="link enrico" :to="{name : 'MyObject'}">My Object</router-link></li>
         <li><router-link class="link enrico" :to="{name : 'NewContent'}">Add Content</router-link></li>
     </form>       
 

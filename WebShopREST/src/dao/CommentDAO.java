@@ -108,6 +108,17 @@ public class CommentDAO {
 		return objectsComments;
 	}
 	
+	public ArrayList<Comment> getAllCommentsBySportsObject(SportObject obj){
+		ArrayList<Comment> objectsComments = new ArrayList<>();
+		for(Comment c : comments) {
+			if (c.objectMatches(obj)) {
+				objectsComments.add(c);
+			}
+		}
+		
+		return objectsComments;
+	}
+	
 	public AverageGradeDTO getObjectStats(SportObject obj) {
 		int sum = 0;
 		int count = 0;
