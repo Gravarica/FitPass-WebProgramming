@@ -11,6 +11,7 @@ import beans.SportObject;
 import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
+import dto.NewTrainingDTO;
 import dto.TrainingScheduleDTO;
 
 public class TrainingDAO {
@@ -103,4 +104,19 @@ public class TrainingDAO {
 		return retList;
 	}
 
+	public Training createTraining(NewTrainingDTO dto) {
+		Training newTraining = new Training(dto);
+		saveTraining();
+		return newTraining;
+	}	
+
+	public boolean checkName(String name, int id) {
+		for(Training it : trainings) {
+			if(it.getObject().getId() == id && it.getName().equals(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

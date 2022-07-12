@@ -172,8 +172,8 @@ public class SportObjectService {
 	@Path("/content/types")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<SportObjectContent> getSportObjectContentTypes(){
-		if(getUserDAO().getLoggedUser().getObject() == null) return null;
-		return getSportObjectDAO().getSportObjectContentTypes(getUserDAO().getLoggedUser().getObject().getId());
+		if(getUserDAO().getLoggedUser().getObjectId() == -1) return null;
+		return getSportObjectDAO().getSportObjectContentTypes(getUserDAO().getLoggedUser().getObjectId());
 	}
 
 	@GET

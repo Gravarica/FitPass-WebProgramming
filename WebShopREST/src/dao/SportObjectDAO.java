@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Content;
 import beans.SportObject;
+import beans.Training;
 import comparators.object.GradeComparator;
 import comparators.object.LocationComparator;
 import comparators.object.ObjectNameComparator;
@@ -304,5 +305,4 @@ public class SportObjectDAO {
 		}
 		return false;
 	}
-	
 }

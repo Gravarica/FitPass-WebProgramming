@@ -15,8 +15,10 @@ import javax.ws.rs.core.MediaType;
 
 import beans.Training;
 import beans.TrainingHistory;
+import dao.SportObjectDAO;
 import dao.TrainingDAO;
 import dao.UserDAO;
+import dto.NewTrainingDTO;
 import dto.TrainingScheduleDTO;
 
 @Path("/trainings")
@@ -41,6 +43,10 @@ public class TrainingService {
 	
 	private UserDAO getUserDAO() {
 		return (UserDAO) ctx.getAttribute("userDAO");
+	}
+	
+	private SportObjectDAO getSportObjectDAO() {
+		return (SportObjectDAO) ctx.getAttribute("sportObjectDAO");
 	}
 
 	@GET
@@ -70,6 +76,20 @@ public class TrainingService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Training> getTrainingsWithoutTrainer(@PathParam("id") int id){
 		return getTrainingDAO().getTrainingsWithoutTrainer(id);
+	}
+	
+	@POST
+	@Path("/create")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Training createTraining(NewTrainingDTO dto) {
+		return getTrainingDAO().createTraining(dto);
+	}
+	
+	@GET
+	@Path("/check/name/{name}/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean checkName(@PathParam("name") String name,@PathParam("id") int id) {
+		return getTrainingDAO().checkName(name,id);
 	}
 
 }

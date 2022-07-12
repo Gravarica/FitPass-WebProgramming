@@ -1,49 +1,41 @@
-package beans;
+package dto;
 
-import java.util.Base64;
-import java.util.Date;
-
-import dto.NewTrainingDTO;
+import beans.SportObject;
+import beans.User;
 import enums.TrainingType;
 
-public class Training extends Entity {
+public class NewTrainingDTO {
 	
+	private User trainer;
 	private String name;
 	private TrainingType type;
 	private SportObject object;
 	private double duration;
 	private String description;
-	private Base64 image;
-	private User trainer;
+	private String imgUrl;
 	
-	public Training() {
+	public NewTrainingDTO() {}
+	
+	public NewTrainingDTO(User trainer, String name, TrainingType type, SportObject object, double duration,
+			String description, String imgUrl) {
 		super();
-	}
-		
-	public Training(int id, String name, TrainingType type, SportObject object, double duration, String description,
-			Base64 image, User trainer) {
-		super(id);
+		this.trainer = trainer;
 		this.name = name;
 		this.type = type;
 		this.object = object;
 		this.duration = duration;
 		this.description = description;
-		this.image = image;
+		this.imgUrl = imgUrl;
+	}
+
+	public User getTrainer() {
+		return trainer;
+	}
+
+	public void setTrainer(User trainer) {
 		this.trainer = trainer;
 	}
 
-	//Konstruktor za kreiranje novog treninga
-	public Training(NewTrainingDTO dto) {
-		this.name = dto.getName();
-		this.type = dto.getType();
-		this.object = dto.getObject();
-		this.duration = dto.getDuration();
-		this.description = dto.getDescription();
-		this.trainer = dto.getTrainer();
-		
-		//Slika boga pitaj
-	}
-	
 	public String getName() {
 		return name;
 	}
@@ -84,20 +76,12 @@ public class Training extends Entity {
 		this.description = description;
 	}
 
-	public Base64 getImage() {
-		return image;
+	public String getImgUrl() {
+		return imgUrl;
 	}
 
-	public void setImage(Base64 image) {
-		this.image = image;
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
-
-	public User getTrainer() {
-		return trainer;
-	}
-
-	public void setTrainer(User trainer) {
-		this.trainer = trainer;
-	}
+	
 }
-
