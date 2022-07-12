@@ -285,4 +285,16 @@ public class SportObjectDAO {
 		}
 		return retList;
 	}
+	
+	public boolean checkForContentName(int id,String name) {
+		SportObject object = getById(id);
+		
+		for(Content it : object.getContents()) {
+			if(it.getName().equals(name)) {
+				return true; //ne moze ime ako vrati true zapamit to baki moj
+			}
+		}
+		return false;
+	}
+	
 }

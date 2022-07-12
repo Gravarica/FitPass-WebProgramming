@@ -12,11 +12,12 @@
                 <div class="row speed pb-3">
                     <div class="col-md-12">
                         <div class="form-outline">
-                            <input v-model="state.newContentDTO.name" type="text" id="lastName" placeholder="Name" class="form-control form-control-lg"/>
+                            <input v-model="state.newContentDTO.name" @keyup="checkName()" type="text" id="lastName" placeholder="Name" class="form-control form-control-lg"/>
                         </div>
                          <span class="jabuka row jabukaZZ" v-if="v$.newContentDTO.name.$error">
                                 {{ v$.newContentDTO.name.$errors[0].$message}}
                         </span>
+                        <span v-if="isAvailable" class="notavailable">Name allready taken, try again.</span>
                     </div>
                 </div>
 
@@ -136,17 +137,19 @@ import {reactive,computed} from 'vue'
             .get('http://localhost:8081/WebShopREST/rest/users/loggedUser')
             .then((response) =>{
                 this.state.loggedUser = response.data
+                console.log(this.state.loggedUser)
             })
 
       },
       methods:{
         createContent(){
             this.v$.$validate()
-            if(!this.v$.$error){
+            if(!this.v$.$error && this.isAvailable == false){
                  axios
                     .post('http://localhost:8081/WebShopREST/rest/sport_objects/addContent/' + this.state.loggedUser.object.id)
                     .then((response)=>{
                         alert("You have successfully added new content to your object!")
+                        this.$router.push({path: '/'})
                 })
             }
         },
@@ -168,6 +171,19 @@ import {reactive,computed} from 'vue'
                     return "Pilates"
                 
             }
+        },
+        checkName(){
+             axios
+                .get('http://localhost:8081/WebShopREST/rest/sport_objects/check/content/name/' + this.state.loggedUser.object.id + "/" + this.state.newContentDTO.name)
+                .then((response) =>{
+                  this.isAvailable = response.data
+                })
+        }
+      },
+      data(){
+        return{
+          isAvailable : false,
+          responseMessage : ""
         }
       }
     }
