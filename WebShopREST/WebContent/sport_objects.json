@@ -5,6 +5,43 @@
 		"name" : "Ozzy",
 		"averageGrade" : 5.00,
 		"sportObjectType" : "GYM",
+		"contents": [
+            {
+                "name": "Sheesh",
+                "imgUrl": "stake",
+                "contentType": "SAUNA",
+                "duration": 30,
+                "description": "Hot, hot, hot..."
+            },
+            {
+                "name": "This is getting personal",
+                "imgUrl": "stake",
+                "contentType": "PERSONAL_TRAINING",
+                "duration": 30,
+                "description": "Achieve your maximum with best trainers!"
+            },
+            {
+                "name": "Pilates of the Carribean",
+                "imgUrl": "stake",
+                "contentType": "PILATES",
+                "duration": 30,
+                "description": "This will steal your fat cells like Jack Sparrow stole Black Pearl"
+            },
+            {
+                "name": "!Fat pass",
+                "imgUrl": "stake",
+                "contentType": "GROUP_TRAINING",
+                "duration": 30,
+                "description": "Not your regular fit pass!"
+            },
+            {
+                "name": "Chakra cleanse",
+                "imgUrl": "stake",
+                "contentType": "YOGA",
+                "duration": 30,
+                "description": "Get that chakra ready for 9-tailed fox"
+            }
+        ],
 		"location" : {
 			"address" : {
 				"street" : "Bulevar Patrijarha Pavla",
@@ -27,6 +64,36 @@
 		"name" : "Coloseum",
 		"averageGrade" : 0.00,
 		"sportObjectType" : "GYM",
+		"contents": [
+            {
+                "name": "Fitness maniacs",
+                "imgUrl": "stake",
+                "contentType": "GROUP_TRAINING",
+                "duration": 30,
+                "description": "Are you a maniac? We are too, come join us"
+            },
+            {
+                "name": "Loose joints studio",
+                "imgUrl": "stake",
+                "contentType": "PILATES",
+                "duration": 30,
+                "description": "We are not doing drugs here, just so you know"
+            },
+            {
+                "name": "Personalization",
+                "imgUrl": "stake",
+                "contentType": "PERSONAL_TRAINING",
+                "duration": 30,
+                "description": "Accustomed for your needs!"
+            },
+            {
+                "name": "Third eye opener",
+                "imgUrl": "stake",
+                "contentType": "YOGA",
+                "duration": 30,
+                "description": "Just like Shiva"
+            }
+        ],
 		"location" : {
 			"address" : {
 				"street" : "Temerinska",
@@ -49,6 +116,36 @@
 		"name" : "Flex",
 		"averageGrade" : 3.00,
 		"sportObjectType" : "POOL",
+		"contents": [
+            {
+                "name": "Nano training",
+                "imgUrl": "stake",
+                "contentType": "GROUP_TRAINING",
+                "duration": 30,
+                "description": "It's a pretty standard size"
+            },
+            {
+                "name": "Six pack coaching",
+                "imgUrl": "stake",
+                "contentType": "GROUP_TRAINING",
+                "duration": 60,
+                "description": "In a short time you will go from six pack to SIX PACK"
+            },
+            {
+                "name": "Pillowtease",
+                "imgUrl": "stake",
+                "contentType": "PILATES",
+                "duration": 30,
+                "description": "You will train so hard, that you will go to sleep"
+            },
+            {
+                "name": "Rampage",
+                "imgUrl": "stake",
+                "contentType": "PERSONAL_TRAINING",
+                "duration": 30,
+                "description": "In a short time you will go from six pack to SIX PACK"
+            }
+        ],
 		"location" : {
 			"address" : {
 				"street" : "Bulevar Zorana Djindjica",
@@ -71,6 +168,36 @@
 		"name" : "TotalGym",
 		"averageGrade" : 0.00,
 		"sportObjectType" : "GYM",
+		"contents": [
+            {
+                "name": "Surya Namaskara",
+                "imgUrl": "stake",
+                "contentType": "YOGA",
+                "duration": 30,
+                "description": "The name speaks to itself"
+            },
+            {
+                "name": "Devito",
+                "imgUrl": "stake",
+                "contentType": "PERSONAL_TRAINING",
+                "duration": 30,
+                "description": "We all like that flex"
+            },
+            {
+                "name": "Nixa zizu studio",
+                "imgUrl": "stake",
+                "contentType": "PERSONAL_TRAINING",
+                "duration": 30,
+                "description": "Dont worry, we won't break your legs"
+            },
+            {
+                "name": "ABC Training",
+                "imgUrl": "stake",
+                "contentType": "GROUP_TRAINING",
+                "duration": 30,
+                "description": "Abs, biceps and cardio!"
+            }   
+        ],
 		"location" : {
 			"address" : {
 				"street" : "Sutjeska",
@@ -93,6 +220,29 @@
 		"name" : "ProFitness",
 		"averageGrade" : 3.00,
 		"sportObjectType" : "GYM",
+		"contents": [
+            {
+                "name": "Suuuna",
+                "imgUrl": "stake",
+                "contentType": "SAUNA",
+                "duration": 30,
+                "description": "Feel refreshed and get soaky"
+            },
+            {
+                "name": "Yoga Master 3000",
+                "imgUrl": "stake",
+                "contentType": "YOGA",
+                "duration": 30,
+                "description": "Feel total flexibility like romanian gymnast"
+            },
+            {
+                "name": "Flight club",
+                "imgUrl": "stake",
+                "contentType": "PILATES",
+                "duration": 30,
+                "description": "You dont talk about Flight club!"
+            }
+        ],
 		"location" : {
 			"address" : {
 				"street" : "Bulevar Oslobodjenja",
@@ -115,6 +265,29 @@
 		"name" : "NoLimit",
 		"averageGrade" : 0.00,
 		"sportObjectType" : "GYM",
+		"contents": [
+            {
+                "name": "No Limit Gluteus",
+                "imgUrl": "stake",
+                "contentType": "PERSONAL_TRAINING",
+                "duration": 30,
+                "description": "Summer is comming!"
+            },
+            {
+                "name": "Body Pump",
+                "imgUrl": "stake",
+                "contentType": "GROUP_TRAINING",
+                "duration": 30,
+                "description": "Get that full body strengthening"
+            },
+            {
+                "name": "No Grease",
+                "imgUrl": "stake",
+                "contentType": "PILATES",
+                "duration": 30,
+                "description": "Sweat it off"
+            }
+        ],
 		"location" : {
 			"address" : {
 				"street" : "Branka Bajica",
@@ -137,6 +310,29 @@
 		"name" : "Classic",
 		"averageGrade" : 0.00,
 		"sportObjectType" : "GYM",
+		"contents": [
+            {
+                "name": "Pump fiction",
+                "imgUrl": "stake",
+                "contentType": "PERSONAL_TRAINING",
+                "duration": 30,
+                "description": "Ezekiel 25:17"
+            },
+            {
+                "name": "The Hateful Weight",
+                "imgUrl": "stake",
+                "contentType": "PILATES",
+                "duration": 30,
+                "description": "We hate that weight so much, we are gonna lose it"
+            },
+            {
+                "name": "Silence of the Abs",
+                "imgUrl": "stake",
+                "contentType": "GROUP_TRAINING",
+                "duration": 30,
+                "description": "At least its longer than Anthony Hopkins air time"
+            }
+        ],
 		"location" : {
 			"address" : {
 				"street" : "Bulevar Oslobodjenja",

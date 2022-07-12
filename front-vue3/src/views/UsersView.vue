@@ -5,11 +5,6 @@
             <h1> Users </h1>
         </div>
 		<div class="container obod">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section pt-4">Users in System</h2>
-				</div>
-			</div>
             <div class="row">
                 <div class="col-md-8 ms-left d-flex">
                     <div class="inputic">
@@ -33,7 +28,9 @@
             </div>
 			<div class="row">
 				<div class="col-md-12">
+                    
 					<div class="table-wrap tablica">
+                        <div class="scrollable-panelz">
 						<table class="table table-hover cabela">
 						  <thead class="thead-primary table-primary">
 						    <tr>
@@ -43,9 +40,8 @@
                               <th @click="this.sortByLastName()" class="hoverboard">Last Name</th>
 						      <th>Role</th>
 							  <th>Status</th>
-							  <th>Points</th>
-                              <th></th>
-							  <th @click="this.sortByPoints()" class="hoverboard">Points</th>
+                              <th @click="this.sortByPoints()" class="hoverboard">Points</th>
+                              <th></th>			  
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -62,6 +58,7 @@
 						  </tbody>
 						</table>
 					</div>
+                    </div>
 				</div>
 			</div>
 		
@@ -125,10 +122,8 @@ import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
             },
             closePopup(){
                 this.show = false
-            }
-        }, 
-          
-          sortByUsername(){
+            },
+            sortByUsername(){
                 axios
                     .get('http://localhost:8081/WebShopREST/rest/users/sort/username/' + this.usernameAsc)
                     .then(response => {
@@ -181,6 +176,11 @@ import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
                         this.users = response.data
                     })
             }
+        
+        
+        }, 
+          
+            
       }
 </script>
 
@@ -189,12 +189,15 @@ import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
         background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
         background-color: #f7b42c;
         background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
-        padding-top: 5%;
+        padding-top: 2%;
+        padding-bottom: 3%;
     }
     .obod{
         background-color: white;
         border-radius: 10px;
-        padding-top: 30px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 50px;
     }
     .tablica{
         font-size: 15px;
@@ -221,4 +224,10 @@ import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
   .headerinho{
     padding-bottom: 60px;
   }
+  .scrollable-panelz{
+      overflow-y:scroll;
+      height: 60.4vh;
+      width:100%;
+      margin-top: 20px;
+ }
 </style>

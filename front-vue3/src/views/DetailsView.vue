@@ -22,40 +22,40 @@
                 </div>
                 <div class="row main-info-row">
                     <div class="col-4 radno-vreme">
-                        <h4 class="black-text headline">Radno vreme</h4>
+                        <h4 class="black-text headline">Work Hour</h4>
                         <div class="work-hours mt-1 pr-3">
                             <div class="d-flex justify-content-between mb-2">
-                                <span>Ponedeljak</span>
+                                <span>Monday</span>
                                 <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
-                                <span>Utorak</span>
+                                <span>Tuesday</span>
                                 <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
-                                <span>Sreda</span>
+                                <span>Wednesday</span>
                                 <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
-                                <span>Cetvrtak</span>
+                                <span>Thursday</span>
                                 <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
-                                <span>Petak</span>
+                                <span>Friday</span>
                                 <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
-                                <span>Subota</span>
+                                <span>Saturday</span>
                                 <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
-                                <span>Nedelja</span>
+                                <span>Sunday</span>
                                 <span>{{this.object.workHour.startTime}} - {{this.object.workHour.endTime}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-7 pl-lg-2 pr-lg-3 mt-1 mt-md-0 description" >
-                        <h4 class="black-text headline">Opis</h4>
+                        <h4 class="black-text headline">Description</h4>
                         <div class="text-content mt-1">
                             <p>
                                 {{this.object.description}}
@@ -63,8 +63,27 @@
                         </div>
                     </div>
                 </div>
+                <div class="contents">
+                    <h4 class="black-text title pb-1">Content</h4>
+                    <Carousel :itemsToShow="2.95" :wrapAround="true">
+                        <Slide v-for="content in this.object.contents" :key="slide">
+                            <ContentCard class="kobajaz"
+                                         :contentType="content.contentType"
+                                         :name="content.name">
+                                <template v-slot:body>
+                                    <div class="content-description">
+                                        {{content.description}}
+                                    </div>
+                                </template>
+                            </ContentCard>
+                        </Slide>
+                        <template #addons>
+                            <navigation />
+                        </template>
+                    </Carousel>
+                </div>
                 <div class="comments">
-                    <h4 class="black-text title pb-1">Komentari i ocene</h4>
+                    <h4 class="black-text title pb-1">Comment section</h4>
                     <div class="comment-item pt-1 mb-1" v-for="comment in this.comments">
                         <div class="top-part d-flex align-items-center pointer sheeshz">
                             <span class="badge badgez" style="margin-right: 20px">{{comment.grade}}</span>
@@ -96,11 +115,19 @@
 <script>
     import Map from '../components/Map.vue';
 import OneObjectMap from '@/components/OneObjectMap.vue';
+import ContentCard from './../components/ContentCard.vue'
 import axios from 'axios';
+import 'vue3-carousel/dist/carousel.css';
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
     export default {
         components: {
             Map,
-            OneObjectMap
+            OneObjectMap,
+            Carousel,
+            Slide,
+            Pagination,
+            Navigation,
+            ContentCard
         },
         props: {
             objectId: null
@@ -114,7 +141,8 @@ import axios from 'axios';
                           location: null,
                           averageGrade: null,
                           workHour: null,
-                          description: ''},
+                          description: '',
+                          contents: null},
                 comments: {
                     grade: null,
                     time: '',
@@ -281,6 +309,7 @@ import axios from 'axios';
 
 .comments{
     font-size: 20px;
+    margin-bottom: 50px;
 }
 
 .sheeshz{
@@ -303,8 +332,36 @@ import axios from 'axios';
     border: 1px solid #a4a4e8
 }
 
+.contents{
+    margin-bottom: 80px;
+}
+
+
 template{
     height: 100%;
     font-family: "Lato";
 }
+</style>
+
+<style scoped>
+
+.carousel__slide > .kobajaz {
+  transform: scale(1);
+  opacity: 0.5;
+  transition: 0.5s;
+}
+.carousel__slide--visible > .kobajaz {
+  opacity: 1;
+  transform: rotateY(0);
+}
+.carousel__slide--next > .kobajaz {
+  transform: scale(0.8) translate(-10px);
+}
+.carousel__slide--prev > .kobajaz {
+  transform: scale(0.8) translate(10px);
+}
+.carousel__slide--active > .kobajaz {
+  transform: scale(1.03);
+}
+
 </style>
