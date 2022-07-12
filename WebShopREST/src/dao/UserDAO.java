@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,10 @@ import beans.SportObject;
 import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
+import comparators.user.FirstNameComparator;
+import comparators.user.LastNameComparator;
+import comparators.user.NameComparator;
+import comparators.user.PointsComparator;
 import dto.CustomerTypeDTO;
 import dto.LoginDTO;
 import dto.LoginReturnDTO;
@@ -191,6 +196,10 @@ public class UserDAO {
 	}
 	
 	public ArrayList<User> getUsersByRole(Role role){
+		if (role == Role.NONE) {
+			return new ArrayList<User>(users.values());
+		}
+		
 		ArrayList<User> returnList = new ArrayList<>();
 		for(User searchUser : users.values()) {
 			if(searchUser.roleMatches(role)) {
@@ -427,4 +436,65 @@ public class UserDAO {
   public ArrayList<SportObject> getObjectsVisitedByUser(){
 		return getLoggedUser().getObjectsVisited();
 	}
+	
+	public ArrayList<User> sortByFirstName(boolean asc){
+		ArrayList<User> userList = new ArrayList<User>(users.values());
+		if (asc) {
+			Collections.sort(userList, new FirstNameComparator());
+		} else {
+			Collections.sort(userList, new FirstNameComparator().reversed());
+		}
+		
+		return userList;
+	}
+	
+	public ArrayList<User> sortByLastName(boolean asc){
+		ArrayList<User> userList = new ArrayList<User>(users.values());
+		if (asc) {
+			Collections.sort(userList, new LastNameComparator());
+		} else {
+			Collections.sort(userList, new LastNameComparator().reversed());
+		}
+		
+		return userList;
+	}
+	
+	public ArrayList<User> sortByPoints(boolean asc){
+		ArrayList<User> userList = new ArrayList<User>(users.values());
+		if (asc) {
+			Collections.sort(userList, new PointsComparator());
+		} else {
+			Collections.sort(userList, new PointsComparator().reversed());
+		}
+		
+		return userList;
+	}
+	
+	public ArrayList<User> sortByUsername(boolean asc){
+		ArrayList<User> userList = new ArrayList<User>(users.values());
+		if (asc) {
+			Collections.sort(userList, new NameComparator());
+		} else {
+			Collections.sort(userList, new NameComparator().reversed());
+		}
+		
+		return userList;
+	}
+	
+	public ArrayList<User> getByCustomerType(CustomerTypeName name){
+		if(name == CustomerTypeName.NONE) {
+			return new ArrayList<User>(users.values());
+		}
+		
+		ArrayList<User> retList = new ArrayList<User>();
+		for (User u : users.values()) {
+			if(u.getRole() == Role.CUSTOMER) {
+				if(u.getCustomerType().getName() == name) {
+					retList.add(u);
+				}
+			}
+		}
+		return retList;
+	}
+	
 }

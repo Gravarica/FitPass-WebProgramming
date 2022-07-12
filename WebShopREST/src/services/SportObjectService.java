@@ -21,6 +21,7 @@ import dao.UserDAO;
 import dto.SportObjectCreateDTO;
 import dto.NewContentDTO;
 import dto.SportObjectSearchDTO;
+import enums.SportObjectType;
 
 @Path("/sport_objects")
 public class SportObjectService {
@@ -83,10 +84,19 @@ public class SportObjectService {
 	}
 	
 	@GET
-	@Path("/search")
+	@Path("/search/type/{type}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ArrayList<SportObject> searchByName(SportObjectSearchDTO dto){
+	public ArrayList<SportObject> searchByType(@PathParam("type") SportObjectType type){
+		return getSportObjectDAO().searchByType(type);
+	}
+	
+	@GET
+	@Path("/search/{name}/{type}/{city}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ArrayList<SportObject> searchByMultiple(@PathParam("name") String parameter, @PathParam("type") SportObjectType type, @PathParam("city") String city){
+		SportObjectSearchDTO dto = new SportObjectSearchDTO(city,type,parameter);
 		return getSportObjectDAO().searchByMultipleParameters(dto);
 	}
   
@@ -132,5 +142,29 @@ public class SportObjectService {
 	public ArrayList<String> getSportObjectTypes(){
 		System.out.println("POZVAN SAM");
 		return getSportObjectDAO().getSportObjectTypes();
+	}
+	
+	@GET
+	@Path("/sort/name/{asc}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<SportObject> sortByName(@PathParam("asc") boolean asc){
+		return getSportObjectDAO().sortByName(asc);
+	}
+	
+	@GET
+	@Path("/sort/grade/{asc}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<SportObject> sortByGrade(@PathParam("asc") boolean asc){
+		return getSportObjectDAO().sortByGrade(asc);
+	}
+	
+	@GET
+	@Path("/sort/location/{asc}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<SportObject> sortByLocation(@PathParam("asc") boolean asc){
+		return getSportObjectDAO().sortByLocation(asc);
 	}
 }

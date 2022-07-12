@@ -55,7 +55,7 @@
 import axios from 'axios'
 import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
 
-   export default{
+   export default {
     data() {
         return {
             trainingHistory: null,

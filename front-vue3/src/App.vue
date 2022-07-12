@@ -19,8 +19,9 @@ import RegistrationPopup from "./components/RegistrationPopup.vue"
 import OpenLayersMap from 'vue3-openlayers'
 import 'vue3-openlayers/dist/vue3-openlayers.css'
 import axios from "axios";
+import { computed } from "@vue/reactivity"
 
-export default{
+export default {
     name : "App",
     data(){
       return{
@@ -32,6 +33,11 @@ export default{
           success: false,
         },
       }
+    },
+    provide() {
+      return{
+        logged: computed( ()=> this.loggedUser.success)
+      }       
     },
     created(){
         console.log('Saljem zahtev')

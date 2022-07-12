@@ -7,7 +7,7 @@
                 <div class="info-holder-inner">
                     <div class="d-flex align-items-center justify-content-between">
                         <h4>{{title}}</h4>
-                        <h4>{{priceDisplay}} RSD</h4>
+                        <h4>{{price}} RSD</h4>
                     </div>
                     <span class="small text-down">1 {{type}} / {{totalAppearances}} Trainings / {{dailyAppearance}} appearances daily</span>
                 </div>
@@ -19,7 +19,7 @@
                 <div class="infoz">
                     <div class="item d-flex align-items-center justify-content-between">
                         <span class="text-item">Subscription</span>
-                        <span>{{priceDisplay}} RSD</span>
+                        <span>{{price}} RSD</span>
                     </div>
                     <div class="item d-flex align-items-center justify-content-between" v-if="disablePromoCode">
                         <span class="text-item">Promo code</span>

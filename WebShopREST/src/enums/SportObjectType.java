@@ -1,5 +1,5 @@
 package enums;
 
 public enum SportObjectType {
-	GYM, POOL, SPORTS_CENTER, DANCE_STUDIO
+	GYM, POOL, SPORTS_CENTER, DANCE_STUDIO, NONE
 }

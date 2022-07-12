@@ -41,7 +41,20 @@ public class Location extends Entity {
 		this.address = address;
 	}
 	
+	public boolean cityIsAlphabeticallySmaller(Location loc) {
+		return address.getCity().compareToIgnoreCase(loc.getAddress().getCity()) < 0;
+	}
 	
+	public boolean cityIsAlphabeticallyGreater(Location loc) {
+		return address.getCity().compareToIgnoreCase(loc.getAddress().getCity()) > 0;
+	}
 	
+	public boolean streetIsAlphabeticallySmaller(Location loc) {
+		return address.getStreet().compareToIgnoreCase(loc.getAddress().getStreet()) < 0;
+	}
+	
+	public boolean streetIsAlphabeticallyGreater(Location loc) {
+		return address.getStreet().compareToIgnoreCase(loc.getAddress().getStreet()) > 0;
+	}
 	
 }

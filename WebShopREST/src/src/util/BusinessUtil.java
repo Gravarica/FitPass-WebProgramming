@@ -79,9 +79,14 @@ public class BusinessUtil {
 		LocalTime target = LocalTime.now();
 		LocalTime startTime = LocalTime.parse(wh.getStartTime(), formatter);
 		LocalTime endTime = LocalTime.parse(wh.getEndTime(), formatter);
+		LocalTime midnight = LocalTime.parse("00:00", formatter);
 		
 		// U slucaj da je od 00 do 00
 		if (startTime.equals(endTime)) {
+			return true;
+		}
+		
+		if (target.isAfter(startTime) && endTime.equals(midnight)) {
 			return true;
 		}
 		
