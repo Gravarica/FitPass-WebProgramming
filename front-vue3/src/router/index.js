@@ -21,6 +21,7 @@ import PromoCode from '../views/PromoCode'
 import CreateCommentView from '../views/CreateCommentView.vue'
 import CommentsView from '../views/CommentsView.vue'
 import CustomerScheduleTraining from '../views/CustomerNewTraining.vue'
+import NewContent from '@/views/NewContentView.vue'
 
 const routes = [
   {
@@ -146,6 +147,11 @@ const routes = [
     name: 'CustomerScheduleTraining',
     component: CustomerScheduleTraining
 
+  },
+  {
+    path: '/add/content',
+    name: 'NewContent',
+    component: NewContent
   }
 ]
 

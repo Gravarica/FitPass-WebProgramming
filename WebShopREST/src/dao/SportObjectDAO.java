@@ -17,6 +17,7 @@ import dto.SportObjectCreateDTO;
 import dto.AverageGradeDTO;
 import dto.NewContentDTO;
 import dto.SportObjectSearchDTO;
+import enums.SportObjectContent;
 import enums.SportObjectType;
 import src.util.BusinessUtil;
 
@@ -183,6 +184,7 @@ public class SportObjectDAO {
 		return newObject;
 	}
     
+	//ADD CONTENT
 	public SportObject addContent(NewContentDTO dto, int id) {
 		SportObject object = getById(id);
 		if(BusinessUtil.checkIfContentExists(object.getContents(), dto)) {
@@ -194,6 +196,8 @@ public class SportObjectDAO {
 		return object;
 	}
 	
+	
+	//GET CONTENT BY NAME
 	private Content getContentByName(String name, SportObject object) {
 		for(Content content : object.getContents()) {
 			if(name.equals(content.getName())) {
@@ -204,6 +208,7 @@ public class SportObjectDAO {
 		return null;
 	}
 	
+	//EDIT CONTENT
 	public SportObject changeContent(NewContentDTO dto, int id) {
 		SportObject object = getById(id);
 		Content changeContent = getContentByName(dto.getName(), object);
@@ -261,5 +266,21 @@ public class SportObjectDAO {
 		
 		return retList;
 	}
+
+	public ArrayList<SportObjectContent> getSportObjectContentTypes(int id){
+		for(SportObject it : objects) {
+			if(it.getId() == id) {
+				return getContents(it.getContents());
+			}
+		}
+		return null;
+	}
 	
+	public ArrayList<SportObjectContent> getContents(ArrayList<Content> contents){
+		ArrayList<SportObjectContent> retList = new ArrayList<SportObjectContent>();
+		for(Content it : contents) {
+			retList.add(it.getContentType());
+		}
+		return retList;
+	}
 }
