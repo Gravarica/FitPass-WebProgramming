@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Content;
 import beans.SportObject;
+import beans.Training;
 import comparators.object.GradeComparator;
 import comparators.object.LocationComparator;
 import comparators.object.ObjectNameComparator;
@@ -239,7 +240,8 @@ public class SportObjectDAO {
 		ArrayList<String> retList = new ArrayList<String>();
 		SportObjectType types[] = SportObjectType.values();
 		for(SportObjectType it : types) {
-			retList.add(it.toString());
+			if(!it.equals(SportObjectType.NONE))
+				retList.add(it.toString());
 		}
 		return retList;
 	}
@@ -304,5 +306,4 @@ public class SportObjectDAO {
 		}
 		return false;
 	}
-	
 }

@@ -177,7 +177,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<User> getAvailableManagers(){
 		return getUserDAO().getAllAvailableManagers();
-	}	
+	}
 
 	@PUT
 	@Path("/editProfile")
@@ -258,4 +258,10 @@ public class UserService {
 		return getUserDAO().checkUsername(username);
 	}
 	
+	@GET
+	@Path("/get/trainers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getAllTrainers(){
+		return getUserDAO().getAllTrainers();
+	}
 }

@@ -245,7 +245,7 @@ public class UserDAO {
 	public ArrayList<User> getAllAvailableManagers(){
 		ArrayList<User> retList = new ArrayList<User>();
 		for(User it : getAllManagers()) {
-			if((it).getObject() == null) {
+			if((it).getObjectId() == -1) {
 				retList.add(it);
 			}
 		}
@@ -511,4 +511,14 @@ public class UserDAO {
 		}
 		return retList;
 	}
- }
+ 
+	public ArrayList<User> getAllTrainers(){
+		ArrayList<User> retList = new ArrayList<User>();
+		for(User it : users.values()) {
+			if(it.getRole() == Role.TRAINER) {
+				retList.add(it);
+			}
+		}
+		return retList;
+	}
+}

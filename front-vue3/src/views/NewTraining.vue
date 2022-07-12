@@ -6,7 +6,7 @@
       <div class="col-12 col-lg-9 col-xl-7">
         <div class="card shadow-2-strong card-registration" style="border-radius: 20px;">
           <div class="card-body p-4 p-md-5">
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 center">New Content</h3>
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 center">New Training</h3>
             <form>
                 
                 <div class="row speed pb-3">
@@ -22,13 +22,24 @@
                 </div>
 
                 <div class="pb-4">
-                     <select required v-model="this.state.newContentDTO.contentType" class="type form-select form-outline form-select-lg" aria-label=".form-select-lg example">
-                        <option value="" disabled>Please select type of content</option>
-                        <option v-for="it in state.types" :value="it">{{getNames(it)}}</option>
+                     <select required v-model="this.state.newContentDTO.type" class="type form-select form-outline form-select-lg" aria-label=".form-select-lg example">
+                        <option value="" disabled>Please select type of training</option>
+                        <option value="GROUP">Group</option>
+                        <option value="PERSONAL">Personal</option>
                     </select>
-                    <span class="jabuka row jabukaZZ" v-if="v$.newContentDTO.contentType.$error">
-                                {{ v$.newContentDTO.contentType.$errors[0].$message}}
-                    </span>
+                     <span class="jabuka row jabukaZZ" v-if="v$.newContentDTO.type.$error">
+                                {{ v$.newContentDTO.type.$errors[0].$message}}
+                        </span>
+                </div>
+
+                <div class="pb-4">
+                     <select required v-model="this.state.newContentDTO.trainer" class="type form-select form-outline form-select-lg" aria-label=".form-select-lg example">
+                        <option value=null disabled>Select trainer</option>
+                        <option v-for="it in this.state.trainers" :value="it" >{{getFullName(it)}}</option>
+                    </select>
+                    <span class="jabuka row jabukaZZ" v-if="v$.newContentDTO.trainer.$error">
+                                {{ v$.newContentDTO.trainer.$errors[0].$message}}
+                        </span>
                 </div>
 
                 <hr class="solid">
@@ -36,7 +47,7 @@
                 <div class="row speed pb-3">
                     <div class="col-md-12">
                         <div class="form-outline ">
-                            <label class="form-label kobaja" for="lastName">Please select picture for new content:</label>
+                            <label class="form-label kobaja" for="lastName">Please select picture for new training:</label>
                             <input type="file" id="lastName"  class="form-control form-control-lg"/>
                         </div>
                          <span class="jabuka row jabukaZZ" v-if="v$.newContentDTO.imgUrl.$error">
@@ -97,23 +108,26 @@ import {reactive,computed} from 'vue'
             newContentDTO : {
                 name : "",
                 imgUrl : "",
-                contentType : "",
+                type : "",
                 duration : null,
-                description : ""
+                description : "",
+                trainer : null
             },
 
             types : null,
-            loggedUser : null
+            loggedUser : null,
+            trainers : null
         })
       
         const rules = computed(() =>{
             return{
                 newContentDTO : {
                     name : {required},
-                    contentType : {required},
+                    type : {required},
                     duration : {numeric},
                     description : {alpha},
-                    imgUrl : {}
+                    imgUrl : {},
+                    trainer : {required}
                 }
             }
         })
@@ -140,44 +154,34 @@ import {reactive,computed} from 'vue'
                 console.log(this.state.loggedUser)
             })
 
+        axios
+            .get('http://localhost:8081/WebShopREST/rest/users/get/trainers')
+            .then((response) =>{
+                this.state.trainers = response.data
+            })
+
       },
       methods:{
         createContent(){
             this.v$.$validate()
             if(!this.v$.$error && this.isAvailable == false){
                  axios
-                    .put('http://localhost:8081/WebShopREST/rest/sport_objects/addContent/' + this.state.loggedUser.objectId,this.state.newContentDTO)
+                    .post('http://localhost:8081/WebShopREST/rest/trainings/create',this.state.newContentDTO)
                     .then((response)=>{
                         alert("You have successfully added new content to your object!")
                         this.$router.push({path: '/'})
                 })
             }
         },
-        getNames(object){
-            switch(object){
-                case "PERSONAL_TRAINING":
-                    return "Personal Training"
-                
-                case "GROUP_TRAINING":
-                    return "Group Training"
-                
-                case "SAUNA":
-                    return "Sauna"
-                
-                case "YOGA":
-                    return "Yoga"
-                
-                case "PILATES":
-                    return "Pilates"
-                
-            }
-        },
         checkName(){
              axios
-                .get('http://localhost:8081/WebShopREST/rest/sport_objects/check/content/name/' + this.state.loggedUser.objectId + "/" + this.state.newContentDTO.name)
+                .get('http://localhost:8081/WebShopREST/rest/trainings/check/name/' + this.state.newContentDTO.name + "/" + this.state.loggedUser.objectId)
                 .then((response) =>{
                   this.isAvailable = response.data
                 })
+        },
+        getFullName(object){
+            return object.firstName + " " + object.lastName
         }
       },
       data(){
