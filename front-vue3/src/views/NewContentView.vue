@@ -21,11 +21,11 @@
                 </div>
 
                 <div class="pb-4">
-                    <select required v-model="this.state.newContentDTO.type" class="type form-select form-outline form-select-lg" aria-label=".form-select-lg example">
+                     <select required v-model="this.state.newContentDTO.type" class="type form-select form-outline form-select-lg" aria-label=".form-select-lg example">
                         <option value="" disabled>Please select type of content</option>
-                        <option v-for="it in state.types" :value="it">{{showType(it)}}</option>
+                        <option v-for="it in state.types" :value="it">{{getNames(it)}}</option>
                     </select>
-                     <span class="jabuka row jabukaZZ" v-if="v$.newContentDTO.type.$error">
+                    <span class="jabuka row jabukaZZ" v-if="v$.newContentDTO.type.$error">
                                 {{ v$.newContentDTO.type.$errors[0].$message}}
                     </span>
                 </div>
@@ -111,7 +111,8 @@ import {reactive,computed} from 'vue'
                     name : {required},
                     type : {required},
                     duration : {numeric},
-                    description : {alpha}
+                    description : {alpha},
+                    imgUrl : {required}
                 }
             }
         })
@@ -128,6 +129,7 @@ import {reactive,computed} from 'vue'
             .get('http://localhost:8081/WebShopREST/rest/sport_objects/content/types')
             .then((response) =>{
                 this.state.types = response.data
+                console.log(this.state.types)
             })
 
         axios
@@ -138,9 +140,6 @@ import {reactive,computed} from 'vue'
 
       },
       methods:{
-        showType(object){
-            return object.toLower()
-        },
         createContent(){
             this.v$.$validate()
             if(!this.v$.$error){
@@ -149,6 +148,25 @@ import {reactive,computed} from 'vue'
                     .then((response)=>{
                         alert("You have successfully added new content to your object!")
                 })
+            }
+        },
+        getNames(object){
+            switch(object){
+                case "PERSONAL_TRAINING":
+                    return "Personal Training"
+                
+                case "GROUP_TRAINING":
+                    return "Group Training"
+                
+                case "SAUNA":
+                    return "Sauna"
+                
+                case "YOGA":
+                    return "Yoga"
+                
+                case "PILATES":
+                    return "Pilates"
+                
             }
         }
       }

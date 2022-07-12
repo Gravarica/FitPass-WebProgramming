@@ -52,7 +52,65 @@
 		"role" : "MANAGER",
 		"dateOfBirth" : "2000-05-09",
 		"customerType" : null,
-		"object" : null,
+		"object" : {
+			"id" : "1",
+		"deleted" : false,
+		"name" : "Ozzy",
+		"averageGrade" : 5.00,
+		"sportObjectType" : "GYM",
+		"contents": [
+            {
+                "name": "Sheesh",
+                "imgUrl": "stake",
+                "contentType": "SAUNA",
+                "duration": 30,
+                "description": "Hot, hot, hot..."
+            },
+            {
+                "name": "This is getting personal",
+                "imgUrl": "stake",
+                "contentType": "PERSONAL_TRAINING",
+                "duration": 30,
+                "description": "Achieve your maximum with best trainers!"
+            },
+            {
+                "name": "Pilates of the Carribean",
+                "imgUrl": "stake",
+                "contentType": "PILATES",
+                "duration": 30,
+                "description": "This will steal your fat cells like Jack Sparrow stole Black Pearl"
+            },
+            {
+                "name": "!Fat pass",
+                "imgUrl": "stake",
+                "contentType": "GROUP_TRAINING",
+                "duration": 30,
+                "description": "Not your regular fit pass!"
+            },
+            {
+                "name": "Chakra cleanse",
+                "imgUrl": "stake",
+                "contentType": "YOGA",
+                "duration": 30,
+                "description": "Get that chakra ready for 9-tailed fox"
+            }
+        ],
+		"location" : {
+			"address" : {
+				"street" : "Bulevar Patrijarha Pavla",
+				"number" : "35",
+				"city" : "Novi Sad",
+				"postalNumber" : "21000"
+			},
+			"longitude" : 19.81762,
+			"latitude" : 45.24055
+		},
+		"description": "Our gym (Ozzy) is one of the first to open in Novi Sad. The story began in 1997 at SPENS, where it is still located today. Following the trends, it went through various transformations and is now one of the most equipped and modern in Serbia.",
+		"workHour": {
+			"startTime": "09:00",
+			"endTime": "22:00"
+		}
+		},
 		"totalPoints" : -1
 	},
 	{
