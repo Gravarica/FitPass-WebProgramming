@@ -211,4 +211,16 @@ public class TrainingHistoryDAO {
 		return returnList;
 	}
 	
+	public ArrayList<User> getUsersThatVisitedObject(int objectId){
+		ArrayList<User> retList = new ArrayList<User>();
+		for (TrainingHistory th : getSportObjectTrainingHistory(objectId)) {
+			if (!BusinessUtil.listContains(retList, th.getCustomer()) && th.getCustomer().userIsCustomer()) {
+				retList.add(th.getCustomer());
+			}
+		}
+		
+		return retList;
+	}
+	
+	
 }

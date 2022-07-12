@@ -83,6 +83,14 @@
                         </template>
                     </Carousel>
                 </div>
+                <div class="Options">
+                    <h4 class="black-text title pb-1">Options</h4>
+                    <div class="butonz d-flex">
+                        <button class="btn-grad" @click="showTrainers()">Trainers</button>
+                        <button class="btn-grad" @click="showUsers()">Users</button>
+                        <button class="btn-grad" @click="showTrainings()">Trainings</button>
+                    </div>
+                </div>
                 <div class="comments">
                     <h4 class="black-text title pb-1">Comment section</h4>
                     <div class="comment-item pt-1 mb-1" v-for="comment in this.comments">
@@ -186,6 +194,15 @@
                                                                  description: obj.description,
                                                                  ctype: obj.contentType,
                                                                  duration: obj.duration}})
+            },
+            showTrainers(){
+                this.$router.push({ name: 'ObjectTrainers', params: { objectId: this.object.id}})
+            },
+            showUsers(){
+                this.$router.push({ name: 'ObjectUsers', params: { objectId: this.object.id}})
+            },
+            showTrainings(){
+                this.$router.push({ name: 'ObjectTrainings', params: { objectId: this.object.id}})
             }
         }
     }
@@ -345,6 +362,9 @@
     margin-bottom: 80px;
 }
 
+.Options{
+    margin-bottom: 80px;
+}
 
 template{
     height: 100%;

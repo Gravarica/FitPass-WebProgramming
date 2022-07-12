@@ -12,6 +12,8 @@ import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
 import dto.TrainingScheduleDTO;
+import enums.TrainingType;
+import src.util.BusinessUtil;
 
 public class TrainingDAO {
 	
@@ -99,6 +101,19 @@ public class TrainingDAO {
 			if(it.getObject().getId() == id && it.getTrainer() != null) {
 				retList.add(it);
 			}
+		}
+		return retList;
+	}
+	
+	public ArrayList<User> getTrainersBySportObject(int objectId){
+		ArrayList<User> retList = new ArrayList<User>();
+		for(Training t : trainings) {
+			if (t.getObject().getId() == objectId && t.getTrainer() != null) {
+				if(!BusinessUtil.listContains(retList, t.getTrainer())) {
+					retList.add(t.getTrainer());
+				}
+			}
+			
 		}
 		return retList;
 	}

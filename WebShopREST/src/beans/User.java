@@ -256,5 +256,13 @@ public class User extends Entity {
 	
 		this.trainingHistory.add(t);
 	}
+	
+	public boolean userIsCustomer() {
+		return role == Role.CUSTOMER;
+	}
+	
+	public boolean userIsTrainer() {
+		return role == Role.TRAINER;
+	}
 
 }

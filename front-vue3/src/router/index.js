@@ -24,6 +24,9 @@ import CustomerScheduleTraining from '../views/CustomerNewTraining.vue'
 import MyObjectView from '../views/MyObjectView.vue'
 import NewContent from '@/views/NewContentView.vue'
 import EditContent from '@/views/EditContentView.vue'
+import TrainersView from '@/views/TrainersView.vue'
+import ObjectUsersView from '@/views/ObjectUsersView.vue'
+import ObjectTrainingsView from '@/views/ObjectTrainingsView.vue'
 
 const routes = [
   {
@@ -163,6 +166,30 @@ const routes = [
     path: '/edit/content',
     name: 'EditContent',
     component: EditContent,
+    props: (route) => ({
+      ...route.params
+    })
+  },
+  {
+    path: '/object/trainers',
+    name: 'ObjectTrainers',
+    component: TrainersView,
+    props: (route) => ({
+      ...route.params
+    })
+  },
+  {
+    path: '/object/users',
+    name: 'ObjectUsers',
+    component: ObjectUsersView,
+    props: (route) => ({
+      ...route.params
+    })
+  },
+  {
+    path: '/object/trainings',
+    name: 'ObjectTrainings',
+    component: ObjectTrainingsView,
     props: (route) => ({
       ...route.params
     })
