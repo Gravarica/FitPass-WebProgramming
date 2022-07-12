@@ -123,4 +123,11 @@ public class TrainingHistoryService {
 	public ArrayList<SportObject> getObjectsVisitedByUser(){
 		return getTrainingHistoryDAO().getObjectsVisitedByLoggedUser(getUserDAO().getLoggedUser().getUsername());
 	}
+	
+	@GET
+	@Path("/users/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getUsersByObject(@PathParam("id") int id){
+		return getTrainingHistoryDAO().getUsersThatVisitedObject(id);
+	}
 }

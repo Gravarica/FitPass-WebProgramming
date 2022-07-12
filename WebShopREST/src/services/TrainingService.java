@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.Training;
 import beans.TrainingHistory;
+import beans.User;
 import dao.SportObjectDAO;
 import dao.TrainingDAO;
 import dao.UserDAO;
@@ -92,4 +93,10 @@ public class TrainingService {
 		return getTrainingDAO().checkName(name,id);
 	}
 
+	@GET
+	@Path("/trainers/object/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getTrainersByObject(@PathParam("id") int id){
+		return getTrainingDAO().getTrainersBySportObject(id);
+	}
 }

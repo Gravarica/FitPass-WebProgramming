@@ -12,6 +12,7 @@ import java.util.UUID;
 import beans.Content;
 import beans.Entity;
 import beans.SportObject;
+import beans.User;
 import beans.WorkHour;
 import dto.NewContentDTO;
 import enums.SubscriptionType;
@@ -67,6 +68,16 @@ public class BusinessUtil {
 	public static boolean listContains(ArrayList<SportObject> objects, SportObject obj) {
 		for(SportObject o : objects) {
 			if(o.getId() == obj.getId()) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public static boolean listContains(ArrayList<User> users, User usr) {
+		for(User u : users) {
+			if(u.getUsername().toLowerCase().equals(usr.getUsername().toLowerCase())) {
 				return true;
 			}
 		}
