@@ -38,9 +38,9 @@
 						  <tbody>
 						    <tr v-for="(comment,index) in this.comments" style="font-size:15px">
 						      <th scope="row">{{index + 1}}</th>
-						      <td>{{comment.customer.username}}</td>
+						      <td>{{comment.username}}</td>
 						      <td>{{comment.time}}</td>
-						      <td>{{comment.object.name}}</td>
+						      <td>{{comment.objectName}}</td>
 							  <td>{{comment.grade}}</td>
 							  <td>{{comment.text}}</td>
                               <td><button class="btn btn-success" @click="approve(comment, index)">APPROVE</button></td>
