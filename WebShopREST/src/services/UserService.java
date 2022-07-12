@@ -33,6 +33,7 @@ import dto.RegistrationDTO;
 import dto.TrainerRegistrationDTO;
 import dto.UpdateProfileDTO;
 import dto.UserAccountInformationDTO;
+import enums.CustomerTypeName;
 import enums.Role;
 
 @Path("/users")
@@ -195,6 +196,53 @@ public class UserService {
 		return getUserDAO().getLoggedUserCustomerType();
 	}
 	
+	@GET
+	@Path("/sort/username/{asc}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ArrayList<User> sortByUsername(@PathParam("asc") boolean asc){
+		return getUserDAO().sortByUsername(asc);
+	}
+	
+	@GET
+	@Path("/sort/firstName/{asc}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ArrayList<User> sortByFirstName(@PathParam("asc") boolean asc){
+		return getUserDAO().sortByFirstName(asc);
+	}
+	
+	@GET
+	@Path("/sort/lastName/{asc}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ArrayList<User> sortByLastName(@PathParam("asc") boolean asc){
+		return getUserDAO().sortByLastName(asc);
+	}
+	
+	@GET
+	@Path("/sort/points/{asc}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ArrayList<User> sortByPoints(@PathParam("asc") boolean asc){
+		return getUserDAO().sortByPoints(asc);
+	}
+	
+	@GET
+	@Path("/filter/role/{role}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getByRole(@PathParam("role") Role role){
+		return getUserDAO().getUsersByRole(role);
+	}
+	
+	@GET
+	@Path("/filter/type/{type}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getByCustomerType(@PathParam("type") CustomerTypeName type){
+		return getUserDAO().getByCustomerType(type);
+	}
 	
 	@GET
 	@Path("/sport_object/visited/{id}")

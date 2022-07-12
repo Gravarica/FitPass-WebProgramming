@@ -1,6 +1,9 @@
 <template>
 <div class="container-flex">
     <section class="ftco-section sheesh vh-100">
+        <div class="headerinho d-flex justify-content-center">
+            <h1> Users </h1>
+        </div>
 		<div class="container obod">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
@@ -8,10 +11,24 @@
 				</div>
 			</div>
             <div class="row">
-                <div class="col-md-8 ms-left">
+                <div class="col-md-8 ms-left d-flex">
                     <div class="inputic">
-                        <input type="text" class="putin" placeholder="Pretraga...">
+                        <input type="text" class="putin" placeholder="Search..." v-model="this.searchInput">
                     </div>
+                    <select class="selectz" @change="filterByRole($event)">
+                        <option value="NONE">Select role</option>
+                        <option value="CUSTOMER">CUSTOMER</option>
+                        <option value="MANAGER">MANAGER</option>
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="TRAINER">TRAINER</option>
+                    </select>
+                    <select class="selectz" @change="filterByType($event)">
+                        <option value="NONE">Select customer type</option>
+                        <option value="BRONZE">BRONZE</option>
+                        <option value="SILVER">SILVER</option>
+                        <option value="GOLD">GOLD</option>
+                        <option value="PLATINUM">PLATINUM</option>
+                    </select>
                 </div>
             </div>
 			<div class="row">
@@ -21,19 +38,22 @@
 						  <thead class="thead-primary table-primary">
 						    <tr>
 						      <th>#</th>
-						      <th>Username</th>
-						      <th>Name</th>
+						      <th @click="this.sortByUsername()" class="hoverboard">Username</th>
+						      <th @click="this.sortByFirstName()" class="hoverboard">First Name</th>
+                              <th @click="this.sortByLastName()" class="hoverboard">Last Name</th>
 						      <th>Role</th>
 							  <th>Status</th>
 							  <th>Points</th>
                               <th></th>
+							  <th @click="this.sortByPoints()" class="hoverboard">Points</th>
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <tr v-for="(user,index) in this.users">
+						    <tr v-for="(user,index) in this.filteredList()">
 						      <th scope="row">{{index + 1}}</th>
 						      <td>{{user.username}}</td>
-						      <td>{{user.firstName}} {{user.lastName}}</td>
+						      <td>{{user.firstName}}</td>
+                              <td>{{user.lastName}}</td>
 						      <td>{{user.role}}</td>
 							  <td>{{getCustomerType(user)}}</td>
 							  <td>{{user.totalPoints}}</td>
@@ -63,11 +83,17 @@ import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
             return{
                 users: null,
                 show : false,
-                deleteUser : null
+                deleteUser : null,
+                usernameAsc: true,
+                firstNameAsc: true,
+                lastNameAsc: true,
+                pointsAsc: true,
+                searchInput: ''
             }
             
         },
-        mounted(){
+        components : {ConfirmationDialogue},
+        created(){
             axios
                 .get('http://localhost:8081/WebShopREST/rest/users/get')
                 .then((response) => {
@@ -82,6 +108,7 @@ import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
 
                 return user.customerType.name
             },
+            
             execute(){
                 axios
                     .delete('http://localhost:8081/WebShopREST/rest/users/delete/' + this.deleteUser.username)
@@ -99,9 +126,62 @@ import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
             closePopup(){
                 this.show = false
             }
-        },
-    
-        components : {ConfirmationDialogue}
+        }, 
+          
+          sortByUsername(){
+                axios
+                    .get('http://localhost:8081/WebShopREST/rest/users/sort/username/' + this.usernameAsc)
+                    .then(response => {
+                        this.users = response.data
+                        this.usernameAsc = !this.usernameAsc
+                    })
+            },
+            sortByFirstName(){
+                axios
+                    .get('http://localhost:8081/WebShopREST/rest/users/sort/firstName/' + this.firstNameAsc)
+                    .then(response => {
+                        this.users = response.data
+                        this.firstNameAsc = !this.firstNameAsc
+                    })
+            },
+            sortByLastName(){
+                axios
+                    .get('http://localhost:8081/WebShopREST/rest/users/sort/lastName/' + this.lastNameAsc)
+                    .then(response => {
+                        this.users = response.data
+                        this.lastNameAsc = !this.lastNameAsc
+                    })
+            },
+            sortByPoints(){
+                axios
+                    .get('http://localhost:8081/WebShopREST/rest/users/sort/points/' + this.pointsAsc)
+                    .then(response => {
+                        this.users = response.data
+                        this.pointsAsc = !this.pointsAsc
+                    })
+            },
+            filteredList(){
+            return this.users.filter((obj) => {
+                return obj.username.toLowerCase().indexOf(this.searchInput.toLowerCase()) != -1 ||
+                       obj.firstName.toLowerCase().indexOf(this.searchInput.toLowerCase()) != -1 ||
+                       obj.lastName.toLowerCase().indexOf(this.searchInput.toLowerCase()) != -1
+            })
+            },
+            filterByRole(event){
+                axios
+                    .get('http://localhost:8081/WebShopREST/rest/users/filter/role/' + event.target.value)
+                    .then(response => {
+                        this.users = response.data
+                    })
+            },
+            filterByType(event){
+                axios
+                    .get('http://localhost:8081/WebShopREST/rest/users/filter/type/' + event.target.value)
+                    .then(response => {
+                        this.users = response.data
+                    })
+            }
+      }
     }
 </script>
 
@@ -110,11 +190,12 @@ import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
         background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
         background-color: #f7b42c;
         background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
-        padding-top: 10%;
+        padding-top: 5%;
     }
     .obod{
         background-color: white;
         border-radius: 10px;
+        padding-top: 30px;
     }
     .tablica{
         font-size: 15px;
@@ -134,5 +215,11 @@ import ConfirmationDialogue from '@/components/ConfirmationDialogue.vue'
   }
   .cabela{
     box-shadow: 0 0 10px 4px rgba(0,0,0,0.07);;
+  }
+  .hoverboard:hover{
+    cursor: pointer;
+  }
+  .headerinho{
+    padding-bottom: 60px;
   }
 </style>

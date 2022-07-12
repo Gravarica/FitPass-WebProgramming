@@ -3,12 +3,16 @@ package dao;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Content;
 import beans.SportObject;
+import comparators.object.GradeComparator;
+import comparators.object.LocationComparator;
+import comparators.object.ObjectNameComparator;
 import dto.SportObjectCreateDTO;
 import dto.AverageGradeDTO;
 import dto.NewContentDTO;
@@ -125,6 +129,10 @@ public class SportObjectDAO {
 	
 	public ArrayList<SportObject> searchByType(SportObjectType type){
 
+		if(type == SportObjectType.NONE) {
+			return objects;
+		}
+		
 		ArrayList<SportObject> returnList = new ArrayList<>();
 		for(SportObject searchObj : objects) {
 			if(searchObj.typeMatches(type)) {
@@ -145,6 +153,7 @@ public class SportObjectDAO {
 	}
 	
 	public ArrayList<SportObject> searchByMultipleParameters(SportObjectSearchDTO dto){
+		System.out.println(dto.getCity());
 		ArrayList<SportObject> returnList = searchByCity(dto.getCity());
 		returnList.retainAll(searchByType(dto.getType()));
 		returnList.retainAll(search(dto.getParameter()));
@@ -213,4 +222,38 @@ public class SportObjectDAO {
 		}
 		return retList;
 	}
+	
+	public ArrayList<SportObject> sortByName(boolean asc){
+		ArrayList<SportObject> retList = new ArrayList<SportObject>(objects);
+		if(asc) {
+			Collections.sort(retList, new ObjectNameComparator()); 
+		} else {
+			Collections.sort(retList, new ObjectNameComparator().reversed());
+		}
+		
+		return retList;
+	}
+	
+	public ArrayList<SportObject> sortByGrade(boolean asc){
+		ArrayList<SportObject> retList = new ArrayList<SportObject>(objects);
+		if(asc) {
+			Collections.sort(retList, new GradeComparator()); 
+		} else {
+			Collections.sort(retList, new GradeComparator().reversed());
+		}
+		
+		return retList;
+	}
+	
+	public ArrayList<SportObject> sortByLocation(boolean asc){
+		ArrayList<SportObject> retList = new ArrayList<SportObject>(objects);
+		if(asc) {
+			Collections.sort(retList, new LocationComparator()); 
+		} else {
+			Collections.sort(retList, new LocationComparator().reversed());
+		}
+		
+		return retList;
+	}
+	
 }
