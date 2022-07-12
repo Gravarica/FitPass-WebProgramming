@@ -121,8 +121,22 @@
                       </span>  
                   </div>
                 </div>
-                
-                <div class="d-grid gap-2 pt-5 md-6">
+
+                 <hr class="solid">
+
+                <div class="row mt-2">
+                    <div>
+                         <p>Last but not least, select logo for sport object:</p>
+                    </div>
+                </div>
+
+                <div class="form-outline row">
+                  <div class="col">
+                    <input type="file" required id="form3Example8" placeholder="From" class="form-control form-control-lg" />
+                  </div>
+                </div>
+
+                <div class="d-grid gap-2 pt-5 ">
                   <input type="button" class="btn btn-lg btn-grad" @click="addNewSportObject()" value="Submit">
                 </div>
                 </form>

@@ -94,7 +94,13 @@ public class SportObjectDAO {
 	}
 
 	public ArrayList<SportObject> getAll(){
-		return objects;
+		ArrayList<SportObject> retList = new ArrayList<SportObject>();
+		for(SportObject it : objects) {
+			if(it.getSportObjectType() != SportObjectType.NONE) {
+				retList.add(it);
+			}
+		}
+		return retList;
 	}
 
 	public SportObject getById(int id){
