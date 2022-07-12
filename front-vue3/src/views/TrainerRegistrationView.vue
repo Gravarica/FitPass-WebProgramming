@@ -64,10 +64,11 @@
               <div class="row mt-4">
                 <div class="col-md-12 pb-4">
                   <div class="form-outline">
-                    <input type="text" id="phoneNumber" class="form-control form-control-lg" placeholder="Username" v-model="state.trainerRegistrationDTO.username"/>
+                    <input type="text" id="phoneNumber" class="form-control form-control-lg" placeholder="Username" v-model="state.trainerRegistrationDTO.username" @keyup="checkUsername()"/>
                     <span class="jabuka" v-if="v$.trainerRegistrationDTO.username.$error">
                         {{ v$.trainerRegistrationDTO.username.$errors[0].$message}}
                     </span>
+                    <span v-if="isAvailable" class="notavailable"> Username taken, try again.</span>
                   </div>
 
                 </div>
@@ -236,6 +237,12 @@ import axios from 'axios'
         }
 
       },
+      data(){
+        return{
+          isAvailable : false,
+          responseMessage : ""
+        }
+      },
       
         watch:{
             selected(object){
@@ -246,8 +253,7 @@ import axios from 'axios'
         methods: {
             register(){
                 this.v$.$validate()
-                if(!this.v$.$error){
-                  console.log(this.state.trainerRegistrationDTO)
+                if(!this.v$.$error && this.isAvailable == false){
                   axios
                     .post('http://localhost:8081/WebShopREST/rest/users/registerTrainer', this.state.trainerRegistrationDTO)
                     .then((response) =>{
@@ -272,6 +278,14 @@ import axios from 'axios'
             },
             setMustChoose(){
               this.state.mustChoose = true
+            },
+            checkUsername(){
+              axios
+                .get('http://localhost:8081/WebShopREST/rest/users/check/username/' + this.state.trainerRegistrationDTO.username)
+                .then((response) =>{
+                  console.log(response.data)
+                  this.isAvailable = response.data
+                })
             }
         },
         created(){

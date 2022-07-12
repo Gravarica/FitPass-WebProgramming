@@ -22,6 +22,7 @@ import CreateCommentView from '../views/CreateCommentView.vue'
 import CommentsView from '../views/CommentsView.vue'
 import CustomerScheduleTraining from '../views/CustomerNewTraining.vue'
 import MyObjectView from '../views/MyObjectView.vue'
+import NewContent from '@/views/NewContentView.vue'
 
 const routes = [
   {
@@ -151,6 +152,11 @@ const routes = [
     path: '/myobject',
     name: 'MyObject',
     component: MyObjectView
+  },
+  {
+    path: '/add/content',
+    name: 'NewContent',
+    component: NewContent
   }
 ]
 

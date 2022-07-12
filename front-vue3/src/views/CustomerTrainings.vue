@@ -7,17 +7,19 @@
       <div class="col-lg-9 col-md-8 mx-auto">
         <h1 class="fw-light">Training History</h1>
         <p class="lead text-center">Here you can see your training history in previous month.</p>
-        <p class="lead text-center">Of course you can allways schedule a new one!</p>
+        <p class="lead text-center" v-if="this.subscription.active">Of course you can allways schedule a new one!</p>
+        <p class="lead text-center" v-else>Your subscription has expired, hurry up and renew it so you can start training ASAP!</p>
         <p>
           <div class="container pt-5 center" v-if="hasHistory">
-                <router-link class="enrico" :to="{name: 'CustomerScheduleTraining'}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
+                <router-link v-if="this.subscription.active || this.subscription.totalAppearances - this.subscription.doneTrainings > 0" class="enrico" :to="{name: 'CustomerScheduleTraining'}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
+                <router-link v-else class="enrico" :to="{name: 'Subscribe'}"><button class="btn btn-warning btn-lg ludilo">Renew Subscription</button></router-link>
             </div>
         </p>
       </div>
     </div>
   </section>
 
-<div class="container-fluid kokain" v-if="hasHistory">
+<div class="container-fluid kokain gradient-custom vh-100" v-if="hasHistory">
     <div class="row row-cols-md-3">
         <div class="col-5" v-for="t in trainingHistory">
         <TrainingAlbumCard
@@ -40,7 +42,7 @@
                 <h2>You don't have any trainings in last month, hurry up and schedule a new one!</h2>
             </div>
             <div class="container pt-5 center">
-                <router-link class="enrico" :to="{name: 'CustomerScheduleTraining'}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
+                <router-link v-if="this.canSchedule" class="enrico" :to="{name: 'CustomerScheduleTraining'}"><button class="btn btn-warning btn-lg ludilo">Schedule New Training</button></router-link>
             </div>
         </div>
     </div>
@@ -60,7 +62,9 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
         return {
             trainingHistory: null,
             loggedUser: null,
-            hasHistory : true
+            hasHistory : true,
+            canSchedule : true,
+             subscription: {active: false}
         };
     },
     components:{
@@ -93,6 +97,12 @@ import TrainingAlbumCard from '../components/TrainingAlbumCard.vue'
             this.loadTrainingHistory()
         });
         
+        axios
+            .get('http://localhost:8081/WebShopREST/rest/subscriptions/get/user')
+            .then((response) =>{
+                console.log("DATAAAAAA" + response.data)
+                this.subscription = response.data
+            })
     }
 }
 </script>
