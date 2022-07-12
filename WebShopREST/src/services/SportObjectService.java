@@ -175,4 +175,12 @@ public class SportObjectService {
 		if(getUserDAO().getLoggedUser().getObject() == null) return null;
 		return getSportObjectDAO().getSportObjectContentTypes(getUserDAO().getLoggedUser().getObject().getId());
 	}
+
+	@GET
+	@Path("/check/content/name/{id}/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean checkForContentName(@PathParam("id")int id, @PathParam("name") String name) {
+		return getSportObjectDAO().checkForContentName(id, name);
+	}
+
 }
