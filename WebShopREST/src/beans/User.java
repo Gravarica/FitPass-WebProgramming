@@ -34,6 +34,7 @@ public class User extends Entity {
 	protected CustomerType customerType;
 	private SportObject object; //Manager
 	private int membershipFeeId; //Customer
+	private int objectId;
 	private ArrayList<SportObject> objectsVisited; //Customer
 	private double totalPoints; //Customer
 	private ArrayList<TrainingHistory> trainingHistory; //Trainer and Customer
@@ -61,9 +62,9 @@ public class User extends Entity {
 	}
 	
 	// Konstruktor za registraciju menadzera
-	public User(ManagerRegistrationDTO dto, SportObject object) {
+	public User(ManagerRegistrationDTO dto, int objectId) {
 		instantiateData(dto);
-		this.object = object;
+		this.objectId = objectId;
 	}
 	
 	//Konstruktor za registraciju trenera
@@ -91,6 +92,7 @@ public class User extends Entity {
 	
 	private void instantiateEmptyFields() {
 		this.object = null;
+		this.objectId = -1;
 		this.totalPoints = -1;
 		this.membershipFeeId = -1;
 		this.objectsVisited = null;
@@ -225,7 +227,15 @@ public class User extends Entity {
 	public boolean roleMatches(Role role) {
 		return this.role == role;
 	}
-	
+
+	public int getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(int objectId) {
+		this.objectId = objectId;
+	}
+
 	// OVA METODA ODRADJENA, ODRADITI!!!!
 	public int numberOfUsedTrainings() {
 		return trainingHistory.size();

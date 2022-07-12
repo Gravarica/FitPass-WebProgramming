@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Content;
@@ -25,11 +27,13 @@ public class SportObjectDAO {
 
 	private ArrayList<SportObject> objects = new ArrayList<SportObject>();
 	private File file;
+	private ServletContext ctx;
 	
 	public SportObjectDAO() {}
 	
-	public SportObjectDAO(String contextPath) {
+	public SportObjectDAO(String contextPath, ServletContext ctx) {
 		file = new File(contextPath + "/sport_objects.json");
+		this.ctx = ctx;
 		System.out.println(contextPath);
 		loadSportObjects(contextPath);
 		
@@ -82,6 +86,9 @@ public class SportObjectDAO {
 		return ++maxId;
 	}
 	
+	private UserDAO getUserDAO() {
+		return (UserDAO) ctx.getAttribute("userDAO");
+	}
 	
 	public ArrayList<SportObject> filterUndeleted(ArrayList<SportObject> objects) {
 		ArrayList<SportObject> objectsNew = new ArrayList<SportObject>();
@@ -180,6 +187,7 @@ public class SportObjectDAO {
 		SportObject newObject = new SportObject(dto);
 		newObject.setId(getMaxId());
 		objects.add(newObject);
+		getUserDAO().setSportObject(newObject.getId(), dto.getManagerUsername());
 		saveSportObjects();
 		return newObject;
 	}

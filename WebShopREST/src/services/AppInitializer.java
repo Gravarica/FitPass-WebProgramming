@@ -18,7 +18,7 @@ public class AppInitializer implements ServletContainerInitializer{
 		for (Class<?> cls : classes) {
                 try {
                 	if(cls == UserDAO.class) {
-                		UserDAO userDAO = new UserDAO(ctx.getRealPath(""));
+                		UserDAO userDAO = new UserDAO(ctx.getRealPath(""),ctx);
                 		ctx.setAttribute("userDAO", userDAO);
                 	}
                 } catch (Throwable ex) {
