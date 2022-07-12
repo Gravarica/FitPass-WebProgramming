@@ -183,6 +183,7 @@ public class SportObjectDAO {
 		
 		Content content = new Content(dto);
 		object.addContent(content);
+		saveSportObjects();
 		return object;
 	}
 	
@@ -204,6 +205,7 @@ public class SportObjectDAO {
 		}
 		
 		changeContent.modify(dto);
+		saveSportObjects();
 		return object;
 	}
 	
