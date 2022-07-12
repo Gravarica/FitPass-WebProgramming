@@ -22,12 +22,12 @@
                 </div>
 
                 <div class="pb-4">
-                     <select required v-model="this.state.newContentDTO.type" class="type form-select form-outline form-select-lg" aria-label=".form-select-lg example">
+                     <select required v-model="this.state.newContentDTO.contentType" class="type form-select form-outline form-select-lg" aria-label=".form-select-lg example">
                         <option value="" disabled>Please select type of content</option>
                         <option v-for="it in state.types" :value="it">{{getNames(it)}}</option>
                     </select>
-                    <span class="jabuka row jabukaZZ" v-if="v$.newContentDTO.type.$error">
-                                {{ v$.newContentDTO.type.$errors[0].$message}}
+                    <span class="jabuka row jabukaZZ" v-if="v$.newContentDTO.contentType.$error">
+                                {{ v$.newContentDTO.contentType.$errors[0].$message}}
                     </span>
                 </div>
 
@@ -71,7 +71,7 @@
                 
                 <div class="row speed">
                     <div class="d-grid gap-2 pt-5 md-6">
-                        <input class="btn btn-lg btn-grad" type="submit" value="Submit" @click="createContent()"/>
+                        <input class="btn btn-lg btn-grad" type="button" value="Submit" @click="createContent()"/>
                     </div>
                 </div>
 
@@ -97,7 +97,7 @@ import {reactive,computed} from 'vue'
             newContentDTO : {
                 name : "",
                 imgUrl : "",
-                type : "",
+                contentType : "",
                 duration : null,
                 description : ""
             },
@@ -110,10 +110,10 @@ import {reactive,computed} from 'vue'
             return{
                 newContentDTO : {
                     name : {required},
-                    type : {required},
+                    contentType : {required},
                     duration : {numeric},
                     description : {alpha},
-                    imgUrl : {required}
+                    imgUrl : {}
                 }
             }
         })
@@ -146,7 +146,7 @@ import {reactive,computed} from 'vue'
             this.v$.$validate()
             if(!this.v$.$error && this.isAvailable == false){
                  axios
-                    .post('http://localhost:8081/WebShopREST/rest/sport_objects/addContent/' + this.state.loggedUser.objectId)
+                    .put('http://localhost:8081/WebShopREST/rest/sport_objects/addContent/' + this.state.loggedUser.objectId,this.state.newContentDTO)
                     .then((response)=>{
                         alert("You have successfully added new content to your object!")
                         this.$router.push({path: '/'})
