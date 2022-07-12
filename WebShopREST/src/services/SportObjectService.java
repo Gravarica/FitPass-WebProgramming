@@ -35,7 +35,7 @@ public class SportObjectService {
 	public void init() {
 		if(ctx.getAttribute("sportObjectDAO") == null) {
 			String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("sportObjectDAO", new SportObjectDAO(contextPath));
+			ctx.setAttribute("sportObjectDAO", new SportObjectDAO(contextPath,ctx));
 		}
 	}
 	
@@ -107,7 +107,6 @@ public class SportObjectService {
 	public SportObject createSportObject(SportObjectCreateDTO dto) {
 		System.out.println("POZVAN SAM");
 		SportObject newObject = getSportObjectDAO().createSportObject(dto);
-		getUserDAO().setSportObject(newObject, dto.getManagerUsername());
 		return newObject;
 	}
   

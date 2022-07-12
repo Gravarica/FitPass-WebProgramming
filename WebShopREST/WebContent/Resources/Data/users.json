@@ -11,6 +11,7 @@
 		"dateOfBirth" : "2000-01-20",
 		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : -1
 	},
 	{
@@ -25,6 +26,7 @@
 		"dateOfBirth" : "2000-07-25",
 		"customerType" : null,
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : -1
 	},
 	{
@@ -39,6 +41,7 @@
 		"dateOfBirth" : "2000-01-01",
 		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 40
 	},
 	{
@@ -53,6 +56,7 @@
 		"dateOfBirth" : "2000-05-09",
 		"customerType" : null,
 		"object" : null,
+		"objectId": 1,
 		"totalPoints" : -1
 	},
 	{
@@ -67,6 +71,7 @@
 		"dateOfBirth" : "2000-05-03",
 		"customerType" : { "name" : "SILVER", "discount" : 3.0, "pointsRequired" : 1000},
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 520
 	},
 	{
@@ -81,6 +86,7 @@
 		"dateOfBirth" : "2000-01-01",
 		"customerType" : { "name" : "GOLD", "discount" : 7.0, "pointsRequired" : 1500},
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 1490
 	},
 	{
@@ -95,6 +101,7 @@
 		"dateOfBirth" : "1985-01-01",
 		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 50
 	},
 	{
@@ -109,6 +116,7 @@
 		"dateOfBirth" : "1998-01-01",
 		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 500},
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 60
 	},
 	{
@@ -121,8 +129,9 @@
 		"gender" : "FEMALE",
 		"role" : "MANAGER",
 		"dateOfBirth" : "1998-01-01",
-		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"customerType" : null,
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 60
 	},
 	{
@@ -135,8 +144,9 @@
 		"gender" : "MALE",
 		"role" : "MANAGER",
 		"dateOfBirth" : "1998-01-01",
-		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"customerType" : null,
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 60
 	},
 	{
@@ -149,8 +159,9 @@
 		"gender" : "MALE",
 		"role" : "MANAGER",
 		"dateOfBirth" : "1998-01-01",
-		"customerType" : { "name" : "BRONZE", "discount" : 0.0, "pointsRequired" : 100},
+		"customerType" : null,
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : 60
 	},
 	{
@@ -165,6 +176,7 @@
 		"dateOfBirth" : "2000-07-25",
 		"customerType" : null,
 		"object" : null,
+		"objectId": -1,
 		"totalPoints" : -1	
 	}
 ]

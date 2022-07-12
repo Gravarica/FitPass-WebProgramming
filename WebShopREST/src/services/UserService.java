@@ -48,7 +48,7 @@ public class UserService {
 	private void init() {
 		if(ctx.getAttribute("userDAO") == null) {
 			String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("userDAO", new UserDAO(contextPath));
+			ctx.setAttribute("userDAO", new UserDAO(contextPath,ctx));
 		}
 	}
 	
@@ -137,8 +137,7 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public User registerManager(ManagerRegistrationDTO dto) {
-		SportObject object = ((SportObjectDAO)ctx.getAttribute("sportObjectDAO")).getById(dto.getSportObjectId());
-		return getUserDAO().registerManager(dto, object);
+		return getUserDAO().registerManager(dto, dto.getSportObjectId());
 	}
 	
 	@POST
@@ -153,10 +152,10 @@ public class UserService {
 	}
   
 	@GET
-	@Path("/get/sport_object/{username}")
+	@Path("/get/sport_object/manager")
 	@Produces(MediaType.APPLICATION_JSON)
-	public SportObject getSportObjectByManager(@PathParam("username") String username) {
-		return getUserDAO().getManagerSportObject(username);
+	public SportObject getSportObjectByManager() {
+		return getUserDAO().getManagerSportObject();
 	}
   
 	@DELETE

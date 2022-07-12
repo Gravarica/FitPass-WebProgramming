@@ -69,6 +69,15 @@ public class CommentService {
 		return getCommentDAO().getCommentsBySportsObject(obj);
 	}
 	
+	@GET
+	@Path("/get/all/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Comment> getAllCommentsBySportObject(@PathParam("id") int id){
+		SportObject obj = getSportObjectDAO().getById(id);
+		return getCommentDAO().getAllCommentsBySportsObject(obj);
+	}
+	
 	@PUT
 	@Path("/approve/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)

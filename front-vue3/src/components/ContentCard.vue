@@ -35,6 +35,8 @@
                     return 'GROUP TRAINING'
                 } else if (cnt == 'SAUNA'){
                     return 'SAUNA'
+                } else if (cnt =='PILATES'){
+                    return 'PILATES'
                 }
 
                 return 'YOGA'

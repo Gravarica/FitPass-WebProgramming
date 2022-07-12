@@ -21,6 +21,7 @@ import PromoCode from '../views/PromoCode'
 import CreateCommentView from '../views/CreateCommentView.vue'
 import CommentsView from '../views/CommentsView.vue'
 import CustomerScheduleTraining from '../views/CustomerNewTraining.vue'
+import MyObjectView from '../views/MyObjectView.vue'
 
 const routes = [
   {
@@ -145,7 +146,11 @@ const routes = [
     path: '/schedule/training/customer',
     name: 'CustomerScheduleTraining',
     component: CustomerScheduleTraining
-
+  },
+  {
+    path: '/myobject',
+    name: 'MyObject',
+    component: MyObjectView
   }
 ]
 

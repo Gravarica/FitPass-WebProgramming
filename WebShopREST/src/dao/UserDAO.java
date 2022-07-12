@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.servlet.ServletContext;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.sun.org.apache.bcel.internal.classfile.Utility;
@@ -52,6 +54,7 @@ import src.util.BusinessUtil;
 public class UserDAO {
 	private Map<String, User> users = new HashMap<>();
 	private File file;
+	private ServletContext ctx;
 	private User loggedUser;
 	
 	public UserDAO() {
@@ -61,9 +64,10 @@ public class UserDAO {
 	/***
 	 * @param contextPath Putanja do aplikacije u Tomcatu. Mo�e se pristupiti samo iz servleta.
 	 */
-	public UserDAO(String contextPath) {
+	public UserDAO(String contextPath, ServletContext ctx) {
 		file = new File(contextPath + "/Resources/Data/users.json");
 		loadUsers(contextPath);
+		this.ctx = ctx;
 		System.out.println("PATH: " + contextPath);
 		//System.out.println(contextPath);
 	}
@@ -83,6 +87,10 @@ public class UserDAO {
 			return null;
 		}
 		return user;
+	}
+	
+	private SportObjectDAO getSportObjectDAO() {
+		return (SportObjectDAO) ctx.getAttribute("sportObjectDAO");
 	}
 	
 	public Collection<User> getAll() {
@@ -255,11 +263,11 @@ public class UserDAO {
 	}
 	
 	//Register MANAGER
-	public User registerManager(ManagerRegistrationDTO dto, SportObject object) {
+	public User registerManager(ManagerRegistrationDTO dto, int objectId) {
 		if (users.containsKey(dto.getUsername())) {
 			return null;
 		}
-		User manager = new User(dto, object);
+		User manager = new User(dto, objectId);
 		manager.setPassword(BusinessUtil.hashPassword(manager.getPassword()));
 		manager.setId(getMaxId());
 		users.put(manager.getUsername(), manager);
@@ -283,21 +291,24 @@ public class UserDAO {
 		return newTrainer;
 	}
 	
-	public User setSportObject(SportObject object, String username) {
+	public User setSportObject(int objectId, String username) {
 		User manager = users.get(username);
 		if(!manager.roleMatches(Role.MANAGER) || manager.getObject() != null) {
 			return null;
 		}
 		
-		manager.setObject(object);
+		manager.setObjectId(objectId);
 		saveUsers();
 		return manager;
 	}
 	
-	public SportObject getManagerSportObject(String username) {
+	public SportObject getManagerSportObject() {
 		for(User it : getAllManagers()){
-			if(it.getUsername().equals(username)) {
-				return it.getObject();
+			if(it.getUsername().toLowerCase().equals(loggedUser.getUsername().toLowerCase())) {
+				if (it.getId() != -1) {
+					return getSportObjectDAO().getById(it.getObjectId());
+				}
+				
 			}
 		}
 		return null;
