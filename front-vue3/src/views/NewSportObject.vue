@@ -6,9 +6,7 @@
         <div class="card card-registration my-4">
           <div class="row g-0">
             <div class="col-xl-6 d-none d-xl-block">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
-                alt="Sample photo" class="img-fluid"
-                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                <MapSelect @select="captureCoordinates"></MapSelect>
             </div>
             <div class="col-xl-6">
               <div class="card-body p-md-5 text-black">
@@ -155,130 +153,125 @@ import axios from 'axios'
 import useValidate from '@vuelidate/core'
 import { required, sameAs, minLength, helpers, alpha,numeric, maxLength} from '@vuelidate/validators'
 import {reactive,computed} from 'vue'
+import MapSelect from '@/components/MapSelect.vue'
 
-    export default{
-        setup(){
-         const state = reactive({
-              types : null,
-                selected : null,
-                managers : null,
-                showManagers : true,
-                canSubmit : false,
-                newSportObject : null,
-                
-                addObjectDTO : { 
-                  name: "", 
-                  type : "" , 
-                  managerUsername: "", 
-                  startTime: "", endTime: "", 
-                  
-                  location:{ 
-                    address:{
-                      street : "" ,
-                      number: "", 
-                      city : "" , 
-                      postalNumber : ""
-                      }, 
-                    
-                    longitude:"", 
-                    latitude:""
-                  }, 
-                    
-                    logo : null
-                }
-         }) 
-
-
+    export default {
+      components: {
+        MapSelect
+      },
+    setup() {
+        const state = reactive({
+            types: null,
+            selected: null,
+            managers: null,
+            showManagers: true,
+            canSubmit: false,
+            newSportObject: null,
+            addObjectDTO: {
+                name: "",
+                type: "",
+                managerUsername: "",
+                startTime: "",
+                endTime: "",
+                location: {
+                    address: {
+                        street: "",
+                        number: "",
+                        city: "",
+                        postalNumber: ""
+                    },
+                    longitude: "",
+                    latitude: ""
+                },
+                logo: null
+            }
+        });
         const rules = computed(() => {
-          return{
-              addObjectDTO : { 
-                  name: {required,alpha}, 
-                  type : {required}, 
-                  managerUsername: {required}, 
-                  startTime: {required} , 
-                  endTime: {required}, 
-                  location:{ 
-                    address:{
-                      street : { required,alpha},
-                      number: {required,}, 
-                      city : {required}, 
-                      postalNumber : {
-                        required,
-                        numeric,
-                        minLength : helpers.withMessage('Must be 5 characters long' , minLength(5)),
-                        maxLength : helpers.withMessage('Must be 5 characters long' , maxLength(5))
-                      }
-                      } 
-                    
-                    // longitude:"", 
-                    // latitude:""
-                  }, 
-                    
+            return {
+                addObjectDTO: {
+                    name: { required, alpha },
+                    type: { required },
+                    managerUsername: { required },
+                    startTime: { required },
+                    endTime: { required },
+                    location: {
+                        address: {
+                            street: { required, alpha },
+                            number: { required, },
+                            city: { required },
+                            postalNumber: {
+                                required,
+                                numeric,
+                                minLength: helpers.withMessage("Must be 5 characters long", minLength(5)),
+                                maxLength: helpers.withMessage("Must be 5 characters long", maxLength(5))
+                            }
+                        }
+                        // longitude:"", 
+                        // latitude:""
+                    },
                     //logo : null
                 }
-          }
-        })
-
-        const v$ = useValidate(rules,state)
-        
-        return{
-          state,
-          v$
-        }
-
-        },
-
-        created(){
-            axios
-                .get('http://localhost:8081/WebShopREST/rest/sport_objects/types')
-                .then((response) =>{
-                    this.state.types = response.data
-                })
-        
-            axios
-                .get('http://localhost:8081/WebShopREST/rest/users/available/managers')
-                .then((response) =>{
-                    this.state.managers = response.data
-                    if(this.state.managers == null){
-                        this.state.showManagers = false
-                    }
-                })
-        },
-        methods:{
-            checkForManagers(){
-                return this.managers == null
-            },
-            getFullName(object){
-                return object.firstName + " " + object.lastName;
-            },
-            canSubmit(){
-                return this.canSubmit
-            },
-            addNewSportObject(){
-                this.v$.$validate()
-                 if(!this.v$.$error){
-                    axios
-                    .post('http://localhost:8081/WebShopREST/rest/sport_objects/create', this.state.addObjectDTO)
-                    .then((response) => {
-                        this.newSportObject = response.data
-                    })
-                 }
-                
-            },
-            convertType(it){
-                switch(it){
-                    case "GYM":
-                        return "Gym"
-                    case "POOL":
-                        return "Pool"
-                     case "SPORTS_CENTER":
-                        return "Sports Center"
-                     case "DANCE_STUDIO":
-                        return "Dance Studio"
-                }
+            };
+        });
+        const v$ = useValidate(rules, state);
+        return {
+            state,
+            v$
+        };
+    },
+    created() {
+        axios
+            .get("http://localhost:8081/WebShopREST/rest/sport_objects/types")
+            .then((response) => {
+            this.state.types = response.data;
+        });
+        axios
+            .get("http://localhost:8081/WebShopREST/rest/users/available/managers")
+            .then((response) => {
+            this.state.managers = response.data;
+            if (this.state.managers == null) {
+                this.state.showManagers = false;
             }
+        });
+    },
+    methods: {
+        checkForManagers() {
+            return this.managers == null;
+        },
+        getFullName(object) {
+            return object.firstName + " " + object.lastName;
+        },
+        canSubmit() {
+            return this.canSubmit;
+        },
+        addNewSportObject() {
+            this.v$.$validate();
+            if (!this.v$.$error) {
+                axios
+                    .post("http://localhost:8081/WebShopREST/rest/sport_objects/create", this.state.addObjectDTO)
+                    .then((response) => {
+                    this.newSportObject = response.data;
+                });
+            }
+        },
+        convertType(it) {
+            switch (it) {
+                case "GYM":
+                    return "Gym";
+                case "POOL":
+                    return "Pool";
+                case "SPORTS_CENTER":
+                    return "Sports Center";
+                case "DANCE_STUDIO":
+                    return "Dance Studio";
+            }
+        },
+        captureCoordinates(event){
+          console.log(event)
         }
-    }
+    },
+    components: { MapSelect }
+}
 
 </script>
 

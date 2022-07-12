@@ -4,7 +4,7 @@
     <ol-view ref="view" :center="center" :rotation="rotation" :zoom="zoom" 
     :projection="projection" />
 
-    <ol-tile-layer>
+    <ol-tile-layer @select="selected">
         <ol-source-osm />
     </ol-tile-layer>
 
@@ -64,7 +64,11 @@ import axios from 'axios'
                     this.objects = response.data
                 })
         },
-    
+        methods: {
+            selected(event){
+                console.log(event)
+            }
+        }
     }
 </script>
 

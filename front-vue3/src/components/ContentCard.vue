@@ -1,7 +1,7 @@
 <template>
     <div class = "card">
         <div class="card-img__wrapper">
-            <img class="card-img" :src="getImgUrl(contentType)" :alt="title" />
+            <img class="card-img" :src="getImgUrl(contentType)" :alt="title" @click="imagePressed"/>
         </div>
         <span class="card-name">{{getContentType(contentType)}}</span>
         <span class="card-title">{{name}}</span>
@@ -40,6 +40,9 @@
                 }
 
                 return 'YOGA'
+            },
+            imagePressed(){
+                this.$emit('imagePressed')
             }  
         }
     }

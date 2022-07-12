@@ -69,7 +69,8 @@
                         <Slide v-for="content in this.object.contents" :key="slide">
                             <ContentCard class="kobajaz"
                                          :contentType="content.contentType"
-                                         :name="content.name">
+                                         :name="content.name"
+                                         @imagePressed="imagePressed(content)">
                                 <template v-slot:body>
                                     <div class="content-description">
                                         {{content.description}}
@@ -179,6 +180,12 @@
                 }
 
                 return 'Sports Center'
+            },
+            imagePressed(obj){
+                this.$router.push({name: 'EditContent', params: {name: obj.name, 
+                                                                 description: obj.description,
+                                                                 ctype: obj.contentType,
+                                                                 duration: obj.duration}})
             }
         }
     }
