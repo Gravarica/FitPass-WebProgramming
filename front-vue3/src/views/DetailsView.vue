@@ -84,7 +84,6 @@
                         <h6 class="pr-2 address-holder mb-1 position-relative">
                             <i class="fas fa-map-marker-alt pin mr-1"></i>
                             {{this.object.location.address.street}} {{this.object.location.address.number}}, {{this.object.location.address.city}}
-                            {{this.object.location.longitude}} , {{this.object.location.latitude}}
                         </h6>
                     </div>
                 </div>    

@@ -10,7 +10,7 @@ public class SportObjectSearchDTO {
 	
 	public SportObjectSearchDTO(String city, SportObjectType type, String parameter) {
 		super();
-		this.city = city;
+		this.city = city.replace("%20", " ");
 		this.type = type;
 		this.parameter = parameter;
 	}

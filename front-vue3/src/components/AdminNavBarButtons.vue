@@ -21,7 +21,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle enrico" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Add new
-        </a>
+            </a>
            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                 <router-link class="link enrico dropdown-item" :to="{name : 'RegisterTrainer'}">Trainer</router-link>
                 <router-link class="link  enrico dropdown-item" :to="{name : 'RegisterManager'}">Manager</router-link>

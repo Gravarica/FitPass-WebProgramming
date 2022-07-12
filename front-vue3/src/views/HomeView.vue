@@ -1,16 +1,18 @@
 <template>
 <div class = "row gradient-custom">
   <div class = "bg-primary text-white rounded something">
-    <p class = "display-3">Trenirajte</p>
-    <p class = "text">u najboljim teretanama, fitnes studijima</p>
-    <p class = "text">i sportskim centrima širom Srbije, sa samo</p>
-    <p class = "text">jednom članarinom!</p>
-    <p class = "display-6" style = "color:orangered">Već od 2.900 RSD.</p>
-    <router-link :to="{name : 'Register'}">
-      <button>Registruj se</button>
-    </router-link>
+    <div class="textic">
+      <p class = "display-3">Trenirajte</p>
+      <p class = "text">u najboljim teretanama, fitnes studijima</p>
+      <p class = "text">i sportskim centrima širom Srbije, sa samo</p>
+      <p class = "text">jednom članarinom!</p>
+      <p class = "display-6" style = "color:orangered">Već od 2.900 RSD.</p>
+      <router-link :to="{name : 'Register'}" v-if="!loggedz">
+        <button>Registruj se</button>
+      </router-link>
     </div>
   </div>
+</div>
 <div class = "mini row gradient-custom">
   <nav >
           <ul class="nav justify-content-center">
@@ -52,6 +54,12 @@ import SportObjects from './SportObjects.vue'
 
 export default {
   name: 'HomeView',
+  inject: ['logged'],
+  data(){
+    return{
+      loggedz: this.logged
+    }
+  },
   components: {
     SportObjects
   },

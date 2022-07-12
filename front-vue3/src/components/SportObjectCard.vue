@@ -20,22 +20,20 @@
                           
                             <p class="card-text">{{street}}  {{number}}, {{city}}</p>
                             <hr class="my-2">
-                            <p class="h5 font-weight-bold mb-2">Sadrzaj</p>
+                            <p class="h5 font-weight-bold mb-2">Content</p>
                             <ul class="list-unstyled d-flex justify-content-start align-items-center mb-0">
                                 <div style="display:flex" class="sadrzaj">
-                                    <li>Yoga -</li>
-                                    <li>Gym -</li>
-                                    <li>Pool</li>
+                                    <p class="text1">{{this.getType(tip)}}</p>
                                 </div>
                             </ul>
 
                             <div style="display:flex" class="mt-2" v-if="!status">
-                                <span class="badge badgez1">Zatvoreno</span>
-                                <p class="text1">Otvara se u {{startTime}}</p>
+                                <span class="badge badgez1">Closed</span>
+                                <p class="text1">Opens at {{startTime}}</p>
                             </div>
                             <div style="display:flex" class="mt-2" v-if="status">
-                                <span class="badge badgez2">Otvoreno</span>
-                                <p class="text1">Zatvara se u {{endTime}}</p>
+                                <span class="badge badgez2">Open</span>
+                                <p class="text1">Closes at {{endTime}}</p>
                             </div>
                         </div>
                       </div>
@@ -55,7 +53,8 @@
             startTime: String,
             endTime: String,
             status: Boolean,
-            id: Number
+            id: Number,
+            tip: String
         },
         methods:{
            getImgUrl(object){
@@ -67,8 +66,19 @@
             name: 'Details',
             params: {
               objectId : this.$props.id
-            }
+            },
           })
+          },
+          getType(param){
+                if(param == 'GYM'){
+                    return 'Gym'
+                } else if(param == 'POOL'){
+                    return 'Pool'
+                } else if(param == 'DANCE_STUDIO'){
+                    return 'Dance studio'
+                }
+
+                return 'Sports center'
           }
         }
     }

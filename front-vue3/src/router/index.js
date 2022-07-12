@@ -24,7 +24,10 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: HomeView
+    component: HomeView,
+    props: (route) => ({
+      ...route.params
+    })
   },
   {
     path: '/objects',
