@@ -146,7 +146,7 @@ import {reactive,computed} from 'vue'
             this.v$.$validate()
             if(!this.v$.$error && this.isAvailable == false){
                  axios
-                    .post('http://localhost:8081/WebShopREST/rest/sport_objects/addContent/' + this.state.loggedUser.object.id)
+                    .post('http://localhost:8081/WebShopREST/rest/sport_objects/addContent/' + this.state.loggedUser.objectId)
                     .then((response)=>{
                         alert("You have successfully added new content to your object!")
                         this.$router.push({path: '/'})
@@ -174,7 +174,7 @@ import {reactive,computed} from 'vue'
         },
         checkName(){
              axios
-                .get('http://localhost:8081/WebShopREST/rest/sport_objects/check/content/name/' + this.state.loggedUser.object.id + "/" + this.state.newContentDTO.name)
+                .get('http://localhost:8081/WebShopREST/rest/sport_objects/check/content/name/' + this.state.loggedUser.objectId + "/" + this.state.newContentDTO.name)
                 .then((response) =>{
                   this.isAvailable = response.data
                 })
