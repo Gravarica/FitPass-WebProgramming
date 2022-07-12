@@ -23,6 +23,7 @@ import CommentsView from '../views/CommentsView.vue'
 import CustomerScheduleTraining from '../views/CustomerNewTraining.vue'
 import MyObjectView from '../views/MyObjectView.vue'
 import NewContent from '@/views/NewContentView.vue'
+import EditContent from '@/views/EditContentView.vue'
 
 const routes = [
   {
@@ -157,6 +158,14 @@ const routes = [
     path: '/add/content',
     name: 'NewContent',
     component: NewContent
+  },
+  {
+    path: '/edit/content',
+    name: 'EditContent',
+    component: EditContent,
+    props: (route) => ({
+      ...route.params
+    })
   }
 ]
 
